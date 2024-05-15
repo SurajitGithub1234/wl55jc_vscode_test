@@ -1,0 +1,756 @@
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"system_stm32wlxx.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.rodata.CHANNEL_OFFSET_TAB,"a"
+  18              		.align	2
+  21              	CHANNEL_OFFSET_TAB:
+  22 0000 081C3044 		.ascii	"\010\0340DXl\200"
+  22      586C80
+  23              		.global	SystemCoreClock
+  24              		.section	.data.SystemCoreClock,"aw"
+  25              		.align	2
+  28              	SystemCoreClock:
+  29 0000 00093D00 		.word	4000000
+  30              		.global	AHBPrescTable
+  31              		.section	.rodata.AHBPrescTable,"a"
+  32              		.align	2
+  35              	AHBPrescTable:
+  36 0000 01000000 		.word	1
+  37 0004 03000000 		.word	3
+  38 0008 05000000 		.word	5
+  39 000c 01000000 		.word	1
+  40 0010 01000000 		.word	1
+  41 0014 06000000 		.word	6
+  42 0018 0A000000 		.word	10
+  43 001c 20000000 		.word	32
+  44 0020 02000000 		.word	2
+  45 0024 04000000 		.word	4
+  46 0028 08000000 		.word	8
+  47 002c 10000000 		.word	16
+  48 0030 40000000 		.word	64
+  49 0034 80000000 		.word	128
+  50 0038 00010000 		.word	256
+  51 003c 00020000 		.word	512
+  52              		.global	APBPrescTable
+  53              		.section	.rodata.APBPrescTable,"a"
+  54              		.align	2
+  57              	APBPrescTable:
+  58 0000 00000000 		.word	0
+  59 0004 00000000 		.word	0
+  60 0008 00000000 		.word	0
+  61 000c 00000000 		.word	0
+  62 0010 01000000 		.word	1
+  63 0014 02000000 		.word	2
+  64 0018 03000000 		.word	3
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 2
+
+
+  65 001c 04000000 		.word	4
+  66              		.global	MSIRangeTable
+  67              		.section	.rodata.MSIRangeTable,"a"
+  68              		.align	2
+  71              	MSIRangeTable:
+  72 0000 A0860100 		.word	100000
+  73 0004 400D0300 		.word	200000
+  74 0008 801A0600 		.word	400000
+  75 000c 00350C00 		.word	800000
+  76 0010 40420F00 		.word	1000000
+  77 0014 80841E00 		.word	2000000
+  78 0018 00093D00 		.word	4000000
+  79 001c 00127A00 		.word	8000000
+  80 0020 0024F400 		.word	16000000
+  81 0024 00366E01 		.word	24000000
+  82 0028 0048E801 		.word	32000000
+  83 002c 006CDC02 		.word	48000000
+  84 0030 00000000 		.word	0
+  85 0034 00000000 		.word	0
+  86 0038 00000000 		.word	0
+  87 003c 00000000 		.word	0
+  88              		.section	.text.SystemInit,"ax",%progbits
+  89              		.align	1
+  90              		.global	SystemInit
+  91              		.syntax unified
+  92              		.thumb
+  93              		.thumb_func
+  95              	SystemInit:
+  96              	.LFB844:
+  97              		.file 1 "Core/Src/system_stm32wlxx.c"
+   1:Core/Src/system_stm32wlxx.c **** /**
+   2:Core/Src/system_stm32wlxx.c ****   ******************************************************************************
+   3:Core/Src/system_stm32wlxx.c ****   * @file    system_stm32wlxx.c
+   4:Core/Src/system_stm32wlxx.c ****   * @author  MCD Application Team
+   5:Core/Src/system_stm32wlxx.c ****   * @brief   CMSIS Cortex Device Peripheral Access Layer System Source File
+   6:Core/Src/system_stm32wlxx.c ****   *
+   7:Core/Src/system_stm32wlxx.c ****   ******************************************************************************
+   8:Core/Src/system_stm32wlxx.c ****   * @attention
+   9:Core/Src/system_stm32wlxx.c ****   *
+  10:Core/Src/system_stm32wlxx.c ****   * Copyright (c) 2020-2021 STMicroelectronics.
+  11:Core/Src/system_stm32wlxx.c ****   * All rights reserved.
+  12:Core/Src/system_stm32wlxx.c ****   *
+  13:Core/Src/system_stm32wlxx.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  14:Core/Src/system_stm32wlxx.c ****   * in the root directory of this software component.
+  15:Core/Src/system_stm32wlxx.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  16:Core/Src/system_stm32wlxx.c ****   *
+  17:Core/Src/system_stm32wlxx.c ****   ******************************************************************************
+  18:Core/Src/system_stm32wlxx.c ****   *   This file provides two functions and one global variable to be called from
+  19:Core/Src/system_stm32wlxx.c ****   *   user application:
+  20:Core/Src/system_stm32wlxx.c ****   *      - SystemInit(): This function is called at startup just after reset and
+  21:Core/Src/system_stm32wlxx.c ****   *                      before branch to main program. This call is made inside
+  22:Core/Src/system_stm32wlxx.c ****   *                      the "startup_stm32wlxx.s" file.
+  23:Core/Src/system_stm32wlxx.c ****   *
+  24:Core/Src/system_stm32wlxx.c ****   *      - SystemCoreClock variable: Contains the core clock (HCLK), it can be used
+  25:Core/Src/system_stm32wlxx.c ****   *                                  by the user application to setup the SysTick
+  26:Core/Src/system_stm32wlxx.c ****   *                                  timer or configure other parameters.
+  27:Core/Src/system_stm32wlxx.c ****   *
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 3
+
+
+  28:Core/Src/system_stm32wlxx.c ****   *      - SystemCoreClockUpdate(): Updates the variable SystemCoreClock and must
+  29:Core/Src/system_stm32wlxx.c ****   *                                 be called whenever the core clock is changed
+  30:Core/Src/system_stm32wlxx.c ****   *                                 during program execution.
+  31:Core/Src/system_stm32wlxx.c ****   *
+  32:Core/Src/system_stm32wlxx.c ****   *   After each device reset the MSI (4 MHz) is used as system clock source.
+  33:Core/Src/system_stm32wlxx.c ****   *   Then SystemInit() function is called, in "startup_stm32wlxx.s" file, to
+  34:Core/Src/system_stm32wlxx.c ****   *   configure the system clock before to branch to main program.
+  35:Core/Src/system_stm32wlxx.c ****   *
+  36:Core/Src/system_stm32wlxx.c ****   *   This file configures the system clock as follows:
+  37:Core/Src/system_stm32wlxx.c ****   *=============================================================================
+  38:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  39:Core/Src/system_stm32wlxx.c ****   *        System Clock source                    | MSI
+  40:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  41:Core/Src/system_stm32wlxx.c ****   *        SYSCLK(Hz)                             | 4000000
+  42:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  43:Core/Src/system_stm32wlxx.c ****   *        HCLK(Hz)                               | 4000000
+  44:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  45:Core/Src/system_stm32wlxx.c ****   *        AHB Prescaler                          | 1
+  46:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  47:Core/Src/system_stm32wlxx.c ****   *        APB1 Prescaler                         | 1
+  48:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  49:Core/Src/system_stm32wlxx.c ****   *        APB2 Prescaler                         | 1
+  50:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  51:Core/Src/system_stm32wlxx.c ****   *        PLL_M                                  | 1
+  52:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  53:Core/Src/system_stm32wlxx.c ****   *        PLL_N                                  | 8
+  54:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  55:Core/Src/system_stm32wlxx.c ****   *        PLL_P                                  | 7
+  56:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  57:Core/Src/system_stm32wlxx.c ****   *        PLL_Q                                  | 2
+  58:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  59:Core/Src/system_stm32wlxx.c ****   *        PLL_R                                  | 2
+  60:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  61:Core/Src/system_stm32wlxx.c ****   *        PLLSAI1_P                              | NA
+  62:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  63:Core/Src/system_stm32wlxx.c ****   *        PLLSAI1_Q                              | NA
+  64:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  65:Core/Src/system_stm32wlxx.c ****   *        PLLSAI1_R                              | NA
+  66:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  67:Core/Src/system_stm32wlxx.c ****   *        Require 48MHz for USB OTG FS,          | Disabled
+  68:Core/Src/system_stm32wlxx.c ****   *        SDIO and RNG clock                     |
+  69:Core/Src/system_stm32wlxx.c ****   *-----------------------------------------------------------------------------
+  70:Core/Src/system_stm32wlxx.c ****   *=============================================================================
+  71:Core/Src/system_stm32wlxx.c ****   */
+  72:Core/Src/system_stm32wlxx.c **** 
+  73:Core/Src/system_stm32wlxx.c **** /** @addtogroup CMSIS
+  74:Core/Src/system_stm32wlxx.c ****   * @{
+  75:Core/Src/system_stm32wlxx.c ****   */
+  76:Core/Src/system_stm32wlxx.c **** 
+  77:Core/Src/system_stm32wlxx.c **** /** @addtogroup stm32WLxx_system
+  78:Core/Src/system_stm32wlxx.c ****   * @{
+  79:Core/Src/system_stm32wlxx.c ****   */
+  80:Core/Src/system_stm32wlxx.c **** 
+  81:Core/Src/system_stm32wlxx.c **** /** @addtogroup stm32WLxx_System_Private_Includes
+  82:Core/Src/system_stm32wlxx.c ****   * @{
+  83:Core/Src/system_stm32wlxx.c ****   */
+  84:Core/Src/system_stm32wlxx.c **** 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 4
+
+
+  85:Core/Src/system_stm32wlxx.c **** #include "stm32wlxx.h"
+  86:Core/Src/system_stm32wlxx.c **** 
+  87:Core/Src/system_stm32wlxx.c **** #if !defined  (HSE_VALUE)
+  88:Core/Src/system_stm32wlxx.c ****   #define HSE_VALUE    (32000000UL) /*!< Value of the External oscillator in Hz */
+  89:Core/Src/system_stm32wlxx.c **** #endif /* HSE_VALUE */
+  90:Core/Src/system_stm32wlxx.c **** 
+  91:Core/Src/system_stm32wlxx.c **** #if !defined  (MSI_VALUE)
+  92:Core/Src/system_stm32wlxx.c ****    #define MSI_VALUE    (4000000UL) /*!< Value of the Internal oscillator in Hz*/
+  93:Core/Src/system_stm32wlxx.c **** #endif /* MSI_VALUE */
+  94:Core/Src/system_stm32wlxx.c **** 
+  95:Core/Src/system_stm32wlxx.c **** #if !defined  (HSI_VALUE)
+  96:Core/Src/system_stm32wlxx.c ****   #define HSI_VALUE    (16000000UL) /*!< Value of the Internal oscillator in Hz*/
+  97:Core/Src/system_stm32wlxx.c **** #endif /* HSI_VALUE */
+  98:Core/Src/system_stm32wlxx.c **** 
+  99:Core/Src/system_stm32wlxx.c **** #if !defined  (LSI_VALUE)
+ 100:Core/Src/system_stm32wlxx.c ****  #define LSI_VALUE  (32000UL)       /*!< Value of LSI in Hz*/
+ 101:Core/Src/system_stm32wlxx.c **** #endif /* LSI_VALUE */
+ 102:Core/Src/system_stm32wlxx.c **** 
+ 103:Core/Src/system_stm32wlxx.c **** #if !defined  (LSE_VALUE)
+ 104:Core/Src/system_stm32wlxx.c ****   #define LSE_VALUE    (32768UL)    /*!< Value of LSE in Hz*/
+ 105:Core/Src/system_stm32wlxx.c **** #endif /* LSE_VALUE */
+ 106:Core/Src/system_stm32wlxx.c **** 
+ 107:Core/Src/system_stm32wlxx.c **** /**
+ 108:Core/Src/system_stm32wlxx.c ****   * @}
+ 109:Core/Src/system_stm32wlxx.c ****   */
+ 110:Core/Src/system_stm32wlxx.c **** 
+ 111:Core/Src/system_stm32wlxx.c **** /** @addtogroup STM32WLxx_System_Private_TypesDefinitions
+ 112:Core/Src/system_stm32wlxx.c ****   * @{
+ 113:Core/Src/system_stm32wlxx.c ****   */
+ 114:Core/Src/system_stm32wlxx.c **** 
+ 115:Core/Src/system_stm32wlxx.c **** /**
+ 116:Core/Src/system_stm32wlxx.c ****   * @}
+ 117:Core/Src/system_stm32wlxx.c ****   */
+ 118:Core/Src/system_stm32wlxx.c **** 
+ 119:Core/Src/system_stm32wlxx.c **** /** @addtogroup STM32WLxx_System_Private_Defines
+ 120:Core/Src/system_stm32wlxx.c ****   * @{
+ 121:Core/Src/system_stm32wlxx.c ****   */
+ 122:Core/Src/system_stm32wlxx.c **** 
+ 123:Core/Src/system_stm32wlxx.c **** /* Note: Following vector table addresses must be defined in line with linker
+ 124:Core/Src/system_stm32wlxx.c ****          configuration. */
+ 125:Core/Src/system_stm32wlxx.c **** /*!< Uncomment the following line if you need to relocate CPU1 CM4 and/or CPU2
+ 126:Core/Src/system_stm32wlxx.c ****      CM0+ vector table anywhere in Sram or Flash. Else vector table will be kept
+ 127:Core/Src/system_stm32wlxx.c ****      at address 0x00 which correspond to automatic remap of boot address selected */
+ 128:Core/Src/system_stm32wlxx.c **** /* #define USER_VECT_TAB_ADDRESS */
+ 129:Core/Src/system_stm32wlxx.c **** #if defined(USER_VECT_TAB_ADDRESS)
+ 130:Core/Src/system_stm32wlxx.c **** #ifdef CORE_CM0PLUS
+ 131:Core/Src/system_stm32wlxx.c ****  /*!< Uncomment this line for user vector table remap in Sram else user remap
+ 132:Core/Src/system_stm32wlxx.c ****       will be done in Flash. */
+ 133:Core/Src/system_stm32wlxx.c **** /* #define VECT_TAB_SRAM */
+ 134:Core/Src/system_stm32wlxx.c **** #if defined(VECT_TAB_SRAM)
+ 135:Core/Src/system_stm32wlxx.c **** #define VECT_TAB_BASE_ADDRESS   SRAM2_BASE      /*!< Vector Table base address field.
+ 136:Core/Src/system_stm32wlxx.c ****                                                      This value must be a multiple of 0x100. */
+ 137:Core/Src/system_stm32wlxx.c **** #define VECT_TAB_OFFSET         0x00008000U     /*!< Vector Table base offset field.
+ 138:Core/Src/system_stm32wlxx.c ****                                                      This value must be a multiple of 0x100. */
+ 139:Core/Src/system_stm32wlxx.c **** #else
+ 140:Core/Src/system_stm32wlxx.c **** #define VECT_TAB_BASE_ADDRESS   FLASH_BASE      /*!< Vector Table base address field.
+ 141:Core/Src/system_stm32wlxx.c ****                                                      This value must be a multiple of 0x100. */
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 5
+
+
+ 142:Core/Src/system_stm32wlxx.c **** #define VECT_TAB_OFFSET         0x00020000U        /*!< Vector Table base offset field.
+ 143:Core/Src/system_stm32wlxx.c ****                                                      This value must be a multiple of 0x100. */
+ 144:Core/Src/system_stm32wlxx.c **** #endif
+ 145:Core/Src/system_stm32wlxx.c **** #else /* CORE_CM4 */
+ 146:Core/Src/system_stm32wlxx.c ****  /*!< Uncomment this line for user vector table remap in Sram else user remap
+ 147:Core/Src/system_stm32wlxx.c ****       will be done in Flash. */
+ 148:Core/Src/system_stm32wlxx.c **** /* #define VECT_TAB_SRAM */
+ 149:Core/Src/system_stm32wlxx.c **** #if defined(VECT_TAB_SRAM)
+ 150:Core/Src/system_stm32wlxx.c **** #define VECT_TAB_BASE_ADDRESS   SRAM1_BASE      /*!< Vector Table base address field.
+ 151:Core/Src/system_stm32wlxx.c ****                                                      This value must be a multiple of 0x200. */
+ 152:Core/Src/system_stm32wlxx.c **** #define VECT_TAB_OFFSET         0x00000000U     /*!< Vector Table base offset field.
+ 153:Core/Src/system_stm32wlxx.c ****                                                      This value must be a multiple of 0x200. */
+ 154:Core/Src/system_stm32wlxx.c **** #else
+ 155:Core/Src/system_stm32wlxx.c **** #define VECT_TAB_BASE_ADDRESS   FLASH_BASE      /*!< Vector Table base address field.
+ 156:Core/Src/system_stm32wlxx.c ****                                                      This value must be a multiple of 0x200. */
+ 157:Core/Src/system_stm32wlxx.c **** #define VECT_TAB_OFFSET         0x00000000U     /*!< Vector Table base offset field.
+ 158:Core/Src/system_stm32wlxx.c ****                                                      This value must be a multiple of 0x200. */
+ 159:Core/Src/system_stm32wlxx.c **** #endif
+ 160:Core/Src/system_stm32wlxx.c **** #endif
+ 161:Core/Src/system_stm32wlxx.c **** #endif
+ 162:Core/Src/system_stm32wlxx.c **** 
+ 163:Core/Src/system_stm32wlxx.c **** /**
+ 164:Core/Src/system_stm32wlxx.c ****   * @}
+ 165:Core/Src/system_stm32wlxx.c ****   */
+ 166:Core/Src/system_stm32wlxx.c **** 
+ 167:Core/Src/system_stm32wlxx.c **** /** @addtogroup STM32WLxx_System_Private_Macros
+ 168:Core/Src/system_stm32wlxx.c ****   * @{
+ 169:Core/Src/system_stm32wlxx.c ****   */
+ 170:Core/Src/system_stm32wlxx.c **** 
+ 171:Core/Src/system_stm32wlxx.c **** /**
+ 172:Core/Src/system_stm32wlxx.c ****   * @}
+ 173:Core/Src/system_stm32wlxx.c ****   */
+ 174:Core/Src/system_stm32wlxx.c **** 
+ 175:Core/Src/system_stm32wlxx.c **** /** @addtogroup STM32WLxx_System_Private_Variables
+ 176:Core/Src/system_stm32wlxx.c ****   * @{
+ 177:Core/Src/system_stm32wlxx.c ****   */
+ 178:Core/Src/system_stm32wlxx.c ****   /* The SystemCoreClock variable is updated in three ways:
+ 179:Core/Src/system_stm32wlxx.c ****       1) from within HAL_Init()
+ 180:Core/Src/system_stm32wlxx.c ****       2) by calling CMSIS function SystemCoreClockUpdate()
+ 181:Core/Src/system_stm32wlxx.c ****       3) each time HAL_RCC_ClockConfig() is called to configure the system clock frequency
+ 182:Core/Src/system_stm32wlxx.c ****   */
+ 183:Core/Src/system_stm32wlxx.c ****   uint32_t SystemCoreClock  = 4000000UL; /*CPU1: M4 on MSI clock after startup (4MHz)*/
+ 184:Core/Src/system_stm32wlxx.c **** 
+ 185:Core/Src/system_stm32wlxx.c ****   const uint32_t AHBPrescTable[16UL] = {1UL, 3UL, 5UL, 1UL, 1UL, 6UL, 10UL, 32UL, 2UL, 4UL, 8UL, 16
+ 186:Core/Src/system_stm32wlxx.c **** 
+ 187:Core/Src/system_stm32wlxx.c ****   const uint32_t APBPrescTable[8UL]  = {0UL, 0UL, 0UL, 0UL, 1UL, 2UL, 3UL, 4UL};
+ 188:Core/Src/system_stm32wlxx.c **** 
+ 189:Core/Src/system_stm32wlxx.c ****   const uint32_t MSIRangeTable[16UL] = {100000UL, 200000UL, 400000UL, 800000UL, 1000000UL, 2000000U
+ 190:Core/Src/system_stm32wlxx.c ****     4000000UL, 8000000UL, 16000000UL, 24000000UL, 32000000UL, 48000000UL, 0UL, 0UL, 0UL, 0UL}; /* 0
+ 191:Core/Src/system_stm32wlxx.c **** /**
+ 192:Core/Src/system_stm32wlxx.c ****   * @}
+ 193:Core/Src/system_stm32wlxx.c ****   */
+ 194:Core/Src/system_stm32wlxx.c **** 
+ 195:Core/Src/system_stm32wlxx.c **** /** @addtogroup STM32WLxx_System_Private_FunctionPrototypes
+ 196:Core/Src/system_stm32wlxx.c ****   * @{
+ 197:Core/Src/system_stm32wlxx.c ****   */
+ 198:Core/Src/system_stm32wlxx.c **** /**
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 6
+
+
+ 199:Core/Src/system_stm32wlxx.c ****   * @}
+ 200:Core/Src/system_stm32wlxx.c ****   */
+ 201:Core/Src/system_stm32wlxx.c **** 
+ 202:Core/Src/system_stm32wlxx.c **** /** @addtogroup STM32WLxx_System_Private_Functions
+ 203:Core/Src/system_stm32wlxx.c ****   * @{
+ 204:Core/Src/system_stm32wlxx.c ****   */
+ 205:Core/Src/system_stm32wlxx.c **** 
+ 206:Core/Src/system_stm32wlxx.c **** /**
+ 207:Core/Src/system_stm32wlxx.c ****   * @brief  Setup the microcontroller system.
+ 208:Core/Src/system_stm32wlxx.c ****   * @param  None
+ 209:Core/Src/system_stm32wlxx.c ****   * @retval None
+ 210:Core/Src/system_stm32wlxx.c ****   */
+ 211:Core/Src/system_stm32wlxx.c **** void SystemInit(void)
+ 212:Core/Src/system_stm32wlxx.c **** {
+  98              		.loc 1 212 1
+  99              		.cfi_startproc
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 1, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 103 0000 80B4     		push	{r7}
+ 104              	.LCFI0:
+ 105              		.cfi_def_cfa_offset 4
+ 106              		.cfi_offset 7, -4
+ 107 0002 00AF     		add	r7, sp, #0
+ 108              	.LCFI1:
+ 109              		.cfi_def_cfa_register 7
+ 213:Core/Src/system_stm32wlxx.c **** #if defined(USER_VECT_TAB_ADDRESS)
+ 214:Core/Src/system_stm32wlxx.c ****   /* Configure the Vector Table location add offset address ------------------*/
+ 215:Core/Src/system_stm32wlxx.c ****   SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET;
+ 216:Core/Src/system_stm32wlxx.c **** #endif
+ 217:Core/Src/system_stm32wlxx.c **** 
+ 218:Core/Src/system_stm32wlxx.c ****   /* FPU settings ------------------------------------------------------------*/
+ 219:Core/Src/system_stm32wlxx.c **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+ 220:Core/Src/system_stm32wlxx.c ****   SCB->CPACR |= ((3UL << (10UL*2UL))|(3UL << (11UL*2UL)));  /* set CP10 and CP11 Full Access */
+ 221:Core/Src/system_stm32wlxx.c **** #endif
+ 222:Core/Src/system_stm32wlxx.c **** }
+ 110              		.loc 1 222 1
+ 111 0004 00BF     		nop
+ 112 0006 BD46     		mov	sp, r7
+ 113              	.LCFI2:
+ 114              		.cfi_def_cfa_register 13
+ 115              		@ sp needed
+ 116 0008 80BC     		pop	{r7}
+ 117              	.LCFI3:
+ 118              		.cfi_restore 7
+ 119              		.cfi_def_cfa_offset 0
+ 120 000a 7047     		bx	lr
+ 121              		.cfi_endproc
+ 122              	.LFE844:
+ 124              		.section	.text.SystemCoreClockUpdate,"ax",%progbits
+ 125              		.align	1
+ 126              		.global	SystemCoreClockUpdate
+ 127              		.syntax unified
+ 128              		.thumb
+ 129              		.thumb_func
+ 131              	SystemCoreClockUpdate:
+ 132              	.LFB845:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 7
+
+
+ 223:Core/Src/system_stm32wlxx.c **** 
+ 224:Core/Src/system_stm32wlxx.c **** /**
+ 225:Core/Src/system_stm32wlxx.c ****   * @brief  Update SystemCoreClock variable according to Clock Register Values.
+ 226:Core/Src/system_stm32wlxx.c ****   *         The SystemCoreClock variable contains the core clock (HCLK), it can
+ 227:Core/Src/system_stm32wlxx.c ****   *         be used by the user application to setup the SysTick timer or configure
+ 228:Core/Src/system_stm32wlxx.c ****   *         other parameters.
+ 229:Core/Src/system_stm32wlxx.c ****   *
+ 230:Core/Src/system_stm32wlxx.c ****   * @note   Each time the core clock (HCLK) changes, this function must be called
+ 231:Core/Src/system_stm32wlxx.c ****   *         to update SystemCoreClock variable value. Otherwise, any configuration
+ 232:Core/Src/system_stm32wlxx.c ****   *         based on this variable will be incorrect.
+ 233:Core/Src/system_stm32wlxx.c ****   *
+ 234:Core/Src/system_stm32wlxx.c ****   * @note   - The system frequency computed by this function is not the real
+ 235:Core/Src/system_stm32wlxx.c ****   *           frequency in the chip. It is calculated based on the predefined
+ 236:Core/Src/system_stm32wlxx.c ****   *           constant and the selected clock source:
+ 237:Core/Src/system_stm32wlxx.c ****   *
+ 238:Core/Src/system_stm32wlxx.c ****   *           - If SYSCLK source is MSI, SystemCoreClock will contain the MSI_VALUE(*)
+ 239:Core/Src/system_stm32wlxx.c ****   *
+ 240:Core/Src/system_stm32wlxx.c ****   *           - If SYSCLK source is HSI, SystemCoreClock will contain the HSI_VALUE(**)
+ 241:Core/Src/system_stm32wlxx.c ****   *
+ 242:Core/Src/system_stm32wlxx.c ****   *           - If SYSCLK source is HSE, SystemCoreClock will contain the HSE_VALUE(***)
+ 243:Core/Src/system_stm32wlxx.c ****   *
+ 244:Core/Src/system_stm32wlxx.c ****   *           - If SYSCLK source is PLL, SystemCoreClock will contain the HSE_VALUE(***)
+ 245:Core/Src/system_stm32wlxx.c ****   *             or HSI_VALUE(*) or MSI_VALUE(*) multiplied/divided by the PLL factors.
+ 246:Core/Src/system_stm32wlxx.c ****   *
+ 247:Core/Src/system_stm32wlxx.c ****   *         (*) MSI_VALUE is a constant defined in stm32wlxx_hal.h file (default value
+ 248:Core/Src/system_stm32wlxx.c ****   *             4 MHz) but the real value may vary depending on the variations
+ 249:Core/Src/system_stm32wlxx.c ****   *             in voltage and temperature.
+ 250:Core/Src/system_stm32wlxx.c ****   *
+ 251:Core/Src/system_stm32wlxx.c ****   *         (**) HSI_VALUE is a constant defined in stm32wlxx_hal_conf.h file (default value
+ 252:Core/Src/system_stm32wlxx.c ****   *              16 MHz) but the real value may vary depending on the variations
+ 253:Core/Src/system_stm32wlxx.c ****   *              in voltage and temperature.
+ 254:Core/Src/system_stm32wlxx.c ****   *
+ 255:Core/Src/system_stm32wlxx.c ****   *         (***) HSE_VALUE is a constant defined in stm32wlxx_hal_conf.h file (default value
+ 256:Core/Src/system_stm32wlxx.c ****   *              32 MHz), user has to ensure that HSE_VALUE is same as the real
+ 257:Core/Src/system_stm32wlxx.c ****   *              frequency of the crystal used. Otherwise, this function may
+ 258:Core/Src/system_stm32wlxx.c ****   *              have wrong result.
+ 259:Core/Src/system_stm32wlxx.c ****   *
+ 260:Core/Src/system_stm32wlxx.c ****   *         - The result of this function could be not correct when using fractional
+ 261:Core/Src/system_stm32wlxx.c ****   *           value for HSE crystal.
+ 262:Core/Src/system_stm32wlxx.c ****   *
+ 263:Core/Src/system_stm32wlxx.c ****   * @param  None
+ 264:Core/Src/system_stm32wlxx.c ****   * @retval None
+ 265:Core/Src/system_stm32wlxx.c ****   */
+ 266:Core/Src/system_stm32wlxx.c **** void SystemCoreClockUpdate(void)
+ 267:Core/Src/system_stm32wlxx.c **** {
+ 133              		.loc 1 267 1
+ 134              		.cfi_startproc
+ 135              		@ args = 0, pretend = 0, frame = 24
+ 136              		@ frame_needed = 1, uses_anonymous_args = 0
+ 137              		@ link register save eliminated.
+ 138 0000 80B4     		push	{r7}
+ 139              	.LCFI4:
+ 140              		.cfi_def_cfa_offset 4
+ 141              		.cfi_offset 7, -4
+ 142 0002 87B0     		sub	sp, sp, #28
+ 143              	.LCFI5:
+ 144              		.cfi_def_cfa_offset 32
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 8
+
+
+ 145 0004 00AF     		add	r7, sp, #0
+ 146              	.LCFI6:
+ 147              		.cfi_def_cfa_register 7
+ 268:Core/Src/system_stm32wlxx.c ****   uint32_t tmp, msirange, pllvco, pllr, pllsource , pllm;
+ 269:Core/Src/system_stm32wlxx.c **** 
+ 270:Core/Src/system_stm32wlxx.c ****  /* Get MSI Range frequency--------------------------------------------------*/
+ 271:Core/Src/system_stm32wlxx.c **** 
+ 272:Core/Src/system_stm32wlxx.c ****    /* Get MSI Range frequency--------------------------------------------------*/
+ 273:Core/Src/system_stm32wlxx.c ****    if((RCC->CR & RCC_CR_MSIRGSEL) == 0U)
+ 148              		.loc 1 273 11
+ 149 0006 4FF0B043 		mov	r3, #1476395008
+ 150 000a 1B68     		ldr	r3, [r3]
+ 151              		.loc 1 273 16
+ 152 000c 03F00803 		and	r3, r3, #8
+ 153              		.loc 1 273 6
+ 154 0010 002B     		cmp	r3, #0
+ 155 0012 08D1     		bne	.L3
+ 274:Core/Src/system_stm32wlxx.c ****    { /* MSISRANGE from RCC_CSR applies */
+ 275:Core/Src/system_stm32wlxx.c ****      msirange = (RCC->CSR & RCC_CSR_MSISRANGE) >> 8U;
+ 156              		.loc 1 275 21
+ 157 0014 4FF0B043 		mov	r3, #1476395008
+ 158 0018 D3F89430 		ldr	r3, [r3, #148]
+ 159              		.loc 1 275 48
+ 160 001c 1B0A     		lsrs	r3, r3, #8
+ 161              		.loc 1 275 15
+ 162 001e 03F00F03 		and	r3, r3, #15
+ 163 0022 7B61     		str	r3, [r7, #20]
+ 164 0024 06E0     		b	.L4
+ 165              	.L3:
+ 276:Core/Src/system_stm32wlxx.c ****    }
+ 277:Core/Src/system_stm32wlxx.c ****    else
+ 278:Core/Src/system_stm32wlxx.c ****    { /* MSIRANGE from RCC_CR applies */
+ 279:Core/Src/system_stm32wlxx.c ****      msirange = (RCC->CR & RCC_CR_MSIRANGE) >> 4U;
+ 166              		.loc 1 279 21
+ 167 0026 4FF0B043 		mov	r3, #1476395008
+ 168 002a 1B68     		ldr	r3, [r3]
+ 169              		.loc 1 279 45
+ 170 002c 1B09     		lsrs	r3, r3, #4
+ 171              		.loc 1 279 15
+ 172 002e 03F00F03 		and	r3, r3, #15
+ 173 0032 7B61     		str	r3, [r7, #20]
+ 174              	.L4:
+ 280:Core/Src/system_stm32wlxx.c ****    }
+ 281:Core/Src/system_stm32wlxx.c ****    /*MSI frequency range in HZ*/
+ 282:Core/Src/system_stm32wlxx.c ****    msirange = MSIRangeTable[msirange];
+ 175              		.loc 1 282 13
+ 176 0034 474A     		ldr	r2, .L17
+ 177 0036 7B69     		ldr	r3, [r7, #20]
+ 178 0038 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 179 003c 7B61     		str	r3, [r7, #20]
+ 283:Core/Src/system_stm32wlxx.c **** 
+ 284:Core/Src/system_stm32wlxx.c **** 
+ 285:Core/Src/system_stm32wlxx.c ****   /*SystemCoreClock=HAL_RCC_GetSysClockFreq();*/
+ 286:Core/Src/system_stm32wlxx.c ****   /* Get SYSCLK source -------------------------------------------------------*/
+ 287:Core/Src/system_stm32wlxx.c ****   switch (RCC->CFGR & RCC_CFGR_SWS)
+ 180              		.loc 1 287 14
+ 181 003e 4FF0B043 		mov	r3, #1476395008
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 9
+
+
+ 182 0042 9B68     		ldr	r3, [r3, #8]
+ 183              		.loc 1 287 21
+ 184 0044 03F00C03 		and	r3, r3, #12
+ 185              		.loc 1 287 3
+ 186 0048 0C2B     		cmp	r3, #12
+ 187 004a 69D8     		bhi	.L5
+ 188 004c 01A2     		adr	r2, .L7
+ 189 004e 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 190 0052 00BF     		.p2align 2
+ 191              	.L7:
+ 192 0054 89000000 		.word	.L10+1
+ 193 0058 21010000 		.word	.L5+1
+ 194 005c 21010000 		.word	.L5+1
+ 195 0060 21010000 		.word	.L5+1
+ 196 0064 91000000 		.word	.L9+1
+ 197 0068 21010000 		.word	.L5+1
+ 198 006c 21010000 		.word	.L5+1
+ 199 0070 21010000 		.word	.L5+1
+ 200 0074 99000000 		.word	.L8+1
+ 201 0078 21010000 		.word	.L5+1
+ 202 007c 21010000 		.word	.L5+1
+ 203 0080 21010000 		.word	.L5+1
+ 204 0084 A1000000 		.word	.L6+1
+ 205              		.p2align 1
+ 206              	.L10:
+ 288:Core/Src/system_stm32wlxx.c ****   {
+ 289:Core/Src/system_stm32wlxx.c ****     case 0x00:   /* MSI used as system clock source */
+ 290:Core/Src/system_stm32wlxx.c ****       SystemCoreClock = msirange;
+ 207              		.loc 1 290 23
+ 208 0088 334A     		ldr	r2, .L17+4
+ 209 008a 7B69     		ldr	r3, [r7, #20]
+ 210 008c 1360     		str	r3, [r2]
+ 291:Core/Src/system_stm32wlxx.c ****       break;
+ 211              		.loc 1 291 7
+ 212 008e 4BE0     		b	.L11
+ 213              	.L9:
+ 292:Core/Src/system_stm32wlxx.c **** 
+ 293:Core/Src/system_stm32wlxx.c ****     case 0x04:  /* HSI used as system clock source */
+ 294:Core/Src/system_stm32wlxx.c ****       /* HSI used as system clock source */
+ 295:Core/Src/system_stm32wlxx.c ****         SystemCoreClock = HSI_VALUE;
+ 214              		.loc 1 295 25
+ 215 0090 314B     		ldr	r3, .L17+4
+ 216 0092 324A     		ldr	r2, .L17+8
+ 217 0094 1A60     		str	r2, [r3]
+ 296:Core/Src/system_stm32wlxx.c ****       break;
+ 218              		.loc 1 296 7
+ 219 0096 47E0     		b	.L11
+ 220              	.L8:
+ 297:Core/Src/system_stm32wlxx.c **** 
+ 298:Core/Src/system_stm32wlxx.c ****     case 0x08:  /* HSE used as system clock source */
+ 299:Core/Src/system_stm32wlxx.c ****       SystemCoreClock = HSE_VALUE;
+ 221              		.loc 1 299 23
+ 222 0098 2F4B     		ldr	r3, .L17+4
+ 223 009a 314A     		ldr	r2, .L17+12
+ 224 009c 1A60     		str	r2, [r3]
+ 300:Core/Src/system_stm32wlxx.c ****       break;
+ 225              		.loc 1 300 7
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 10
+
+
+ 226 009e 43E0     		b	.L11
+ 227              	.L6:
+ 301:Core/Src/system_stm32wlxx.c **** 
+ 302:Core/Src/system_stm32wlxx.c ****     case 0x0C: /* PLL used as system clock  source */
+ 303:Core/Src/system_stm32wlxx.c ****       /* PLL_VCO = (HSE_VALUE or HSI_VALUE or MSI_VALUE/ PLLM) * PLLN
+ 304:Core/Src/system_stm32wlxx.c ****          SYSCLK = PLL_VCO / PLLR
+ 305:Core/Src/system_stm32wlxx.c ****          */
+ 306:Core/Src/system_stm32wlxx.c ****       pllsource = (RCC->PLLCFGR & RCC_PLLCFGR_PLLSRC);
+ 228              		.loc 1 306 23
+ 229 00a0 4FF0B043 		mov	r3, #1476395008
+ 230 00a4 DB68     		ldr	r3, [r3, #12]
+ 231              		.loc 1 306 17
+ 232 00a6 03F00303 		and	r3, r3, #3
+ 233 00aa FB60     		str	r3, [r7, #12]
+ 307:Core/Src/system_stm32wlxx.c ****       pllm = ((RCC->PLLCFGR & RCC_PLLCFGR_PLLM) >> RCC_PLLCFGR_PLLM_Pos) + 1UL ;
+ 234              		.loc 1 307 19
+ 235 00ac 4FF0B043 		mov	r3, #1476395008
+ 236 00b0 DB68     		ldr	r3, [r3, #12]
+ 237              		.loc 1 307 49
+ 238 00b2 1B09     		lsrs	r3, r3, #4
+ 239 00b4 03F00703 		and	r3, r3, #7
+ 240              		.loc 1 307 12
+ 241 00b8 0133     		adds	r3, r3, #1
+ 242 00ba BB60     		str	r3, [r7, #8]
+ 243 00bc FB68     		ldr	r3, [r7, #12]
+ 244 00be 022B     		cmp	r3, #2
+ 245 00c0 03D0     		beq	.L12
+ 246 00c2 FB68     		ldr	r3, [r7, #12]
+ 247 00c4 032B     		cmp	r3, #3
+ 248 00c6 06D0     		beq	.L13
+ 249 00c8 0BE0     		b	.L16
+ 250              	.L12:
+ 308:Core/Src/system_stm32wlxx.c **** 
+ 309:Core/Src/system_stm32wlxx.c ****       switch (pllsource)
+ 310:Core/Src/system_stm32wlxx.c ****       {
+ 311:Core/Src/system_stm32wlxx.c ****         case 0x02:  /* HSI used as PLL clock source */
+ 312:Core/Src/system_stm32wlxx.c ****           pllvco = (HSI_VALUE / pllm);
+ 251              		.loc 1 312 18
+ 252 00ca 244A     		ldr	r2, .L17+8
+ 253 00cc BB68     		ldr	r3, [r7, #8]
+ 254 00ce B2FBF3F3 		udiv	r3, r2, r3
+ 255 00d2 3B61     		str	r3, [r7, #16]
+ 313:Core/Src/system_stm32wlxx.c ****           break;
+ 256              		.loc 1 313 11
+ 257 00d4 0BE0     		b	.L15
+ 258              	.L13:
+ 314:Core/Src/system_stm32wlxx.c **** 
+ 315:Core/Src/system_stm32wlxx.c ****         case 0x03:  /* HSE used as PLL clock source */
+ 316:Core/Src/system_stm32wlxx.c ****           pllvco = (HSE_VALUE / pllm);
+ 259              		.loc 1 316 18
+ 260 00d6 224A     		ldr	r2, .L17+12
+ 261 00d8 BB68     		ldr	r3, [r7, #8]
+ 262 00da B2FBF3F3 		udiv	r3, r2, r3
+ 263 00de 3B61     		str	r3, [r7, #16]
+ 317:Core/Src/system_stm32wlxx.c ****           break;
+ 264              		.loc 1 317 11
+ 265 00e0 05E0     		b	.L15
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 11
+
+
+ 266              	.L16:
+ 318:Core/Src/system_stm32wlxx.c **** 
+ 319:Core/Src/system_stm32wlxx.c ****         default:    /* MSI used as PLL clock source */
+ 320:Core/Src/system_stm32wlxx.c ****           pllvco = (msirange / pllm);
+ 267              		.loc 1 320 18
+ 268 00e2 7A69     		ldr	r2, [r7, #20]
+ 269 00e4 BB68     		ldr	r3, [r7, #8]
+ 270 00e6 B2FBF3F3 		udiv	r3, r2, r3
+ 271 00ea 3B61     		str	r3, [r7, #16]
+ 321:Core/Src/system_stm32wlxx.c ****           break;
+ 272              		.loc 1 321 11
+ 273 00ec 00BF     		nop
+ 274              	.L15:
+ 322:Core/Src/system_stm32wlxx.c ****       }
+ 323:Core/Src/system_stm32wlxx.c **** 
+ 324:Core/Src/system_stm32wlxx.c ****       pllvco = pllvco * ((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> RCC_PLLCFGR_PLLN_Pos);
+ 275              		.loc 1 324 30
+ 276 00ee 4FF0B043 		mov	r3, #1476395008
+ 277 00f2 DB68     		ldr	r3, [r3, #12]
+ 278              		.loc 1 324 60
+ 279 00f4 1B0A     		lsrs	r3, r3, #8
+ 280 00f6 03F07F02 		and	r2, r3, #127
+ 281              		.loc 1 324 14
+ 282 00fa 3B69     		ldr	r3, [r7, #16]
+ 283 00fc 02FB03F3 		mul	r3, r2, r3
+ 284 0100 3B61     		str	r3, [r7, #16]
+ 325:Core/Src/system_stm32wlxx.c ****       pllr = (((RCC->PLLCFGR & RCC_PLLCFGR_PLLR) >> RCC_PLLCFGR_PLLR_Pos) + 1UL);
+ 285              		.loc 1 325 20
+ 286 0102 4FF0B043 		mov	r3, #1476395008
+ 287 0106 DB68     		ldr	r3, [r3, #12]
+ 288              		.loc 1 325 50
+ 289 0108 5B0F     		lsrs	r3, r3, #29
+ 290 010a 03F00703 		and	r3, r3, #7
+ 291              		.loc 1 325 12
+ 292 010e 0133     		adds	r3, r3, #1
+ 293 0110 7B60     		str	r3, [r7, #4]
+ 326:Core/Src/system_stm32wlxx.c **** 
+ 327:Core/Src/system_stm32wlxx.c ****       SystemCoreClock = pllvco/pllr;
+ 294              		.loc 1 327 31
+ 295 0112 3A69     		ldr	r2, [r7, #16]
+ 296 0114 7B68     		ldr	r3, [r7, #4]
+ 297 0116 B2FBF3F3 		udiv	r3, r2, r3
+ 298              		.loc 1 327 23
+ 299 011a 0F4A     		ldr	r2, .L17+4
+ 300 011c 1360     		str	r3, [r2]
+ 328:Core/Src/system_stm32wlxx.c ****       break;
+ 301              		.loc 1 328 7
+ 302 011e 03E0     		b	.L11
+ 303              	.L5:
+ 329:Core/Src/system_stm32wlxx.c **** 
+ 330:Core/Src/system_stm32wlxx.c ****     default:
+ 331:Core/Src/system_stm32wlxx.c ****       SystemCoreClock = msirange;
+ 304              		.loc 1 331 23
+ 305 0120 0D4A     		ldr	r2, .L17+4
+ 306 0122 7B69     		ldr	r3, [r7, #20]
+ 307 0124 1360     		str	r3, [r2]
+ 332:Core/Src/system_stm32wlxx.c ****       break;
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 12
+
+
+ 308              		.loc 1 332 7
+ 309 0126 00BF     		nop
+ 310              	.L11:
+ 333:Core/Src/system_stm32wlxx.c ****   }
+ 334:Core/Src/system_stm32wlxx.c **** 
+ 335:Core/Src/system_stm32wlxx.c ****   /* Compute HCLK clock frequency --------------------------------------------*/
+ 336:Core/Src/system_stm32wlxx.c **** #if defined(DUAL_CORE) &&  defined(CORE_CM0PLUS)
+ 337:Core/Src/system_stm32wlxx.c ****   /* Get HCLK2 prescaler */
+ 338:Core/Src/system_stm32wlxx.c ****   tmp = AHBPrescTable[((RCC->EXTCFGR & RCC_EXTCFGR_C2HPRE) >> RCC_EXTCFGR_C2HPRE_Pos)];
+ 339:Core/Src/system_stm32wlxx.c **** #else
+ 340:Core/Src/system_stm32wlxx.c ****   /* Get HCLK1 prescaler */
+ 341:Core/Src/system_stm32wlxx.c ****   tmp = AHBPrescTable[((RCC->CFGR & RCC_CFGR_HPRE) >> RCC_CFGR_HPRE_Pos)];
+ 311              		.loc 1 341 28
+ 312 0128 4FF0B043 		mov	r3, #1476395008
+ 313 012c 9B68     		ldr	r3, [r3, #8]
+ 314              		.loc 1 341 52
+ 315 012e 1B09     		lsrs	r3, r3, #4
+ 316 0130 03F00F03 		and	r3, r3, #15
+ 317              		.loc 1 341 7
+ 318 0134 0B4A     		ldr	r2, .L17+16
+ 319 0136 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 320 013a 3B60     		str	r3, [r7]
+ 342:Core/Src/system_stm32wlxx.c **** #endif
+ 343:Core/Src/system_stm32wlxx.c **** 
+ 344:Core/Src/system_stm32wlxx.c ****   /* Core clock frequency */
+ 345:Core/Src/system_stm32wlxx.c ****   SystemCoreClock = SystemCoreClock / tmp;
+ 321              		.loc 1 345 37
+ 322 013c 064B     		ldr	r3, .L17+4
+ 323 013e 1A68     		ldr	r2, [r3]
+ 324 0140 3B68     		ldr	r3, [r7]
+ 325 0142 B2FBF3F3 		udiv	r3, r2, r3
+ 326              		.loc 1 345 19
+ 327 0146 044A     		ldr	r2, .L17+4
+ 328 0148 1360     		str	r3, [r2]
+ 346:Core/Src/system_stm32wlxx.c **** }
+ 329              		.loc 1 346 1
+ 330 014a 00BF     		nop
+ 331 014c 1C37     		adds	r7, r7, #28
+ 332              	.LCFI7:
+ 333              		.cfi_def_cfa_offset 4
+ 334 014e BD46     		mov	sp, r7
+ 335              	.LCFI8:
+ 336              		.cfi_def_cfa_register 13
+ 337              		@ sp needed
+ 338 0150 80BC     		pop	{r7}
+ 339              	.LCFI9:
+ 340              		.cfi_restore 7
+ 341              		.cfi_def_cfa_offset 0
+ 342 0152 7047     		bx	lr
+ 343              	.L18:
+ 344              		.align	2
+ 345              	.L17:
+ 346 0154 00000000 		.word	MSIRangeTable
+ 347 0158 00000000 		.word	SystemCoreClock
+ 348 015c 0024F400 		.word	16000000
+ 349 0160 0048E801 		.word	32000000
+ 350 0164 00000000 		.word	AHBPrescTable
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 13
+
+
+ 351              		.cfi_endproc
+ 352              	.LFE845:
+ 354              		.text
+ 355              	.Letext0:
+ 356              		.file 2 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 357              		.file 3 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 358              		.file 4 "Drivers/CMSIS/Device/ST/STM32WLxx/Include/system_stm32wlxx.h"
+ 359              		.file 5 "Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wl55xx.h"
+ 360              		.file 6 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_stm32wlxx.c
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:18     .rodata.CHANNEL_OFFSET_TAB:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:21     .rodata.CHANNEL_OFFSET_TAB:00000000 CHANNEL_OFFSET_TAB
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:28     .data.SystemCoreClock:00000000 SystemCoreClock
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:25     .data.SystemCoreClock:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:35     .rodata.AHBPrescTable:00000000 AHBPrescTable
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:32     .rodata.AHBPrescTable:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:57     .rodata.APBPrescTable:00000000 APBPrescTable
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:54     .rodata.APBPrescTable:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:71     .rodata.MSIRangeTable:00000000 MSIRangeTable
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:68     .rodata.MSIRangeTable:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:89     .text.SystemInit:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:95     .text.SystemInit:00000000 SystemInit
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:125    .text.SystemCoreClockUpdate:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:131    .text.SystemCoreClockUpdate:00000000 SystemCoreClockUpdate
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:192    .text.SystemCoreClockUpdate:00000054 $d
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:205    .text.SystemCoreClockUpdate:00000088 $t
+C:\Users\Lenovo\AppData\Local\Temp\cchKKP1d.s:346    .text.SystemCoreClockUpdate:00000154 $d
+
+NO UNDEFINED SYMBOLS

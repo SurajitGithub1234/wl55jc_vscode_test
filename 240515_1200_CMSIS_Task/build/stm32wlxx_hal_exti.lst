@@ -1,0 +1,1954 @@
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"stm32wlxx_hal_exti.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.rodata.CHANNEL_OFFSET_TAB,"a"
+  18              		.align	2
+  21              	CHANNEL_OFFSET_TAB:
+  22 0000 081C3044 		.ascii	"\010\0340DXl\200"
+  22      586C80
+  23              		.section	.text.HAL_EXTI_SetConfigLine,"ax",%progbits
+  24              		.align	1
+  25              		.global	HAL_EXTI_SetConfigLine
+  26              		.syntax unified
+  27              		.thumb
+  28              		.thumb_func
+  30              	HAL_EXTI_SetConfigLine:
+  31              	.LFB844:
+  32              		.file 1 "Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c"
+   1:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+   2:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   ******************************************************************************
+   3:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @file    stm32wlxx_hal_exti.c
+   4:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @author  MCD Application Team
+   5:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief   EXTI HAL module driver.
+   6:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *          This file provides firmware functions to manage the following
+   7:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *          functionalities of the General Purpose Input/Output (EXTI) peripheral:
+   8:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *           + Initialization and de-initialization functions
+   9:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *           + IO operation functions
+  10:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   ******************************************************************************
+  11:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @attention
+  12:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *
+  13:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * Copyright (c) 2020 STMicroelectronics.
+  14:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * All rights reserved.
+  15:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *
+  16:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  17:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * in the root directory of this software component.
+  18:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  19:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *
+  20:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   ******************************************************************************
+  21:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   @verbatim
+  22:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   ==============================================================================
+  23:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****                     ##### EXTI Peripheral features #####
+  24:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   ==============================================================================
+  25:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   [..]
+  26:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (+) Each Exti line can be configured within this driver.
+  27:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 2
+
+
+  28:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (+) Exti line can be configured in 3 different modes
+  29:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Interrupt
+  30:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Event
+  31:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Both of them
+  32:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  33:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (+) Configurable Exti lines can be configured with 3 different triggers
+  34:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Rising
+  35:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Falling
+  36:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Both of them
+  37:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  38:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (+) When set in interrupt mode, configurable Exti lines have two diffenrents
+  39:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         interrupt pending registers which allow to distinguish which transition
+  40:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         occurs:
+  41:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Rising edge pending interrupt
+  42:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Falling
+  43:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  44:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (+) Exti lines 0 to 15 are linked to gpio pin number 0 to 15. Gpio port can
+  45:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         be selected through multiplexer.
+  46:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  47:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****                      ##### How to use this driver #####
+  48:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   ==============================================================================
+  49:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   [..]
+  50:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  51:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (#) Configure the EXTI line using HAL_EXTI_SetConfigLine().
+  52:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Choose the interrupt line number by setting "Line" member from
+  53:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****              EXTI_ConfigTypeDef structure.
+  54:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Configure the interrupt and/or event mode using "Mode" member from
+  55:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****              EXTI_ConfigTypeDef structure.
+  56:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) For configurable lines, configure rising and/or falling trigger
+  57:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****              "Trigger" member from EXTI_ConfigTypeDef structure.
+  58:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) For Exti lines linked to gpio, choose gpio port using "GPIOSel"
+  59:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****              member from GPIO_InitTypeDef structure.
+  60:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  61:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (#) Get current Exti configuration of a dedicated line using
+  62:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         HAL_EXTI_GetConfigLine().
+  63:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Provide exiting handle as parameter.
+  64:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Provide pointer on EXTI_ConfigTypeDef structure as second parameter.
+  65:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  66:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (#) Clear Exti configuration of a dedicated line using HAL_EXTI_GetConfigLine().
+  67:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Provide exiting handle as parameter.
+  68:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  69:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (#) Register callback to treat Exti interrupts using HAL_EXTI_RegisterCallback().
+  70:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Provide exiting handle as first parameter.
+  71:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Provide which callback will be registered using one value from
+  72:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****              EXTI_CallbackIDTypeDef.
+  73:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****         (++) Provide callback function pointer.
+  74:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  75:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (#) Get interrupt pending bit using HAL_EXTI_GetPending().
+  76:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  77:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (#) Clear interrupt pending bit using HAL_EXTI_GetPending().
+  78:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  79:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     (#) Generate software interrupt using HAL_EXTI_GenerateSWI().
+  80:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  81:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   @endverbatim
+  82:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   ******************************************************************************
+  83:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+  84:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 3
+
+
+  85:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /* Includes ------------------------------------------------------------------*/
+  86:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #include "stm32wlxx_hal.h"
+  87:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  88:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /** @addtogroup STM32WLxx_HAL_Driver
+  89:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @{
+  90:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+  91:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+  92:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /** @addtogroup EXTI
+  93:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @{
+  94:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+  95:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /** MISRA C:2012 deviation rule has been granted for following rule:
+  96:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * Rule-18.1_b - Medium: Array `EXTICR' 1st subscript interval [0,7] may be out
+  97:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * of bounds [0,3] in following API :
+  98:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * HAL_EXTI_SetConfigLine
+  99:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * HAL_EXTI_GetConfigLine
+ 100:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * HAL_EXTI_ClearConfigLine
+ 101:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 102:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 103:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #ifdef HAL_EXTI_MODULE_ENABLED
+ 104:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 105:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /* Private typedef -----------------------------------------------------------*/
+ 106:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /* Private defines ------------------------------------------------------------*/
+ 107:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /** @defgroup EXTI_Private_Constants EXTI Private Constants
+ 108:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @{
+ 109:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 110:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #define EXTI_MODE_OFFSET                    0x04u  /* 0x10: offset between CPU IMR/EMR registers */
+ 111:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #define EXTI_CONFIG_OFFSET                  0x08u  /* 0x20: offset between CPU Rising/Falling confi
+ 112:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 113:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @}
+ 114:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 115:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 116:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /* Private macros ------------------------------------------------------------*/
+ 117:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /* Private variables ---------------------------------------------------------*/
+ 118:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /* Private function prototypes -----------------------------------------------*/
+ 119:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /* Exported functions --------------------------------------------------------*/
+ 120:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 121:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /** @addtogroup EXTI_Exported_Functions
+ 122:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @{
+ 123:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 124:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 125:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /** @addtogroup EXTI_Exported_Functions_Group1
+ 126:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *  @brief    Configuration functions
+ 127:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *
+ 128:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** @verbatim
+ 129:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****  ===============================================================================
+ 130:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****               ##### Configuration functions #####
+ 131:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****  ===============================================================================
+ 132:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 133:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** @endverbatim
+ 134:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @{
+ 135:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 136:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 137:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 138:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief  Set configuration of a dedicated Exti line.
+ 139:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  hexti Exti handle.
+ 140:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  pExtiConfig Pointer on EXTI configuration to be set.
+ 141:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @retval HAL Status.
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 4
+
+
+ 142:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 143:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** HAL_StatusTypeDef HAL_EXTI_SetConfigLine(EXTI_HandleTypeDef *hexti, EXTI_ConfigTypeDef *pExtiConfig
+ 144:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** {
+  33              		.loc 1 144 1
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 32
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37              		@ link register save eliminated.
+  38 0000 80B4     		push	{r7}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 4
+  41              		.cfi_offset 7, -4
+  42 0002 89B0     		sub	sp, sp, #36
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 40
+  45 0004 00AF     		add	r7, sp, #0
+  46              	.LCFI2:
+  47              		.cfi_def_cfa_register 7
+  48 0006 7860     		str	r0, [r7, #4]
+  49 0008 3960     		str	r1, [r7]
+ 145:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   __IO uint32_t *regaddr;
+ 146:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t regval;
+ 147:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t linepos;
+ 148:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t maskline;
+ 149:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t offset;
+ 150:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 151:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check null pointer */
+ 152:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if ((hexti == NULL) || (pExtiConfig == NULL))
+  50              		.loc 1 152 6
+  51 000a 7B68     		ldr	r3, [r7, #4]
+  52 000c 002B     		cmp	r3, #0
+  53 000e 02D0     		beq	.L2
+  54              		.loc 1 152 23 discriminator 1
+  55 0010 3B68     		ldr	r3, [r7]
+  56 0012 002B     		cmp	r3, #0
+  57 0014 01D1     		bne	.L3
+  58              	.L2:
+ 153:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 154:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     return HAL_ERROR;
+  59              		.loc 1 154 12
+  60 0016 0123     		movs	r3, #1
+  61 0018 B9E0     		b	.L4
+  62              	.L3:
+ 155:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 156:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 157:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check parameters */
+ 158:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_LINE(pExtiConfig->Line));
+ 159:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_MODE(pExtiConfig->Mode));
+ 160:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 161:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Assign line number to handle */
+ 162:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   hexti->Line = pExtiConfig->Line;
+  63              		.loc 1 162 28
+  64 001a 3B68     		ldr	r3, [r7]
+  65 001c 1A68     		ldr	r2, [r3]
+  66              		.loc 1 162 15
+  67 001e 7B68     		ldr	r3, [r7, #4]
+  68 0020 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 5
+
+
+ 163:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 164:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* compute line register offset and line mask */
+ 165:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   offset = ((pExtiConfig->Line & EXTI_REG_MASK) >> EXTI_REG_SHIFT);
+  69              		.loc 1 165 25
+  70 0022 3B68     		ldr	r3, [r7]
+  71 0024 1B68     		ldr	r3, [r3]
+  72              		.loc 1 165 49
+  73 0026 1B0C     		lsrs	r3, r3, #16
+  74              		.loc 1 165 10
+  75 0028 03F00103 		and	r3, r3, #1
+  76 002c BB61     		str	r3, [r7, #24]
+ 166:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   linepos = (pExtiConfig->Line & EXTI_PIN_MASK);
+  77              		.loc 1 166 25
+  78 002e 3B68     		ldr	r3, [r7]
+  79 0030 1B68     		ldr	r3, [r3]
+  80              		.loc 1 166 11
+  81 0032 03F01F03 		and	r3, r3, #31
+  82 0036 7B61     		str	r3, [r7, #20]
+ 167:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   maskline = (1uL << linepos);
+  83              		.loc 1 167 12
+  84 0038 0122     		movs	r2, #1
+  85 003a 7B69     		ldr	r3, [r7, #20]
+  86 003c 02FA03F3 		lsl	r3, r2, r3
+  87 0040 3B61     		str	r3, [r7, #16]
+ 168:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 169:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Configure triggers for configurable lines */
+ 170:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if ((pExtiConfig->Line & EXTI_CONFIG) != 0x00u)
+  88              		.loc 1 170 19
+  89 0042 3B68     		ldr	r3, [r7]
+  90 0044 1B68     		ldr	r3, [r3]
+  91              		.loc 1 170 26
+  92 0046 03F00073 		and	r3, r3, #33554432
+  93              		.loc 1 170 6
+  94 004a 002B     		cmp	r3, #0
+  95 004c 64D0     		beq	.L5
+ 171:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 172:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     assert_param(IS_EXTI_TRIGGER(pExtiConfig->Trigger));
+ 173:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 174:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Configure rising trigger */
+ 175:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regaddr = (&EXTI->RTSR1 + (EXTI_CONFIG_OFFSET * offset));
+  96              		.loc 1 175 29
+  97 004e BB69     		ldr	r3, [r7, #24]
+  98 0050 5B01     		lsls	r3, r3, #5
+  99              		.loc 1 175 13
+ 100 0052 03F1B043 		add	r3, r3, #1476395008
+ 101 0056 03F50063 		add	r3, r3, #2048
+ 102 005a FB60     		str	r3, [r7, #12]
+ 176:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval = *regaddr;
+ 103              		.loc 1 176 12
+ 104 005c FB68     		ldr	r3, [r7, #12]
+ 105 005e 1B68     		ldr	r3, [r3]
+ 106 0060 FB61     		str	r3, [r7, #28]
+ 177:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 178:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Mask or set line */
+ 179:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     if ((pExtiConfig->Trigger & EXTI_TRIGGER_RISING) != 0x00u)
+ 107              		.loc 1 179 21
+ 108 0062 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 6
+
+
+ 109 0064 9B68     		ldr	r3, [r3, #8]
+ 110              		.loc 1 179 31
+ 111 0066 03F00103 		and	r3, r3, #1
+ 112              		.loc 1 179 8
+ 113 006a 002B     		cmp	r3, #0
+ 114 006c 04D0     		beq	.L6
+ 180:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 181:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval |= maskline;
+ 115              		.loc 1 181 14
+ 116 006e FA69     		ldr	r2, [r7, #28]
+ 117 0070 3B69     		ldr	r3, [r7, #16]
+ 118 0072 1343     		orrs	r3, r3, r2
+ 119 0074 FB61     		str	r3, [r7, #28]
+ 120 0076 04E0     		b	.L7
+ 121              	.L6:
+ 182:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 183:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     else
+ 184:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 185:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval &= ~maskline;
+ 122              		.loc 1 185 17
+ 123 0078 3B69     		ldr	r3, [r7, #16]
+ 124 007a DB43     		mvns	r3, r3
+ 125              		.loc 1 185 14
+ 126 007c FA69     		ldr	r2, [r7, #28]
+ 127 007e 1340     		ands	r3, r3, r2
+ 128 0080 FB61     		str	r3, [r7, #28]
+ 129              	.L7:
+ 186:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 187:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 188:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Store rising trigger mode */
+ 189:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     *regaddr = regval;
+ 130              		.loc 1 189 14
+ 131 0082 FB68     		ldr	r3, [r7, #12]
+ 132 0084 FA69     		ldr	r2, [r7, #28]
+ 133 0086 1A60     		str	r2, [r3]
+ 190:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 191:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Configure falling trigger */
+ 192:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regaddr = (&EXTI->FTSR1 + (EXTI_CONFIG_OFFSET * offset));
+ 134              		.loc 1 192 29
+ 135 0088 BB69     		ldr	r3, [r7, #24]
+ 136 008a 5B01     		lsls	r3, r3, #5
+ 137              		.loc 1 192 13
+ 138 008c 03F1B043 		add	r3, r3, #1476395008
+ 139 0090 03F60403 		addw	r3, r3, #2052
+ 140 0094 FB60     		str	r3, [r7, #12]
+ 193:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval = *regaddr;
+ 141              		.loc 1 193 12
+ 142 0096 FB68     		ldr	r3, [r7, #12]
+ 143 0098 1B68     		ldr	r3, [r3]
+ 144 009a FB61     		str	r3, [r7, #28]
+ 194:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 195:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Mask or set line */
+ 196:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     if ((pExtiConfig->Trigger & EXTI_TRIGGER_FALLING) != 0x00u)
+ 145              		.loc 1 196 21
+ 146 009c 3B68     		ldr	r3, [r7]
+ 147 009e 9B68     		ldr	r3, [r3, #8]
+ 148              		.loc 1 196 31
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 7
+
+
+ 149 00a0 03F00203 		and	r3, r3, #2
+ 150              		.loc 1 196 8
+ 151 00a4 002B     		cmp	r3, #0
+ 152 00a6 04D0     		beq	.L8
+ 197:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 198:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval |= maskline;
+ 153              		.loc 1 198 14
+ 154 00a8 FA69     		ldr	r2, [r7, #28]
+ 155 00aa 3B69     		ldr	r3, [r7, #16]
+ 156 00ac 1343     		orrs	r3, r3, r2
+ 157 00ae FB61     		str	r3, [r7, #28]
+ 158 00b0 04E0     		b	.L9
+ 159              	.L8:
+ 199:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 200:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     else
+ 201:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 202:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval &= ~maskline;
+ 160              		.loc 1 202 17
+ 161 00b2 3B69     		ldr	r3, [r7, #16]
+ 162 00b4 DB43     		mvns	r3, r3
+ 163              		.loc 1 202 14
+ 164 00b6 FA69     		ldr	r2, [r7, #28]
+ 165 00b8 1340     		ands	r3, r3, r2
+ 166 00ba FB61     		str	r3, [r7, #28]
+ 167              	.L9:
+ 203:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 204:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 205:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Store falling trigger mode */
+ 206:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     *regaddr = regval;
+ 168              		.loc 1 206 14
+ 169 00bc FB68     		ldr	r3, [r7, #12]
+ 170 00be FA69     		ldr	r2, [r7, #28]
+ 171 00c0 1A60     		str	r2, [r3]
+ 207:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 208:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Configure gpio port selection in case of gpio exti line */
+ 209:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     if ((pExtiConfig->Line & EXTI_GPIO) == EXTI_GPIO)
+ 172              		.loc 1 209 21
+ 173 00c2 3B68     		ldr	r3, [r7]
+ 174 00c4 1B68     		ldr	r3, [r3]
+ 175              		.loc 1 209 28
+ 176 00c6 03F0C063 		and	r3, r3, #100663296
+ 177              		.loc 1 209 8
+ 178 00ca B3F1C06F 		cmp	r3, #100663296
+ 179 00ce 23D1     		bne	.L5
+ 210:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 211:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       assert_param(IS_EXTI_GPIO_PORT(pExtiConfig->GPIOSel));
+ 212:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       assert_param(IS_EXTI_GPIO_PIN(linepos));
+ 213:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 214:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval = SYSCFG->EXTICR[linepos >> 2u];
+ 180              		.loc 1 214 22
+ 181 00d0 314A     		ldr	r2, .L14
+ 182              		.loc 1 214 39
+ 183 00d2 7B69     		ldr	r3, [r7, #20]
+ 184 00d4 9B08     		lsrs	r3, r3, #2
+ 185              		.loc 1 214 14
+ 186 00d6 0233     		adds	r3, r3, #2
+ 187 00d8 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 8
+
+
+ 188 00dc FB61     		str	r3, [r7, #28]
+ 215:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval &= ~(SYSCFG_EXTICR1_EXTI0 << (SYSCFG_EXTICR1_EXTI1_Pos * (linepos & 0x03u)));
+ 189              		.loc 1 215 80
+ 190 00de 7B69     		ldr	r3, [r7, #20]
+ 191 00e0 03F00303 		and	r3, r3, #3
+ 192              		.loc 1 215 69
+ 193 00e4 9B00     		lsls	r3, r3, #2
+ 194              		.loc 1 215 40
+ 195 00e6 0722     		movs	r2, #7
+ 196 00e8 02FA03F3 		lsl	r3, r2, r3
+ 197              		.loc 1 215 17
+ 198 00ec DB43     		mvns	r3, r3
+ 199              		.loc 1 215 14
+ 200 00ee FA69     		ldr	r2, [r7, #28]
+ 201 00f0 1340     		ands	r3, r3, r2
+ 202 00f2 FB61     		str	r3, [r7, #28]
+ 216:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval |= (pExtiConfig->GPIOSel << (SYSCFG_EXTICR1_EXTI1_Pos * (linepos & 0x03u)));
+ 203              		.loc 1 216 29
+ 204 00f4 3B68     		ldr	r3, [r7]
+ 205 00f6 DA68     		ldr	r2, [r3, #12]
+ 206              		.loc 1 216 79
+ 207 00f8 7B69     		ldr	r3, [r7, #20]
+ 208 00fa 03F00303 		and	r3, r3, #3
+ 209              		.loc 1 216 68
+ 210 00fe 9B00     		lsls	r3, r3, #2
+ 211              		.loc 1 216 39
+ 212 0100 02FA03F3 		lsl	r3, r2, r3
+ 213              		.loc 1 216 14
+ 214 0104 FA69     		ldr	r2, [r7, #28]
+ 215 0106 1343     		orrs	r3, r3, r2
+ 216 0108 FB61     		str	r3, [r7, #28]
+ 217:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       SYSCFG->EXTICR[linepos >> 2u] = regval;
+ 217              		.loc 1 217 13
+ 218 010a 2349     		ldr	r1, .L14
+ 219              		.loc 1 217 30
+ 220 010c 7B69     		ldr	r3, [r7, #20]
+ 221 010e 9B08     		lsrs	r3, r3, #2
+ 222              		.loc 1 217 37
+ 223 0110 0233     		adds	r3, r3, #2
+ 224 0112 FA69     		ldr	r2, [r7, #28]
+ 225 0114 41F82320 		str	r2, [r1, r3, lsl #2]
+ 226              	.L5:
+ 218:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 219:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 220:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 221:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Configure interrupt mode : read current mode */
+ 222:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #if defined(DUAL_CORE) && defined(CORE_CM0PLUS)
+ 223:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->C2IMR1 + (EXTI_MODE_OFFSET * offset));
+ 224:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #else
+ 225:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->IMR1 + (EXTI_MODE_OFFSET * offset));
+ 227              		.loc 1 225 26
+ 228 0118 BB69     		ldr	r3, [r7, #24]
+ 229 011a 1B01     		lsls	r3, r3, #4
+ 230              		.loc 1 225 11
+ 231 011c 03F1B043 		add	r3, r3, #1476395008
+ 232 0120 03F50863 		add	r3, r3, #2176
+ 233 0124 FB60     		str	r3, [r7, #12]
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 9
+
+
+ 226:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #endif /* DUAL_CORE && CORE_CM0PLUS */
+ 227:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regval = *regaddr;
+ 234              		.loc 1 227 10
+ 235 0126 FB68     		ldr	r3, [r7, #12]
+ 236 0128 1B68     		ldr	r3, [r3]
+ 237 012a FB61     		str	r3, [r7, #28]
+ 228:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 229:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Mask or set line */
+ 230:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if ((pExtiConfig->Mode & EXTI_MODE_INTERRUPT) != 0x00u)
+ 238              		.loc 1 230 19
+ 239 012c 3B68     		ldr	r3, [r7]
+ 240 012e 5B68     		ldr	r3, [r3, #4]
+ 241              		.loc 1 230 26
+ 242 0130 03F00103 		and	r3, r3, #1
+ 243              		.loc 1 230 6
+ 244 0134 002B     		cmp	r3, #0
+ 245 0136 04D0     		beq	.L10
+ 231:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 232:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval |= maskline;
+ 246              		.loc 1 232 12
+ 247 0138 FA69     		ldr	r2, [r7, #28]
+ 248 013a 3B69     		ldr	r3, [r7, #16]
+ 249 013c 1343     		orrs	r3, r3, r2
+ 250 013e FB61     		str	r3, [r7, #28]
+ 251 0140 04E0     		b	.L11
+ 252              	.L10:
+ 233:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 234:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   else
+ 235:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 236:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval &= ~maskline;
+ 253              		.loc 1 236 15
+ 254 0142 3B69     		ldr	r3, [r7, #16]
+ 255 0144 DB43     		mvns	r3, r3
+ 256              		.loc 1 236 12
+ 257 0146 FA69     		ldr	r2, [r7, #28]
+ 258 0148 1340     		ands	r3, r3, r2
+ 259 014a FB61     		str	r3, [r7, #28]
+ 260              	.L11:
+ 237:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 238:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 239:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Store interrupt mode */
+ 240:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *regaddr = regval;
+ 261              		.loc 1 240 12
+ 262 014c FB68     		ldr	r3, [r7, #12]
+ 263 014e FA69     		ldr	r2, [r7, #28]
+ 264 0150 1A60     		str	r2, [r3]
+ 241:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 242:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Configure event mode : read current mode */
+ 243:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #if defined(DUAL_CORE) && defined(CORE_CM0PLUS)
+ 244:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->C2EMR1 + (EXTI_MODE_OFFSET * offset));
+ 245:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #else
+ 246:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->EMR1 + (EXTI_MODE_OFFSET * offset));
+ 265              		.loc 1 246 26
+ 266 0152 BB69     		ldr	r3, [r7, #24]
+ 267 0154 1B01     		lsls	r3, r3, #4
+ 268              		.loc 1 246 11
+ 269 0156 03F1B043 		add	r3, r3, #1476395008
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 10
+
+
+ 270 015a 03F68403 		addw	r3, r3, #2180
+ 271 015e FB60     		str	r3, [r7, #12]
+ 247:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #endif /* DUAL_CORE && CORE_CM0PLUS */
+ 248:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regval = *regaddr;
+ 272              		.loc 1 248 10
+ 273 0160 FB68     		ldr	r3, [r7, #12]
+ 274 0162 1B68     		ldr	r3, [r3]
+ 275 0164 FB61     		str	r3, [r7, #28]
+ 249:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 250:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Mask or set line */
+ 251:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if ((pExtiConfig->Mode & EXTI_MODE_EVENT) != 0x00u)
+ 276              		.loc 1 251 19
+ 277 0166 3B68     		ldr	r3, [r7]
+ 278 0168 5B68     		ldr	r3, [r3, #4]
+ 279              		.loc 1 251 26
+ 280 016a 03F00203 		and	r3, r3, #2
+ 281              		.loc 1 251 6
+ 282 016e 002B     		cmp	r3, #0
+ 283 0170 04D0     		beq	.L12
+ 252:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 253:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* The event mode cannot be configured if the line does not support it */
+ 254:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     assert_param(IS_EXTI_EVENT_PRESENT(pExtiConfig->Line));
+ 255:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval |= maskline;
+ 284              		.loc 1 255 12
+ 285 0172 FA69     		ldr	r2, [r7, #28]
+ 286 0174 3B69     		ldr	r3, [r7, #16]
+ 287 0176 1343     		orrs	r3, r3, r2
+ 288 0178 FB61     		str	r3, [r7, #28]
+ 289 017a 04E0     		b	.L13
+ 290              	.L12:
+ 256:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 257:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   else
+ 258:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 259:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval &= ~maskline;
+ 291              		.loc 1 259 15
+ 292 017c 3B69     		ldr	r3, [r7, #16]
+ 293 017e DB43     		mvns	r3, r3
+ 294              		.loc 1 259 12
+ 295 0180 FA69     		ldr	r2, [r7, #28]
+ 296 0182 1340     		ands	r3, r3, r2
+ 297 0184 FB61     		str	r3, [r7, #28]
+ 298              	.L13:
+ 260:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 261:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 262:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Store event mode */
+ 263:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *regaddr = regval;
+ 299              		.loc 1 263 12
+ 300 0186 FB68     		ldr	r3, [r7, #12]
+ 301 0188 FA69     		ldr	r2, [r7, #28]
+ 302 018a 1A60     		str	r2, [r3]
+ 264:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 265:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   return HAL_OK;
+ 303              		.loc 1 265 10
+ 304 018c 0023     		movs	r3, #0
+ 305              	.L4:
+ 266:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** }
+ 306              		.loc 1 266 1
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 11
+
+
+ 307 018e 1846     		mov	r0, r3
+ 308 0190 2437     		adds	r7, r7, #36
+ 309              	.LCFI3:
+ 310              		.cfi_def_cfa_offset 4
+ 311 0192 BD46     		mov	sp, r7
+ 312              	.LCFI4:
+ 313              		.cfi_def_cfa_register 13
+ 314              		@ sp needed
+ 315 0194 80BC     		pop	{r7}
+ 316              	.LCFI5:
+ 317              		.cfi_restore 7
+ 318              		.cfi_def_cfa_offset 0
+ 319 0196 7047     		bx	lr
+ 320              	.L15:
+ 321              		.align	2
+ 322              	.L14:
+ 323 0198 00000140 		.word	1073807360
+ 324              		.cfi_endproc
+ 325              	.LFE844:
+ 327              		.section	.text.HAL_EXTI_GetConfigLine,"ax",%progbits
+ 328              		.align	1
+ 329              		.global	HAL_EXTI_GetConfigLine
+ 330              		.syntax unified
+ 331              		.thumb
+ 332              		.thumb_func
+ 334              	HAL_EXTI_GetConfigLine:
+ 335              	.LFB845:
+ 267:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 268:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 269:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 270:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief  Get configuration of a dedicated Exti line.
+ 271:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  hexti Exti handle.
+ 272:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  pExtiConfig Pointer on structure to store Exti configuration.
+ 273:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @retval HAL Status.
+ 274:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 275:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** HAL_StatusTypeDef HAL_EXTI_GetConfigLine(EXTI_HandleTypeDef *hexti, EXTI_ConfigTypeDef *pExtiConfig
+ 276:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** {
+ 336              		.loc 1 276 1
+ 337              		.cfi_startproc
+ 338              		@ args = 0, pretend = 0, frame = 32
+ 339              		@ frame_needed = 1, uses_anonymous_args = 0
+ 340              		@ link register save eliminated.
+ 341 0000 80B4     		push	{r7}
+ 342              	.LCFI6:
+ 343              		.cfi_def_cfa_offset 4
+ 344              		.cfi_offset 7, -4
+ 345 0002 89B0     		sub	sp, sp, #36
+ 346              	.LCFI7:
+ 347              		.cfi_def_cfa_offset 40
+ 348 0004 00AF     		add	r7, sp, #0
+ 349              	.LCFI8:
+ 350              		.cfi_def_cfa_register 7
+ 351 0006 7860     		str	r0, [r7, #4]
+ 352 0008 3960     		str	r1, [r7]
+ 277:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   __IO uint32_t *regaddr;
+ 278:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t regval;
+ 279:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t linepos;
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 12
+
+
+ 280:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t maskline;
+ 281:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t offset;
+ 282:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 283:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check null pointer */
+ 284:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if ((hexti == NULL) || (pExtiConfig == NULL))
+ 353              		.loc 1 284 6
+ 354 000a 7B68     		ldr	r3, [r7, #4]
+ 355 000c 002B     		cmp	r3, #0
+ 356 000e 02D0     		beq	.L17
+ 357              		.loc 1 284 23 discriminator 1
+ 358 0010 3B68     		ldr	r3, [r7]
+ 359 0012 002B     		cmp	r3, #0
+ 360 0014 01D1     		bne	.L18
+ 361              	.L17:
+ 285:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 286:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     return HAL_ERROR;
+ 362              		.loc 1 286 12
+ 363 0016 0123     		movs	r3, #1
+ 364 0018 8BE0     		b	.L19
+ 365              	.L18:
+ 287:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 288:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 289:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check the parameter */
+ 290:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_LINE(hexti->Line));
+ 291:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 292:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Store handle line number to configuration structure */
+ 293:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   pExtiConfig->Line = hexti->Line;
+ 366              		.loc 1 293 28
+ 367 001a 7B68     		ldr	r3, [r7, #4]
+ 368 001c 1A68     		ldr	r2, [r3]
+ 369              		.loc 1 293 21
+ 370 001e 3B68     		ldr	r3, [r7]
+ 371 0020 1A60     		str	r2, [r3]
+ 294:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 295:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* compute line register offset and line mask */
+ 296:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   offset = ((pExtiConfig->Line & EXTI_REG_MASK) >> EXTI_REG_SHIFT);
+ 372              		.loc 1 296 25
+ 373 0022 3B68     		ldr	r3, [r7]
+ 374 0024 1B68     		ldr	r3, [r3]
+ 375              		.loc 1 296 49
+ 376 0026 1B0C     		lsrs	r3, r3, #16
+ 377              		.loc 1 296 10
+ 378 0028 03F00103 		and	r3, r3, #1
+ 379 002c FB61     		str	r3, [r7, #28]
+ 297:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   linepos = (pExtiConfig->Line & EXTI_PIN_MASK);
+ 380              		.loc 1 297 25
+ 381 002e 3B68     		ldr	r3, [r7]
+ 382 0030 1B68     		ldr	r3, [r3]
+ 383              		.loc 1 297 11
+ 384 0032 03F01F03 		and	r3, r3, #31
+ 385 0036 BB61     		str	r3, [r7, #24]
+ 298:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   maskline = (1uL << linepos);
+ 386              		.loc 1 298 12
+ 387 0038 0122     		movs	r2, #1
+ 388 003a BB69     		ldr	r3, [r7, #24]
+ 389 003c 02FA03F3 		lsl	r3, r2, r3
+ 390 0040 7B61     		str	r3, [r7, #20]
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 13
+
+
+ 299:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 300:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* 1] Get core mode : interrupt */
+ 301:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #if defined(DUAL_CORE) && defined(CORE_CM0PLUS)
+ 302:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->C2IMR1 + (EXTI_MODE_OFFSET * offset));
+ 303:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #else
+ 304:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->IMR1 + (EXTI_MODE_OFFSET * offset));
+ 391              		.loc 1 304 26
+ 392 0042 FB69     		ldr	r3, [r7, #28]
+ 393 0044 1B01     		lsls	r3, r3, #4
+ 394              		.loc 1 304 11
+ 395 0046 03F1B043 		add	r3, r3, #1476395008
+ 396 004a 03F50863 		add	r3, r3, #2176
+ 397 004e 3B61     		str	r3, [r7, #16]
+ 305:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #endif /* DUAL_CORE && CORE_CM0PLUS */
+ 306:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regval = *regaddr;
+ 398              		.loc 1 306 10
+ 399 0050 3B69     		ldr	r3, [r7, #16]
+ 400 0052 1B68     		ldr	r3, [r3]
+ 401 0054 FB60     		str	r3, [r7, #12]
+ 307:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 308:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check if selected line is enable */
+ 309:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if ((regval & maskline) != 0x00u)
+ 402              		.loc 1 309 15
+ 403 0056 FA68     		ldr	r2, [r7, #12]
+ 404 0058 7B69     		ldr	r3, [r7, #20]
+ 405 005a 1340     		ands	r3, r3, r2
+ 406              		.loc 1 309 6
+ 407 005c 002B     		cmp	r3, #0
+ 408 005e 03D0     		beq	.L20
+ 310:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 311:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     pExtiConfig->Mode = EXTI_MODE_INTERRUPT;
+ 409              		.loc 1 311 23
+ 410 0060 3B68     		ldr	r3, [r7]
+ 411 0062 0122     		movs	r2, #1
+ 412 0064 5A60     		str	r2, [r3, #4]
+ 413 0066 02E0     		b	.L21
+ 414              	.L20:
+ 312:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 313:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   else
+ 314:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 315:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     pExtiConfig->Mode = EXTI_MODE_NONE;
+ 415              		.loc 1 315 23
+ 416 0068 3B68     		ldr	r3, [r7]
+ 417 006a 0022     		movs	r2, #0
+ 418 006c 5A60     		str	r2, [r3, #4]
+ 419              	.L21:
+ 316:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 317:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 318:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Get event mode */
+ 319:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #if defined(DUAL_CORE) && defined(CORE_CM0PLUS)
+ 320:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->C2EMR1 + (EXTI_MODE_OFFSET * offset));
+ 321:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #else
+ 322:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->EMR1 + (EXTI_MODE_OFFSET * offset));
+ 420              		.loc 1 322 26
+ 421 006e FB69     		ldr	r3, [r7, #28]
+ 422 0070 1B01     		lsls	r3, r3, #4
+ 423              		.loc 1 322 11
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 14
+
+
+ 424 0072 03F1B043 		add	r3, r3, #1476395008
+ 425 0076 03F68403 		addw	r3, r3, #2180
+ 426 007a 3B61     		str	r3, [r7, #16]
+ 323:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #endif /* DUAL_CORE && CORE_CM0PLUS */
+ 324:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regval = *regaddr;
+ 427              		.loc 1 324 10
+ 428 007c 3B69     		ldr	r3, [r7, #16]
+ 429 007e 1B68     		ldr	r3, [r3]
+ 430 0080 FB60     		str	r3, [r7, #12]
+ 325:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 326:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check if selected line is enable */
+ 327:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if ((regval & maskline) != 0x00u)
+ 431              		.loc 1 327 15
+ 432 0082 FA68     		ldr	r2, [r7, #12]
+ 433 0084 7B69     		ldr	r3, [r7, #20]
+ 434 0086 1340     		ands	r3, r3, r2
+ 435              		.loc 1 327 6
+ 436 0088 002B     		cmp	r3, #0
+ 437 008a 05D0     		beq	.L22
+ 328:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 329:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     pExtiConfig->Mode |= EXTI_MODE_EVENT;
+ 438              		.loc 1 329 23
+ 439 008c 3B68     		ldr	r3, [r7]
+ 440 008e 5B68     		ldr	r3, [r3, #4]
+ 441 0090 43F00202 		orr	r2, r3, #2
+ 442 0094 3B68     		ldr	r3, [r7]
+ 443 0096 5A60     		str	r2, [r3, #4]
+ 444              	.L22:
+ 330:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 331:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 332:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Get default Trigger and GPIOSel configuration */
+ 333:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   pExtiConfig->Trigger = EXTI_TRIGGER_NONE;
+ 445              		.loc 1 333 24
+ 446 0098 3B68     		ldr	r3, [r7]
+ 447 009a 0022     		movs	r2, #0
+ 448 009c 9A60     		str	r2, [r3, #8]
+ 334:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   pExtiConfig->GPIOSel = 0x00u;
+ 449              		.loc 1 334 24
+ 450 009e 3B68     		ldr	r3, [r7]
+ 451 00a0 0022     		movs	r2, #0
+ 452 00a2 DA60     		str	r2, [r3, #12]
+ 335:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 336:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* 2] Get trigger for configurable lines : rising */
+ 337:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if ((pExtiConfig->Line & EXTI_CONFIG) != 0x00u)
+ 453              		.loc 1 337 19
+ 454 00a4 3B68     		ldr	r3, [r7]
+ 455 00a6 1B68     		ldr	r3, [r3]
+ 456              		.loc 1 337 26
+ 457 00a8 03F00073 		and	r3, r3, #33554432
+ 458              		.loc 1 337 6
+ 459 00ac 002B     		cmp	r3, #0
+ 460 00ae 3FD0     		beq	.L23
+ 338:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 339:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regaddr = (&EXTI->RTSR1 + (EXTI_CONFIG_OFFSET * offset));
+ 461              		.loc 1 339 29
+ 462 00b0 FB69     		ldr	r3, [r7, #28]
+ 463 00b2 5B01     		lsls	r3, r3, #5
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 15
+
+
+ 464              		.loc 1 339 13
+ 465 00b4 03F1B043 		add	r3, r3, #1476395008
+ 466 00b8 03F50063 		add	r3, r3, #2048
+ 467 00bc 3B61     		str	r3, [r7, #16]
+ 340:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval = *regaddr;
+ 468              		.loc 1 340 12
+ 469 00be 3B69     		ldr	r3, [r7, #16]
+ 470 00c0 1B68     		ldr	r3, [r3]
+ 471 00c2 FB60     		str	r3, [r7, #12]
+ 341:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 342:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Check if configuration of selected line is enable */
+ 343:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     if ((regval & maskline) != 0x00u)
+ 472              		.loc 1 343 17
+ 473 00c4 FA68     		ldr	r2, [r7, #12]
+ 474 00c6 7B69     		ldr	r3, [r7, #20]
+ 475 00c8 1340     		ands	r3, r3, r2
+ 476              		.loc 1 343 8
+ 477 00ca 002B     		cmp	r3, #0
+ 478 00cc 02D0     		beq	.L24
+ 344:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 345:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       pExtiConfig->Trigger = EXTI_TRIGGER_RISING;
+ 479              		.loc 1 345 28
+ 480 00ce 3B68     		ldr	r3, [r7]
+ 481 00d0 0122     		movs	r2, #1
+ 482 00d2 9A60     		str	r2, [r3, #8]
+ 483              	.L24:
+ 346:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 347:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 348:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Get falling configuration */
+ 349:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regaddr = (&EXTI->FTSR1 + (EXTI_CONFIG_OFFSET * offset));
+ 484              		.loc 1 349 29
+ 485 00d4 FB69     		ldr	r3, [r7, #28]
+ 486 00d6 5B01     		lsls	r3, r3, #5
+ 487              		.loc 1 349 13
+ 488 00d8 03F1B043 		add	r3, r3, #1476395008
+ 489 00dc 03F60403 		addw	r3, r3, #2052
+ 490 00e0 3B61     		str	r3, [r7, #16]
+ 350:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval = *regaddr;
+ 491              		.loc 1 350 12
+ 492 00e2 3B69     		ldr	r3, [r7, #16]
+ 493 00e4 1B68     		ldr	r3, [r3]
+ 494 00e6 FB60     		str	r3, [r7, #12]
+ 351:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 352:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Check if configuration of selected line is enable */
+ 353:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     if ((regval & maskline) != 0x00u)
+ 495              		.loc 1 353 17
+ 496 00e8 FA68     		ldr	r2, [r7, #12]
+ 497 00ea 7B69     		ldr	r3, [r7, #20]
+ 498 00ec 1340     		ands	r3, r3, r2
+ 499              		.loc 1 353 8
+ 500 00ee 002B     		cmp	r3, #0
+ 501 00f0 05D0     		beq	.L25
+ 354:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 355:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       pExtiConfig->Trigger |= EXTI_TRIGGER_FALLING;
+ 502              		.loc 1 355 28
+ 503 00f2 3B68     		ldr	r3, [r7]
+ 504 00f4 9B68     		ldr	r3, [r3, #8]
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 16
+
+
+ 505 00f6 43F00202 		orr	r2, r3, #2
+ 506 00fa 3B68     		ldr	r3, [r7]
+ 507 00fc 9A60     		str	r2, [r3, #8]
+ 508              	.L25:
+ 356:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 357:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 358:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Get Gpio port selection for gpio lines */
+ 359:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     if ((pExtiConfig->Line & EXTI_GPIO) == EXTI_GPIO)
+ 509              		.loc 1 359 21
+ 510 00fe 3B68     		ldr	r3, [r7]
+ 511 0100 1B68     		ldr	r3, [r3]
+ 512              		.loc 1 359 28
+ 513 0102 03F0C063 		and	r3, r3, #100663296
+ 514              		.loc 1 359 8
+ 515 0106 B3F1C06F 		cmp	r3, #100663296
+ 516 010a 11D1     		bne	.L23
+ 360:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 361:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval = SYSCFG->EXTICR[linepos >> 2u];
+ 517              		.loc 1 361 22
+ 518 010c 0B4A     		ldr	r2, .L26
+ 519              		.loc 1 361 39
+ 520 010e BB69     		ldr	r3, [r7, #24]
+ 521 0110 9B08     		lsrs	r3, r3, #2
+ 522              		.loc 1 361 14
+ 523 0112 0233     		adds	r3, r3, #2
+ 524 0114 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 525 0118 FB60     		str	r3, [r7, #12]
+ 362:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       pExtiConfig->GPIOSel = (regval >> (SYSCFG_EXTICR1_EXTI1_Pos * (linepos & 0x03u))) & SYSCFG_EX
+ 526              		.loc 1 362 78
+ 527 011a BB69     		ldr	r3, [r7, #24]
+ 528 011c 03F00303 		and	r3, r3, #3
+ 529              		.loc 1 362 67
+ 530 0120 9B00     		lsls	r3, r3, #2
+ 531              		.loc 1 362 38
+ 532 0122 FA68     		ldr	r2, [r7, #12]
+ 533 0124 22FA03F3 		lsr	r3, r2, r3
+ 534              		.loc 1 362 89
+ 535 0128 03F00702 		and	r2, r3, #7
+ 536              		.loc 1 362 28
+ 537 012c 3B68     		ldr	r3, [r7]
+ 538 012e DA60     		str	r2, [r3, #12]
+ 539              	.L23:
+ 363:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 364:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 365:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 366:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   return HAL_OK;
+ 540              		.loc 1 366 10
+ 541 0130 0023     		movs	r3, #0
+ 542              	.L19:
+ 367:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** }
+ 543              		.loc 1 367 1
+ 544 0132 1846     		mov	r0, r3
+ 545 0134 2437     		adds	r7, r7, #36
+ 546              	.LCFI9:
+ 547              		.cfi_def_cfa_offset 4
+ 548 0136 BD46     		mov	sp, r7
+ 549              	.LCFI10:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 17
+
+
+ 550              		.cfi_def_cfa_register 13
+ 551              		@ sp needed
+ 552 0138 80BC     		pop	{r7}
+ 553              	.LCFI11:
+ 554              		.cfi_restore 7
+ 555              		.cfi_def_cfa_offset 0
+ 556 013a 7047     		bx	lr
+ 557              	.L27:
+ 558              		.align	2
+ 559              	.L26:
+ 560 013c 00000140 		.word	1073807360
+ 561              		.cfi_endproc
+ 562              	.LFE845:
+ 564              		.section	.text.HAL_EXTI_ClearConfigLine,"ax",%progbits
+ 565              		.align	1
+ 566              		.global	HAL_EXTI_ClearConfigLine
+ 567              		.syntax unified
+ 568              		.thumb
+ 569              		.thumb_func
+ 571              	HAL_EXTI_ClearConfigLine:
+ 572              	.LFB846:
+ 368:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 369:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 370:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 371:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief  Clear whole configuration of a dedicated Exti line.
+ 372:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  hexti Exti handle.
+ 373:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @retval HAL Status.
+ 374:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 375:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** HAL_StatusTypeDef HAL_EXTI_ClearConfigLine(EXTI_HandleTypeDef *hexti)
+ 376:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** {
+ 573              		.loc 1 376 1
+ 574              		.cfi_startproc
+ 575              		@ args = 0, pretend = 0, frame = 32
+ 576              		@ frame_needed = 1, uses_anonymous_args = 0
+ 577              		@ link register save eliminated.
+ 578 0000 80B4     		push	{r7}
+ 579              	.LCFI12:
+ 580              		.cfi_def_cfa_offset 4
+ 581              		.cfi_offset 7, -4
+ 582 0002 89B0     		sub	sp, sp, #36
+ 583              	.LCFI13:
+ 584              		.cfi_def_cfa_offset 40
+ 585 0004 00AF     		add	r7, sp, #0
+ 586              	.LCFI14:
+ 587              		.cfi_def_cfa_register 7
+ 588 0006 7860     		str	r0, [r7, #4]
+ 377:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   __IO uint32_t *regaddr;
+ 378:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t regval;
+ 379:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t linepos;
+ 380:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t maskline;
+ 381:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t offset;
+ 382:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 383:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check null pointer */
+ 384:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if (hexti == NULL)
+ 589              		.loc 1 384 6
+ 590 0008 7B68     		ldr	r3, [r7, #4]
+ 591 000a 002B     		cmp	r3, #0
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 18
+
+
+ 592 000c 01D1     		bne	.L29
+ 385:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 386:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     return HAL_ERROR;
+ 593              		.loc 1 386 12
+ 594 000e 0123     		movs	r3, #1
+ 595 0010 76E0     		b	.L30
+ 596              	.L29:
+ 387:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 388:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 389:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check the parameter */
+ 390:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_LINE(hexti->Line));
+ 391:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 392:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* compute line register offset and line mask */
+ 393:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   offset = ((hexti->Line & EXTI_REG_MASK) >> EXTI_REG_SHIFT);
+ 597              		.loc 1 393 19
+ 598 0012 7B68     		ldr	r3, [r7, #4]
+ 599 0014 1B68     		ldr	r3, [r3]
+ 600              		.loc 1 393 43
+ 601 0016 1B0C     		lsrs	r3, r3, #16
+ 602              		.loc 1 393 10
+ 603 0018 03F00103 		and	r3, r3, #1
+ 604 001c FB61     		str	r3, [r7, #28]
+ 394:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   linepos = (hexti->Line & EXTI_PIN_MASK);
+ 605              		.loc 1 394 19
+ 606 001e 7B68     		ldr	r3, [r7, #4]
+ 607 0020 1B68     		ldr	r3, [r3]
+ 608              		.loc 1 394 11
+ 609 0022 03F01F03 		and	r3, r3, #31
+ 610 0026 BB61     		str	r3, [r7, #24]
+ 395:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   maskline = (1uL << linepos);
+ 611              		.loc 1 395 12
+ 612 0028 0122     		movs	r2, #1
+ 613 002a BB69     		ldr	r3, [r7, #24]
+ 614 002c 02FA03F3 		lsl	r3, r2, r3
+ 615 0030 7B61     		str	r3, [r7, #20]
+ 396:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 397:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* 1] Clear interrupt mode */
+ 398:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #if defined(DUAL_CORE) && defined(CORE_CM0PLUS)
+ 399:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->C2IMR1 + (EXTI_MODE_OFFSET * offset));
+ 400:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #else
+ 401:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->IMR1 + (EXTI_MODE_OFFSET * offset));
+ 616              		.loc 1 401 26
+ 617 0032 FB69     		ldr	r3, [r7, #28]
+ 618 0034 1B01     		lsls	r3, r3, #4
+ 619              		.loc 1 401 11
+ 620 0036 03F1B043 		add	r3, r3, #1476395008
+ 621 003a 03F50863 		add	r3, r3, #2176
+ 622 003e 3B61     		str	r3, [r7, #16]
+ 402:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #endif /* DUAL_CORE && CORE_CM0PLUS */
+ 403:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regval = (*regaddr & ~maskline);
+ 623              		.loc 1 403 13
+ 624 0040 3B69     		ldr	r3, [r7, #16]
+ 625 0042 1A68     		ldr	r2, [r3]
+ 626              		.loc 1 403 24
+ 627 0044 7B69     		ldr	r3, [r7, #20]
+ 628 0046 DB43     		mvns	r3, r3
+ 629              		.loc 1 403 10
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 19
+
+
+ 630 0048 1340     		ands	r3, r3, r2
+ 631 004a FB60     		str	r3, [r7, #12]
+ 404:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *regaddr = regval;
+ 632              		.loc 1 404 12
+ 633 004c 3B69     		ldr	r3, [r7, #16]
+ 634 004e FA68     		ldr	r2, [r7, #12]
+ 635 0050 1A60     		str	r2, [r3]
+ 405:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 406:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* 2] Clear event mode */
+ 407:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #if defined(DUAL_CORE) && defined(CORE_CM0PLUS)
+ 408:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->C2EMR1 + (EXTI_MODE_OFFSET * offset));
+ 409:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #else
+ 410:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->EMR1 + (EXTI_MODE_OFFSET * offset));
+ 636              		.loc 1 410 26
+ 637 0052 FB69     		ldr	r3, [r7, #28]
+ 638 0054 1B01     		lsls	r3, r3, #4
+ 639              		.loc 1 410 11
+ 640 0056 03F1B043 		add	r3, r3, #1476395008
+ 641 005a 03F68403 		addw	r3, r3, #2180
+ 642 005e 3B61     		str	r3, [r7, #16]
+ 411:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** #endif /* DUAL_CORE && CORE_CM0PLUS */
+ 412:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regval = (*regaddr & ~maskline);
+ 643              		.loc 1 412 13
+ 644 0060 3B69     		ldr	r3, [r7, #16]
+ 645 0062 1A68     		ldr	r2, [r3]
+ 646              		.loc 1 412 24
+ 647 0064 7B69     		ldr	r3, [r7, #20]
+ 648 0066 DB43     		mvns	r3, r3
+ 649              		.loc 1 412 10
+ 650 0068 1340     		ands	r3, r3, r2
+ 651 006a FB60     		str	r3, [r7, #12]
+ 413:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *regaddr = regval;
+ 652              		.loc 1 413 12
+ 653 006c 3B69     		ldr	r3, [r7, #16]
+ 654 006e FA68     		ldr	r2, [r7, #12]
+ 655 0070 1A60     		str	r2, [r3]
+ 414:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 415:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* 3] Clear triggers in case of configurable lines */
+ 416:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if ((hexti->Line & EXTI_CONFIG) != 0x00u)
+ 656              		.loc 1 416 13
+ 657 0072 7B68     		ldr	r3, [r7, #4]
+ 658 0074 1B68     		ldr	r3, [r3]
+ 659              		.loc 1 416 20
+ 660 0076 03F00073 		and	r3, r3, #33554432
+ 661              		.loc 1 416 6
+ 662 007a 002B     		cmp	r3, #0
+ 663 007c 3FD0     		beq	.L31
+ 417:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 418:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regaddr = (&EXTI->RTSR1 + (EXTI_CONFIG_OFFSET * offset));
+ 664              		.loc 1 418 29
+ 665 007e FB69     		ldr	r3, [r7, #28]
+ 666 0080 5B01     		lsls	r3, r3, #5
+ 667              		.loc 1 418 13
+ 668 0082 03F1B043 		add	r3, r3, #1476395008
+ 669 0086 03F50063 		add	r3, r3, #2048
+ 670 008a 3B61     		str	r3, [r7, #16]
+ 419:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval = (*regaddr & ~maskline);
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 20
+
+
+ 671              		.loc 1 419 15
+ 672 008c 3B69     		ldr	r3, [r7, #16]
+ 673 008e 1A68     		ldr	r2, [r3]
+ 674              		.loc 1 419 26
+ 675 0090 7B69     		ldr	r3, [r7, #20]
+ 676 0092 DB43     		mvns	r3, r3
+ 677              		.loc 1 419 12
+ 678 0094 1340     		ands	r3, r3, r2
+ 679 0096 FB60     		str	r3, [r7, #12]
+ 420:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     *regaddr = regval;
+ 680              		.loc 1 420 14
+ 681 0098 3B69     		ldr	r3, [r7, #16]
+ 682 009a FA68     		ldr	r2, [r7, #12]
+ 683 009c 1A60     		str	r2, [r3]
+ 421:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 422:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regaddr = (&EXTI->FTSR1 + (EXTI_CONFIG_OFFSET * offset));
+ 684              		.loc 1 422 29
+ 685 009e FB69     		ldr	r3, [r7, #28]
+ 686 00a0 5B01     		lsls	r3, r3, #5
+ 687              		.loc 1 422 13
+ 688 00a2 03F1B043 		add	r3, r3, #1476395008
+ 689 00a6 03F60403 		addw	r3, r3, #2052
+ 690 00aa 3B61     		str	r3, [r7, #16]
+ 423:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     regval = (*regaddr & ~maskline);
+ 691              		.loc 1 423 15
+ 692 00ac 3B69     		ldr	r3, [r7, #16]
+ 693 00ae 1A68     		ldr	r2, [r3]
+ 694              		.loc 1 423 26
+ 695 00b0 7B69     		ldr	r3, [r7, #20]
+ 696 00b2 DB43     		mvns	r3, r3
+ 697              		.loc 1 423 12
+ 698 00b4 1340     		ands	r3, r3, r2
+ 699 00b6 FB60     		str	r3, [r7, #12]
+ 424:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     *regaddr = regval;
+ 700              		.loc 1 424 14
+ 701 00b8 3B69     		ldr	r3, [r7, #16]
+ 702 00ba FA68     		ldr	r2, [r7, #12]
+ 703 00bc 1A60     		str	r2, [r3]
+ 425:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 426:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Get Gpio port selection for gpio lines */
+ 427:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     if ((hexti->Line & EXTI_GPIO) == EXTI_GPIO)
+ 704              		.loc 1 427 15
+ 705 00be 7B68     		ldr	r3, [r7, #4]
+ 706 00c0 1B68     		ldr	r3, [r3]
+ 707              		.loc 1 427 22
+ 708 00c2 03F0C063 		and	r3, r3, #100663296
+ 709              		.loc 1 427 8
+ 710 00c6 B3F1C06F 		cmp	r3, #100663296
+ 711 00ca 18D1     		bne	.L31
+ 428:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 429:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval = SYSCFG->EXTICR[linepos >> 2u];
+ 712              		.loc 1 429 22
+ 713 00cc 0F4A     		ldr	r2, .L32
+ 714              		.loc 1 429 39
+ 715 00ce BB69     		ldr	r3, [r7, #24]
+ 716 00d0 9B08     		lsrs	r3, r3, #2
+ 717              		.loc 1 429 14
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 21
+
+
+ 718 00d2 0233     		adds	r3, r3, #2
+ 719 00d4 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 720 00d8 FB60     		str	r3, [r7, #12]
+ 430:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       regval &= ~(SYSCFG_EXTICR1_EXTI0 << (SYSCFG_EXTICR1_EXTI1_Pos * (linepos & 0x03u)));
+ 721              		.loc 1 430 80
+ 722 00da BB69     		ldr	r3, [r7, #24]
+ 723 00dc 03F00303 		and	r3, r3, #3
+ 724              		.loc 1 430 69
+ 725 00e0 9B00     		lsls	r3, r3, #2
+ 726              		.loc 1 430 40
+ 727 00e2 0722     		movs	r2, #7
+ 728 00e4 02FA03F3 		lsl	r3, r2, r3
+ 729              		.loc 1 430 17
+ 730 00e8 DB43     		mvns	r3, r3
+ 731              		.loc 1 430 14
+ 732 00ea FA68     		ldr	r2, [r7, #12]
+ 733 00ec 1340     		ands	r3, r3, r2
+ 734 00ee FB60     		str	r3, [r7, #12]
+ 431:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       SYSCFG->EXTICR[linepos >> 2u] = regval;
+ 735              		.loc 1 431 13
+ 736 00f0 0649     		ldr	r1, .L32
+ 737              		.loc 1 431 30
+ 738 00f2 BB69     		ldr	r3, [r7, #24]
+ 739 00f4 9B08     		lsrs	r3, r3, #2
+ 740              		.loc 1 431 37
+ 741 00f6 0233     		adds	r3, r3, #2
+ 742 00f8 FA68     		ldr	r2, [r7, #12]
+ 743 00fa 41F82320 		str	r2, [r1, r3, lsl #2]
+ 744              	.L31:
+ 432:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 433:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 434:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 435:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   return HAL_OK;
+ 745              		.loc 1 435 10
+ 746 00fe 0023     		movs	r3, #0
+ 747              	.L30:
+ 436:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** }
+ 748              		.loc 1 436 1
+ 749 0100 1846     		mov	r0, r3
+ 750 0102 2437     		adds	r7, r7, #36
+ 751              	.LCFI15:
+ 752              		.cfi_def_cfa_offset 4
+ 753 0104 BD46     		mov	sp, r7
+ 754              	.LCFI16:
+ 755              		.cfi_def_cfa_register 13
+ 756              		@ sp needed
+ 757 0106 80BC     		pop	{r7}
+ 758              	.LCFI17:
+ 759              		.cfi_restore 7
+ 760              		.cfi_def_cfa_offset 0
+ 761 0108 7047     		bx	lr
+ 762              	.L33:
+ 763 010a 00BF     		.align	2
+ 764              	.L32:
+ 765 010c 00000140 		.word	1073807360
+ 766              		.cfi_endproc
+ 767              	.LFE846:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 22
+
+
+ 769              		.section	.text.HAL_EXTI_RegisterCallback,"ax",%progbits
+ 770              		.align	1
+ 771              		.global	HAL_EXTI_RegisterCallback
+ 772              		.syntax unified
+ 773              		.thumb
+ 774              		.thumb_func
+ 776              	HAL_EXTI_RegisterCallback:
+ 777              	.LFB847:
+ 437:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 438:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 439:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 440:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief  Register callback for a dedicaated Exti line.
+ 441:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  hexti Exti handle.
+ 442:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  CallbackID User callback identifier.
+ 443:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *         This parameter can be one of @arg @ref EXTI_CallbackIDTypeDef values.
+ 444:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  pPendingCbfn function pointer to be stored as callback.
+ 445:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @retval HAL Status.
+ 446:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 447:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** HAL_StatusTypeDef HAL_EXTI_RegisterCallback(EXTI_HandleTypeDef *hexti, EXTI_CallbackIDTypeDef Callb
+ 448:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** {
+ 778              		.loc 1 448 1
+ 779              		.cfi_startproc
+ 780              		@ args = 0, pretend = 0, frame = 24
+ 781              		@ frame_needed = 1, uses_anonymous_args = 0
+ 782              		@ link register save eliminated.
+ 783 0000 80B4     		push	{r7}
+ 784              	.LCFI18:
+ 785              		.cfi_def_cfa_offset 4
+ 786              		.cfi_offset 7, -4
+ 787 0002 87B0     		sub	sp, sp, #28
+ 788              	.LCFI19:
+ 789              		.cfi_def_cfa_offset 32
+ 790 0004 00AF     		add	r7, sp, #0
+ 791              	.LCFI20:
+ 792              		.cfi_def_cfa_register 7
+ 793 0006 F860     		str	r0, [r7, #12]
+ 794 0008 0B46     		mov	r3, r1
+ 795 000a 7A60     		str	r2, [r7, #4]
+ 796 000c FB72     		strb	r3, [r7, #11]
+ 449:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 797              		.loc 1 449 21
+ 798 000e 0023     		movs	r3, #0
+ 799 0010 FB75     		strb	r3, [r7, #23]
+ 450:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 451:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   switch (CallbackID)
+ 800              		.loc 1 451 3
+ 801 0012 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 802 0014 002B     		cmp	r3, #0
+ 803 0016 03D1     		bne	.L35
+ 452:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 453:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     case  HAL_EXTI_COMMON_CB_ID:
+ 454:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       hexti->PendingCallback = pPendingCbfn;
+ 804              		.loc 1 454 30
+ 805 0018 FB68     		ldr	r3, [r7, #12]
+ 806 001a 7A68     		ldr	r2, [r7, #4]
+ 807 001c 5A60     		str	r2, [r3, #4]
+ 455:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       break;
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 23
+
+
+ 808              		.loc 1 455 7
+ 809 001e 02E0     		b	.L36
+ 810              	.L35:
+ 456:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 457:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     default:
+ 458:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       status = HAL_ERROR;
+ 811              		.loc 1 458 14
+ 812 0020 0123     		movs	r3, #1
+ 813 0022 FB75     		strb	r3, [r7, #23]
+ 459:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       break;
+ 814              		.loc 1 459 7
+ 815 0024 00BF     		nop
+ 816              	.L36:
+ 460:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 461:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 462:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   return status;
+ 817              		.loc 1 462 10
+ 818 0026 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
+ 463:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** }
+ 819              		.loc 1 463 1
+ 820 0028 1846     		mov	r0, r3
+ 821 002a 1C37     		adds	r7, r7, #28
+ 822              	.LCFI21:
+ 823              		.cfi_def_cfa_offset 4
+ 824 002c BD46     		mov	sp, r7
+ 825              	.LCFI22:
+ 826              		.cfi_def_cfa_register 13
+ 827              		@ sp needed
+ 828 002e 80BC     		pop	{r7}
+ 829              	.LCFI23:
+ 830              		.cfi_restore 7
+ 831              		.cfi_def_cfa_offset 0
+ 832 0030 7047     		bx	lr
+ 833              		.cfi_endproc
+ 834              	.LFE847:
+ 836              		.section	.text.HAL_EXTI_GetHandle,"ax",%progbits
+ 837              		.align	1
+ 838              		.global	HAL_EXTI_GetHandle
+ 839              		.syntax unified
+ 840              		.thumb
+ 841              		.thumb_func
+ 843              	HAL_EXTI_GetHandle:
+ 844              	.LFB848:
+ 464:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 465:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 466:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 467:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief  Store line number as handle private field.
+ 468:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  hexti Exti handle.
+ 469:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  ExtiLine Exti line number.
+ 470:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *         This parameter can be from 0 to @ref EXTI_LINE_NB.
+ 471:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @retval HAL Status.
+ 472:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 473:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** HAL_StatusTypeDef HAL_EXTI_GetHandle(EXTI_HandleTypeDef *hexti, uint32_t ExtiLine)
+ 474:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** {
+ 845              		.loc 1 474 1
+ 846              		.cfi_startproc
+ 847              		@ args = 0, pretend = 0, frame = 8
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 24
+
+
+ 848              		@ frame_needed = 1, uses_anonymous_args = 0
+ 849              		@ link register save eliminated.
+ 850 0000 80B4     		push	{r7}
+ 851              	.LCFI24:
+ 852              		.cfi_def_cfa_offset 4
+ 853              		.cfi_offset 7, -4
+ 854 0002 83B0     		sub	sp, sp, #12
+ 855              	.LCFI25:
+ 856              		.cfi_def_cfa_offset 16
+ 857 0004 00AF     		add	r7, sp, #0
+ 858              	.LCFI26:
+ 859              		.cfi_def_cfa_register 7
+ 860 0006 7860     		str	r0, [r7, #4]
+ 861 0008 3960     		str	r1, [r7]
+ 475:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check the parameters */
+ 476:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_LINE(ExtiLine));
+ 477:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 478:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check null pointer */
+ 479:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if (hexti == NULL)
+ 862              		.loc 1 479 6
+ 863 000a 7B68     		ldr	r3, [r7, #4]
+ 864 000c 002B     		cmp	r3, #0
+ 865 000e 01D1     		bne	.L39
+ 480:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 481:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     return HAL_ERROR;
+ 866              		.loc 1 481 12
+ 867 0010 0123     		movs	r3, #1
+ 868 0012 03E0     		b	.L40
+ 869              	.L39:
+ 482:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 483:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   else
+ 484:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 485:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Store line number as handle private field */
+ 486:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     hexti->Line = ExtiLine;
+ 870              		.loc 1 486 17
+ 871 0014 7B68     		ldr	r3, [r7, #4]
+ 872 0016 3A68     		ldr	r2, [r7]
+ 873 0018 1A60     		str	r2, [r3]
+ 487:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 488:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     return HAL_OK;
+ 874              		.loc 1 488 12
+ 875 001a 0023     		movs	r3, #0
+ 876              	.L40:
+ 489:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 490:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** }
+ 877              		.loc 1 490 1
+ 878 001c 1846     		mov	r0, r3
+ 879 001e 0C37     		adds	r7, r7, #12
+ 880              	.LCFI27:
+ 881              		.cfi_def_cfa_offset 4
+ 882 0020 BD46     		mov	sp, r7
+ 883              	.LCFI28:
+ 884              		.cfi_def_cfa_register 13
+ 885              		@ sp needed
+ 886 0022 80BC     		pop	{r7}
+ 887              	.LCFI29:
+ 888              		.cfi_restore 7
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 25
+
+
+ 889              		.cfi_def_cfa_offset 0
+ 890 0024 7047     		bx	lr
+ 891              		.cfi_endproc
+ 892              	.LFE848:
+ 894              		.section	.text.HAL_EXTI_IRQHandler,"ax",%progbits
+ 895              		.align	1
+ 896              		.global	HAL_EXTI_IRQHandler
+ 897              		.syntax unified
+ 898              		.thumb
+ 899              		.thumb_func
+ 901              	HAL_EXTI_IRQHandler:
+ 902              	.LFB849:
+ 491:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 492:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 493:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 494:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @}
+ 495:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 496:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 497:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /** @addtogroup EXTI_Exported_Functions_Group2
+ 498:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *  @brief EXTI IO functions.
+ 499:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *
+ 500:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** @verbatim
+ 501:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****  ===============================================================================
+ 502:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****                        ##### IO operation functions #####
+ 503:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****  ===============================================================================
+ 504:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 505:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** @endverbatim
+ 506:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @{
+ 507:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 508:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 509:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 510:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief  Handle EXTI interrupt request.
+ 511:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  hexti Exti handle.
+ 512:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @retval none.
+ 513:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 514:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** void HAL_EXTI_IRQHandler(EXTI_HandleTypeDef *hexti)
+ 515:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** {
+ 903              		.loc 1 515 1
+ 904              		.cfi_startproc
+ 905              		@ args = 0, pretend = 0, frame = 24
+ 906              		@ frame_needed = 1, uses_anonymous_args = 0
+ 907 0000 80B5     		push	{r7, lr}
+ 908              	.LCFI30:
+ 909              		.cfi_def_cfa_offset 8
+ 910              		.cfi_offset 7, -8
+ 911              		.cfi_offset 14, -4
+ 912 0002 86B0     		sub	sp, sp, #24
+ 913              	.LCFI31:
+ 914              		.cfi_def_cfa_offset 32
+ 915 0004 00AF     		add	r7, sp, #0
+ 916              	.LCFI32:
+ 917              		.cfi_def_cfa_register 7
+ 918 0006 7860     		str	r0, [r7, #4]
+ 516:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   __IO uint32_t *regaddr;
+ 517:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t regval;
+ 518:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t maskline;
+ 519:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t offset;
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 26
+
+
+ 520:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 521:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Compute line register offset and line mask */
+ 522:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   offset = ((hexti->Line & EXTI_REG_MASK) >> EXTI_REG_SHIFT);
+ 919              		.loc 1 522 19
+ 920 0008 7B68     		ldr	r3, [r7, #4]
+ 921 000a 1B68     		ldr	r3, [r3]
+ 922              		.loc 1 522 43
+ 923 000c 1B0C     		lsrs	r3, r3, #16
+ 924              		.loc 1 522 10
+ 925 000e 03F00103 		and	r3, r3, #1
+ 926 0012 7B61     		str	r3, [r7, #20]
+ 523:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   maskline = (1uL << (hexti->Line & EXTI_PIN_MASK));
+ 927              		.loc 1 523 28
+ 928 0014 7B68     		ldr	r3, [r7, #4]
+ 929 0016 1B68     		ldr	r3, [r3]
+ 930              		.loc 1 523 35
+ 931 0018 03F01F03 		and	r3, r3, #31
+ 932              		.loc 1 523 12
+ 933 001c 0122     		movs	r2, #1
+ 934 001e 02FA03F3 		lsl	r3, r2, r3
+ 935 0022 3B61     		str	r3, [r7, #16]
+ 524:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 525:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Get pending bit  */
+ 526:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->PR1 + (EXTI_CONFIG_OFFSET * offset));
+ 936              		.loc 1 526 25
+ 937 0024 7B69     		ldr	r3, [r7, #20]
+ 938 0026 5B01     		lsls	r3, r3, #5
+ 939              		.loc 1 526 11
+ 940 0028 03F1B043 		add	r3, r3, #1476395008
+ 941 002c 03F60C03 		addw	r3, r3, #2060
+ 942 0030 FB60     		str	r3, [r7, #12]
+ 527:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regval = (*regaddr & maskline);
+ 943              		.loc 1 527 13
+ 944 0032 FB68     		ldr	r3, [r7, #12]
+ 945 0034 1B68     		ldr	r3, [r3]
+ 946              		.loc 1 527 10
+ 947 0036 3A69     		ldr	r2, [r7, #16]
+ 948 0038 1340     		ands	r3, r3, r2
+ 949 003a BB60     		str	r3, [r7, #8]
+ 528:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 529:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   if (regval != 0x00u)
+ 950              		.loc 1 529 6
+ 951 003c BB68     		ldr	r3, [r7, #8]
+ 952 003e 002B     		cmp	r3, #0
+ 953 0040 09D0     		beq	.L43
+ 530:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   {
+ 531:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Clear pending bit */
+ 532:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     *regaddr = maskline;
+ 954              		.loc 1 532 14
+ 955 0042 FB68     		ldr	r3, [r7, #12]
+ 956 0044 3A69     		ldr	r2, [r7, #16]
+ 957 0046 1A60     		str	r2, [r3]
+ 533:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 534:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     /* Call callback */
+ 535:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     if (hexti->PendingCallback != NULL)
+ 958              		.loc 1 535 14
+ 959 0048 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 27
+
+
+ 960 004a 5B68     		ldr	r3, [r3, #4]
+ 961              		.loc 1 535 8
+ 962 004c 002B     		cmp	r3, #0
+ 963 004e 02D0     		beq	.L43
+ 536:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     {
+ 537:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****       hexti->PendingCallback();
+ 964              		.loc 1 537 12
+ 965 0050 7B68     		ldr	r3, [r7, #4]
+ 966 0052 5B68     		ldr	r3, [r3, #4]
+ 967              		.loc 1 537 7
+ 968 0054 9847     		blx	r3
+ 969              	.LVL0:
+ 970              	.L43:
+ 538:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****     }
+ 539:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   }
+ 540:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** }
+ 971              		.loc 1 540 1
+ 972 0056 00BF     		nop
+ 973 0058 1837     		adds	r7, r7, #24
+ 974              	.LCFI33:
+ 975              		.cfi_def_cfa_offset 8
+ 976 005a BD46     		mov	sp, r7
+ 977              	.LCFI34:
+ 978              		.cfi_def_cfa_register 13
+ 979              		@ sp needed
+ 980 005c 80BD     		pop	{r7, pc}
+ 981              		.cfi_endproc
+ 982              	.LFE849:
+ 984              		.section	.text.HAL_EXTI_GetPending,"ax",%progbits
+ 985              		.align	1
+ 986              		.global	HAL_EXTI_GetPending
+ 987              		.syntax unified
+ 988              		.thumb
+ 989              		.thumb_func
+ 991              	HAL_EXTI_GetPending:
+ 992              	.LFB850:
+ 541:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 542:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 543:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 544:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief  Get interrupt pending bit of a dedicated line.
+ 545:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  hexti Exti handle.
+ 546:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  Edge Specify which pending edge as to be checked.
+ 547:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *         This parameter can be one of the following values:
+ 548:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *           @arg @ref EXTI_TRIGGER_RISING_FALLING
+ 549:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *         This parameter is kept for compatibility with other series.
+ 550:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @retval 1 if interrupt is pending else 0.
+ 551:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 552:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** uint32_t HAL_EXTI_GetPending(EXTI_HandleTypeDef *hexti, uint32_t Edge)
+ 553:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** {
+ 993              		.loc 1 553 1
+ 994              		.cfi_startproc
+ 995              		@ args = 0, pretend = 0, frame = 32
+ 996              		@ frame_needed = 1, uses_anonymous_args = 0
+ 997              		@ link register save eliminated.
+ 998 0000 80B4     		push	{r7}
+ 999              	.LCFI35:
+ 1000              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 28
+
+
+ 1001              		.cfi_offset 7, -4
+ 1002 0002 89B0     		sub	sp, sp, #36
+ 1003              	.LCFI36:
+ 1004              		.cfi_def_cfa_offset 40
+ 1005 0004 00AF     		add	r7, sp, #0
+ 1006              	.LCFI37:
+ 1007              		.cfi_def_cfa_register 7
+ 1008 0006 7860     		str	r0, [r7, #4]
+ 1009 0008 3960     		str	r1, [r7]
+ 554:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   __IO uint32_t *regaddr;
+ 555:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t regval;
+ 556:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t linepos;
+ 557:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t maskline;
+ 558:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t offset;
+ 559:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 560:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check parameters */
+ 561:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_LINE(hexti->Line));
+ 562:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_CONFIG_LINE(hexti->Line));
+ 563:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_PENDING_EDGE(Edge));
+ 564:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 565:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* compute line register offset and line mask */
+ 566:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   offset = ((hexti->Line & EXTI_REG_MASK) >> EXTI_REG_SHIFT);
+ 1010              		.loc 1 566 19
+ 1011 000a 7B68     		ldr	r3, [r7, #4]
+ 1012 000c 1B68     		ldr	r3, [r3]
+ 1013              		.loc 1 566 43
+ 1014 000e 1B0C     		lsrs	r3, r3, #16
+ 1015              		.loc 1 566 10
+ 1016 0010 03F00103 		and	r3, r3, #1
+ 1017 0014 FB61     		str	r3, [r7, #28]
+ 567:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   linepos = (hexti->Line & EXTI_PIN_MASK);
+ 1018              		.loc 1 567 19
+ 1019 0016 7B68     		ldr	r3, [r7, #4]
+ 1020 0018 1B68     		ldr	r3, [r3]
+ 1021              		.loc 1 567 11
+ 1022 001a 03F01F03 		and	r3, r3, #31
+ 1023 001e BB61     		str	r3, [r7, #24]
+ 568:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   maskline = (1uL << linepos);
+ 1024              		.loc 1 568 12
+ 1025 0020 0122     		movs	r2, #1
+ 1026 0022 BB69     		ldr	r3, [r7, #24]
+ 1027 0024 02FA03F3 		lsl	r3, r2, r3
+ 1028 0028 7B61     		str	r3, [r7, #20]
+ 569:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 570:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Get pending bit */
+ 571:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->PR1 + (EXTI_CONFIG_OFFSET * offset));
+ 1029              		.loc 1 571 25
+ 1030 002a FB69     		ldr	r3, [r7, #28]
+ 1031 002c 5B01     		lsls	r3, r3, #5
+ 1032              		.loc 1 571 11
+ 1033 002e 03F1B043 		add	r3, r3, #1476395008
+ 1034 0032 03F60C03 		addw	r3, r3, #2060
+ 1035 0036 3B61     		str	r3, [r7, #16]
+ 572:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 573:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* return 1 if bit is set else 0 */
+ 574:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regval = ((*regaddr & maskline) >> linepos);
+ 1036              		.loc 1 574 14
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 29
+
+
+ 1037 0038 3B69     		ldr	r3, [r7, #16]
+ 1038 003a 1A68     		ldr	r2, [r3]
+ 1039              		.loc 1 574 23
+ 1040 003c 7B69     		ldr	r3, [r7, #20]
+ 1041 003e 1A40     		ands	r2, r2, r3
+ 1042              		.loc 1 574 10
+ 1043 0040 BB69     		ldr	r3, [r7, #24]
+ 1044 0042 22FA03F3 		lsr	r3, r2, r3
+ 1045 0046 FB60     		str	r3, [r7, #12]
+ 575:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   return regval;
+ 1046              		.loc 1 575 10
+ 1047 0048 FB68     		ldr	r3, [r7, #12]
+ 576:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** }
+ 1048              		.loc 1 576 1
+ 1049 004a 1846     		mov	r0, r3
+ 1050 004c 2437     		adds	r7, r7, #36
+ 1051              	.LCFI38:
+ 1052              		.cfi_def_cfa_offset 4
+ 1053 004e BD46     		mov	sp, r7
+ 1054              	.LCFI39:
+ 1055              		.cfi_def_cfa_register 13
+ 1056              		@ sp needed
+ 1057 0050 80BC     		pop	{r7}
+ 1058              	.LCFI40:
+ 1059              		.cfi_restore 7
+ 1060              		.cfi_def_cfa_offset 0
+ 1061 0052 7047     		bx	lr
+ 1062              		.cfi_endproc
+ 1063              	.LFE850:
+ 1065              		.section	.text.HAL_EXTI_ClearPending,"ax",%progbits
+ 1066              		.align	1
+ 1067              		.global	HAL_EXTI_ClearPending
+ 1068              		.syntax unified
+ 1069              		.thumb
+ 1070              		.thumb_func
+ 1072              	HAL_EXTI_ClearPending:
+ 1073              	.LFB851:
+ 577:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 578:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 579:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 580:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief  Clear interrupt pending bit of a dedicated line.
+ 581:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  hexti Exti handle.
+ 582:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  Edge Specify which pending edge as to be clear.
+ 583:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *         This parameter can be one of the following values:
+ 584:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *           @arg @ref EXTI_TRIGGER_RISING_FALLING
+ 585:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *         This parameter is kept for compatibility with other series.
+ 586:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @retval None.
+ 587:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 588:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** void HAL_EXTI_ClearPending(EXTI_HandleTypeDef *hexti, uint32_t Edge)
+ 589:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** {
+ 1074              		.loc 1 589 1
+ 1075              		.cfi_startproc
+ 1076              		@ args = 0, pretend = 0, frame = 24
+ 1077              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1078              		@ link register save eliminated.
+ 1079 0000 80B4     		push	{r7}
+ 1080              	.LCFI41:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 30
+
+
+ 1081              		.cfi_def_cfa_offset 4
+ 1082              		.cfi_offset 7, -4
+ 1083 0002 87B0     		sub	sp, sp, #28
+ 1084              	.LCFI42:
+ 1085              		.cfi_def_cfa_offset 32
+ 1086 0004 00AF     		add	r7, sp, #0
+ 1087              	.LCFI43:
+ 1088              		.cfi_def_cfa_register 7
+ 1089 0006 7860     		str	r0, [r7, #4]
+ 1090 0008 3960     		str	r1, [r7]
+ 590:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   __IO uint32_t *regaddr;
+ 591:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t maskline;
+ 592:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t offset;
+ 593:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 594:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check parameters */
+ 595:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_LINE(hexti->Line));
+ 596:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_CONFIG_LINE(hexti->Line));
+ 597:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_PENDING_EDGE(Edge));
+ 598:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 599:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* compute line register offset and line mask */
+ 600:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   offset = ((hexti->Line & EXTI_REG_MASK) >> EXTI_REG_SHIFT);
+ 1091              		.loc 1 600 19
+ 1092 000a 7B68     		ldr	r3, [r7, #4]
+ 1093 000c 1B68     		ldr	r3, [r3]
+ 1094              		.loc 1 600 43
+ 1095 000e 1B0C     		lsrs	r3, r3, #16
+ 1096              		.loc 1 600 10
+ 1097 0010 03F00103 		and	r3, r3, #1
+ 1098 0014 7B61     		str	r3, [r7, #20]
+ 601:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   maskline = (1uL << (hexti->Line & EXTI_PIN_MASK));
+ 1099              		.loc 1 601 28
+ 1100 0016 7B68     		ldr	r3, [r7, #4]
+ 1101 0018 1B68     		ldr	r3, [r3]
+ 1102              		.loc 1 601 35
+ 1103 001a 03F01F03 		and	r3, r3, #31
+ 1104              		.loc 1 601 12
+ 1105 001e 0122     		movs	r2, #1
+ 1106 0020 02FA03F3 		lsl	r3, r2, r3
+ 1107 0024 3B61     		str	r3, [r7, #16]
+ 602:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 603:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Get pending register address */
+ 604:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->PR1 + (EXTI_CONFIG_OFFSET * offset));
+ 1108              		.loc 1 604 25
+ 1109 0026 7B69     		ldr	r3, [r7, #20]
+ 1110 0028 5B01     		lsls	r3, r3, #5
+ 1111              		.loc 1 604 11
+ 1112 002a 03F1B043 		add	r3, r3, #1476395008
+ 1113 002e 03F60C03 		addw	r3, r3, #2060
+ 1114 0032 FB60     		str	r3, [r7, #12]
+ 605:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 606:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Clear Pending bit */
+ 607:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *regaddr =  maskline;
+ 1115              		.loc 1 607 12
+ 1116 0034 FB68     		ldr	r3, [r7, #12]
+ 1117 0036 3A69     		ldr	r2, [r7, #16]
+ 1118 0038 1A60     		str	r2, [r3]
+ 608:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** }
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 31
+
+
+ 1119              		.loc 1 608 1
+ 1120 003a 00BF     		nop
+ 1121 003c 1C37     		adds	r7, r7, #28
+ 1122              	.LCFI44:
+ 1123              		.cfi_def_cfa_offset 4
+ 1124 003e BD46     		mov	sp, r7
+ 1125              	.LCFI45:
+ 1126              		.cfi_def_cfa_register 13
+ 1127              		@ sp needed
+ 1128 0040 80BC     		pop	{r7}
+ 1129              	.LCFI46:
+ 1130              		.cfi_restore 7
+ 1131              		.cfi_def_cfa_offset 0
+ 1132 0042 7047     		bx	lr
+ 1133              		.cfi_endproc
+ 1134              	.LFE851:
+ 1136              		.section	.text.HAL_EXTI_GenerateSWI,"ax",%progbits
+ 1137              		.align	1
+ 1138              		.global	HAL_EXTI_GenerateSWI
+ 1139              		.syntax unified
+ 1140              		.thumb
+ 1141              		.thumb_func
+ 1143              	HAL_EXTI_GenerateSWI:
+ 1144              	.LFB852:
+ 609:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 610:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** /**
+ 611:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @brief  Generate a software interrupt for a dedicated line.
+ 612:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @param  hexti Exti handle.
+ 613:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   * @retval None.
+ 614:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   */
+ 615:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** void HAL_EXTI_GenerateSWI(EXTI_HandleTypeDef *hexti)
+ 616:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** {
+ 1145              		.loc 1 616 1
+ 1146              		.cfi_startproc
+ 1147              		@ args = 0, pretend = 0, frame = 24
+ 1148              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1149              		@ link register save eliminated.
+ 1150 0000 80B4     		push	{r7}
+ 1151              	.LCFI47:
+ 1152              		.cfi_def_cfa_offset 4
+ 1153              		.cfi_offset 7, -4
+ 1154 0002 87B0     		sub	sp, sp, #28
+ 1155              	.LCFI48:
+ 1156              		.cfi_def_cfa_offset 32
+ 1157 0004 00AF     		add	r7, sp, #0
+ 1158              	.LCFI49:
+ 1159              		.cfi_def_cfa_register 7
+ 1160 0006 7860     		str	r0, [r7, #4]
+ 617:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   __IO uint32_t *regaddr;
+ 618:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t maskline;
+ 619:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   uint32_t offset;
+ 620:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 621:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* Check parameters */
+ 622:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_LINE(hexti->Line));
+ 623:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   assert_param(IS_EXTI_CONFIG_LINE(hexti->Line));
+ 624:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 625:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   /* compute line register offset and line mask */
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 32
+
+
+ 626:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   offset = ((hexti->Line & EXTI_REG_MASK) >> EXTI_REG_SHIFT);
+ 1161              		.loc 1 626 19
+ 1162 0008 7B68     		ldr	r3, [r7, #4]
+ 1163 000a 1B68     		ldr	r3, [r3]
+ 1164              		.loc 1 626 43
+ 1165 000c 1B0C     		lsrs	r3, r3, #16
+ 1166              		.loc 1 626 10
+ 1167 000e 03F00103 		and	r3, r3, #1
+ 1168 0012 7B61     		str	r3, [r7, #20]
+ 627:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   maskline = (1uL << (hexti->Line & EXTI_PIN_MASK));
+ 1169              		.loc 1 627 28
+ 1170 0014 7B68     		ldr	r3, [r7, #4]
+ 1171 0016 1B68     		ldr	r3, [r3]
+ 1172              		.loc 1 627 35
+ 1173 0018 03F01F03 		and	r3, r3, #31
+ 1174              		.loc 1 627 12
+ 1175 001c 0122     		movs	r2, #1
+ 1176 001e 02FA03F3 		lsl	r3, r2, r3
+ 1177 0022 3B61     		str	r3, [r7, #16]
+ 628:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** 
+ 629:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   regaddr = (&EXTI->SWIER1 + (EXTI_CONFIG_OFFSET * offset));
+ 1178              		.loc 1 629 28
+ 1179 0024 7B69     		ldr	r3, [r7, #20]
+ 1180 0026 5B01     		lsls	r3, r3, #5
+ 1181              		.loc 1 629 11
+ 1182 0028 03F1B043 		add	r3, r3, #1476395008
+ 1183 002c 03F60803 		addw	r3, r3, #2056
+ 1184 0030 FB60     		str	r3, [r7, #12]
+ 630:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c ****   *regaddr = maskline;
+ 1185              		.loc 1 630 12
+ 1186 0032 FB68     		ldr	r3, [r7, #12]
+ 1187 0034 3A69     		ldr	r2, [r7, #16]
+ 1188 0036 1A60     		str	r2, [r3]
+ 631:Drivers/STM32WLxx_HAL_Driver/Src/stm32wlxx_hal_exti.c **** }
+ 1189              		.loc 1 631 1
+ 1190 0038 00BF     		nop
+ 1191 003a 1C37     		adds	r7, r7, #28
+ 1192              	.LCFI50:
+ 1193              		.cfi_def_cfa_offset 4
+ 1194 003c BD46     		mov	sp, r7
+ 1195              	.LCFI51:
+ 1196              		.cfi_def_cfa_register 13
+ 1197              		@ sp needed
+ 1198 003e 80BC     		pop	{r7}
+ 1199              	.LCFI52:
+ 1200              		.cfi_restore 7
+ 1201              		.cfi_def_cfa_offset 0
+ 1202 0040 7047     		bx	lr
+ 1203              		.cfi_endproc
+ 1204              	.LFE852:
+ 1206              		.text
+ 1207              	.Letext0:
+ 1208              		.file 2 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 1209              		.file 3 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 1210              		.file 4 "Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wl55xx.h"
+ 1211              		.file 5 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_def.h"
+ 1212              		.file 6 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_exti.h"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 33
+
+
+ 1213              		.file 7 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s 			page 34
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32wlxx_hal_exti.c
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:18     .rodata.CHANNEL_OFFSET_TAB:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:21     .rodata.CHANNEL_OFFSET_TAB:00000000 CHANNEL_OFFSET_TAB
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:24     .text.HAL_EXTI_SetConfigLine:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:30     .text.HAL_EXTI_SetConfigLine:00000000 HAL_EXTI_SetConfigLine
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:323    .text.HAL_EXTI_SetConfigLine:00000198 $d
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:328    .text.HAL_EXTI_GetConfigLine:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:334    .text.HAL_EXTI_GetConfigLine:00000000 HAL_EXTI_GetConfigLine
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:560    .text.HAL_EXTI_GetConfigLine:0000013c $d
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:565    .text.HAL_EXTI_ClearConfigLine:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:571    .text.HAL_EXTI_ClearConfigLine:00000000 HAL_EXTI_ClearConfigLine
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:765    .text.HAL_EXTI_ClearConfigLine:0000010c $d
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:770    .text.HAL_EXTI_RegisterCallback:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:776    .text.HAL_EXTI_RegisterCallback:00000000 HAL_EXTI_RegisterCallback
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:837    .text.HAL_EXTI_GetHandle:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:843    .text.HAL_EXTI_GetHandle:00000000 HAL_EXTI_GetHandle
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:895    .text.HAL_EXTI_IRQHandler:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:901    .text.HAL_EXTI_IRQHandler:00000000 HAL_EXTI_IRQHandler
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:985    .text.HAL_EXTI_GetPending:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:991    .text.HAL_EXTI_GetPending:00000000 HAL_EXTI_GetPending
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:1066   .text.HAL_EXTI_ClearPending:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:1072   .text.HAL_EXTI_ClearPending:00000000 HAL_EXTI_ClearPending
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:1137   .text.HAL_EXTI_GenerateSWI:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cciF65mn.s:1143   .text.HAL_EXTI_GenerateSWI:00000000 HAL_EXTI_GenerateSWI
+
+NO UNDEFINED SYMBOLS

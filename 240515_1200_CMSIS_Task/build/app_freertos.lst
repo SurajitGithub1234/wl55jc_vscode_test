@@ -1,0 +1,38 @@
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccWkuFNd.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"app_freertos.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.rodata.CHANNEL_OFFSET_TAB,"a"
+  18              		.align	2
+  21              	CHANNEL_OFFSET_TAB:
+  22 0000 081C3044 		.ascii	"\010\0340DXl\200"
+  22      586C80
+  23              		.text
+  24              	.Letext0:
+  25              		.file 1 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+  26              		.file 2 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+  27              		.file 3 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccWkuFNd.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 app_freertos.c
+C:\Users\Lenovo\AppData\Local\Temp\ccWkuFNd.s:18     .rodata.CHANNEL_OFFSET_TAB:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccWkuFNd.s:21     .rodata.CHANNEL_OFFSET_TAB:00000000 CHANNEL_OFFSET_TAB
+
+NO UNDEFINED SYMBOLS

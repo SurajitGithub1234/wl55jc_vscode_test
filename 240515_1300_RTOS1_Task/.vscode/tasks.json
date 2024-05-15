@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build all",
+            "group": "build",
+            "type": "shell",
+            "command": "make",
+            "args": ["all"]
+        }, 
+        {
+            "label": "build clean",
+            "group": "build",
+            "type": "shell",
+            "command": "make",
+            "args": ["clean"]
+        },
+        {
+            "label": "flash via OpenOCD",
+            "group": "build",
+            "type": "shell",
+            "command": "make",
+            "args": ["flash"]
+        }
+    ]
+}
