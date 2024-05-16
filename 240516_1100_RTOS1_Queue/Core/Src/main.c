@@ -56,16 +56,21 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 // void StartDefaultTask(void const * argument);
 void fnRTOSMessageSendTask(void const *argument);
-void fnRTOSMessageReceiverTask(void const *argument);
+void fnRTOSMessageReceiver1Task(void const *argument);
+void fnRTOSMessageReceiver2Task(void const *argument);
 void fnCMSIS1_Thread_Config_Assert(osThreadId osThreadHandler);
 
 // Configure CMSIS RTOS 1 Task: fnRTOSMessageSendTask
 osThreadId SenderTaskID;
 osThreadDef(CMSIS1_Sender_Task, fnRTOSMessageSendTask, osPriorityNormal, TASK_INSTANCE_SINGLE, SENDER_TASK_STACK_SIZE);
 
-// Config CMSIS RTOS 1 Task: fnRTOSMessageReceiverTask
-osThreadId ReceiverTaskID;
-osThreadDef(CMSIS1_Receiver_Task, fnRTOSMessageReceiverTask, osPriorityAboveNormal, TASK_INSTANCE_SINGLE, RECIEVER_TASK_STACK_SIZE);
+// Config CMSIS RTOS 1 Task: fnRTOSMessageReceiver1Task
+osThreadId Receiver1TaskID;
+osThreadDef(CMSIS1_Receiver1_Task, fnRTOSMessageReceiver1Task, osPriorityAboveNormal, TASK_INSTANCE_SINGLE, RECIEVER_TASK_STACK_SIZE);
+
+// conifg CMSIS RTOS 1 Task: fnRTOSMessageReceiver2Task
+osThreadId Receiver2TaskID;
+osThreadDef(CMSIS1_Receiver2_Task, fnRTOSMessageReceiver2Task, osPriorityHigh, TASK_INSTANCE_SINGLE, RECIEVER_TASK_STACK_SIZE);
 
 // Create a message queue to pass structure pointer from one ptr to another.
 osMessageQDef(EM_Data_Queue, EM_DATA_QUEUE_SIZE, pStructEMData);
@@ -138,13 +143,17 @@ int main(void)
     printf("Task could not be creared sucessfully!!");
     Error_Handler();
   }
+  // Create Receiver 1 Thread
+  Receiver1TaskID = osThreadCreate(osThread(CMSIS1_Receiver1_Task), NULL);
+  fnCMSIS1_Thread_Config_Assert(Receiver1TaskID);
 
-  ReceiverTaskID = osThreadCreate(osThread(CMSIS1_Receiver_Task), NULL);
-  fnCMSIS1_Thread_Config_Assert(ReceiverTaskID);
+  // create Receiver 2 thread
+  Receiver2TaskID = osThreadCreate(osThread(CMSIS1_Receiver2_Task), NULL);
+  fnCMSIS1_Thread_Config_Assert(Receiver2TaskID);
 
   // create a message queue to store the energy monitor data and pass from one thread to other
-  osThreadId osMessageQueueSendThreadID = NULL;
-  EM_Data_Queue_Id = osMessageCreate(osMessageQ(EM_Data_Queue), osMessageQueueSendThreadID);
+  osThreadId osMessageQueueSendThreadID = Receiver1TaskID;
+  EM_Data_Queue_Id = osMessageCreate(osMessageQ(EM_Data_Queue), Receiver1TaskID);
   if (EM_Data_Queue_Id == NULL)
   {
     printf("Queue could not be created!!\r\n");
@@ -290,7 +299,9 @@ void fnRTOSMessageSendTask(void const *argument)
 
   EMData_t StructConfigEMData;
   StructConfigEMData.fVoltage_pha = 220.10;
+  StructConfigEMData.fVoltage_phb = 440.10;
   StructConfigEMData.fCurrent_pha = 50.10;
+  StructConfigEMData.fCurrent_phb = 60.10;
   StructConfigEMData.fPF = 0.50;
   StructConfigEMData.pStructEnergyData = &StructConfigEnergyData;
   StructConfigEMData.pStructPowerData = &StructConfigPowerData;
@@ -314,7 +325,7 @@ void fnRTOSMessageSendTask(void const *argument)
 }
 
 /* USER CODE END Header_StartDefaultTask */
-void fnRTOSMessageReceiverTask(void const *argument)
+void fnRTOSMessageReceiver1Task(void const *argument)
 {
   uint32_t u32MessageQueueRxBlockTime = 500;
   osEvent event;
@@ -322,13 +333,33 @@ void fnRTOSMessageReceiverTask(void const *argument)
   while (1)
   {
     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_9);
-    printf("Test CMSIS-RTOS 1: Receiver Task\r\n");
+    printf("Test CMSIS-RTOS 1: Receiver 1 Task\r\n");
     printf("Waiting for the EM data from Sender Task!!\r\n");
     event = osMessageGet(EM_Data_Queue_Id, osWaitForever);
     if (event.status == osEventMessage)
     {
       pStructRxEMData = (EMData_t *)event.value.p;
       printf("PhaseA Voltage: %d\n PhaseA Current: %d\r\n", (int)pStructRxEMData->fVoltage_pha, (int)pStructRxEMData->fCurrent_pha);
+    }
+  }
+}
+
+/* USER CODE END Header_StartDefaultTask */
+void fnRTOSMessageReceiver2Task(void const *argument)
+{
+  uint32_t u32MessageQueueRxBlockTime = 500;
+  osEvent event;
+  EMData_t *pStructRxEMData;
+  while (1)
+  {
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_11);
+    printf("Test CMSIS-RTOS 1: Receiver 2 Task\r\n");
+    printf("Waiting for the EM data from Sender Task!!\r\n");
+    event = osMessageGet(EM_Data_Queue_Id, osWaitForever);
+    if (event.status == osEventMessage)
+    {
+      pStructRxEMData = (EMData_t *)event.value.p;
+      printf("PhaseB Voltage: %d\n PhaseB Current: %d\r\n", (int)pStructRxEMData->fVoltage_phb, (int)pStructRxEMData->fCurrent_phb);
     }
   }
 }

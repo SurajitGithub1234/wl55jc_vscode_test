@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   31:Core/Src/main.c **** /* Private typedef -----------------------------------------------------------*/
   32:Core/Src/main.c **** /* USER CODE BEGIN PTD */
   33:Core/Src/main.c **** 
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 2
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 2
 
 
   34:Core/Src/main.c **** /* USER CODE END PTD */
@@ -86,177 +86,186 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   56:Core/Src/main.c **** static void MX_GPIO_Init(void);
   57:Core/Src/main.c **** // void StartDefaultTask(void const * argument);
   58:Core/Src/main.c **** void fnRTOSMessageSendTask(void const *argument);
-  59:Core/Src/main.c **** void fnRTOSMessageReceiverTask(void const *argument);
-  60:Core/Src/main.c **** void fnCMSIS1_Thread_Config_Assert(osThreadId osThreadHandler);
-  61:Core/Src/main.c **** 
-  62:Core/Src/main.c **** // Configure CMSIS RTOS 1 Task: fnRTOSMessageSendTask
-  63:Core/Src/main.c **** osThreadId SenderTaskID;
-  64:Core/Src/main.c **** osThreadDef(CMSIS1_Sender_Task, fnRTOSMessageSendTask, osPriorityNormal, TASK_INSTANCE_SINGLE, SEND
-  65:Core/Src/main.c **** 
-  66:Core/Src/main.c **** // Config CMSIS RTOS 1 Task: fnRTOSMessageReceiverTask
-  67:Core/Src/main.c **** osThreadId ReceiverTaskID;
-  68:Core/Src/main.c **** osThreadDef(CMSIS1_Receiver_Task, fnRTOSMessageReceiverTask, osPriorityAboveNormal, TASK_INSTANCE_S
-  69:Core/Src/main.c **** 
-  70:Core/Src/main.c **** // Create a message queue to pass structure pointer from one ptr to another.
-  71:Core/Src/main.c **** osMessageQDef(EM_Data_Queue, EM_DATA_QUEUE_SIZE, pStructEMData);
-  72:Core/Src/main.c **** osMessageQId(EM_Data_Queue_Id);
-  73:Core/Src/main.c **** /* USER CODE BEGIN PFP */
+  59:Core/Src/main.c **** void fnRTOSMessageReceiver1Task(void const *argument);
+  60:Core/Src/main.c **** void fnRTOSMessageReceiver2Task(void const *argument);
+  61:Core/Src/main.c **** void fnCMSIS1_Thread_Config_Assert(osThreadId osThreadHandler);
+  62:Core/Src/main.c **** 
+  63:Core/Src/main.c **** // Configure CMSIS RTOS 1 Task: fnRTOSMessageSendTask
+  64:Core/Src/main.c **** osThreadId SenderTaskID;
+  65:Core/Src/main.c **** osThreadDef(CMSIS1_Sender_Task, fnRTOSMessageSendTask, osPriorityNormal, TASK_INSTANCE_SINGLE, SEND
+  66:Core/Src/main.c **** 
+  67:Core/Src/main.c **** // Config CMSIS RTOS 1 Task: fnRTOSMessageReceiver1Task
+  68:Core/Src/main.c **** osThreadId Receiver1TaskID;
+  69:Core/Src/main.c **** osThreadDef(CMSIS1_Receiver1_Task, fnRTOSMessageReceiver1Task, osPriorityAboveNormal, TASK_INSTANCE
+  70:Core/Src/main.c **** 
+  71:Core/Src/main.c **** // conifg CMSIS RTOS 1 Task: fnRTOSMessageReceiver2Task
+  72:Core/Src/main.c **** osThreadId Receiver2TaskID;
+  73:Core/Src/main.c **** osThreadDef(CMSIS1_Receiver2_Task, fnRTOSMessageReceiver2Task, osPriorityHigh, TASK_INSTANCE_SINGLE
   74:Core/Src/main.c **** 
-  75:Core/Src/main.c **** /* USER CODE END PFP */
-  76:Core/Src/main.c **** 
-  77:Core/Src/main.c **** /* Private user code ---------------------------------------------------------*/
-  78:Core/Src/main.c **** /* USER CODE BEGIN 0 */
+  75:Core/Src/main.c **** // Create a message queue to pass structure pointer from one ptr to another.
+  76:Core/Src/main.c **** osMessageQDef(EM_Data_Queue, EM_DATA_QUEUE_SIZE, pStructEMData);
+  77:Core/Src/main.c **** osMessageQId(EM_Data_Queue_Id);
+  78:Core/Src/main.c **** /* USER CODE BEGIN PFP */
   79:Core/Src/main.c **** 
-  80:Core/Src/main.c **** /* USER CODE END 0 */
+  80:Core/Src/main.c **** /* USER CODE END PFP */
   81:Core/Src/main.c **** 
-  82:Core/Src/main.c **** /**
-  83:Core/Src/main.c ****  * @brief  The application entry point.
-  84:Core/Src/main.c ****  * @retval int
-  85:Core/Src/main.c ****  */
-  86:Core/Src/main.c **** int main(void)
-  87:Core/Src/main.c **** {
-  88:Core/Src/main.c **** 
-  89:Core/Src/main.c ****   /* USER CODE BEGIN 1 */
-  90:Core/Src/main.c **** 
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 3
+  82:Core/Src/main.c **** /* Private user code ---------------------------------------------------------*/
+  83:Core/Src/main.c **** /* USER CODE BEGIN 0 */
+  84:Core/Src/main.c **** 
+  85:Core/Src/main.c **** /* USER CODE END 0 */
+  86:Core/Src/main.c **** 
+  87:Core/Src/main.c **** /**
+  88:Core/Src/main.c ****  * @brief  The application entry point.
+  89:Core/Src/main.c ****  * @retval int
+  90:Core/Src/main.c ****  */
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 3
 
 
-  91:Core/Src/main.c ****   /* USER CODE END 1 */
-  92:Core/Src/main.c **** 
-  93:Core/Src/main.c ****   /* MCU Configuration--------------------------------------------------------*/
-  94:Core/Src/main.c **** 
-  95:Core/Src/main.c ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  96:Core/Src/main.c ****   HAL_Init();
+  91:Core/Src/main.c **** int main(void)
+  92:Core/Src/main.c **** {
+  93:Core/Src/main.c **** 
+  94:Core/Src/main.c ****   /* USER CODE BEGIN 1 */
+  95:Core/Src/main.c **** 
+  96:Core/Src/main.c ****   /* USER CODE END 1 */
   97:Core/Src/main.c **** 
-  98:Core/Src/main.c ****   /* USER CODE BEGIN Init */
+  98:Core/Src/main.c ****   /* MCU Configuration--------------------------------------------------------*/
   99:Core/Src/main.c **** 
- 100:Core/Src/main.c ****   /* USER CODE END Init */
- 101:Core/Src/main.c **** 
- 102:Core/Src/main.c ****   /* Configure the system clock */
- 103:Core/Src/main.c ****   SystemClock_Config();
+ 100:Core/Src/main.c ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+ 101:Core/Src/main.c ****   HAL_Init();
+ 102:Core/Src/main.c **** 
+ 103:Core/Src/main.c ****   /* USER CODE BEGIN Init */
  104:Core/Src/main.c **** 
- 105:Core/Src/main.c ****   /* USER CODE BEGIN SysInit */
+ 105:Core/Src/main.c ****   /* USER CODE END Init */
  106:Core/Src/main.c **** 
- 107:Core/Src/main.c ****   /* USER CODE END SysInit */
- 108:Core/Src/main.c **** 
- 109:Core/Src/main.c ****   /* Initialize all configured peripherals */
- 110:Core/Src/main.c ****   MX_GPIO_Init();
- 111:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
- 112:Core/Src/main.c **** 
- 113:Core/Src/main.c ****   /* USER CODE END 2 */
- 114:Core/Src/main.c **** 
- 115:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_MUTEX */
- 116:Core/Src/main.c ****   /* add mutexes, ... */
- 117:Core/Src/main.c ****   /* USER CODE END RTOS_MUTEX */
- 118:Core/Src/main.c **** 
- 119:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
- 120:Core/Src/main.c ****   /* add semaphores, ... */
- 121:Core/Src/main.c ****   /* USER CODE END RTOS_SEMAPHORES */
- 122:Core/Src/main.c **** 
- 123:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_TIMERS */
- 124:Core/Src/main.c ****   /* start timers, add new ones, ... */
- 125:Core/Src/main.c ****   /* USER CODE END RTOS_TIMERS */
- 126:Core/Src/main.c **** 
- 127:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_QUEUES */
- 128:Core/Src/main.c ****   /* add queues, ... */
- 129:Core/Src/main.c ****   /* USER CODE END RTOS_QUEUES */
- 130:Core/Src/main.c **** 
- 131:Core/Src/main.c ****   /* Create the thread(s) */
- 132:Core/Src/main.c ****   /* definition and creation of defaultTask */
- 133:Core/Src/main.c ****   // osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
- 134:Core/Src/main.c **** 
- 135:Core/Src/main.c ****   SenderTaskID = osThreadCreate(osThread(CMSIS1_Sender_Task), NULL);
- 136:Core/Src/main.c ****   if (SenderTaskID == NULL)
- 137:Core/Src/main.c ****   {
- 138:Core/Src/main.c ****     printf("Task could not be creared sucessfully!!");
- 139:Core/Src/main.c ****     Error_Handler();
- 140:Core/Src/main.c ****   }
- 141:Core/Src/main.c **** 
- 142:Core/Src/main.c ****   ReceiverTaskID = osThreadCreate(osThread(CMSIS1_Receiver_Task), NULL);
- 143:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(ReceiverTaskID);
- 144:Core/Src/main.c **** 
- 145:Core/Src/main.c ****   // create a message queue to store the energy monitor data and pass from one thread to other
- 146:Core/Src/main.c ****   osThreadId osMessageQueueSendThreadID = NULL;
- 147:Core/Src/main.c ****   EM_Data_Queue_Id = osMessageCreate(osMessageQ(EM_Data_Queue), osMessageQueueSendThreadID);
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 4
+ 107:Core/Src/main.c ****   /* Configure the system clock */
+ 108:Core/Src/main.c ****   SystemClock_Config();
+ 109:Core/Src/main.c **** 
+ 110:Core/Src/main.c ****   /* USER CODE BEGIN SysInit */
+ 111:Core/Src/main.c **** 
+ 112:Core/Src/main.c ****   /* USER CODE END SysInit */
+ 113:Core/Src/main.c **** 
+ 114:Core/Src/main.c ****   /* Initialize all configured peripherals */
+ 115:Core/Src/main.c ****   MX_GPIO_Init();
+ 116:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
+ 117:Core/Src/main.c **** 
+ 118:Core/Src/main.c ****   /* USER CODE END 2 */
+ 119:Core/Src/main.c **** 
+ 120:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_MUTEX */
+ 121:Core/Src/main.c ****   /* add mutexes, ... */
+ 122:Core/Src/main.c ****   /* USER CODE END RTOS_MUTEX */
+ 123:Core/Src/main.c **** 
+ 124:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
+ 125:Core/Src/main.c ****   /* add semaphores, ... */
+ 126:Core/Src/main.c ****   /* USER CODE END RTOS_SEMAPHORES */
+ 127:Core/Src/main.c **** 
+ 128:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_TIMERS */
+ 129:Core/Src/main.c ****   /* start timers, add new ones, ... */
+ 130:Core/Src/main.c ****   /* USER CODE END RTOS_TIMERS */
+ 131:Core/Src/main.c **** 
+ 132:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_QUEUES */
+ 133:Core/Src/main.c ****   /* add queues, ... */
+ 134:Core/Src/main.c ****   /* USER CODE END RTOS_QUEUES */
+ 135:Core/Src/main.c **** 
+ 136:Core/Src/main.c ****   /* Create the thread(s) */
+ 137:Core/Src/main.c ****   /* definition and creation of defaultTask */
+ 138:Core/Src/main.c ****   // osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+ 139:Core/Src/main.c **** 
+ 140:Core/Src/main.c ****   SenderTaskID = osThreadCreate(osThread(CMSIS1_Sender_Task), NULL);
+ 141:Core/Src/main.c ****   if (SenderTaskID == NULL)
+ 142:Core/Src/main.c ****   {
+ 143:Core/Src/main.c ****     printf("Task could not be creared sucessfully!!");
+ 144:Core/Src/main.c ****     Error_Handler();
+ 145:Core/Src/main.c ****   }
+ 146:Core/Src/main.c ****   // Create Receiver 1 Thread
+ 147:Core/Src/main.c ****   Receiver1TaskID = osThreadCreate(osThread(CMSIS1_Receiver1_Task), NULL);
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 4
 
 
- 148:Core/Src/main.c ****   if (EM_Data_Queue_Id == NULL)
- 149:Core/Src/main.c ****   {
- 150:Core/Src/main.c ****     printf("Queue could not be created!!\r\n");
- 151:Core/Src/main.c ****     Error_Handler();
- 152:Core/Src/main.c ****   }
- 153:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_THREADS */
- 154:Core/Src/main.c ****   /* add threads, ... */
- 155:Core/Src/main.c ****   /* USER CODE END RTOS_THREADS */
- 156:Core/Src/main.c **** 
- 157:Core/Src/main.c ****   /* Start scheduler */
- 158:Core/Src/main.c ****   osKernelStart();
- 159:Core/Src/main.c **** 
- 160:Core/Src/main.c ****   /* We should never get here as control is now taken by the scheduler */
- 161:Core/Src/main.c **** 
- 162:Core/Src/main.c ****   /* Infinite loop */
- 163:Core/Src/main.c ****   /* USER CODE BEGIN WHILE */
- 164:Core/Src/main.c ****   while (1)
- 165:Core/Src/main.c ****   {
- 166:Core/Src/main.c ****     /* USER CODE END WHILE */
- 167:Core/Src/main.c **** 
- 168:Core/Src/main.c ****     /* USER CODE BEGIN 3 */
- 169:Core/Src/main.c ****   }
- 170:Core/Src/main.c ****   /* USER CODE END 3 */
- 171:Core/Src/main.c **** }
- 172:Core/Src/main.c **** 
- 173:Core/Src/main.c **** /**
- 174:Core/Src/main.c ****  * @brief System Clock Configuration
- 175:Core/Src/main.c ****  * @retval None
- 176:Core/Src/main.c ****  */
- 177:Core/Src/main.c **** void SystemClock_Config(void)
- 178:Core/Src/main.c **** {
- 179:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
- 180:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 148:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(Receiver1TaskID);
+ 149:Core/Src/main.c **** 
+ 150:Core/Src/main.c ****   // create Receiver 2 thread
+ 151:Core/Src/main.c ****   Receiver2TaskID = osThreadCreate(osThread(CMSIS1_Receiver2_Task), NULL);
+ 152:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(Receiver2TaskID);
+ 153:Core/Src/main.c **** 
+ 154:Core/Src/main.c ****   // create a message queue to store the energy monitor data and pass from one thread to other
+ 155:Core/Src/main.c ****   osThreadId osMessageQueueSendThreadID = Receiver1TaskID;
+ 156:Core/Src/main.c ****   EM_Data_Queue_Id = osMessageCreate(osMessageQ(EM_Data_Queue), osMessageQueueSendThreadID);
+ 157:Core/Src/main.c ****   if (EM_Data_Queue_Id == NULL)
+ 158:Core/Src/main.c ****   {
+ 159:Core/Src/main.c ****     printf("Queue could not be created!!\r\n");
+ 160:Core/Src/main.c ****     Error_Handler();
+ 161:Core/Src/main.c ****   }
+ 162:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_THREADS */
+ 163:Core/Src/main.c ****   /* add threads, ... */
+ 164:Core/Src/main.c ****   /* USER CODE END RTOS_THREADS */
+ 165:Core/Src/main.c **** 
+ 166:Core/Src/main.c ****   /* Start scheduler */
+ 167:Core/Src/main.c ****   osKernelStart();
+ 168:Core/Src/main.c **** 
+ 169:Core/Src/main.c ****   /* We should never get here as control is now taken by the scheduler */
+ 170:Core/Src/main.c **** 
+ 171:Core/Src/main.c ****   /* Infinite loop */
+ 172:Core/Src/main.c ****   /* USER CODE BEGIN WHILE */
+ 173:Core/Src/main.c ****   while (1)
+ 174:Core/Src/main.c ****   {
+ 175:Core/Src/main.c ****     /* USER CODE END WHILE */
+ 176:Core/Src/main.c **** 
+ 177:Core/Src/main.c ****     /* USER CODE BEGIN 3 */
+ 178:Core/Src/main.c ****   }
+ 179:Core/Src/main.c ****   /* USER CODE END 3 */
+ 180:Core/Src/main.c **** }
  181:Core/Src/main.c **** 
- 182:Core/Src/main.c ****   /** Configure the main internal regulator output voltage
- 183:Core/Src/main.c ****    */
- 184:Core/Src/main.c ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
- 185:Core/Src/main.c **** 
- 186:Core/Src/main.c ****   /** Initializes the CPU, AHB and APB buses clocks
- 187:Core/Src/main.c ****    */
- 188:Core/Src/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
- 189:Core/Src/main.c ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
- 190:Core/Src/main.c ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
- 191:Core/Src/main.c ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
- 192:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
- 193:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 194:Core/Src/main.c ****   {
- 195:Core/Src/main.c ****     Error_Handler();
- 196:Core/Src/main.c ****   }
- 197:Core/Src/main.c **** 
- 198:Core/Src/main.c ****   /** Configure the SYSCLKSource, HCLK, PCLK1 and PCLK2 clocks dividers
- 199:Core/Src/main.c ****    */
- 200:Core/Src/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK3 | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | R
- 201:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
- 202:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 203:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
- 204:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 5
+ 182:Core/Src/main.c **** /**
+ 183:Core/Src/main.c ****  * @brief System Clock Configuration
+ 184:Core/Src/main.c ****  * @retval None
+ 185:Core/Src/main.c ****  */
+ 186:Core/Src/main.c **** void SystemClock_Config(void)
+ 187:Core/Src/main.c **** {
+ 188:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 189:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 190:Core/Src/main.c **** 
+ 191:Core/Src/main.c ****   /** Configure the main internal regulator output voltage
+ 192:Core/Src/main.c ****    */
+ 193:Core/Src/main.c ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+ 194:Core/Src/main.c **** 
+ 195:Core/Src/main.c ****   /** Initializes the CPU, AHB and APB buses clocks
+ 196:Core/Src/main.c ****    */
+ 197:Core/Src/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
+ 198:Core/Src/main.c ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+ 199:Core/Src/main.c ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
+ 200:Core/Src/main.c ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+ 201:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+ 202:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 203:Core/Src/main.c ****   {
+ 204:Core/Src/main.c ****     Error_Handler();
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 5
 
 
- 205:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLK3Divider = RCC_SYSCLK_DIV1;
+ 205:Core/Src/main.c ****   }
  206:Core/Src/main.c **** 
- 207:Core/Src/main.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
- 208:Core/Src/main.c ****   {
- 209:Core/Src/main.c ****     Error_Handler();
- 210:Core/Src/main.c ****   }
- 211:Core/Src/main.c **** }
- 212:Core/Src/main.c **** 
- 213:Core/Src/main.c **** /**
- 214:Core/Src/main.c ****  * @brief GPIO Initialization Function
- 215:Core/Src/main.c ****  * @param None
- 216:Core/Src/main.c ****  * @retval None
- 217:Core/Src/main.c ****  */
- 218:Core/Src/main.c **** static void MX_GPIO_Init(void)
- 219:Core/Src/main.c **** {
-  26              		.loc 1 219 1 view -0
+ 207:Core/Src/main.c ****   /** Configure the SYSCLKSource, HCLK, PCLK1 and PCLK2 clocks dividers
+ 208:Core/Src/main.c ****    */
+ 209:Core/Src/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK3 | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | R
+ 210:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+ 211:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 212:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 213:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 214:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLK3Divider = RCC_SYSCLK_DIV1;
+ 215:Core/Src/main.c **** 
+ 216:Core/Src/main.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+ 217:Core/Src/main.c ****   {
+ 218:Core/Src/main.c ****     Error_Handler();
+ 219:Core/Src/main.c ****   }
+ 220:Core/Src/main.c **** }
+ 221:Core/Src/main.c **** 
+ 222:Core/Src/main.c **** /**
+ 223:Core/Src/main.c ****  * @brief GPIO Initialization Function
+ 224:Core/Src/main.c ****  * @param None
+ 225:Core/Src/main.c ****  * @retval None
+ 226:Core/Src/main.c ****  */
+ 227:Core/Src/main.c **** static void MX_GPIO_Init(void)
+ 228:Core/Src/main.c **** {
+  26              		.loc 1 228 1 view -0
   27              		.cfi_startproc
   28              		@ args = 0, pretend = 0, frame = 32
   29              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -268,27 +277,30 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   35 0002 88B0     		sub	sp, sp, #32
   36              	.LCFI1:
   37              		.cfi_def_cfa_offset 40
- 220:Core/Src/main.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  38              		.loc 1 220 3 view .LVU1
-  39              		.loc 1 220 20 is_stmt 0 view .LVU2
+ 229:Core/Src/main.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+  38              		.loc 1 229 3 view .LVU1
+  39              		.loc 1 229 20 is_stmt 0 view .LVU2
   40 0004 0024     		movs	r4, #0
   41 0006 0394     		str	r4, [sp, #12]
   42 0008 0494     		str	r4, [sp, #16]
   43 000a 0594     		str	r4, [sp, #20]
   44 000c 0694     		str	r4, [sp, #24]
   45 000e 0794     		str	r4, [sp, #28]
- 221:Core/Src/main.c ****   /* USER CODE BEGIN MX_GPIO_Init_1 */
- 222:Core/Src/main.c ****   /* USER CODE END MX_GPIO_Init_1 */
- 223:Core/Src/main.c **** 
- 224:Core/Src/main.c ****   /* GPIO Ports Clock Enable */
- 225:Core/Src/main.c ****   __HAL_RCC_GPIOC_CLK_ENABLE();
-  46              		.loc 1 225 3 is_stmt 1 view .LVU3
+ 230:Core/Src/main.c ****   /* USER CODE BEGIN MX_GPIO_Init_1 */
+ 231:Core/Src/main.c ****   /* USER CODE END MX_GPIO_Init_1 */
+ 232:Core/Src/main.c **** 
+ 233:Core/Src/main.c ****   /* GPIO Ports Clock Enable */
+ 234:Core/Src/main.c ****   __HAL_RCC_GPIOC_CLK_ENABLE();
+  46              		.loc 1 234 3 is_stmt 1 view .LVU3
   47              	.LVL0:
   48              	.LBB8:
   49              	.LBI8:
   50              		.file 2 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h"
    1:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
    2:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   ******************************************************************************
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 6
+
+
    3:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @file    stm32wlxx_ll_bus.h
    4:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @author  MCD Application Team
    5:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief   Header file of BUS LL module.
@@ -298,9 +310,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
    9:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * Copyright (c) 2020 STMicroelectronics.
   10:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * All rights reserved.
   11:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 6
-
-
   12:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * This software is licensed under terms that can be found in the LICENSE file
   13:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * in the root directory of this software component.
   14:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * If no LICENSE file comes with this software, it is provided AS-IS.
@@ -349,6 +358,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   57:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Private types -------------------------------------------------------------*/
   58:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Private variables ---------------------------------------------------------*/
   59:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 7
+
+
   60:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Private constants ---------------------------------------------------------*/
   61:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
   62:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Private macros ------------------------------------------------------------*/
@@ -358,9 +370,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   66:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Exported constants --------------------------------------------------------*/
   67:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_Exported_Constants BUS Exported Constants
   68:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 7
-
-
   69:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
   70:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
   71:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_AHB1_GRP1_PERIPH  AHB1 GRP1 PERIPH
@@ -409,6 +418,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  114:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
  115:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
  116:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_ALL            (0xFFFFFFFFU)
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 8
+
+
  117:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_TIM2           RCC_APB1ENR1_TIM2EN
  118:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_RTCAPB         RCC_APB1ENR1_RTCAPBEN
  119:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_WWDG           RCC_APB1ENR1_WWDGEN
@@ -418,9 +430,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  123:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_I2C2           RCC_APB1ENR1_I2C2EN
  124:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_I2C3           RCC_APB1ENR1_I2C3EN
  125:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_DAC            RCC_APB1ENR1_DACEN
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 8
-
-
  126:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_LPTIM1         RCC_APB1ENR1_LPTIM1EN
  127:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
  128:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
@@ -469,6 +478,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  171:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB1_GRP1_PERIPH_DMA2         RCC_C2AHB1ENR_DMA2EN
  172:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB1_GRP1_PERIPH_DMAMUX1      RCC_C2AHB1ENR_DMAMUX1EN
  173:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB1_GRP1_PERIPH_CRC          RCC_C2AHB1ENR_CRCEN
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 9
+
+
  174:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
  175:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
  176:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
@@ -478,9 +490,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  180:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
  181:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
  182:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB2_GRP1_PERIPH_GPIOA        RCC_C2AHB2ENR_GPIOAEN
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 9
-
-
  183:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB2_GRP1_PERIPH_GPIOB        RCC_C2AHB2ENR_GPIOBEN
  184:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB2_GRP1_PERIPH_GPIOC        RCC_C2AHB2ENR_GPIOCEN
  185:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB2_GRP1_PERIPH_GPIOH        RCC_C2AHB2ENR_GPIOHEN
@@ -529,6 +538,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  228:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP2_PERIPH_LPTIM2       RCC_C2APB1ENR2_LPTIM2EN
  229:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP2_PERIPH_LPTIM3       RCC_C2APB1ENR2_LPTIM3EN
  230:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 10
+
+
  231:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
  232:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
  233:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
@@ -538,9 +550,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  237:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
  238:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_ADC          RCC_C2APB2ENR_ADCEN
  239:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_TIM1         RCC_C2APB2ENR_TIM1EN
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 10
-
-
  240:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_SPI1         RCC_C2APB2ENR_SPI1EN
  241:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_USART1       RCC_C2APB2ENR_USART1EN
  242:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_TIM16        RCC_C2APB2ENR_TIM16EN
@@ -589,6 +598,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  285:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval None
  286:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
  287:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_EnableClock(uint32_t Periphs)
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 11
+
+
  288:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
  289:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   __IO uint32_t tmpreg;
  290:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   SET_BIT(RCC->AHB1ENR, Periphs);
@@ -598,9 +610,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  294:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
  295:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
  296:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 11
-
-
  297:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Check if AHB1 peripheral clock is enabled or not
  298:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1ENR      DMA1EN        LL_AHB1_GRP1_IsEnabledClock\n
  299:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      DMA2EN        LL_AHB1_GRP1_IsEnabledClock\n
@@ -649,6 +658,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  342:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
  343:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
  344:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval None
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 12
+
+
  345:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
  346:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_ForceReset(uint32_t Periphs)
  347:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
@@ -658,9 +670,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  351:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
  352:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Release AHB1 peripherals reset.
  353:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1RSTR     DMA1RST       LL_AHB1_GRP1_ReleaseReset\n
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 12
-
-
  354:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1RSTR     DMA2RST       LL_AHB1_GRP1_ReleaseReset\n
  355:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1RSTR     DMAMUX1RST     LL_AHB1_GRP1_ReleaseReset\n
  356:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1RSTR     CRCRST        LL_AHB1_GRP1_ReleaseReset\n
@@ -709,6 +718,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  399:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
  400:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
  401:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 13
+
+
  402:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
  403:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval uint32_t
  404:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
@@ -718,9 +730,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  408:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
  409:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
  410:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 13
-
-
  411:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Disable AHB1 peripherals clock during Low Power (Sleep) mode.
  412:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1SMENR    DMA1SMEN      LL_AHB1_GRP1_DisableClockSleep\n
  413:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    DMA2SMEN      LL_AHB1_GRP1_DisableClockSleep\n
@@ -769,6 +778,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   54              		.loc 2 452 3 view .LVU6
   55 0010 4FF0B043 		mov	r3, #1476395008
   56 0014 DA6C     		ldr	r2, [r3, #76]
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 14
+
+
   57 0016 42F00402 		orr	r2, r2, #4
   58 001a DA64     		str	r2, [r3, #76]
  453:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   /* Delay after an RCC peripheral clock enabling */
@@ -778,9 +790,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   61 001c DA6C     		ldr	r2, [r3, #76]
   62 001e 02F00402 		and	r2, r2, #4
   63              		.loc 2 454 10 view .LVU9
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 14
-
-
   64 0022 0292     		str	r2, [sp, #8]
  455:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
   65              		.loc 2 455 3 is_stmt 1 view .LVU10
@@ -789,8 +798,8 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   68              		.loc 2 455 3 is_stmt 0 view .LVU11
   69              	.LBE9:
   70              	.LBE8:
- 226:Core/Src/main.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
-  71              		.loc 1 226 3 is_stmt 1 view .LVU12
+ 235:Core/Src/main.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+  71              		.loc 1 235 3 is_stmt 1 view .LVU12
   72              	.LBB10:
   73              	.LBI10:
  449:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
@@ -818,8 +827,8 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   90              		.loc 2 455 3 is_stmt 0 view .LVU20
   91              	.LBE11:
   92              	.LBE10:
- 227:Core/Src/main.c ****   __HAL_RCC_GPIOB_CLK_ENABLE();
-  93              		.loc 1 227 3 is_stmt 1 view .LVU21
+ 236:Core/Src/main.c ****   __HAL_RCC_GPIOB_CLK_ENABLE();
+  93              		.loc 1 236 3 is_stmt 1 view .LVU21
   94              	.LBB12:
   95              	.LBI12:
  449:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
@@ -829,6 +838,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
   98              		.loc 2 451 3 view .LVU23
  452:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   /* Delay after an RCC peripheral clock enabling */
   99              		.loc 2 452 3 view .LVU24
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 15
+
+
  100 0038 DA6C     		ldr	r2, [r3, #76]
  101 003a 42F00202 		orr	r2, r2, #2
  102 003e DA64     		str	r2, [r3, #76]
@@ -838,9 +850,6 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  104              		.loc 2 454 12 is_stmt 0 view .LVU26
  105 0040 DB6C     		ldr	r3, [r3, #76]
  106 0042 03F00203 		and	r3, r3, #2
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 15
-
-
  454:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
  107              		.loc 2 454 10 view .LVU27
  108 0046 0093     		str	r3, [sp]
@@ -850,66 +859,66 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  112              		.loc 2 455 3 is_stmt 0 view .LVU29
  113              	.LBE13:
  114              	.LBE12:
- 228:Core/Src/main.c **** 
- 229:Core/Src/main.c ****   /*Configure GPIO pins : T_VCP_RX_Pin T_VCP_RXA2_Pin */
- 230:Core/Src/main.c ****   GPIO_InitStruct.Pin = T_VCP_RX_Pin | T_VCP_RXA2_Pin;
- 115              		.loc 1 230 3 is_stmt 1 view .LVU30
- 116              		.loc 1 230 23 is_stmt 0 view .LVU31
+ 237:Core/Src/main.c **** 
+ 238:Core/Src/main.c ****   /*Configure GPIO pins : T_VCP_RX_Pin T_VCP_RXA2_Pin */
+ 239:Core/Src/main.c ****   GPIO_InitStruct.Pin = T_VCP_RX_Pin | T_VCP_RXA2_Pin;
+ 115              		.loc 1 239 3 is_stmt 1 view .LVU30
+ 116              		.loc 1 239 23 is_stmt 0 view .LVU31
  117 004a 0C23     		movs	r3, #12
  118 004c 0393     		str	r3, [sp, #12]
- 231:Core/Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
- 119              		.loc 1 231 3 is_stmt 1 view .LVU32
- 120              		.loc 1 231 24 is_stmt 0 view .LVU33
+ 240:Core/Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 119              		.loc 1 240 3 is_stmt 1 view .LVU32
+ 120              		.loc 1 240 24 is_stmt 0 view .LVU33
  121 004e 0223     		movs	r3, #2
  122 0050 0493     		str	r3, [sp, #16]
- 232:Core/Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 123              		.loc 1 232 3 is_stmt 1 view .LVU34
- 233:Core/Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 124              		.loc 1 233 3 view .LVU35
- 234:Core/Src/main.c ****   GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
- 125              		.loc 1 234 3 view .LVU36
- 126              		.loc 1 234 29 is_stmt 0 view .LVU37
+ 241:Core/Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 123              		.loc 1 241 3 is_stmt 1 view .LVU34
+ 242:Core/Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 124              		.loc 1 242 3 view .LVU35
+ 243:Core/Src/main.c ****   GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+ 125              		.loc 1 243 3 view .LVU36
+ 126              		.loc 1 243 29 is_stmt 0 view .LVU37
  127 0052 0723     		movs	r3, #7
  128 0054 0793     		str	r3, [sp, #28]
- 235:Core/Src/main.c ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
- 129              		.loc 1 235 3 is_stmt 1 view .LVU38
+ 244:Core/Src/main.c ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 129              		.loc 1 244 3 is_stmt 1 view .LVU38
  130 0056 03A9     		add	r1, sp, #12
  131 0058 4FF09040 		mov	r0, #1207959552
  132 005c FFF7FEFF 		bl	HAL_GPIO_Init
  133              	.LVL4:
- 236:Core/Src/main.c **** 
- 237:Core/Src/main.c ****   GPIO_InitStruct.Pin = GPIO_PIN_15 | GPIO_PIN_9;
- 134              		.loc 1 237 3 view .LVU39
- 135              		.loc 1 237 23 is_stmt 0 view .LVU40
+ 245:Core/Src/main.c **** 
+ 246:Core/Src/main.c ****   GPIO_InitStruct.Pin = GPIO_PIN_15 | GPIO_PIN_9;
+ 134              		.loc 1 246 3 view .LVU39
+ 135              		.loc 1 246 23 is_stmt 0 view .LVU40
  136 0060 4FF40243 		mov	r3, #33280
  137 0064 0393     		str	r3, [sp, #12]
- 238:Core/Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 138              		.loc 1 238 3 is_stmt 1 view .LVU41
- 139              		.loc 1 238 24 is_stmt 0 view .LVU42
+ 247:Core/Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 138              		.loc 1 247 3 is_stmt 1 view .LVU41
+ 139              		.loc 1 247 24 is_stmt 0 view .LVU42
  140 0066 0123     		movs	r3, #1
  141 0068 0493     		str	r3, [sp, #16]
- 239:Core/Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 142              		.loc 1 239 3 is_stmt 1 view .LVU43
- 143              		.loc 1 239 24 is_stmt 0 view .LVU44
+ 248:Core/Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 16
+
+
+ 142              		.loc 1 248 3 is_stmt 1 view .LVU43
+ 143              		.loc 1 248 24 is_stmt 0 view .LVU44
  144 006a 0594     		str	r4, [sp, #20]
- 240:Core/Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 145              		.loc 1 240 3 is_stmt 1 view .LVU45
- 146              		.loc 1 240 25 is_stmt 0 view .LVU46
+ 249:Core/Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 145              		.loc 1 249 3 is_stmt 1 view .LVU45
+ 146              		.loc 1 249 25 is_stmt 0 view .LVU46
  147 006c 0694     		str	r4, [sp, #24]
- 241:Core/Src/main.c ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- 148              		.loc 1 241 3 is_stmt 1 view .LVU47
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 16
-
-
+ 250:Core/Src/main.c ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 148              		.loc 1 250 3 is_stmt 1 view .LVU47
  149 006e 03A9     		add	r1, sp, #12
  150 0070 0248     		ldr	r0, .L3
  151 0072 FFF7FEFF 		bl	HAL_GPIO_Init
  152              	.LVL5:
- 242:Core/Src/main.c **** 
- 243:Core/Src/main.c ****   /* USER CODE BEGIN MX_GPIO_Init_2 */
- 244:Core/Src/main.c ****   /* USER CODE END MX_GPIO_Init_2 */
- 245:Core/Src/main.c **** }
- 153              		.loc 1 245 1 is_stmt 0 view .LVU48
+ 251:Core/Src/main.c **** 
+ 252:Core/Src/main.c ****   /* USER CODE BEGIN MX_GPIO_Init_2 */
+ 253:Core/Src/main.c ****   /* USER CODE END MX_GPIO_Init_2 */
+ 254:Core/Src/main.c **** }
+ 153              		.loc 1 254 1 is_stmt 0 view .LVU48
  154 0076 08B0     		add	sp, sp, #32
  155              	.LCFI2:
  156              		.cfi_def_cfa_offset 8
@@ -949,6 +958,9 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  177      2025640D 
  177      0A00
  178 0072 0000     		.align	2
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 17
+
+
  179              	.LC3:
  180 0074 4D657373 		.ascii	"Message not sent sucessfully!!\015\000"
  180      61676520 
@@ -958,1004 +970,1197 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 1
  181              		.section	.text.fnRTOSMessageSendTask,"ax",%progbits
  182              		.align	1
  183              		.global	fnRTOSMessageSendTask
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 17
-
-
  184              		.syntax unified
  185              		.thumb
  186              		.thumb_func
  188              	fnRTOSMessageSendTask:
  189              	.LVL6:
  190              	.LFB855:
- 246:Core/Src/main.c **** 
- 247:Core/Src/main.c **** /* USER CODE BEGIN 4 */
- 248:Core/Src/main.c **** 
- 249:Core/Src/main.c **** /* USER CODE END 4 */
- 250:Core/Src/main.c **** 
- 251:Core/Src/main.c **** /* USER CODE BEGIN Header_StartDefaultTask */
- 252:Core/Src/main.c **** /**
- 253:Core/Src/main.c ****  * @brief  Function implementing the defaultTask thread.
- 254:Core/Src/main.c ****  * @param  argument: Not used
- 255:Core/Src/main.c ****  * @retval None
- 256:Core/Src/main.c ****  */
- 257:Core/Src/main.c **** /* USER CODE END Header_StartDefaultTask */
- 258:Core/Src/main.c **** // void StartDefaultTask(void const *argument)
- 259:Core/Src/main.c **** // {
- 260:Core/Src/main.c **** //   /* USER CODE BEGIN 5 */
- 261:Core/Src/main.c **** //   /* Infinite loop */
- 262:Core/Src/main.c **** //   for (;;)
- 263:Core/Src/main.c **** //   {
- 264:Core/Src/main.c **** //     osDelay(1);
- 265:Core/Src/main.c **** //   }
- 266:Core/Src/main.c **** //   /* USER CODE END 5 */
- 267:Core/Src/main.c **** // }
- 268:Core/Src/main.c **** 
- 269:Core/Src/main.c **** /**
- 270:Core/Src/main.c ****  * @brief  Function implementing the SenderTask thread.
- 271:Core/Src/main.c ****  * @param  argument: Not used
- 272:Core/Src/main.c ****  * @retval None
- 273:Core/Src/main.c ****  */
- 274:Core/Src/main.c **** /* USER CODE END Header_StartDefaultTask */
- 275:Core/Src/main.c **** void fnRTOSMessageSendTask(void const *argument)
- 276:Core/Src/main.c **** {
- 191              		.loc 1 276 1 is_stmt 1 view -0
+ 255:Core/Src/main.c **** 
+ 256:Core/Src/main.c **** /* USER CODE BEGIN 4 */
+ 257:Core/Src/main.c **** 
+ 258:Core/Src/main.c **** /* USER CODE END 4 */
+ 259:Core/Src/main.c **** 
+ 260:Core/Src/main.c **** /* USER CODE BEGIN Header_StartDefaultTask */
+ 261:Core/Src/main.c **** /**
+ 262:Core/Src/main.c ****  * @brief  Function implementing the defaultTask thread.
+ 263:Core/Src/main.c ****  * @param  argument: Not used
+ 264:Core/Src/main.c ****  * @retval None
+ 265:Core/Src/main.c ****  */
+ 266:Core/Src/main.c **** /* USER CODE END Header_StartDefaultTask */
+ 267:Core/Src/main.c **** // void StartDefaultTask(void const *argument)
+ 268:Core/Src/main.c **** // {
+ 269:Core/Src/main.c **** //   /* USER CODE BEGIN 5 */
+ 270:Core/Src/main.c **** //   /* Infinite loop */
+ 271:Core/Src/main.c **** //   for (;;)
+ 272:Core/Src/main.c **** //   {
+ 273:Core/Src/main.c **** //     osDelay(1);
+ 274:Core/Src/main.c **** //   }
+ 275:Core/Src/main.c **** //   /* USER CODE END 5 */
+ 276:Core/Src/main.c **** // }
+ 277:Core/Src/main.c **** 
+ 278:Core/Src/main.c **** /**
+ 279:Core/Src/main.c ****  * @brief  Function implementing the SenderTask thread.
+ 280:Core/Src/main.c ****  * @param  argument: Not used
+ 281:Core/Src/main.c ****  * @retval None
+ 282:Core/Src/main.c ****  */
+ 283:Core/Src/main.c **** /* USER CODE END Header_StartDefaultTask */
+ 284:Core/Src/main.c **** void fnRTOSMessageSendTask(void const *argument)
+ 285:Core/Src/main.c **** {
+ 191              		.loc 1 285 1 is_stmt 1 view -0
  192              		.cfi_startproc
  193              		@ args = 0, pretend = 0, frame = 128
  194              		@ frame_needed = 0, uses_anonymous_args = 0
- 195              		.loc 1 276 1 is_stmt 0 view .LVU50
+ 195              		.loc 1 285 1 is_stmt 0 view .LVU50
  196 0000 00B5     		push	{lr}
  197              	.LCFI3:
  198              		.cfi_def_cfa_offset 4
  199              		.cfi_offset 14, -4
  200 0002 A1B0     		sub	sp, sp, #132
  201              	.LCFI4:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 18
+
+
  202              		.cfi_def_cfa_offset 136
- 277:Core/Src/main.c **** 
- 278:Core/Src/main.c ****   EnergyData_t StructConfigEnergyData;
- 203              		.loc 1 278 3 is_stmt 1 view .LVU51
- 279:Core/Src/main.c ****   StructConfigEnergyData.fKVAh_pha = 111.23;
- 204              		.loc 1 279 3 view .LVU52
- 205              		.loc 1 279 36 is_stmt 0 view .LVU53
- 206 0004 1F4B     		ldr	r3, .L10
+ 286:Core/Src/main.c **** 
+ 287:Core/Src/main.c ****   EnergyData_t StructConfigEnergyData;
+ 203              		.loc 1 287 3 is_stmt 1 view .LVU51
+ 288:Core/Src/main.c ****   StructConfigEnergyData.fKVAh_pha = 111.23;
+ 204              		.loc 1 288 3 view .LVU52
+ 205              		.loc 1 288 36 is_stmt 0 view .LVU53
+ 206 0004 214B     		ldr	r3, .L10
  207 0006 1893     		str	r3, [sp, #96]	@ float
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 18
-
-
- 280:Core/Src/main.c ****   StructConfigEnergyData.fKVArh_pha = 222.23;
- 208              		.loc 1 280 3 is_stmt 1 view .LVU54
- 209              		.loc 1 280 37 is_stmt 0 view .LVU55
- 210 0008 1F4B     		ldr	r3, .L10+4
+ 289:Core/Src/main.c ****   StructConfigEnergyData.fKVArh_pha = 222.23;
+ 208              		.loc 1 289 3 is_stmt 1 view .LVU54
+ 209              		.loc 1 289 37 is_stmt 0 view .LVU55
+ 210 0008 214B     		ldr	r3, .L10+4
  211 000a 1993     		str	r3, [sp, #100]	@ float
- 281:Core/Src/main.c ****   StructConfigEnergyData.fKWh_pha = 333.23;
- 212              		.loc 1 281 3 is_stmt 1 view .LVU56
- 213              		.loc 1 281 35 is_stmt 0 view .LVU57
- 214 000c 1F4B     		ldr	r3, .L10+8
+ 290:Core/Src/main.c ****   StructConfigEnergyData.fKWh_pha = 333.23;
+ 212              		.loc 1 290 3 is_stmt 1 view .LVU56
+ 213              		.loc 1 290 35 is_stmt 0 view .LVU57
+ 214 000c 214B     		ldr	r3, .L10+8
  215 000e 1793     		str	r3, [sp, #92]	@ float
- 282:Core/Src/main.c **** 
- 283:Core/Src/main.c ****   PowerData_t StructConfigPowerData;
- 216              		.loc 1 283 3 is_stmt 1 view .LVU58
- 284:Core/Src/main.c ****   StructConfigPowerData.fKW_pha = 11.22;
- 217              		.loc 1 284 3 view .LVU59
- 218              		.loc 1 284 33 is_stmt 0 view .LVU60
- 219 0010 1F4B     		ldr	r3, .L10+12
+ 291:Core/Src/main.c **** 
+ 292:Core/Src/main.c ****   PowerData_t StructConfigPowerData;
+ 216              		.loc 1 292 3 is_stmt 1 view .LVU58
+ 293:Core/Src/main.c ****   StructConfigPowerData.fKW_pha = 11.22;
+ 217              		.loc 1 293 3 view .LVU59
+ 218              		.loc 1 293 33 is_stmt 0 view .LVU60
+ 219 0010 214B     		ldr	r3, .L10+12
  220 0012 0E93     		str	r3, [sp, #56]	@ float
- 285:Core/Src/main.c ****   StructConfigPowerData.fVA_pha = 22.22;
- 221              		.loc 1 285 3 is_stmt 1 view .LVU61
- 222              		.loc 1 285 33 is_stmt 0 view .LVU62
- 223 0014 1F4B     		ldr	r3, .L10+16
+ 294:Core/Src/main.c ****   StructConfigPowerData.fVA_pha = 22.22;
+ 221              		.loc 1 294 3 is_stmt 1 view .LVU61
+ 222              		.loc 1 294 33 is_stmt 0 view .LVU62
+ 223 0014 214B     		ldr	r3, .L10+16
  224 0016 0F93     		str	r3, [sp, #60]	@ float
- 286:Core/Src/main.c ****   StructConfigPowerData.fVAr_pha = 33.22;
- 225              		.loc 1 286 3 is_stmt 1 view .LVU63
- 226              		.loc 1 286 34 is_stmt 0 view .LVU64
- 227 0018 1F4B     		ldr	r3, .L10+20
+ 295:Core/Src/main.c ****   StructConfigPowerData.fVAr_pha = 33.22;
+ 225              		.loc 1 295 3 is_stmt 1 view .LVU63
+ 226              		.loc 1 295 34 is_stmt 0 view .LVU64
+ 227 0018 214B     		ldr	r3, .L10+20
  228 001a 1093     		str	r3, [sp, #64]	@ float
- 287:Core/Src/main.c **** 
- 288:Core/Src/main.c ****   PhaseAngle_t StructConfigPhaseAngle;
- 229              		.loc 1 288 3 is_stmt 1 view .LVU65
- 289:Core/Src/main.c ****   StructConfigPhaseAngle.fPhiA = 120.33;
- 230              		.loc 1 289 3 view .LVU66
- 231              		.loc 1 289 32 is_stmt 0 view .LVU67
- 232 001c 1F4B     		ldr	r3, .L10+24
+ 296:Core/Src/main.c **** 
+ 297:Core/Src/main.c ****   PhaseAngle_t StructConfigPhaseAngle;
+ 229              		.loc 1 297 3 is_stmt 1 view .LVU65
+ 298:Core/Src/main.c ****   StructConfigPhaseAngle.fPhiA = 120.33;
+ 230              		.loc 1 298 3 view .LVU66
+ 231              		.loc 1 298 32 is_stmt 0 view .LVU67
+ 232 001c 214B     		ldr	r3, .L10+24
  233 001e 0B93     		str	r3, [sp, #44]	@ float
- 290:Core/Src/main.c **** 
- 291:Core/Src/main.c ****   EMData_t StructConfigEMData;
- 234              		.loc 1 291 3 is_stmt 1 view .LVU68
- 292:Core/Src/main.c ****   StructConfigEMData.fVoltage_pha = 220.10;
- 235              		.loc 1 292 3 view .LVU69
- 236              		.loc 1 292 35 is_stmt 0 view .LVU70
- 237 0020 1F4B     		ldr	r3, .L10+28
+ 299:Core/Src/main.c **** 
+ 300:Core/Src/main.c ****   EMData_t StructConfigEMData;
+ 234              		.loc 1 300 3 is_stmt 1 view .LVU68
+ 301:Core/Src/main.c ****   StructConfigEMData.fVoltage_pha = 220.10;
+ 235              		.loc 1 301 3 view .LVU69
+ 236              		.loc 1 301 35 is_stmt 0 view .LVU70
+ 237 0020 214B     		ldr	r3, .L10+28
  238 0022 0193     		str	r3, [sp, #4]	@ float
- 293:Core/Src/main.c ****   StructConfigEMData.fCurrent_pha = 50.10;
- 239              		.loc 1 293 3 is_stmt 1 view .LVU71
- 240              		.loc 1 293 35 is_stmt 0 view .LVU72
- 241 0024 1F4B     		ldr	r3, .L10+32
- 242 0026 0493     		str	r3, [sp, #16]	@ float
- 294:Core/Src/main.c ****   StructConfigEMData.fPF = 0.50;
- 243              		.loc 1 294 3 is_stmt 1 view .LVU73
- 244              		.loc 1 294 26 is_stmt 0 view .LVU74
- 245 0028 4FF07C53 		mov	r3, #1056964608
- 246 002c 0A93     		str	r3, [sp, #40]	@ float
- 295:Core/Src/main.c ****   StructConfigEMData.pStructEnergyData = &StructConfigEnergyData;
- 247              		.loc 1 295 3 is_stmt 1 view .LVU75
- 248              		.loc 1 295 40 is_stmt 0 view .LVU76
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 19
+ 302:Core/Src/main.c ****   StructConfigEMData.fVoltage_phb = 440.10;
+ 239              		.loc 1 302 3 is_stmt 1 view .LVU71
+ 240              		.loc 1 302 35 is_stmt 0 view .LVU72
+ 241 0024 214B     		ldr	r3, .L10+32
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 19
 
 
- 249 002e 17AB     		add	r3, sp, #92
- 250 0030 0793     		str	r3, [sp, #28]
- 296:Core/Src/main.c ****   StructConfigEMData.pStructPowerData = &StructConfigPowerData;
- 251              		.loc 1 296 3 is_stmt 1 view .LVU77
- 252              		.loc 1 296 39 is_stmt 0 view .LVU78
- 253 0032 0EAB     		add	r3, sp, #56
- 254 0034 0893     		str	r3, [sp, #32]
- 297:Core/Src/main.c ****   StructConfigEMData.pStructPhaseAngleData = &StructConfigPhaseAngle;
- 255              		.loc 1 297 3 is_stmt 1 view .LVU79
- 256              		.loc 1 297 44 is_stmt 0 view .LVU80
- 257 0036 0BAB     		add	r3, sp, #44
- 258 0038 0993     		str	r3, [sp, #36]
- 298:Core/Src/main.c **** 
- 299:Core/Src/main.c ****   uint32_t u32QueueSendBlockTime = 500;
- 259              		.loc 1 299 3 is_stmt 1 view .LVU81
- 260              	.LVL7:
- 261              		.loc 1 299 3 is_stmt 0 view .LVU82
- 262 003a 06E0     		b	.L7
- 263              	.LVL8:
- 264              	.L9:
- 300:Core/Src/main.c ****   osStatus osMessageSendStatus;
- 301:Core/Src/main.c ****   while (1)
- 302:Core/Src/main.c ****   {
- 303:Core/Src/main.c ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15);
- 304:Core/Src/main.c ****     printf("Test CMSIS-RTOS 1: Sender Task\r\n");
- 305:Core/Src/main.c ****     printf("Sending EM value struct pointer via Message Queue to rx-thread\r\n");
- 306:Core/Src/main.c ****     printf("Pha_Voltage: %d\r\n", (int)StructConfigEMData.fVoltage_pha);
- 307:Core/Src/main.c ****     osMessageSendStatus = osMessagePut(EM_Data_Queue_Id, (uint32_t)&StructConfigEMData, osWaitForev
- 308:Core/Src/main.c ****     if (osMessageSendStatus != osOK)
- 309:Core/Src/main.c ****     {
- 310:Core/Src/main.c ****       printf("Message not sent sucessfully!!\r\n");
- 265              		.loc 1 310 7 is_stmt 1 view .LVU83
- 266 003c 1A48     		ldr	r0, .L10+36
- 267              	.LVL9:
- 268              		.loc 1 310 7 is_stmt 0 view .LVU84
- 269 003e FFF7FEFF 		bl	puts
- 270              	.LVL10:
- 271              	.L6:
- 311:Core/Src/main.c ****     }
- 312:Core/Src/main.c ****     osDelay(2000);
- 272              		.loc 1 312 5 is_stmt 1 view .LVU85
- 273 0042 4FF4FA60 		mov	r0, #2000
- 274 0046 FFF7FEFF 		bl	osDelay
- 275              	.LVL11:
- 301:Core/Src/main.c ****   {
- 276              		.loc 1 301 9 view .LVU86
- 277              	.L7:
- 300:Core/Src/main.c ****   osStatus osMessageSendStatus;
- 278              		.loc 1 300 3 view .LVU87
- 301:Core/Src/main.c ****   {
- 279              		.loc 1 301 3 view .LVU88
- 303:Core/Src/main.c ****     printf("Test CMSIS-RTOS 1: Sender Task\r\n");
- 280              		.loc 1 303 5 view .LVU89
- 281 004a 4FF40041 		mov	r1, #32768
- 282 004e 1748     		ldr	r0, .L10+40
- 283 0050 FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 284              	.LVL12:
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 20
+ 242 0026 0293     		str	r3, [sp, #8]	@ float
+ 303:Core/Src/main.c ****   StructConfigEMData.fCurrent_pha = 50.10;
+ 243              		.loc 1 303 3 is_stmt 1 view .LVU73
+ 244              		.loc 1 303 35 is_stmt 0 view .LVU74
+ 245 0028 214B     		ldr	r3, .L10+36
+ 246 002a 0493     		str	r3, [sp, #16]	@ float
+ 304:Core/Src/main.c ****   StructConfigEMData.fCurrent_phb = 60.10;
+ 247              		.loc 1 304 3 is_stmt 1 view .LVU75
+ 248              		.loc 1 304 35 is_stmt 0 view .LVU76
+ 249 002c 214B     		ldr	r3, .L10+40
+ 250 002e 0593     		str	r3, [sp, #20]	@ float
+ 305:Core/Src/main.c ****   StructConfigEMData.fPF = 0.50;
+ 251              		.loc 1 305 3 is_stmt 1 view .LVU77
+ 252              		.loc 1 305 26 is_stmt 0 view .LVU78
+ 253 0030 4FF07C53 		mov	r3, #1056964608
+ 254 0034 0A93     		str	r3, [sp, #40]	@ float
+ 306:Core/Src/main.c ****   StructConfigEMData.pStructEnergyData = &StructConfigEnergyData;
+ 255              		.loc 1 306 3 is_stmt 1 view .LVU79
+ 256              		.loc 1 306 40 is_stmt 0 view .LVU80
+ 257 0036 17AB     		add	r3, sp, #92
+ 258 0038 0793     		str	r3, [sp, #28]
+ 307:Core/Src/main.c ****   StructConfigEMData.pStructPowerData = &StructConfigPowerData;
+ 259              		.loc 1 307 3 is_stmt 1 view .LVU81
+ 260              		.loc 1 307 39 is_stmt 0 view .LVU82
+ 261 003a 0EAB     		add	r3, sp, #56
+ 262 003c 0893     		str	r3, [sp, #32]
+ 308:Core/Src/main.c ****   StructConfigEMData.pStructPhaseAngleData = &StructConfigPhaseAngle;
+ 263              		.loc 1 308 3 is_stmt 1 view .LVU83
+ 264              		.loc 1 308 44 is_stmt 0 view .LVU84
+ 265 003e 0BAB     		add	r3, sp, #44
+ 266 0040 0993     		str	r3, [sp, #36]
+ 309:Core/Src/main.c **** 
+ 310:Core/Src/main.c ****   uint32_t u32QueueSendBlockTime = 500;
+ 267              		.loc 1 310 3 is_stmt 1 view .LVU85
+ 268              	.LVL7:
+ 269              		.loc 1 310 3 is_stmt 0 view .LVU86
+ 270 0042 06E0     		b	.L7
+ 271              	.LVL8:
+ 272              	.L9:
+ 311:Core/Src/main.c ****   osStatus osMessageSendStatus;
+ 312:Core/Src/main.c ****   while (1)
+ 313:Core/Src/main.c ****   {
+ 314:Core/Src/main.c ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15);
+ 315:Core/Src/main.c ****     printf("Test CMSIS-RTOS 1: Sender Task\r\n");
+ 316:Core/Src/main.c ****     printf("Sending EM value struct pointer via Message Queue to rx-thread\r\n");
+ 317:Core/Src/main.c ****     printf("Pha_Voltage: %d\r\n", (int)StructConfigEMData.fVoltage_pha);
+ 318:Core/Src/main.c ****     osMessageSendStatus = osMessagePut(EM_Data_Queue_Id, (uint32_t)&StructConfigEMData, osWaitForev
+ 319:Core/Src/main.c ****     if (osMessageSendStatus != osOK)
+ 320:Core/Src/main.c ****     {
+ 321:Core/Src/main.c ****       printf("Message not sent sucessfully!!\r\n");
+ 273              		.loc 1 321 7 is_stmt 1 view .LVU87
+ 274 0044 1C48     		ldr	r0, .L10+44
+ 275              	.LVL9:
+ 276              		.loc 1 321 7 is_stmt 0 view .LVU88
+ 277 0046 FFF7FEFF 		bl	puts
+ 278              	.LVL10:
+ 279              	.L6:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 20
 
 
- 304:Core/Src/main.c ****     printf("Sending EM value struct pointer via Message Queue to rx-thread\r\n");
- 285              		.loc 1 304 5 view .LVU90
- 286 0054 1648     		ldr	r0, .L10+44
- 287 0056 FFF7FEFF 		bl	puts
- 288              	.LVL13:
- 305:Core/Src/main.c ****     printf("Pha_Voltage: %d\r\n", (int)StructConfigEMData.fVoltage_pha);
- 289              		.loc 1 305 5 view .LVU91
- 290 005a 1648     		ldr	r0, .L10+48
- 291 005c FFF7FEFF 		bl	puts
- 292              	.LVL14:
- 306:Core/Src/main.c ****     osMessageSendStatus = osMessagePut(EM_Data_Queue_Id, (uint32_t)&StructConfigEMData, osWaitForev
- 293              		.loc 1 306 5 view .LVU92
- 294 0060 0198     		ldr	r0, [sp, #4]	@ float
- 295 0062 FFF7FEFF 		bl	__aeabi_f2iz
- 296              	.LVL15:
- 297 0066 0146     		mov	r1, r0
- 298 0068 1348     		ldr	r0, .L10+52
- 299 006a FFF7FEFF 		bl	printf
- 300              	.LVL16:
- 307:Core/Src/main.c ****     if (osMessageSendStatus != osOK)
- 301              		.loc 1 307 5 view .LVU93
- 307:Core/Src/main.c ****     if (osMessageSendStatus != osOK)
- 302              		.loc 1 307 27 is_stmt 0 view .LVU94
- 303 006e 4FF0FF32 		mov	r2, #-1
- 304 0072 01A9     		add	r1, sp, #4
- 305 0074 114B     		ldr	r3, .L10+56
- 306 0076 1868     		ldr	r0, [r3]
- 307 0078 FFF7FEFF 		bl	osMessagePut
- 308              	.LVL17:
- 308:Core/Src/main.c ****     {
- 309              		.loc 1 308 5 is_stmt 1 view .LVU95
- 308:Core/Src/main.c ****     {
- 310              		.loc 1 308 8 is_stmt 0 view .LVU96
- 311 007c 0028     		cmp	r0, #0
- 312 007e DDD1     		bne	.L9
- 313 0080 DFE7     		b	.L6
- 314              	.L11:
- 315 0082 00BF     		.align	2
- 316              	.L10:
- 317 0084 C375DE42 		.word	1121875395
- 318 0088 E13A5E43 		.word	1130248929
- 319 008c 719DA643 		.word	1134992753
- 320 0090 1F853341 		.word	1093895455
- 321 0094 8FC2B141 		.word	1102168719
- 322 0098 48E10442 		.word	1107616072
- 323 009c F6A8F042 		.word	1123068150
- 324 00a0 9A195C43 		.word	1130109338
- 325 00a4 66664842 		.word	1112041062
- 326 00a8 74000000 		.word	.LC3
- 327 00ac 00040048 		.word	1207960576
- 328 00b0 00000000 		.word	.LC0
- 329 00b4 20000000 		.word	.LC1
- 330 00b8 60000000 		.word	.LC2
- 331 00bc 00000000 		.word	.LANCHOR0
- 332              		.cfi_endproc
- 333              	.LFE855:
- 335              		.section	.rodata.fnRTOSMessageReceiverTask.str1.4,"aMS",%progbits,1
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 21
+ 322:Core/Src/main.c ****     }
+ 323:Core/Src/main.c ****     osDelay(2000);
+ 280              		.loc 1 323 5 is_stmt 1 view .LVU89
+ 281 004a 4FF4FA60 		mov	r0, #2000
+ 282 004e FFF7FEFF 		bl	osDelay
+ 283              	.LVL11:
+ 312:Core/Src/main.c ****   {
+ 284              		.loc 1 312 9 view .LVU90
+ 285              	.L7:
+ 311:Core/Src/main.c ****   osStatus osMessageSendStatus;
+ 286              		.loc 1 311 3 view .LVU91
+ 312:Core/Src/main.c ****   {
+ 287              		.loc 1 312 3 view .LVU92
+ 314:Core/Src/main.c ****     printf("Test CMSIS-RTOS 1: Sender Task\r\n");
+ 288              		.loc 1 314 5 view .LVU93
+ 289 0052 4FF40041 		mov	r1, #32768
+ 290 0056 1948     		ldr	r0, .L10+48
+ 291 0058 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 292              	.LVL12:
+ 315:Core/Src/main.c ****     printf("Sending EM value struct pointer via Message Queue to rx-thread\r\n");
+ 293              		.loc 1 315 5 view .LVU94
+ 294 005c 1848     		ldr	r0, .L10+52
+ 295 005e FFF7FEFF 		bl	puts
+ 296              	.LVL13:
+ 316:Core/Src/main.c ****     printf("Pha_Voltage: %d\r\n", (int)StructConfigEMData.fVoltage_pha);
+ 297              		.loc 1 316 5 view .LVU95
+ 298 0062 1848     		ldr	r0, .L10+56
+ 299 0064 FFF7FEFF 		bl	puts
+ 300              	.LVL14:
+ 317:Core/Src/main.c ****     osMessageSendStatus = osMessagePut(EM_Data_Queue_Id, (uint32_t)&StructConfigEMData, osWaitForev
+ 301              		.loc 1 317 5 view .LVU96
+ 302 0068 0198     		ldr	r0, [sp, #4]	@ float
+ 303 006a FFF7FEFF 		bl	__aeabi_f2iz
+ 304              	.LVL15:
+ 305 006e 0146     		mov	r1, r0
+ 306 0070 1548     		ldr	r0, .L10+60
+ 307 0072 FFF7FEFF 		bl	printf
+ 308              	.LVL16:
+ 318:Core/Src/main.c ****     if (osMessageSendStatus != osOK)
+ 309              		.loc 1 318 5 view .LVU97
+ 318:Core/Src/main.c ****     if (osMessageSendStatus != osOK)
+ 310              		.loc 1 318 27 is_stmt 0 view .LVU98
+ 311 0076 4FF0FF32 		mov	r2, #-1
+ 312 007a 01A9     		add	r1, sp, #4
+ 313 007c 134B     		ldr	r3, .L10+64
+ 314 007e 1868     		ldr	r0, [r3]
+ 315 0080 FFF7FEFF 		bl	osMessagePut
+ 316              	.LVL17:
+ 319:Core/Src/main.c ****     {
+ 317              		.loc 1 319 5 is_stmt 1 view .LVU99
+ 319:Core/Src/main.c ****     {
+ 318              		.loc 1 319 8 is_stmt 0 view .LVU100
+ 319 0084 0028     		cmp	r0, #0
+ 320 0086 DDD1     		bne	.L9
+ 321 0088 DFE7     		b	.L6
+ 322              	.L11:
+ 323 008a 00BF     		.align	2
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 21
 
 
- 336              		.align	2
- 337              	.LC4:
- 338 0000 54657374 		.ascii	"Test CMSIS-RTOS 1: Receiver Task\015\000"
- 338      20434D53 
- 338      49532D52 
- 338      544F5320 
- 338      313A2052 
- 339 0022 0000     		.align	2
- 340              	.LC5:
- 341 0024 57616974 		.ascii	"Waiting for the EM data from Sender Task!!\015\000"
- 341      696E6720 
- 341      666F7220 
- 341      74686520 
- 341      454D2064 
- 342              		.align	2
- 343              	.LC6:
- 344 0050 50686173 		.ascii	"PhaseA Voltage: %d\012 PhaseA Current: %d\015\012\000"
- 344      65412056 
- 344      6F6C7461 
- 344      67653A20 
- 344      25640A20 
- 345              		.section	.text.fnRTOSMessageReceiverTask,"ax",%progbits
- 346              		.align	1
- 347              		.global	fnRTOSMessageReceiverTask
- 348              		.syntax unified
- 349              		.thumb
- 350              		.thumb_func
- 352              	fnRTOSMessageReceiverTask:
- 353              	.LFB856:
- 313:Core/Src/main.c ****   }
- 314:Core/Src/main.c **** }
- 315:Core/Src/main.c **** 
- 316:Core/Src/main.c **** /* USER CODE END Header_StartDefaultTask */
- 317:Core/Src/main.c **** void fnRTOSMessageReceiverTask(void const *argument)
- 318:Core/Src/main.c **** {
- 354              		.loc 1 318 1 is_stmt 1 view -0
- 355              		.cfi_startproc
- 356              		@ args = 0, pretend = 0, frame = 16
- 357              		@ frame_needed = 0, uses_anonymous_args = 0
- 358              	.LVL18:
- 359              		.loc 1 318 1 is_stmt 0 view .LVU98
- 360 0000 30B5     		push	{r4, r5, lr}
- 361              	.LCFI5:
- 362              		.cfi_def_cfa_offset 12
- 363              		.cfi_offset 4, -12
- 364              		.cfi_offset 5, -8
- 365              		.cfi_offset 14, -4
- 366 0002 85B0     		sub	sp, sp, #20
- 367              	.LCFI6:
- 368              		.cfi_def_cfa_offset 32
- 369              	.LVL19:
- 370              	.L13:
- 319:Core/Src/main.c ****   uint32_t u32MessageQueueRxBlockTime = 500;
- 320:Core/Src/main.c ****   osEvent event;
- 371              		.loc 1 320 3 is_stmt 1 view .LVU99
- 321:Core/Src/main.c ****   EMData_t *pStructRxEMData;
- 372              		.loc 1 321 3 view .LVU100
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 22
+ 324              	.L10:
+ 325 008c C375DE42 		.word	1121875395
+ 326 0090 E13A5E43 		.word	1130248929
+ 327 0094 719DA643 		.word	1134992753
+ 328 0098 1F853341 		.word	1093895455
+ 329 009c 8FC2B141 		.word	1102168719
+ 330 00a0 48E10442 		.word	1107616072
+ 331 00a4 F6A8F042 		.word	1123068150
+ 332 00a8 9A195C43 		.word	1130109338
+ 333 00ac CD0CDC43 		.word	1138494669
+ 334 00b0 66664842 		.word	1112041062
+ 335 00b4 66667042 		.word	1114662502
+ 336 00b8 74000000 		.word	.LC3
+ 337 00bc 00040048 		.word	1207960576
+ 338 00c0 00000000 		.word	.LC0
+ 339 00c4 20000000 		.word	.LC1
+ 340 00c8 60000000 		.word	.LC2
+ 341 00cc 00000000 		.word	.LANCHOR0
+ 342              		.cfi_endproc
+ 343              	.LFE855:
+ 345              		.section	.rodata.fnRTOSMessageReceiver1Task.str1.4,"aMS",%progbits,1
+ 346              		.align	2
+ 347              	.LC4:
+ 348 0000 54657374 		.ascii	"Test CMSIS-RTOS 1: Receiver 1 Task\015\000"
+ 348      20434D53 
+ 348      49532D52 
+ 348      544F5320 
+ 348      313A2052 
+ 349              		.align	2
+ 350              	.LC5:
+ 351 0024 57616974 		.ascii	"Waiting for the EM data from Sender Task!!\015\000"
+ 351      696E6720 
+ 351      666F7220 
+ 351      74686520 
+ 351      454D2064 
+ 352              		.align	2
+ 353              	.LC6:
+ 354 0050 50686173 		.ascii	"PhaseA Voltage: %d\012 PhaseA Current: %d\015\012\000"
+ 354      65412056 
+ 354      6F6C7461 
+ 354      67653A20 
+ 354      25640A20 
+ 355              		.section	.text.fnRTOSMessageReceiver1Task,"ax",%progbits
+ 356              		.align	1
+ 357              		.global	fnRTOSMessageReceiver1Task
+ 358              		.syntax unified
+ 359              		.thumb
+ 360              		.thumb_func
+ 362              	fnRTOSMessageReceiver1Task:
+ 363              	.LFB856:
+ 324:Core/Src/main.c ****   }
+ 325:Core/Src/main.c **** }
+ 326:Core/Src/main.c **** 
+ 327:Core/Src/main.c **** /* USER CODE END Header_StartDefaultTask */
+ 328:Core/Src/main.c **** void fnRTOSMessageReceiver1Task(void const *argument)
+ 329:Core/Src/main.c **** {
+ 364              		.loc 1 329 1 is_stmt 1 view -0
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 22
 
 
- 322:Core/Src/main.c ****   while (1)
- 373              		.loc 1 322 3 view .LVU101
- 323:Core/Src/main.c ****   {
- 324:Core/Src/main.c ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_9);
- 374              		.loc 1 324 5 view .LVU102
- 375 0004 4FF40071 		mov	r1, #512
- 376 0008 1048     		ldr	r0, .L16
- 377 000a FFF7FEFF 		bl	HAL_GPIO_TogglePin
- 378              	.LVL20:
- 325:Core/Src/main.c ****     printf("Test CMSIS-RTOS 1: Receiver Task\r\n");
- 379              		.loc 1 325 5 view .LVU103
- 380 000e 1048     		ldr	r0, .L16+4
- 381 0010 FFF7FEFF 		bl	puts
- 382              	.LVL21:
- 326:Core/Src/main.c ****     printf("Waiting for the EM data from Sender Task!!\r\n");
- 383              		.loc 1 326 5 view .LVU104
- 384 0014 0F48     		ldr	r0, .L16+8
- 385 0016 FFF7FEFF 		bl	puts
- 386              	.LVL22:
- 327:Core/Src/main.c ****     event = osMessageGet(EM_Data_Queue_Id, osWaitForever);
- 387              		.loc 1 327 5 view .LVU105
- 388              		.loc 1 327 13 is_stmt 0 view .LVU106
- 389 001a 4FF0FF32 		mov	r2, #-1
- 390 001e 0E4B     		ldr	r3, .L16+12
- 391 0020 1968     		ldr	r1, [r3]
- 392 0022 01A8     		add	r0, sp, #4
- 393 0024 FFF7FEFF 		bl	osMessageGet
- 394              	.LVL23:
- 328:Core/Src/main.c ****     if (event.status == osEventMessage)
- 395              		.loc 1 328 5 is_stmt 1 view .LVU107
- 396              		.loc 1 328 14 is_stmt 0 view .LVU108
- 397 0028 019B     		ldr	r3, [sp, #4]
- 398              		.loc 1 328 8 view .LVU109
- 399 002a 102B     		cmp	r3, #16
- 400 002c EAD1     		bne	.L13
- 329:Core/Src/main.c ****     {
- 330:Core/Src/main.c ****       pStructRxEMData = (EMData_t *)event.value.p;
- 401              		.loc 1 330 7 is_stmt 1 view .LVU110
- 402              		.loc 1 330 23 is_stmt 0 view .LVU111
- 403 002e 029B     		ldr	r3, [sp, #8]
- 404              	.LVL24:
- 331:Core/Src/main.c ****       printf("PhaseA Voltage: %d\n PhaseA Current: %d\r\n", (int)pStructRxEMData->fVoltage_pha, (in
- 405              		.loc 1 331 7 is_stmt 1 view .LVU112
- 406              		.loc 1 331 81 is_stmt 0 view .LVU113
- 407 0030 1D68     		ldr	r5, [r3]	@ float
- 408              		.loc 1 331 7 view .LVU114
- 409 0032 D868     		ldr	r0, [r3, #12]	@ float
- 410 0034 FFF7FEFF 		bl	__aeabi_f2iz
- 411              	.LVL25:
- 412              		.loc 1 331 7 view .LVU115
- 413 0038 0446     		mov	r4, r0
- 414 003a 2846     		mov	r0, r5
- 415 003c FFF7FEFF 		bl	__aeabi_f2iz
- 416              	.LVL26:
- 417 0040 0146     		mov	r1, r0
- 418 0042 2246     		mov	r2, r4
- 419 0044 0548     		ldr	r0, .L16+16
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 23
+ 365              		.cfi_startproc
+ 366              		@ args = 0, pretend = 0, frame = 16
+ 367              		@ frame_needed = 0, uses_anonymous_args = 0
+ 368              	.LVL18:
+ 369              		.loc 1 329 1 is_stmt 0 view .LVU102
+ 370 0000 30B5     		push	{r4, r5, lr}
+ 371              	.LCFI5:
+ 372              		.cfi_def_cfa_offset 12
+ 373              		.cfi_offset 4, -12
+ 374              		.cfi_offset 5, -8
+ 375              		.cfi_offset 14, -4
+ 376 0002 85B0     		sub	sp, sp, #20
+ 377              	.LCFI6:
+ 378              		.cfi_def_cfa_offset 32
+ 379              	.LVL19:
+ 380              	.L13:
+ 330:Core/Src/main.c ****   uint32_t u32MessageQueueRxBlockTime = 500;
+ 331:Core/Src/main.c ****   osEvent event;
+ 381              		.loc 1 331 3 is_stmt 1 view .LVU103
+ 332:Core/Src/main.c ****   EMData_t *pStructRxEMData;
+ 382              		.loc 1 332 3 view .LVU104
+ 333:Core/Src/main.c ****   while (1)
+ 383              		.loc 1 333 3 view .LVU105
+ 334:Core/Src/main.c ****   {
+ 335:Core/Src/main.c ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_9);
+ 384              		.loc 1 335 5 view .LVU106
+ 385 0004 4FF40071 		mov	r1, #512
+ 386 0008 1048     		ldr	r0, .L16
+ 387 000a FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 388              	.LVL20:
+ 336:Core/Src/main.c ****     printf("Test CMSIS-RTOS 1: Receiver 1 Task\r\n");
+ 389              		.loc 1 336 5 view .LVU107
+ 390 000e 1048     		ldr	r0, .L16+4
+ 391 0010 FFF7FEFF 		bl	puts
+ 392              	.LVL21:
+ 337:Core/Src/main.c ****     printf("Waiting for the EM data from Sender Task!!\r\n");
+ 393              		.loc 1 337 5 view .LVU108
+ 394 0014 0F48     		ldr	r0, .L16+8
+ 395 0016 FFF7FEFF 		bl	puts
+ 396              	.LVL22:
+ 338:Core/Src/main.c ****     event = osMessageGet(EM_Data_Queue_Id, osWaitForever);
+ 397              		.loc 1 338 5 view .LVU109
+ 398              		.loc 1 338 13 is_stmt 0 view .LVU110
+ 399 001a 4FF0FF32 		mov	r2, #-1
+ 400 001e 0E4B     		ldr	r3, .L16+12
+ 401 0020 1968     		ldr	r1, [r3]
+ 402 0022 01A8     		add	r0, sp, #4
+ 403 0024 FFF7FEFF 		bl	osMessageGet
+ 404              	.LVL23:
+ 339:Core/Src/main.c ****     if (event.status == osEventMessage)
+ 405              		.loc 1 339 5 is_stmt 1 view .LVU111
+ 406              		.loc 1 339 14 is_stmt 0 view .LVU112
+ 407 0028 019B     		ldr	r3, [sp, #4]
+ 408              		.loc 1 339 8 view .LVU113
+ 409 002a 102B     		cmp	r3, #16
+ 410 002c EAD1     		bne	.L13
+ 340:Core/Src/main.c ****     {
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 23
 
 
- 420 0046 FFF7FEFF 		bl	printf
- 421              	.LVL27:
- 422 004a DBE7     		b	.L13
- 423              	.L17:
- 424              		.align	2
- 425              	.L16:
- 426 004c 00040048 		.word	1207960576
- 427 0050 00000000 		.word	.LC4
- 428 0054 24000000 		.word	.LC5
- 429 0058 00000000 		.word	.LANCHOR0
- 430 005c 50000000 		.word	.LC6
- 431              		.cfi_endproc
- 432              	.LFE856:
- 434              		.section	.text.SystemClock_Config,"ax",%progbits
- 435              		.align	1
- 436              		.global	SystemClock_Config
- 437              		.syntax unified
- 438              		.thumb
- 439              		.thumb_func
- 441              	SystemClock_Config:
- 442              	.LFB853:
- 178:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
- 443              		.loc 1 178 1 is_stmt 1 view -0
- 444              		.cfi_startproc
- 445              		@ args = 0, pretend = 0, frame = 104
- 446              		@ frame_needed = 0, uses_anonymous_args = 0
- 447 0000 00B5     		push	{lr}
- 448              	.LCFI7:
- 449              		.cfi_def_cfa_offset 4
- 450              		.cfi_offset 14, -4
- 451 0002 9BB0     		sub	sp, sp, #108
- 452              	.LCFI8:
- 453              		.cfi_def_cfa_offset 112
- 179:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 454              		.loc 1 179 3 view .LVU117
- 179:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 455              		.loc 1 179 22 is_stmt 0 view .LVU118
- 456 0004 4822     		movs	r2, #72
- 457 0006 0021     		movs	r1, #0
- 458 0008 08A8     		add	r0, sp, #32
- 459 000a FFF7FEFF 		bl	memset
- 460              	.LVL28:
- 180:Core/Src/main.c **** 
- 461              		.loc 1 180 3 is_stmt 1 view .LVU119
- 180:Core/Src/main.c **** 
- 462              		.loc 1 180 22 is_stmt 0 view .LVU120
- 463 000e 0023     		movs	r3, #0
- 464 0010 0193     		str	r3, [sp, #4]
- 465 0012 0293     		str	r3, [sp, #8]
- 466 0014 0393     		str	r3, [sp, #12]
- 467 0016 0493     		str	r3, [sp, #16]
- 468 0018 0593     		str	r3, [sp, #20]
- 469 001a 0693     		str	r3, [sp, #24]
- 470 001c 0793     		str	r3, [sp, #28]
- 184:Core/Src/main.c **** 
- 471              		.loc 1 184 3 is_stmt 1 view .LVU121
- 472              	.LBB14:
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 24
+ 341:Core/Src/main.c ****       pStructRxEMData = (EMData_t *)event.value.p;
+ 411              		.loc 1 341 7 is_stmt 1 view .LVU114
+ 412              		.loc 1 341 23 is_stmt 0 view .LVU115
+ 413 002e 029B     		ldr	r3, [sp, #8]
+ 414              	.LVL24:
+ 342:Core/Src/main.c ****       printf("PhaseA Voltage: %d\n PhaseA Current: %d\r\n", (int)pStructRxEMData->fVoltage_pha, (in
+ 415              		.loc 1 342 7 is_stmt 1 view .LVU116
+ 416              		.loc 1 342 81 is_stmt 0 view .LVU117
+ 417 0030 1D68     		ldr	r5, [r3]	@ float
+ 418              		.loc 1 342 7 view .LVU118
+ 419 0032 D868     		ldr	r0, [r3, #12]	@ float
+ 420 0034 FFF7FEFF 		bl	__aeabi_f2iz
+ 421              	.LVL25:
+ 422              		.loc 1 342 7 view .LVU119
+ 423 0038 0446     		mov	r4, r0
+ 424 003a 2846     		mov	r0, r5
+ 425 003c FFF7FEFF 		bl	__aeabi_f2iz
+ 426              	.LVL26:
+ 427 0040 0146     		mov	r1, r0
+ 428 0042 2246     		mov	r2, r4
+ 429 0044 0548     		ldr	r0, .L16+16
+ 430 0046 FFF7FEFF 		bl	printf
+ 431              	.LVL27:
+ 432 004a DBE7     		b	.L13
+ 433              	.L17:
+ 434              		.align	2
+ 435              	.L16:
+ 436 004c 00040048 		.word	1207960576
+ 437 0050 00000000 		.word	.LC4
+ 438 0054 24000000 		.word	.LC5
+ 439 0058 00000000 		.word	.LANCHOR0
+ 440 005c 50000000 		.word	.LC6
+ 441              		.cfi_endproc
+ 442              	.LFE856:
+ 444              		.section	.rodata.fnRTOSMessageReceiver2Task.str1.4,"aMS",%progbits,1
+ 445              		.align	2
+ 446              	.LC7:
+ 447 0000 54657374 		.ascii	"Test CMSIS-RTOS 1: Receiver 2 Task\015\000"
+ 447      20434D53 
+ 447      49532D52 
+ 447      544F5320 
+ 447      313A2052 
+ 448              		.align	2
+ 449              	.LC8:
+ 450 0024 50686173 		.ascii	"PhaseB Voltage: %d\012 PhaseB Current: %d\015\012\000"
+ 450      65422056 
+ 450      6F6C7461 
+ 450      67653A20 
+ 450      25640A20 
+ 451              		.section	.text.fnRTOSMessageReceiver2Task,"ax",%progbits
+ 452              		.align	1
+ 453              		.global	fnRTOSMessageReceiver2Task
+ 454              		.syntax unified
+ 455              		.thumb
+ 456              		.thumb_func
+ 458              	fnRTOSMessageReceiver2Task:
+ 459              	.LFB857:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 24
 
 
- 184:Core/Src/main.c **** 
- 473              		.loc 1 184 3 view .LVU122
- 184:Core/Src/main.c **** 
- 474              		.loc 1 184 3 view .LVU123
- 475 001e 1649     		ldr	r1, .L24
- 476 0020 0A68     		ldr	r2, [r1]
- 477 0022 22F4C062 		bic	r2, r2, #1536
- 478 0026 42F48062 		orr	r2, r2, #1024
- 479 002a 0A60     		str	r2, [r1]
- 184:Core/Src/main.c **** 
- 480              		.loc 1 184 3 view .LVU124
- 481 002c 0A68     		ldr	r2, [r1]
- 482 002e 02F4C062 		and	r2, r2, #1536
- 483 0032 0092     		str	r2, [sp]
- 184:Core/Src/main.c **** 
- 484              		.loc 1 184 3 view .LVU125
- 485 0034 009A     		ldr	r2, [sp]
- 486              	.LBE14:
- 184:Core/Src/main.c **** 
- 487              		.loc 1 184 3 view .LVU126
- 188:Core/Src/main.c ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
- 488              		.loc 1 188 3 view .LVU127
- 188:Core/Src/main.c ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
- 489              		.loc 1 188 36 is_stmt 0 view .LVU128
- 490 0036 2022     		movs	r2, #32
- 491 0038 0892     		str	r2, [sp, #32]
- 189:Core/Src/main.c ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
- 492              		.loc 1 189 3 is_stmt 1 view .LVU129
- 189:Core/Src/main.c ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
- 493              		.loc 1 189 30 is_stmt 0 view .LVU130
- 494 003a 0122     		movs	r2, #1
- 495 003c 1092     		str	r2, [sp, #64]
- 190:Core/Src/main.c ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
- 496              		.loc 1 190 3 is_stmt 1 view .LVU131
- 190:Core/Src/main.c ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
- 497              		.loc 1 190 41 is_stmt 0 view .LVU132
- 498 003e 1193     		str	r3, [sp, #68]
- 191:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
- 499              		.loc 1 191 3 is_stmt 1 view .LVU133
- 191:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
- 500              		.loc 1 191 35 is_stmt 0 view .LVU134
- 501 0040 6022     		movs	r2, #96
- 502 0042 1292     		str	r2, [sp, #72]
- 192:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 503              		.loc 1 192 3 is_stmt 1 view .LVU135
- 192:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 504              		.loc 1 192 34 is_stmt 0 view .LVU136
- 505 0044 1393     		str	r3, [sp, #76]
- 193:Core/Src/main.c ****   {
- 506              		.loc 1 193 3 is_stmt 1 view .LVU137
- 193:Core/Src/main.c ****   {
- 507              		.loc 1 193 7 is_stmt 0 view .LVU138
- 508 0046 08A8     		add	r0, sp, #32
- 509 0048 FFF7FEFF 		bl	HAL_RCC_OscConfig
- 510              	.LVL29:
- 193:Core/Src/main.c ****   {
- 511              		.loc 1 193 6 view .LVU139
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 25
-
-
- 512 004c 70B9     		cbnz	r0, .L22
- 513              	.L19:
- 200:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
- 514              		.loc 1 200 3 is_stmt 1 view .LVU140
- 200:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
- 515              		.loc 1 200 31 is_stmt 0 view .LVU141
- 516 004e 4F23     		movs	r3, #79
- 517 0050 0193     		str	r3, [sp, #4]
- 201:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 518              		.loc 1 201 3 is_stmt 1 view .LVU142
- 201:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 519              		.loc 1 201 34 is_stmt 0 view .LVU143
- 520 0052 0021     		movs	r1, #0
- 521 0054 0291     		str	r1, [sp, #8]
- 202:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
- 522              		.loc 1 202 3 is_stmt 1 view .LVU144
- 202:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
- 523              		.loc 1 202 35 is_stmt 0 view .LVU145
- 524 0056 0391     		str	r1, [sp, #12]
- 203:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 525              		.loc 1 203 3 is_stmt 1 view .LVU146
- 203:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 526              		.loc 1 203 36 is_stmt 0 view .LVU147
- 527 0058 0491     		str	r1, [sp, #16]
- 204:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLK3Divider = RCC_SYSCLK_DIV1;
- 528              		.loc 1 204 3 is_stmt 1 view .LVU148
- 204:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLK3Divider = RCC_SYSCLK_DIV1;
- 529              		.loc 1 204 36 is_stmt 0 view .LVU149
- 530 005a 0591     		str	r1, [sp, #20]
- 205:Core/Src/main.c **** 
- 531              		.loc 1 205 3 is_stmt 1 view .LVU150
- 205:Core/Src/main.c **** 
- 532              		.loc 1 205 36 is_stmt 0 view .LVU151
- 533 005c 0791     		str	r1, [sp, #28]
- 207:Core/Src/main.c ****   {
- 534              		.loc 1 207 3 is_stmt 1 view .LVU152
- 207:Core/Src/main.c ****   {
- 535              		.loc 1 207 7 is_stmt 0 view .LVU153
- 536 005e 01A8     		add	r0, sp, #4
- 537 0060 FFF7FEFF 		bl	HAL_RCC_ClockConfig
- 538              	.LVL30:
- 207:Core/Src/main.c ****   {
- 539              		.loc 1 207 6 view .LVU154
- 540 0064 28B9     		cbnz	r0, .L23
- 541              	.L18:
- 211:Core/Src/main.c **** 
- 542              		.loc 1 211 1 view .LVU155
- 543 0066 1BB0     		add	sp, sp, #108
- 544              	.LCFI9:
- 545              		.cfi_remember_state
- 546              		.cfi_def_cfa_offset 4
- 547              		@ sp needed
- 548 0068 5DF804FB 		ldr	pc, [sp], #4
- 549              	.L22:
- 550              	.LCFI10:
- 551              		.cfi_restore_state
- 195:Core/Src/main.c ****   }
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 26
-
-
- 552              		.loc 1 195 5 is_stmt 1 view .LVU156
- 553 006c FFF7FEFF 		bl	Error_Handler
- 554              	.LVL31:
- 555 0070 EDE7     		b	.L19
- 556              	.L23:
- 209:Core/Src/main.c ****   }
- 557              		.loc 1 209 5 view .LVU157
- 558 0072 FFF7FEFF 		bl	Error_Handler
- 559              	.LVL32:
- 211:Core/Src/main.c **** 
- 560              		.loc 1 211 1 is_stmt 0 view .LVU158
- 561 0076 F6E7     		b	.L18
- 562              	.L25:
- 563              		.align	2
- 564              	.L24:
- 565 0078 00040058 		.word	1476396032
- 566              		.cfi_endproc
- 567              	.LFE853:
- 569              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
- 570              		.align	1
- 571              		.global	HAL_TIM_PeriodElapsedCallback
- 572              		.syntax unified
- 573              		.thumb
- 574              		.thumb_func
- 576              	HAL_TIM_PeriodElapsedCallback:
- 577              	.LVL33:
- 578              	.LFB857:
- 332:Core/Src/main.c ****     }
- 333:Core/Src/main.c ****   }
- 334:Core/Src/main.c **** }
- 335:Core/Src/main.c **** /**
- 336:Core/Src/main.c ****  * @brief  Period elapsed callback in non blocking mode
- 337:Core/Src/main.c ****  * @note   This function is called  when TIM17 interrupt took place, inside
- 338:Core/Src/main.c ****  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
- 339:Core/Src/main.c ****  * a global variable "uwTick" used as application time base.
- 340:Core/Src/main.c ****  * @param  htim : TIM handle
- 341:Core/Src/main.c ****  * @retval None
- 342:Core/Src/main.c ****  */
- 343:Core/Src/main.c **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
- 344:Core/Src/main.c **** {
- 579              		.loc 1 344 1 is_stmt 1 view -0
- 580              		.cfi_startproc
- 581              		@ args = 0, pretend = 0, frame = 0
- 582              		@ frame_needed = 0, uses_anonymous_args = 0
- 583              		.loc 1 344 1 is_stmt 0 view .LVU160
- 584 0000 08B5     		push	{r3, lr}
- 585              	.LCFI11:
- 586              		.cfi_def_cfa_offset 8
- 587              		.cfi_offset 3, -8
- 588              		.cfi_offset 14, -4
- 345:Core/Src/main.c ****   /* USER CODE BEGIN Callback 0 */
+ 343:Core/Src/main.c ****     }
+ 344:Core/Src/main.c ****   }
+ 345:Core/Src/main.c **** }
  346:Core/Src/main.c **** 
- 347:Core/Src/main.c ****   /* USER CODE END Callback 0 */
- 348:Core/Src/main.c ****   if (htim->Instance == TIM17)
- 589              		.loc 1 348 3 is_stmt 1 view .LVU161
- 590              		.loc 1 348 11 is_stmt 0 view .LVU162
- 591 0002 0268     		ldr	r2, [r0]
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 27
+ 347:Core/Src/main.c **** /* USER CODE END Header_StartDefaultTask */
+ 348:Core/Src/main.c **** void fnRTOSMessageReceiver2Task(void const *argument)
+ 349:Core/Src/main.c **** {
+ 460              		.loc 1 349 1 is_stmt 1 view -0
+ 461              		.cfi_startproc
+ 462              		@ args = 0, pretend = 0, frame = 16
+ 463              		@ frame_needed = 0, uses_anonymous_args = 0
+ 464              	.LVL28:
+ 465              		.loc 1 349 1 is_stmt 0 view .LVU121
+ 466 0000 30B5     		push	{r4, r5, lr}
+ 467              	.LCFI7:
+ 468              		.cfi_def_cfa_offset 12
+ 469              		.cfi_offset 4, -12
+ 470              		.cfi_offset 5, -8
+ 471              		.cfi_offset 14, -4
+ 472 0002 85B0     		sub	sp, sp, #20
+ 473              	.LCFI8:
+ 474              		.cfi_def_cfa_offset 32
+ 475              	.LVL29:
+ 476              	.L19:
+ 350:Core/Src/main.c ****   uint32_t u32MessageQueueRxBlockTime = 500;
+ 351:Core/Src/main.c ****   osEvent event;
+ 477              		.loc 1 351 3 is_stmt 1 view .LVU122
+ 352:Core/Src/main.c ****   EMData_t *pStructRxEMData;
+ 478              		.loc 1 352 3 view .LVU123
+ 353:Core/Src/main.c ****   while (1)
+ 479              		.loc 1 353 3 view .LVU124
+ 354:Core/Src/main.c ****   {
+ 355:Core/Src/main.c ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_11);
+ 480              		.loc 1 355 5 view .LVU125
+ 481 0004 4FF40061 		mov	r1, #2048
+ 482 0008 1048     		ldr	r0, .L22
+ 483 000a FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 484              	.LVL30:
+ 356:Core/Src/main.c ****     printf("Test CMSIS-RTOS 1: Receiver 2 Task\r\n");
+ 485              		.loc 1 356 5 view .LVU126
+ 486 000e 1048     		ldr	r0, .L22+4
+ 487 0010 FFF7FEFF 		bl	puts
+ 488              	.LVL31:
+ 357:Core/Src/main.c ****     printf("Waiting for the EM data from Sender Task!!\r\n");
+ 489              		.loc 1 357 5 view .LVU127
+ 490 0014 0F48     		ldr	r0, .L22+8
+ 491 0016 FFF7FEFF 		bl	puts
+ 492              	.LVL32:
+ 358:Core/Src/main.c ****     event = osMessageGet(EM_Data_Queue_Id, osWaitForever);
+ 493              		.loc 1 358 5 view .LVU128
+ 494              		.loc 1 358 13 is_stmt 0 view .LVU129
+ 495 001a 4FF0FF32 		mov	r2, #-1
+ 496 001e 0E4B     		ldr	r3, .L22+12
+ 497 0020 1968     		ldr	r1, [r3]
+ 498 0022 01A8     		add	r0, sp, #4
+ 499 0024 FFF7FEFF 		bl	osMessageGet
+ 500              	.LVL33:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 25
 
 
- 592              		.loc 1 348 6 view .LVU163
- 593 0004 034B     		ldr	r3, .L30
- 594 0006 9A42     		cmp	r2, r3
- 595 0008 00D0     		beq	.L29
- 596              	.LVL34:
- 597              	.L26:
- 349:Core/Src/main.c ****   {
- 350:Core/Src/main.c ****     HAL_IncTick();
- 351:Core/Src/main.c ****   }
- 352:Core/Src/main.c ****   /* USER CODE BEGIN Callback 1 */
- 353:Core/Src/main.c **** 
- 354:Core/Src/main.c ****   /* USER CODE END Callback 1 */
- 355:Core/Src/main.c **** }
- 598              		.loc 1 355 1 view .LVU164
- 599 000a 08BD     		pop	{r3, pc}
- 600              	.LVL35:
- 601              	.L29:
- 350:Core/Src/main.c ****   }
- 602              		.loc 1 350 5 is_stmt 1 view .LVU165
- 603 000c FFF7FEFF 		bl	HAL_IncTick
- 604              	.LVL36:
- 605              		.loc 1 355 1 is_stmt 0 view .LVU166
- 606 0010 FBE7     		b	.L26
- 607              	.L31:
- 608 0012 00BF     		.align	2
- 609              	.L30:
- 610 0014 00480140 		.word	1073825792
- 611              		.cfi_endproc
- 612              	.LFE857:
- 614              		.section	.rodata.fnCMSIS1_Thread_Config_Assert.str1.4,"aMS",%progbits,1
- 615              		.align	2
- 616              	.LC7:
- 617 0000 54687265 		.ascii	"Thread could not be created due to insuffient heap "
- 617      61642063 
- 617      6F756C64 
- 617      206E6F74 
- 617      20626520 
- 618 0033 73706163 		.ascii	"space during pvPortMalloc\015\000"
- 618      65206475 
- 618      72696E67 
- 618      20707650 
- 618      6F72744D 
- 619              		.section	.text.fnCMSIS1_Thread_Config_Assert,"ax",%progbits
- 620              		.align	1
- 621              		.global	fnCMSIS1_Thread_Config_Assert
- 622              		.syntax unified
- 623              		.thumb
- 624              		.thumb_func
- 626              	fnCMSIS1_Thread_Config_Assert:
- 627              	.LVL37:
- 628              	.LFB858:
- 356:Core/Src/main.c **** 
- 357:Core/Src/main.c **** void fnCMSIS1_Thread_Config_Assert(osThreadId osThreadHandler)
- 358:Core/Src/main.c **** {
- 629              		.loc 1 358 1 is_stmt 1 view -0
- 630              		.cfi_startproc
- 631              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 28
+ 359:Core/Src/main.c ****     if (event.status == osEventMessage)
+ 501              		.loc 1 359 5 is_stmt 1 view .LVU130
+ 502              		.loc 1 359 14 is_stmt 0 view .LVU131
+ 503 0028 019B     		ldr	r3, [sp, #4]
+ 504              		.loc 1 359 8 view .LVU132
+ 505 002a 102B     		cmp	r3, #16
+ 506 002c EAD1     		bne	.L19
+ 360:Core/Src/main.c ****     {
+ 361:Core/Src/main.c ****       pStructRxEMData = (EMData_t *)event.value.p;
+ 507              		.loc 1 361 7 is_stmt 1 view .LVU133
+ 508              		.loc 1 361 23 is_stmt 0 view .LVU134
+ 509 002e 029B     		ldr	r3, [sp, #8]
+ 510              	.LVL34:
+ 362:Core/Src/main.c ****       printf("PhaseB Voltage: %d\n PhaseB Current: %d\r\n", (int)pStructRxEMData->fVoltage_phb, (in
+ 511              		.loc 1 362 7 is_stmt 1 view .LVU135
+ 512              		.loc 1 362 81 is_stmt 0 view .LVU136
+ 513 0030 5D68     		ldr	r5, [r3, #4]	@ float
+ 514              		.loc 1 362 7 view .LVU137
+ 515 0032 1869     		ldr	r0, [r3, #16]	@ float
+ 516 0034 FFF7FEFF 		bl	__aeabi_f2iz
+ 517              	.LVL35:
+ 518              		.loc 1 362 7 view .LVU138
+ 519 0038 0446     		mov	r4, r0
+ 520 003a 2846     		mov	r0, r5
+ 521 003c FFF7FEFF 		bl	__aeabi_f2iz
+ 522              	.LVL36:
+ 523 0040 0146     		mov	r1, r0
+ 524 0042 2246     		mov	r2, r4
+ 525 0044 0548     		ldr	r0, .L22+16
+ 526 0046 FFF7FEFF 		bl	printf
+ 527              	.LVL37:
+ 528 004a DBE7     		b	.L19
+ 529              	.L23:
+ 530              		.align	2
+ 531              	.L22:
+ 532 004c 00040048 		.word	1207960576
+ 533 0050 00000000 		.word	.LC7
+ 534 0054 24000000 		.word	.LC5
+ 535 0058 00000000 		.word	.LANCHOR0
+ 536 005c 24000000 		.word	.LC8
+ 537              		.cfi_endproc
+ 538              	.LFE857:
+ 540              		.section	.text.SystemClock_Config,"ax",%progbits
+ 541              		.align	1
+ 542              		.global	SystemClock_Config
+ 543              		.syntax unified
+ 544              		.thumb
+ 545              		.thumb_func
+ 547              	SystemClock_Config:
+ 548              	.LFB853:
+ 187:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 549              		.loc 1 187 1 is_stmt 1 view -0
+ 550              		.cfi_startproc
+ 551              		@ args = 0, pretend = 0, frame = 104
+ 552              		@ frame_needed = 0, uses_anonymous_args = 0
+ 553 0000 00B5     		push	{lr}
+ 554              	.LCFI9:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 26
 
 
- 632              		@ frame_needed = 0, uses_anonymous_args = 0
- 359:Core/Src/main.c ****   if (osThreadHandler == NULL)
- 633              		.loc 1 359 3 view .LVU168
- 634              		.loc 1 359 6 is_stmt 0 view .LVU169
- 635 0000 00B1     		cbz	r0, .L38
- 636 0002 7047     		bx	lr
- 637              	.L38:
- 358:Core/Src/main.c ****   if (osThreadHandler == NULL)
- 638              		.loc 1 358 1 view .LVU170
- 639 0004 08B5     		push	{r3, lr}
- 640              	.LCFI12:
- 641              		.cfi_def_cfa_offset 8
- 642              		.cfi_offset 3, -8
- 643              		.cfi_offset 14, -4
- 360:Core/Src/main.c ****   {
- 361:Core/Src/main.c ****     printf("Thread could not be created due to insuffient heap space during pvPortMalloc\r\n");
- 644              		.loc 1 361 5 is_stmt 1 view .LVU171
- 645 0006 0348     		ldr	r0, .L39
- 646              	.LVL38:
- 647              		.loc 1 361 5 is_stmt 0 view .LVU172
- 648 0008 FFF7FEFF 		bl	puts
- 649              	.LVL39:
- 362:Core/Src/main.c ****     Error_Handler();
- 650              		.loc 1 362 5 is_stmt 1 view .LVU173
- 651 000c FFF7FEFF 		bl	Error_Handler
- 652              	.LVL40:
- 363:Core/Src/main.c ****   }
- 364:Core/Src/main.c **** }
- 653              		.loc 1 364 1 is_stmt 0 view .LVU174
- 654 0010 08BD     		pop	{r3, pc}
- 655              	.L40:
- 656 0012 00BF     		.align	2
- 657              	.L39:
- 658 0014 00000000 		.word	.LC7
- 659              		.cfi_endproc
- 660              	.LFE858:
- 662              		.section	.rodata.main.str1.4,"aMS",%progbits,1
- 663              		.align	2
- 664              	.LC8:
- 665 0000 5461736B 		.ascii	"Task could not be creared sucessfully!!\000"
- 665      20636F75 
- 665      6C64206E 
- 665      6F742062 
- 665      65206372 
- 666              		.align	2
- 667              	.LC9:
- 668 0028 51756575 		.ascii	"Queue could not be created!!\015\000"
- 668      6520636F 
- 668      756C6420 
- 668      6E6F7420 
- 668      62652063 
- 669              		.section	.text.main,"ax",%progbits
- 670              		.align	1
- 671              		.global	main
- 672              		.syntax unified
- 673              		.thumb
- 674              		.thumb_func
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 29
+ 555              		.cfi_def_cfa_offset 4
+ 556              		.cfi_offset 14, -4
+ 557 0002 9BB0     		sub	sp, sp, #108
+ 558              	.LCFI10:
+ 559              		.cfi_def_cfa_offset 112
+ 188:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 560              		.loc 1 188 3 view .LVU140
+ 188:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 561              		.loc 1 188 22 is_stmt 0 view .LVU141
+ 562 0004 4822     		movs	r2, #72
+ 563 0006 0021     		movs	r1, #0
+ 564 0008 08A8     		add	r0, sp, #32
+ 565 000a FFF7FEFF 		bl	memset
+ 566              	.LVL38:
+ 189:Core/Src/main.c **** 
+ 567              		.loc 1 189 3 is_stmt 1 view .LVU142
+ 189:Core/Src/main.c **** 
+ 568              		.loc 1 189 22 is_stmt 0 view .LVU143
+ 569 000e 0023     		movs	r3, #0
+ 570 0010 0193     		str	r3, [sp, #4]
+ 571 0012 0293     		str	r3, [sp, #8]
+ 572 0014 0393     		str	r3, [sp, #12]
+ 573 0016 0493     		str	r3, [sp, #16]
+ 574 0018 0593     		str	r3, [sp, #20]
+ 575 001a 0693     		str	r3, [sp, #24]
+ 576 001c 0793     		str	r3, [sp, #28]
+ 193:Core/Src/main.c **** 
+ 577              		.loc 1 193 3 is_stmt 1 view .LVU144
+ 578              	.LBB14:
+ 193:Core/Src/main.c **** 
+ 579              		.loc 1 193 3 view .LVU145
+ 193:Core/Src/main.c **** 
+ 580              		.loc 1 193 3 view .LVU146
+ 581 001e 1649     		ldr	r1, .L30
+ 582 0020 0A68     		ldr	r2, [r1]
+ 583 0022 22F4C062 		bic	r2, r2, #1536
+ 584 0026 42F48062 		orr	r2, r2, #1024
+ 585 002a 0A60     		str	r2, [r1]
+ 193:Core/Src/main.c **** 
+ 586              		.loc 1 193 3 view .LVU147
+ 587 002c 0A68     		ldr	r2, [r1]
+ 588 002e 02F4C062 		and	r2, r2, #1536
+ 589 0032 0092     		str	r2, [sp]
+ 193:Core/Src/main.c **** 
+ 590              		.loc 1 193 3 view .LVU148
+ 591 0034 009A     		ldr	r2, [sp]
+ 592              	.LBE14:
+ 193:Core/Src/main.c **** 
+ 593              		.loc 1 193 3 view .LVU149
+ 197:Core/Src/main.c ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+ 594              		.loc 1 197 3 view .LVU150
+ 197:Core/Src/main.c ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+ 595              		.loc 1 197 36 is_stmt 0 view .LVU151
+ 596 0036 2022     		movs	r2, #32
+ 597 0038 0892     		str	r2, [sp, #32]
+ 198:Core/Src/main.c ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
+ 598              		.loc 1 198 3 is_stmt 1 view .LVU152
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 27
 
 
- 676              	main:
- 677              	.LFB852:
-  87:Core/Src/main.c **** 
- 678              		.loc 1 87 1 is_stmt 1 view -0
- 679              		.cfi_startproc
- 680              		@ args = 0, pretend = 0, frame = 0
- 681              		@ frame_needed = 0, uses_anonymous_args = 0
- 682 0000 08B5     		push	{r3, lr}
- 683              	.LCFI13:
- 684              		.cfi_def_cfa_offset 8
- 685              		.cfi_offset 3, -8
- 686              		.cfi_offset 14, -4
-  96:Core/Src/main.c **** 
- 687              		.loc 1 96 3 view .LVU176
- 688 0002 FFF7FEFF 		bl	HAL_Init
- 689              	.LVL41:
- 103:Core/Src/main.c **** 
- 690              		.loc 1 103 3 view .LVU177
- 691 0006 FFF7FEFF 		bl	SystemClock_Config
- 692              	.LVL42:
- 110:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
- 693              		.loc 1 110 3 view .LVU178
- 694 000a FFF7FEFF 		bl	MX_GPIO_Init
- 695              	.LVL43:
- 135:Core/Src/main.c ****   if (SenderTaskID == NULL)
- 696              		.loc 1 135 3 view .LVU179
- 135:Core/Src/main.c ****   if (SenderTaskID == NULL)
- 697              		.loc 1 135 18 is_stmt 0 view .LVU180
- 698 000e 0021     		movs	r1, #0
- 699 0010 1148     		ldr	r0, .L48
- 700 0012 FFF7FEFF 		bl	osThreadCreate
- 701              	.LVL44:
- 135:Core/Src/main.c ****   if (SenderTaskID == NULL)
- 702              		.loc 1 135 16 view .LVU181
- 703 0016 114B     		ldr	r3, .L48+4
- 704 0018 1860     		str	r0, [r3]
- 136:Core/Src/main.c ****   {
- 705              		.loc 1 136 3 is_stmt 1 view .LVU182
- 136:Core/Src/main.c ****   {
- 706              		.loc 1 136 6 is_stmt 0 view .LVU183
- 707 001a 88B1     		cbz	r0, .L46
- 708              	.L42:
- 142:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(ReceiverTaskID);
- 709              		.loc 1 142 3 is_stmt 1 view .LVU184
- 142:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(ReceiverTaskID);
- 710              		.loc 1 142 20 is_stmt 0 view .LVU185
- 711 001c 0021     		movs	r1, #0
- 712 001e 1048     		ldr	r0, .L48+8
- 713 0020 FFF7FEFF 		bl	osThreadCreate
- 714              	.LVL45:
- 142:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(ReceiverTaskID);
- 715              		.loc 1 142 18 view .LVU186
- 716 0024 0F4B     		ldr	r3, .L48+12
- 717 0026 1860     		str	r0, [r3]
- 143:Core/Src/main.c **** 
- 718              		.loc 1 143 3 is_stmt 1 view .LVU187
- 719 0028 FFF7FEFF 		bl	fnCMSIS1_Thread_Config_Assert
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 30
+ 198:Core/Src/main.c ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
+ 599              		.loc 1 198 30 is_stmt 0 view .LVU153
+ 600 003a 0122     		movs	r2, #1
+ 601 003c 1092     		str	r2, [sp, #64]
+ 199:Core/Src/main.c ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+ 602              		.loc 1 199 3 is_stmt 1 view .LVU154
+ 199:Core/Src/main.c ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+ 603              		.loc 1 199 41 is_stmt 0 view .LVU155
+ 604 003e 1193     		str	r3, [sp, #68]
+ 200:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+ 605              		.loc 1 200 3 is_stmt 1 view .LVU156
+ 200:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+ 606              		.loc 1 200 35 is_stmt 0 view .LVU157
+ 607 0040 6022     		movs	r2, #96
+ 608 0042 1292     		str	r2, [sp, #72]
+ 201:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 609              		.loc 1 201 3 is_stmt 1 view .LVU158
+ 201:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 610              		.loc 1 201 34 is_stmt 0 view .LVU159
+ 611 0044 1393     		str	r3, [sp, #76]
+ 202:Core/Src/main.c ****   {
+ 612              		.loc 1 202 3 is_stmt 1 view .LVU160
+ 202:Core/Src/main.c ****   {
+ 613              		.loc 1 202 7 is_stmt 0 view .LVU161
+ 614 0046 08A8     		add	r0, sp, #32
+ 615 0048 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 616              	.LVL39:
+ 202:Core/Src/main.c ****   {
+ 617              		.loc 1 202 6 view .LVU162
+ 618 004c 70B9     		cbnz	r0, .L28
+ 619              	.L25:
+ 209:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+ 620              		.loc 1 209 3 is_stmt 1 view .LVU163
+ 209:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+ 621              		.loc 1 209 31 is_stmt 0 view .LVU164
+ 622 004e 4F23     		movs	r3, #79
+ 623 0050 0193     		str	r3, [sp, #4]
+ 210:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 624              		.loc 1 210 3 is_stmt 1 view .LVU165
+ 210:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 625              		.loc 1 210 34 is_stmt 0 view .LVU166
+ 626 0052 0021     		movs	r1, #0
+ 627 0054 0291     		str	r1, [sp, #8]
+ 211:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 628              		.loc 1 211 3 is_stmt 1 view .LVU167
+ 211:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 629              		.loc 1 211 35 is_stmt 0 view .LVU168
+ 630 0056 0391     		str	r1, [sp, #12]
+ 212:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 631              		.loc 1 212 3 is_stmt 1 view .LVU169
+ 212:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 632              		.loc 1 212 36 is_stmt 0 view .LVU170
+ 633 0058 0491     		str	r1, [sp, #16]
+ 213:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLK3Divider = RCC_SYSCLK_DIV1;
+ 634              		.loc 1 213 3 is_stmt 1 view .LVU171
+ 213:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLK3Divider = RCC_SYSCLK_DIV1;
+ 635              		.loc 1 213 36 is_stmt 0 view .LVU172
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 28
 
 
- 720              	.LVL46:
- 146:Core/Src/main.c ****   EM_Data_Queue_Id = osMessageCreate(osMessageQ(EM_Data_Queue), osMessageQueueSendThreadID);
- 721              		.loc 1 146 3 view .LVU188
- 147:Core/Src/main.c ****   if (EM_Data_Queue_Id == NULL)
- 722              		.loc 1 147 3 view .LVU189
- 147:Core/Src/main.c ****   if (EM_Data_Queue_Id == NULL)
- 723              		.loc 1 147 22 is_stmt 0 view .LVU190
- 724 002c 0021     		movs	r1, #0
- 725 002e 0E48     		ldr	r0, .L48+16
- 726 0030 FFF7FEFF 		bl	osMessageCreate
- 727              	.LVL47:
- 147:Core/Src/main.c ****   if (EM_Data_Queue_Id == NULL)
- 728              		.loc 1 147 20 view .LVU191
- 729 0034 0D4B     		ldr	r3, .L48+20
- 730 0036 1860     		str	r0, [r3]
- 148:Core/Src/main.c ****   {
- 731              		.loc 1 148 3 is_stmt 1 view .LVU192
- 148:Core/Src/main.c ****   {
- 732              		.loc 1 148 6 is_stmt 0 view .LVU193
- 733 0038 40B1     		cbz	r0, .L47
- 734              	.L43:
- 158:Core/Src/main.c **** 
- 735              		.loc 1 158 3 is_stmt 1 view .LVU194
- 736 003a FFF7FEFF 		bl	osKernelStart
- 737              	.LVL48:
- 738              	.L44:
- 164:Core/Src/main.c ****   {
- 739              		.loc 1 164 3 discriminator 1 view .LVU195
- 169:Core/Src/main.c ****   /* USER CODE END 3 */
- 740              		.loc 1 169 3 discriminator 1 view .LVU196
- 164:Core/Src/main.c ****   {
- 741              		.loc 1 164 9 discriminator 1 view .LVU197
- 742 003e FEE7     		b	.L44
- 743              	.LVL49:
- 744              	.L46:
- 138:Core/Src/main.c ****     Error_Handler();
- 745              		.loc 1 138 5 view .LVU198
- 746 0040 0B48     		ldr	r0, .L48+24
- 747 0042 FFF7FEFF 		bl	printf
- 748              	.LVL50:
- 139:Core/Src/main.c ****   }
- 749              		.loc 1 139 5 view .LVU199
- 750 0046 FFF7FEFF 		bl	Error_Handler
- 751              	.LVL51:
- 752 004a E7E7     		b	.L42
- 753              	.LVL52:
- 754              	.L47:
- 150:Core/Src/main.c ****     Error_Handler();
- 755              		.loc 1 150 5 view .LVU200
- 756 004c 0948     		ldr	r0, .L48+28
- 757 004e FFF7FEFF 		bl	puts
- 758              	.LVL53:
- 151:Core/Src/main.c ****   }
- 759              		.loc 1 151 5 view .LVU201
- 760 0052 FFF7FEFF 		bl	Error_Handler
- 761              	.LVL54:
- 762 0056 F0E7     		b	.L43
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 31
+ 636 005a 0591     		str	r1, [sp, #20]
+ 214:Core/Src/main.c **** 
+ 637              		.loc 1 214 3 is_stmt 1 view .LVU173
+ 214:Core/Src/main.c **** 
+ 638              		.loc 1 214 36 is_stmt 0 view .LVU174
+ 639 005c 0791     		str	r1, [sp, #28]
+ 216:Core/Src/main.c ****   {
+ 640              		.loc 1 216 3 is_stmt 1 view .LVU175
+ 216:Core/Src/main.c ****   {
+ 641              		.loc 1 216 7 is_stmt 0 view .LVU176
+ 642 005e 01A8     		add	r0, sp, #4
+ 643 0060 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 644              	.LVL40:
+ 216:Core/Src/main.c ****   {
+ 645              		.loc 1 216 6 view .LVU177
+ 646 0064 28B9     		cbnz	r0, .L29
+ 647              	.L24:
+ 220:Core/Src/main.c **** 
+ 648              		.loc 1 220 1 view .LVU178
+ 649 0066 1BB0     		add	sp, sp, #108
+ 650              	.LCFI11:
+ 651              		.cfi_remember_state
+ 652              		.cfi_def_cfa_offset 4
+ 653              		@ sp needed
+ 654 0068 5DF804FB 		ldr	pc, [sp], #4
+ 655              	.L28:
+ 656              	.LCFI12:
+ 657              		.cfi_restore_state
+ 204:Core/Src/main.c ****   }
+ 658              		.loc 1 204 5 is_stmt 1 view .LVU179
+ 659 006c FFF7FEFF 		bl	Error_Handler
+ 660              	.LVL41:
+ 661 0070 EDE7     		b	.L25
+ 662              	.L29:
+ 218:Core/Src/main.c ****   }
+ 663              		.loc 1 218 5 view .LVU180
+ 664 0072 FFF7FEFF 		bl	Error_Handler
+ 665              	.LVL42:
+ 220:Core/Src/main.c **** 
+ 666              		.loc 1 220 1 is_stmt 0 view .LVU181
+ 667 0076 F6E7     		b	.L24
+ 668              	.L31:
+ 669              		.align	2
+ 670              	.L30:
+ 671 0078 00040058 		.word	1476396032
+ 672              		.cfi_endproc
+ 673              	.LFE853:
+ 675              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
+ 676              		.align	1
+ 677              		.global	HAL_TIM_PeriodElapsedCallback
+ 678              		.syntax unified
+ 679              		.thumb
+ 680              		.thumb_func
+ 682              	HAL_TIM_PeriodElapsedCallback:
+ 683              	.LVL43:
+ 684              	.LFB858:
+ 363:Core/Src/main.c ****     }
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 29
 
 
- 763              	.L49:
- 764              		.align	2
- 765              	.L48:
- 766 0058 00000000 		.word	.LANCHOR1
- 767 005c 00000000 		.word	.LANCHOR2
- 768 0060 00000000 		.word	.LANCHOR3
- 769 0064 00000000 		.word	.LANCHOR4
- 770 0068 00000000 		.word	.LANCHOR5
- 771 006c 00000000 		.word	.LANCHOR0
- 772 0070 00000000 		.word	.LC8
- 773 0074 28000000 		.word	.LC9
- 774              		.cfi_endproc
- 775              	.LFE852:
- 777              		.global	EM_Data_Queue_Id
- 778              		.global	os_messageQ_def_EM_Data_Queue
- 779              		.global	os_thread_def_CMSIS1_Receiver_Task
- 780              		.section	.rodata.str1.4,"aMS",%progbits,1
- 781              		.align	2
- 782              	.LC10:
- 783 0000 434D5349 		.ascii	"CMSIS1_Receiver_Task\000"
- 783      53315F52 
- 783      65636569 
- 783      7665725F 
- 783      5461736B 
- 784              		.global	ReceiverTaskID
- 785              		.global	os_thread_def_CMSIS1_Sender_Task
- 786 0015 000000   		.align	2
- 787              	.LC11:
- 788 0018 434D5349 		.ascii	"CMSIS1_Sender_Task\000"
- 788      53315F53 
- 788      656E6465 
- 788      725F5461 
- 788      736B00
- 789              		.global	SenderTaskID
- 790              		.global	pStructEMData
- 791              		.section	.bss.EM_Data_Queue_Id,"aw",%nobits
- 792              		.align	2
- 793              		.set	.LANCHOR0,. + 0
- 796              	EM_Data_Queue_Id:
- 797 0000 00000000 		.space	4
- 798              		.section	.bss.ReceiverTaskID,"aw",%nobits
- 799              		.align	2
- 800              		.set	.LANCHOR4,. + 0
- 803              	ReceiverTaskID:
- 804 0000 00000000 		.space	4
- 805              		.section	.bss.SenderTaskID,"aw",%nobits
- 806              		.align	2
- 807              		.set	.LANCHOR2,. + 0
- 810              	SenderTaskID:
- 811 0000 00000000 		.space	4
- 812              		.section	.bss.pStructEMData,"aw",%nobits
- 813              		.align	2
- 816              	pStructEMData:
- 817 0000 00000000 		.space	4
- 818              		.section	.rodata.os_messageQ_def_EM_Data_Queue,"a"
- 819              		.align	2
- 820              		.set	.LANCHOR5,. + 0
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 32
+ 364:Core/Src/main.c ****   }
+ 365:Core/Src/main.c **** }
+ 366:Core/Src/main.c **** /**
+ 367:Core/Src/main.c ****  * @brief  Period elapsed callback in non blocking mode
+ 368:Core/Src/main.c ****  * @note   This function is called  when TIM17 interrupt took place, inside
+ 369:Core/Src/main.c ****  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+ 370:Core/Src/main.c ****  * a global variable "uwTick" used as application time base.
+ 371:Core/Src/main.c ****  * @param  htim : TIM handle
+ 372:Core/Src/main.c ****  * @retval None
+ 373:Core/Src/main.c ****  */
+ 374:Core/Src/main.c **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ 375:Core/Src/main.c **** {
+ 685              		.loc 1 375 1 is_stmt 1 view -0
+ 686              		.cfi_startproc
+ 687              		@ args = 0, pretend = 0, frame = 0
+ 688              		@ frame_needed = 0, uses_anonymous_args = 0
+ 689              		.loc 1 375 1 is_stmt 0 view .LVU183
+ 690 0000 08B5     		push	{r3, lr}
+ 691              	.LCFI13:
+ 692              		.cfi_def_cfa_offset 8
+ 693              		.cfi_offset 3, -8
+ 694              		.cfi_offset 14, -4
+ 376:Core/Src/main.c ****   /* USER CODE BEGIN Callback 0 */
+ 377:Core/Src/main.c **** 
+ 378:Core/Src/main.c ****   /* USER CODE END Callback 0 */
+ 379:Core/Src/main.c ****   if (htim->Instance == TIM17)
+ 695              		.loc 1 379 3 is_stmt 1 view .LVU184
+ 696              		.loc 1 379 11 is_stmt 0 view .LVU185
+ 697 0002 0268     		ldr	r2, [r0]
+ 698              		.loc 1 379 6 view .LVU186
+ 699 0004 034B     		ldr	r3, .L36
+ 700 0006 9A42     		cmp	r2, r3
+ 701 0008 00D0     		beq	.L35
+ 702              	.LVL44:
+ 703              	.L32:
+ 380:Core/Src/main.c ****   {
+ 381:Core/Src/main.c ****     HAL_IncTick();
+ 382:Core/Src/main.c ****   }
+ 383:Core/Src/main.c ****   /* USER CODE BEGIN Callback 1 */
+ 384:Core/Src/main.c **** 
+ 385:Core/Src/main.c ****   /* USER CODE END Callback 1 */
+ 386:Core/Src/main.c **** }
+ 704              		.loc 1 386 1 view .LVU187
+ 705 000a 08BD     		pop	{r3, pc}
+ 706              	.LVL45:
+ 707              	.L35:
+ 381:Core/Src/main.c ****   }
+ 708              		.loc 1 381 5 is_stmt 1 view .LVU188
+ 709 000c FFF7FEFF 		bl	HAL_IncTick
+ 710              	.LVL46:
+ 711              		.loc 1 386 1 is_stmt 0 view .LVU189
+ 712 0010 FBE7     		b	.L32
+ 713              	.L37:
+ 714 0012 00BF     		.align	2
+ 715              	.L36:
+ 716 0014 00480140 		.word	1073825792
+ 717              		.cfi_endproc
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 30
 
 
- 823              	os_messageQ_def_EM_Data_Queue:
- 824 0000 02000000 		.word	2
- 825 0004 04000000 		.word	4
- 826 0008 00000000 		.word	0
- 827 000c 00000000 		.word	0
- 828              		.section	.rodata.os_thread_def_CMSIS1_Receiver_Task,"a"
- 829              		.align	2
- 830              		.set	.LANCHOR3,. + 0
- 833              	os_thread_def_CMSIS1_Receiver_Task:
- 834 0000 00000000 		.word	.LC10
- 835 0004 00000000 		.word	fnRTOSMessageReceiverTask
- 836 0008 0100     		.short	1
- 837 000a 0000     		.space	2
- 838 000c 01000000 		.word	1
- 839 0010 00010000 		.word	256
- 840 0014 00000000 		.word	0
- 841 0018 00000000 		.word	0
- 842              		.section	.rodata.os_thread_def_CMSIS1_Sender_Task,"a"
- 843              		.align	2
- 844              		.set	.LANCHOR1,. + 0
- 847              	os_thread_def_CMSIS1_Sender_Task:
- 848 0000 18000000 		.word	.LC11
- 849 0004 00000000 		.word	fnRTOSMessageSendTask
- 850 0008 0000     		.short	0
- 851 000a 0000     		.space	2
- 852 000c 01000000 		.word	1
- 853 0010 00010000 		.word	256
- 854 0014 00000000 		.word	0
- 855 0018 00000000 		.word	0
- 856              		.text
- 857              	.Letext0:
- 858              		.file 3 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
- 859              		.file 4 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
- 860              		.file 5 "Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wl55xx.h"
- 861              		.file 6 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_def.h"
- 862              		.file 7 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_dma.h"
- 863              		.file 8 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_gpio.h"
- 864              		.file 9 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_rcc.h"
- 865              		.file 10 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_tim.h"
- 866              		.file 11 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h"
- 867              		.file 12 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
- 868              		.file 13 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
- 869              		.file 14 "Middlewares/Third_Party/FreeRTOS/Source/include/queue.h"
- 870              		.file 15 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
- 871              		.file 16 "Core/Inc/FreeRTOS_Var.h"
- 872              		.file 17 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
- 873              		.file 18 "Core/Inc/main.h"
- 874              		.file 19 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal.h"
- 875              		.file 20 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-1
- 876              		.file 21 "<built-in>"
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 33
+ 718              	.LFE858:
+ 720              		.section	.rodata.fnCMSIS1_Thread_Config_Assert.str1.4,"aMS",%progbits,1
+ 721              		.align	2
+ 722              	.LC9:
+ 723 0000 54687265 		.ascii	"Thread could not be created due to insuffient heap "
+ 723      61642063 
+ 723      6F756C64 
+ 723      206E6F74 
+ 723      20626520 
+ 724 0033 73706163 		.ascii	"space during pvPortMalloc\015\000"
+ 724      65206475 
+ 724      72696E67 
+ 724      20707650 
+ 724      6F72744D 
+ 725              		.section	.text.fnCMSIS1_Thread_Config_Assert,"ax",%progbits
+ 726              		.align	1
+ 727              		.global	fnCMSIS1_Thread_Config_Assert
+ 728              		.syntax unified
+ 729              		.thumb
+ 730              		.thumb_func
+ 732              	fnCMSIS1_Thread_Config_Assert:
+ 733              	.LVL47:
+ 734              	.LFB859:
+ 387:Core/Src/main.c **** 
+ 388:Core/Src/main.c **** void fnCMSIS1_Thread_Config_Assert(osThreadId osThreadHandler)
+ 389:Core/Src/main.c **** {
+ 735              		.loc 1 389 1 is_stmt 1 view -0
+ 736              		.cfi_startproc
+ 737              		@ args = 0, pretend = 0, frame = 0
+ 738              		@ frame_needed = 0, uses_anonymous_args = 0
+ 390:Core/Src/main.c ****   if (osThreadHandler == NULL)
+ 739              		.loc 1 390 3 view .LVU191
+ 740              		.loc 1 390 6 is_stmt 0 view .LVU192
+ 741 0000 00B1     		cbz	r0, .L44
+ 742 0002 7047     		bx	lr
+ 743              	.L44:
+ 389:Core/Src/main.c ****   if (osThreadHandler == NULL)
+ 744              		.loc 1 389 1 view .LVU193
+ 745 0004 08B5     		push	{r3, lr}
+ 746              	.LCFI14:
+ 747              		.cfi_def_cfa_offset 8
+ 748              		.cfi_offset 3, -8
+ 749              		.cfi_offset 14, -4
+ 391:Core/Src/main.c ****   {
+ 392:Core/Src/main.c ****     printf("Thread could not be created due to insuffient heap space during pvPortMalloc\r\n");
+ 750              		.loc 1 392 5 is_stmt 1 view .LVU194
+ 751 0006 0348     		ldr	r0, .L45
+ 752              	.LVL48:
+ 753              		.loc 1 392 5 is_stmt 0 view .LVU195
+ 754 0008 FFF7FEFF 		bl	puts
+ 755              	.LVL49:
+ 393:Core/Src/main.c ****     Error_Handler();
+ 756              		.loc 1 393 5 is_stmt 1 view .LVU196
+ 757 000c FFF7FEFF 		bl	Error_Handler
+ 758              	.LVL50:
+ 394:Core/Src/main.c ****   }
+ 395:Core/Src/main.c **** }
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 31
+
+
+ 759              		.loc 1 395 1 is_stmt 0 view .LVU197
+ 760 0010 08BD     		pop	{r3, pc}
+ 761              	.L46:
+ 762 0012 00BF     		.align	2
+ 763              	.L45:
+ 764 0014 00000000 		.word	.LC9
+ 765              		.cfi_endproc
+ 766              	.LFE859:
+ 768              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 769              		.align	2
+ 770              	.LC10:
+ 771 0000 5461736B 		.ascii	"Task could not be creared sucessfully!!\000"
+ 771      20636F75 
+ 771      6C64206E 
+ 771      6F742062 
+ 771      65206372 
+ 772              		.align	2
+ 773              	.LC11:
+ 774 0028 51756575 		.ascii	"Queue could not be created!!\015\000"
+ 774      6520636F 
+ 774      756C6420 
+ 774      6E6F7420 
+ 774      62652063 
+ 775              		.section	.text.main,"ax",%progbits
+ 776              		.align	1
+ 777              		.global	main
+ 778              		.syntax unified
+ 779              		.thumb
+ 780              		.thumb_func
+ 782              	main:
+ 783              	.LFB852:
+  92:Core/Src/main.c **** 
+ 784              		.loc 1 92 1 is_stmt 1 view -0
+ 785              		.cfi_startproc
+ 786              		@ args = 0, pretend = 0, frame = 0
+ 787              		@ frame_needed = 0, uses_anonymous_args = 0
+ 788 0000 10B5     		push	{r4, lr}
+ 789              	.LCFI15:
+ 790              		.cfi_def_cfa_offset 8
+ 791              		.cfi_offset 4, -8
+ 792              		.cfi_offset 14, -4
+ 101:Core/Src/main.c **** 
+ 793              		.loc 1 101 3 view .LVU199
+ 794 0002 FFF7FEFF 		bl	HAL_Init
+ 795              	.LVL51:
+ 108:Core/Src/main.c **** 
+ 796              		.loc 1 108 3 view .LVU200
+ 797 0006 FFF7FEFF 		bl	SystemClock_Config
+ 798              	.LVL52:
+ 115:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
+ 799              		.loc 1 115 3 view .LVU201
+ 800 000a FFF7FEFF 		bl	MX_GPIO_Init
+ 801              	.LVL53:
+ 140:Core/Src/main.c ****   if (SenderTaskID == NULL)
+ 802              		.loc 1 140 3 view .LVU202
+ 140:Core/Src/main.c ****   if (SenderTaskID == NULL)
+ 803              		.loc 1 140 18 is_stmt 0 view .LVU203
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 32
+
+
+ 804 000e 0021     		movs	r1, #0
+ 805 0010 1548     		ldr	r0, .L54
+ 806 0012 FFF7FEFF 		bl	osThreadCreate
+ 807              	.LVL54:
+ 140:Core/Src/main.c ****   if (SenderTaskID == NULL)
+ 808              		.loc 1 140 16 view .LVU204
+ 809 0016 154B     		ldr	r3, .L54+4
+ 810 0018 1860     		str	r0, [r3]
+ 141:Core/Src/main.c ****   {
+ 811              		.loc 1 141 3 is_stmt 1 view .LVU205
+ 141:Core/Src/main.c ****   {
+ 812              		.loc 1 141 6 is_stmt 0 view .LVU206
+ 813 001a C8B1     		cbz	r0, .L52
+ 814              	.L48:
+ 147:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(Receiver1TaskID);
+ 815              		.loc 1 147 3 is_stmt 1 view .LVU207
+ 147:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(Receiver1TaskID);
+ 816              		.loc 1 147 21 is_stmt 0 view .LVU208
+ 817 001c 0021     		movs	r1, #0
+ 818 001e 1448     		ldr	r0, .L54+8
+ 819 0020 FFF7FEFF 		bl	osThreadCreate
+ 820              	.LVL55:
+ 147:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(Receiver1TaskID);
+ 821              		.loc 1 147 19 view .LVU209
+ 822 0024 134C     		ldr	r4, .L54+12
+ 823 0026 2060     		str	r0, [r4]
+ 148:Core/Src/main.c **** 
+ 824              		.loc 1 148 3 is_stmt 1 view .LVU210
+ 825 0028 FFF7FEFF 		bl	fnCMSIS1_Thread_Config_Assert
+ 826              	.LVL56:
+ 151:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(Receiver2TaskID);
+ 827              		.loc 1 151 3 view .LVU211
+ 151:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(Receiver2TaskID);
+ 828              		.loc 1 151 21 is_stmt 0 view .LVU212
+ 829 002c 0021     		movs	r1, #0
+ 830 002e 1248     		ldr	r0, .L54+16
+ 831 0030 FFF7FEFF 		bl	osThreadCreate
+ 832              	.LVL57:
+ 151:Core/Src/main.c ****   fnCMSIS1_Thread_Config_Assert(Receiver2TaskID);
+ 833              		.loc 1 151 19 view .LVU213
+ 834 0034 114B     		ldr	r3, .L54+20
+ 835 0036 1860     		str	r0, [r3]
+ 152:Core/Src/main.c **** 
+ 836              		.loc 1 152 3 is_stmt 1 view .LVU214
+ 837 0038 FFF7FEFF 		bl	fnCMSIS1_Thread_Config_Assert
+ 838              	.LVL58:
+ 155:Core/Src/main.c ****   EM_Data_Queue_Id = osMessageCreate(osMessageQ(EM_Data_Queue), osMessageQueueSendThreadID);
+ 839              		.loc 1 155 3 view .LVU215
+ 156:Core/Src/main.c ****   if (EM_Data_Queue_Id == NULL)
+ 840              		.loc 1 156 3 view .LVU216
+ 156:Core/Src/main.c ****   if (EM_Data_Queue_Id == NULL)
+ 841              		.loc 1 156 22 is_stmt 0 view .LVU217
+ 842 003c 2168     		ldr	r1, [r4]
+ 843 003e 1048     		ldr	r0, .L54+24
+ 844 0040 FFF7FEFF 		bl	osMessageCreate
+ 845              	.LVL59:
+ 156:Core/Src/main.c ****   if (EM_Data_Queue_Id == NULL)
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 33
+
+
+ 846              		.loc 1 156 20 view .LVU218
+ 847 0044 0F4B     		ldr	r3, .L54+28
+ 848 0046 1860     		str	r0, [r3]
+ 157:Core/Src/main.c ****   {
+ 849              		.loc 1 157 3 is_stmt 1 view .LVU219
+ 157:Core/Src/main.c ****   {
+ 850              		.loc 1 157 6 is_stmt 0 view .LVU220
+ 851 0048 40B1     		cbz	r0, .L53
+ 852              	.L49:
+ 167:Core/Src/main.c **** 
+ 853              		.loc 1 167 3 is_stmt 1 view .LVU221
+ 854 004a FFF7FEFF 		bl	osKernelStart
+ 855              	.LVL60:
+ 856              	.L50:
+ 173:Core/Src/main.c ****   {
+ 857              		.loc 1 173 3 discriminator 1 view .LVU222
+ 178:Core/Src/main.c ****   /* USER CODE END 3 */
+ 858              		.loc 1 178 3 discriminator 1 view .LVU223
+ 173:Core/Src/main.c ****   {
+ 859              		.loc 1 173 9 discriminator 1 view .LVU224
+ 860 004e FEE7     		b	.L50
+ 861              	.L52:
+ 143:Core/Src/main.c ****     Error_Handler();
+ 862              		.loc 1 143 5 view .LVU225
+ 863 0050 0D48     		ldr	r0, .L54+32
+ 864 0052 FFF7FEFF 		bl	printf
+ 865              	.LVL61:
+ 144:Core/Src/main.c ****   }
+ 866              		.loc 1 144 5 view .LVU226
+ 867 0056 FFF7FEFF 		bl	Error_Handler
+ 868              	.LVL62:
+ 869 005a DFE7     		b	.L48
+ 870              	.L53:
+ 159:Core/Src/main.c ****     Error_Handler();
+ 871              		.loc 1 159 5 view .LVU227
+ 872 005c 0B48     		ldr	r0, .L54+36
+ 873 005e FFF7FEFF 		bl	puts
+ 874              	.LVL63:
+ 160:Core/Src/main.c ****   }
+ 875              		.loc 1 160 5 view .LVU228
+ 876 0062 FFF7FEFF 		bl	Error_Handler
+ 877              	.LVL64:
+ 878 0066 F0E7     		b	.L49
+ 879              	.L55:
+ 880              		.align	2
+ 881              	.L54:
+ 882 0068 00000000 		.word	.LANCHOR1
+ 883 006c 00000000 		.word	.LANCHOR2
+ 884 0070 00000000 		.word	.LANCHOR3
+ 885 0074 00000000 		.word	.LANCHOR4
+ 886 0078 00000000 		.word	.LANCHOR5
+ 887 007c 00000000 		.word	.LANCHOR6
+ 888 0080 00000000 		.word	.LANCHOR7
+ 889 0084 00000000 		.word	.LANCHOR0
+ 890 0088 00000000 		.word	.LC10
+ 891 008c 28000000 		.word	.LC11
+ 892              		.cfi_endproc
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 34
+
+
+ 893              	.LFE852:
+ 895              		.global	EM_Data_Queue_Id
+ 896              		.global	os_messageQ_def_EM_Data_Queue
+ 897              		.global	os_thread_def_CMSIS1_Receiver2_Task
+ 898              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 899              		.align	2
+ 900              	.LC12:
+ 901 0000 434D5349 		.ascii	"CMSIS1_Receiver2_Task\000"
+ 901      53315F52 
+ 901      65636569 
+ 901      76657232 
+ 901      5F546173 
+ 902              		.global	Receiver2TaskID
+ 903              		.global	os_thread_def_CMSIS1_Receiver1_Task
+ 904 0016 0000     		.align	2
+ 905              	.LC13:
+ 906 0018 434D5349 		.ascii	"CMSIS1_Receiver1_Task\000"
+ 906      53315F52 
+ 906      65636569 
+ 906      76657231 
+ 906      5F546173 
+ 907              		.global	Receiver1TaskID
+ 908              		.global	os_thread_def_CMSIS1_Sender_Task
+ 909 002e 0000     		.align	2
+ 910              	.LC14:
+ 911 0030 434D5349 		.ascii	"CMSIS1_Sender_Task\000"
+ 911      53315F53 
+ 911      656E6465 
+ 911      725F5461 
+ 911      736B00
+ 912              		.global	SenderTaskID
+ 913              		.global	pStructEMData
+ 914              		.section	.bss.EM_Data_Queue_Id,"aw",%nobits
+ 915              		.align	2
+ 916              		.set	.LANCHOR0,. + 0
+ 919              	EM_Data_Queue_Id:
+ 920 0000 00000000 		.space	4
+ 921              		.section	.bss.Receiver1TaskID,"aw",%nobits
+ 922              		.align	2
+ 923              		.set	.LANCHOR4,. + 0
+ 926              	Receiver1TaskID:
+ 927 0000 00000000 		.space	4
+ 928              		.section	.bss.Receiver2TaskID,"aw",%nobits
+ 929              		.align	2
+ 930              		.set	.LANCHOR6,. + 0
+ 933              	Receiver2TaskID:
+ 934 0000 00000000 		.space	4
+ 935              		.section	.bss.SenderTaskID,"aw",%nobits
+ 936              		.align	2
+ 937              		.set	.LANCHOR2,. + 0
+ 940              	SenderTaskID:
+ 941 0000 00000000 		.space	4
+ 942              		.section	.bss.pStructEMData,"aw",%nobits
+ 943              		.align	2
+ 946              	pStructEMData:
+ 947 0000 00000000 		.space	4
+ 948              		.section	.rodata.os_messageQ_def_EM_Data_Queue,"a"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 35
+
+
+ 949              		.align	2
+ 950              		.set	.LANCHOR7,. + 0
+ 953              	os_messageQ_def_EM_Data_Queue:
+ 954 0000 02000000 		.word	2
+ 955 0004 04000000 		.word	4
+ 956 0008 00000000 		.word	0
+ 957 000c 00000000 		.word	0
+ 958              		.section	.rodata.os_thread_def_CMSIS1_Receiver1_Task,"a"
+ 959              		.align	2
+ 960              		.set	.LANCHOR3,. + 0
+ 963              	os_thread_def_CMSIS1_Receiver1_Task:
+ 964 0000 18000000 		.word	.LC13
+ 965 0004 00000000 		.word	fnRTOSMessageReceiver1Task
+ 966 0008 0100     		.short	1
+ 967 000a 0000     		.space	2
+ 968 000c 01000000 		.word	1
+ 969 0010 00010000 		.word	256
+ 970 0014 00000000 		.word	0
+ 971 0018 00000000 		.word	0
+ 972              		.section	.rodata.os_thread_def_CMSIS1_Receiver2_Task,"a"
+ 973              		.align	2
+ 974              		.set	.LANCHOR5,. + 0
+ 977              	os_thread_def_CMSIS1_Receiver2_Task:
+ 978 0000 00000000 		.word	.LC12
+ 979 0004 00000000 		.word	fnRTOSMessageReceiver2Task
+ 980 0008 0200     		.short	2
+ 981 000a 0000     		.space	2
+ 982 000c 01000000 		.word	1
+ 983 0010 00010000 		.word	256
+ 984 0014 00000000 		.word	0
+ 985 0018 00000000 		.word	0
+ 986              		.section	.rodata.os_thread_def_CMSIS1_Sender_Task,"a"
+ 987              		.align	2
+ 988              		.set	.LANCHOR1,. + 0
+ 991              	os_thread_def_CMSIS1_Sender_Task:
+ 992 0000 30000000 		.word	.LC14
+ 993 0004 00000000 		.word	fnRTOSMessageSendTask
+ 994 0008 0000     		.short	0
+ 995 000a 0000     		.space	2
+ 996 000c 01000000 		.word	1
+ 997 0010 00010000 		.word	256
+ 998 0014 00000000 		.word	0
+ 999 0018 00000000 		.word	0
+ 1000              		.text
+ 1001              	.Letext0:
+ 1002              		.file 3 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 1003              		.file 4 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 1004              		.file 5 "Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wl55xx.h"
+ 1005              		.file 6 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_def.h"
+ 1006              		.file 7 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_dma.h"
+ 1007              		.file 8 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_gpio.h"
+ 1008              		.file 9 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_rcc.h"
+ 1009              		.file 10 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_tim.h"
+ 1010              		.file 11 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h"
+ 1011              		.file 12 "Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h"
+ 1012              		.file 13 "Middlewares/Third_Party/FreeRTOS/Source/include/task.h"
+ 1013              		.file 14 "Middlewares/Third_Party/FreeRTOS/Source/include/queue.h"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 36
+
+
+ 1014              		.file 15 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
+ 1015              		.file 16 "Core/Inc/FreeRTOS_Var.h"
+ 1016              		.file 17 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
+ 1017              		.file 18 "Core/Inc/main.h"
+ 1018              		.file 19 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal.h"
+ 1019              		.file 20 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-1
+ 1020              		.file 21 "<built-in>"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 37
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:18     .text.MX_GPIO_Init:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:23     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:162    .text.MX_GPIO_Init:0000007c $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:167    .rodata.fnRTOSMessageSendTask.str1.4:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:182    .text.fnRTOSMessageSendTask:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:188    .text.fnRTOSMessageSendTask:00000000 fnRTOSMessageSendTask
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:317    .text.fnRTOSMessageSendTask:00000084 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:336    .rodata.fnRTOSMessageReceiverTask.str1.4:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:346    .text.fnRTOSMessageReceiverTask:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:352    .text.fnRTOSMessageReceiverTask:00000000 fnRTOSMessageReceiverTask
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:426    .text.fnRTOSMessageReceiverTask:0000004c $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:435    .text.SystemClock_Config:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:441    .text.SystemClock_Config:00000000 SystemClock_Config
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:565    .text.SystemClock_Config:00000078 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:570    .text.HAL_TIM_PeriodElapsedCallback:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:576    .text.HAL_TIM_PeriodElapsedCallback:00000000 HAL_TIM_PeriodElapsedCallback
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:610    .text.HAL_TIM_PeriodElapsedCallback:00000014 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:615    .rodata.fnCMSIS1_Thread_Config_Assert.str1.4:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:620    .text.fnCMSIS1_Thread_Config_Assert:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:626    .text.fnCMSIS1_Thread_Config_Assert:00000000 fnCMSIS1_Thread_Config_Assert
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:658    .text.fnCMSIS1_Thread_Config_Assert:00000014 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:663    .rodata.main.str1.4:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:670    .text.main:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:676    .text.main:00000000 main
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:766    .text.main:00000058 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:796    .bss.EM_Data_Queue_Id:00000000 EM_Data_Queue_Id
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:823    .rodata.os_messageQ_def_EM_Data_Queue:00000000 os_messageQ_def_EM_Data_Queue
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:833    .rodata.os_thread_def_CMSIS1_Receiver_Task:00000000 os_thread_def_CMSIS1_Receiver_Task
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:781    .rodata.str1.4:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:803    .bss.ReceiverTaskID:00000000 ReceiverTaskID
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:847    .rodata.os_thread_def_CMSIS1_Sender_Task:00000000 os_thread_def_CMSIS1_Sender_Task
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:810    .bss.SenderTaskID:00000000 SenderTaskID
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:816    .bss.pStructEMData:00000000 pStructEMData
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:792    .bss.EM_Data_Queue_Id:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:799    .bss.ReceiverTaskID:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:806    .bss.SenderTaskID:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:813    .bss.pStructEMData:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:819    .rodata.os_messageQ_def_EM_Data_Queue:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:829    .rodata.os_thread_def_CMSIS1_Receiver_Task:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s:843    .rodata.os_thread_def_CMSIS1_Sender_Task:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:18     .text.MX_GPIO_Init:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:23     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:162    .text.MX_GPIO_Init:0000007c $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:167    .rodata.fnRTOSMessageSendTask.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:182    .text.fnRTOSMessageSendTask:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:188    .text.fnRTOSMessageSendTask:00000000 fnRTOSMessageSendTask
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:325    .text.fnRTOSMessageSendTask:0000008c $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:346    .rodata.fnRTOSMessageReceiver1Task.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:356    .text.fnRTOSMessageReceiver1Task:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:362    .text.fnRTOSMessageReceiver1Task:00000000 fnRTOSMessageReceiver1Task
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:436    .text.fnRTOSMessageReceiver1Task:0000004c $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:445    .rodata.fnRTOSMessageReceiver2Task.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:452    .text.fnRTOSMessageReceiver2Task:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:458    .text.fnRTOSMessageReceiver2Task:00000000 fnRTOSMessageReceiver2Task
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:532    .text.fnRTOSMessageReceiver2Task:0000004c $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:541    .text.SystemClock_Config:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:547    .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:671    .text.SystemClock_Config:00000078 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:676    .text.HAL_TIM_PeriodElapsedCallback:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:682    .text.HAL_TIM_PeriodElapsedCallback:00000000 HAL_TIM_PeriodElapsedCallback
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:716    .text.HAL_TIM_PeriodElapsedCallback:00000014 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:721    .rodata.fnCMSIS1_Thread_Config_Assert.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:726    .text.fnCMSIS1_Thread_Config_Assert:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:732    .text.fnCMSIS1_Thread_Config_Assert:00000000 fnCMSIS1_Thread_Config_Assert
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:764    .text.fnCMSIS1_Thread_Config_Assert:00000014 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:769    .rodata.main.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:776    .text.main:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:782    .text.main:00000000 main
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:882    .text.main:00000068 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:919    .bss.EM_Data_Queue_Id:00000000 EM_Data_Queue_Id
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:953    .rodata.os_messageQ_def_EM_Data_Queue:00000000 os_messageQ_def_EM_Data_Queue
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:977    .rodata.os_thread_def_CMSIS1_Receiver2_Task:00000000 os_thread_def_CMSIS1_Receiver2_Task
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:899    .rodata.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:933    .bss.Receiver2TaskID:00000000 Receiver2TaskID
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:963    .rodata.os_thread_def_CMSIS1_Receiver1_Task:00000000 os_thread_def_CMSIS1_Receiver1_Task
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:926    .bss.Receiver1TaskID:00000000 Receiver1TaskID
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:991    .rodata.os_thread_def_CMSIS1_Sender_Task:00000000 os_thread_def_CMSIS1_Sender_Task
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:940    .bss.SenderTaskID:00000000 SenderTaskID
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:946    .bss.pStructEMData:00000000 pStructEMData
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:915    .bss.EM_Data_Queue_Id:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:922    .bss.Receiver1TaskID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:929    .bss.Receiver2TaskID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:936    .bss.SenderTaskID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:943    .bss.pStructEMData:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:949    .rodata.os_messageQ_def_EM_Data_Queue:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:959    .rodata.os_thread_def_CMSIS1_Receiver1_Task:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:973    .rodata.os_thread_def_CMSIS1_Receiver2_Task:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s:987    .rodata.os_thread_def_CMSIS1_Sender_Task:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_Init
@@ -1963,6 +2168,9 @@ __aeabi_f2iz
 puts
 osDelay
 HAL_GPIO_TogglePin
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckLhfic.s 			page 38
+
+
 printf
 osMessagePut
 osMessageGet
@@ -1971,9 +2179,6 @@ HAL_RCC_OscConfig
 HAL_RCC_ClockConfig
 Error_Handler
 HAL_IncTick
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccFai0Vm.s 			page 34
-
-
 HAL_Init
 osThreadCreate
 osMessageCreate
