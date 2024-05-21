@@ -1,0 +1,1592 @@
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.MX_GPIO_Init,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	MX_GPIO_Init:
+  24              	.LFB853:
+  25              		.file 1 "Core/Src/main.c"
+   1:Core/Src/main.c **** /* USER CODE BEGIN Header */
+   2:Core/Src/main.c **** /**
+   3:Core/Src/main.c ****   ******************************************************************************
+   4:Core/Src/main.c ****   * @file           : main.c
+   5:Core/Src/main.c ****   * @brief          : Main program body
+   6:Core/Src/main.c ****   ******************************************************************************
+   7:Core/Src/main.c ****   * @attention
+   8:Core/Src/main.c ****   *
+   9:Core/Src/main.c ****   * Copyright (c) 2024 STMicroelectronics.
+  10:Core/Src/main.c ****   * All rights reserved.
+  11:Core/Src/main.c ****   *
+  12:Core/Src/main.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Core/Src/main.c ****   * in the root directory of this software component.
+  14:Core/Src/main.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Core/Src/main.c ****   *
+  16:Core/Src/main.c ****   ******************************************************************************
+  17:Core/Src/main.c ****   */
+  18:Core/Src/main.c **** /* USER CODE END Header */
+  19:Core/Src/main.c **** /* Includes ------------------------------------------------------------------*/
+  20:Core/Src/main.c **** #include <stdio.h>
+  21:Core/Src/main.c **** #include <string.h>
+  22:Core/Src/main.c **** #include <stdarg.h>
+  23:Core/Src/main.c **** #include <stdint.h>
+  24:Core/Src/main.c **** 
+  25:Core/Src/main.c **** #include "main.h"
+  26:Core/Src/main.c **** #include "cmsis_os.h"
+  27:Core/Src/main.c **** #include "cmsis_os2.h"
+  28:Core/Src/main.c **** 
+  29:Core/Src/main.c **** #include "cmsis_os2_attr.h"
+  30:Core/Src/main.c **** 
+  31:Core/Src/main.c **** /* Private includes ----------------------------------------------------------*/
+  32:Core/Src/main.c **** /* USER CODE BEGIN Includes */
+  33:Core/Src/main.c **** 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 2
+
+
+  34:Core/Src/main.c **** /* USER CODE END Includes */
+  35:Core/Src/main.c **** 
+  36:Core/Src/main.c **** /* Private typedef -----------------------------------------------------------*/
+  37:Core/Src/main.c **** /* USER CODE BEGIN PTD */
+  38:Core/Src/main.c **** 
+  39:Core/Src/main.c **** /* USER CODE END PTD */
+  40:Core/Src/main.c **** 
+  41:Core/Src/main.c **** /* Private define ------------------------------------------------------------*/
+  42:Core/Src/main.c **** /* USER CODE BEGIN PD */
+  43:Core/Src/main.c **** 
+  44:Core/Src/main.c **** /* USER CODE END PD */
+  45:Core/Src/main.c **** 
+  46:Core/Src/main.c **** /* Private macro -------------------------------------------------------------*/
+  47:Core/Src/main.c **** /* USER CODE BEGIN PM */
+  48:Core/Src/main.c **** 
+  49:Core/Src/main.c **** /* USER CODE END PM */
+  50:Core/Src/main.c **** 
+  51:Core/Src/main.c **** /* Private function prototypes -----------------------------------------------*/
+  52:Core/Src/main.c **** void SystemClock_Config(void);
+  53:Core/Src/main.c **** static void MX_GPIO_Init(void);
+  54:Core/Src/main.c **** 
+  55:Core/Src/main.c **** /*user PV*/
+  56:Core/Src/main.c **** osKernelState_t KernelState;
+  57:Core/Src/main.c **** uint32_t u32KernelTickFrequency, u32KernelSystemTimer;
+  58:Core/Src/main.c **** /* USER CODE END PV */
+  59:Core/Src/main.c **** 
+  60:Core/Src/main.c **** /* USER CODE BEGIN PFP */
+  61:Core/Src/main.c **** 
+  62:Core/Src/main.c **** /* USER CODE END PFP */
+  63:Core/Src/main.c **** 
+  64:Core/Src/main.c **** /* Private user code ---------------------------------------------------------*/
+  65:Core/Src/main.c **** /* USER CODE BEGIN 0 */
+  66:Core/Src/main.c **** 
+  67:Core/Src/main.c **** /* USER CODE END 0 */
+  68:Core/Src/main.c **** 
+  69:Core/Src/main.c **** /**
+  70:Core/Src/main.c ****   * @brief  The application entry point.
+  71:Core/Src/main.c ****   * @retval int
+  72:Core/Src/main.c ****   */
+  73:Core/Src/main.c **** int main(void)
+  74:Core/Src/main.c **** {
+  75:Core/Src/main.c **** 
+  76:Core/Src/main.c ****   /* USER CODE BEGIN 1 */
+  77:Core/Src/main.c **** 
+  78:Core/Src/main.c ****   /* USER CODE END 1 */
+  79:Core/Src/main.c **** 
+  80:Core/Src/main.c ****   /* MCU Configuration--------------------------------------------------------*/
+  81:Core/Src/main.c **** 
+  82:Core/Src/main.c ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  83:Core/Src/main.c ****   HAL_Init();
+  84:Core/Src/main.c **** 
+  85:Core/Src/main.c ****   /* USER CODE BEGIN Init */
+  86:Core/Src/main.c **** 
+  87:Core/Src/main.c ****   /* USER CODE END Init */
+  88:Core/Src/main.c **** 
+  89:Core/Src/main.c ****   /* Configure the system clock */
+  90:Core/Src/main.c ****   SystemClock_Config();
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 3
+
+
+  91:Core/Src/main.c **** 
+  92:Core/Src/main.c ****   /* USER CODE BEGIN SysInit */
+  93:Core/Src/main.c **** 
+  94:Core/Src/main.c ****   /* USER CODE END SysInit */
+  95:Core/Src/main.c **** 
+  96:Core/Src/main.c ****   /* Initialize all configured peripherals */
+  97:Core/Src/main.c ****   MX_GPIO_Init();
+  98:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
+  99:Core/Src/main.c **** 
+ 100:Core/Src/main.c ****   /* USER CODE END 2 */
+ 101:Core/Src/main.c **** 
+ 102:Core/Src/main.c ****   //At the very fisrt, display kernel info
+ 103:Core/Src/main.c ****   OS2ConfigAssert(osKernelGetInfo(&osv, chArrInfoBuf, sizeof(chArrInfoBuf)));
+ 104:Core/Src/main.c ****   printf("kernel info: %s\r\n", chArrInfoBuf);
+ 105:Core/Src/main.c ****   printf("cmsis os2 api version: %ld\r\n", osv.api);
+ 106:Core/Src/main.c ****   printf("cmsis os2 kernel version: %ld\r\n", osv.kernel);
+ 107:Core/Src/main.c **** 
+ 108:Core/Src/main.c ****   //get the current kernel state: it should return osKernelInactive and then prog should init the k
+ 109:Core/Src/main.c ****   KernelState = osKernelGetState(); 
+ 110:Core/Src/main.c ****   if(KernelState == osKernelInactive)
+ 111:Core/Src/main.c ****   {
+ 112:Core/Src/main.c ****     //Init the kernel
+ 113:Core/Src/main.c ****     osKernelInitialize();
+ 114:Core/Src/main.c ****   }
+ 115:Core/Src/main.c ****   else
+ 116:Core/Src/main.c ****   {
+ 117:Core/Src/main.c ****     printf("Kernel's default state is not inactive, going to error loop\r\n");
+ 118:Core/Src/main.c ****     Error_Handler();
+ 119:Core/Src/main.c ****   }
+ 120:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_MUTEX */
+ 121:Core/Src/main.c ****   /* add mutexes, ... */
+ 122:Core/Src/main.c ****   /* USER CODE END RTOS_MUTEX */
+ 123:Core/Src/main.c **** 
+ 124:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_SEMAPHORES */
+ 125:Core/Src/main.c ****   /* add semaphores, ... */
+ 126:Core/Src/main.c ****   /* USER CODE END RTOS_SEMAPHORES */
+ 127:Core/Src/main.c **** 
+ 128:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_TIMERS */
+ 129:Core/Src/main.c ****   /* start timers, add new ones, ... */
+ 130:Core/Src/main.c ****   /* USER CODE END RTOS_TIMERS */
+ 131:Core/Src/main.c **** 
+ 132:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_QUEUES */
+ 133:Core/Src/main.c ****   /* add queues, ... */
+ 134:Core/Src/main.c ****   /* USER CODE END RTOS_QUEUES */
+ 135:Core/Src/main.c **** 
+ 136:Core/Src/main.c ****   /* Create the thread(s) */
+ 137:Core/Src/main.c ****   /* Create the Synch Sender Thread*/
+ 138:Core/Src/main.c ****   if(!fnConfigAndCreateThreads())
+ 139:Core/Src/main.c ****   {
+ 140:Core/Src/main.c ****     printf("thread creation failed\r\n");
+ 141:Core/Src/main.c ****     Error_Handler();
+ 142:Core/Src/main.c ****   };
+ 143:Core/Src/main.c ****   
+ 144:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_THREADS */
+ 145:Core/Src/main.c ****   /* add threads, ... */
+ 146:Core/Src/main.c ****   /* USER CODE END RTOS_THREADS */
+ 147:Core/Src/main.c **** 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 4
+
+
+ 148:Core/Src/main.c ****   /* USER CODE BEGIN RTOS_EVENTS */
+ 149:Core/Src/main.c ****   /* add events, ... */
+ 150:Core/Src/main.c ****   /* USER CODE END RTOS_EVENTS */
+ 151:Core/Src/main.c **** 
+ 152:Core/Src/main.c ****   /* Start scheduler */
+ 153:Core/Src/main.c ****   KernelState = osKernelGetState(); 
+ 154:Core/Src/main.c ****   if(KernelState == osKernelReady)
+ 155:Core/Src/main.c ****   {
+ 156:Core/Src/main.c ****     //start the kernel
+ 157:Core/Src/main.c ****     osKernelStart();
+ 158:Core/Src/main.c ****   }
+ 159:Core/Src/main.c ****   else
+ 160:Core/Src/main.c ****   {
+ 161:Core/Src/main.c ****     printf("Kernel is not ready to be started, check api: osKernelInialize, going to error loop\r\n
+ 162:Core/Src/main.c ****     Error_Handler();
+ 163:Core/Src/main.c ****   }
+ 164:Core/Src/main.c **** 
+ 165:Core/Src/main.c ****   /* We should never get here as control is now taken by the scheduler */
+ 166:Core/Src/main.c **** 
+ 167:Core/Src/main.c ****   /* Infinite loop */
+ 168:Core/Src/main.c ****   /* USER CODE BEGIN WHILE */
+ 169:Core/Src/main.c ****   while (1)
+ 170:Core/Src/main.c ****   {
+ 171:Core/Src/main.c ****     /* USER CODE END WHILE */
+ 172:Core/Src/main.c **** 
+ 173:Core/Src/main.c ****     /* USER CODE BEGIN 3 */
+ 174:Core/Src/main.c ****   }
+ 175:Core/Src/main.c ****   /* USER CODE END 3 */
+ 176:Core/Src/main.c **** }
+ 177:Core/Src/main.c **** 
+ 178:Core/Src/main.c **** /**
+ 179:Core/Src/main.c ****   * @brief System Clock Configuration
+ 180:Core/Src/main.c ****   * @retval None
+ 181:Core/Src/main.c ****   */
+ 182:Core/Src/main.c **** void SystemClock_Config(void)
+ 183:Core/Src/main.c **** {
+ 184:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 185:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 186:Core/Src/main.c **** 
+ 187:Core/Src/main.c ****   /** Configure the main internal regulator output voltage
+ 188:Core/Src/main.c ****   */
+ 189:Core/Src/main.c ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
+ 190:Core/Src/main.c **** 
+ 191:Core/Src/main.c ****   /** Initializes the CPU, AHB and APB buses clocks
+ 192:Core/Src/main.c ****   */
+ 193:Core/Src/main.c ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
+ 194:Core/Src/main.c ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+ 195:Core/Src/main.c ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
+ 196:Core/Src/main.c ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+ 197:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+ 198:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 199:Core/Src/main.c ****   {
+ 200:Core/Src/main.c ****     Error_Handler();
+ 201:Core/Src/main.c ****   }
+ 202:Core/Src/main.c **** 
+ 203:Core/Src/main.c ****   /** Configure the SYSCLKSource, HCLK, PCLK1 and PCLK2 clocks dividers
+ 204:Core/Src/main.c ****   */
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 5
+
+
+ 205:Core/Src/main.c ****   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK3|RCC_CLOCKTYPE_HCLK
+ 206:Core/Src/main.c ****                               |RCC_CLOCKTYPE_SYSCLK|RCC_CLOCKTYPE_PCLK1
+ 207:Core/Src/main.c ****                               |RCC_CLOCKTYPE_PCLK2;
+ 208:Core/Src/main.c ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+ 209:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 210:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 211:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 212:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLK3Divider = RCC_SYSCLK_DIV1;
+ 213:Core/Src/main.c **** 
+ 214:Core/Src/main.c ****   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+ 215:Core/Src/main.c ****   {
+ 216:Core/Src/main.c ****     Error_Handler();
+ 217:Core/Src/main.c ****   }
+ 218:Core/Src/main.c **** }
+ 219:Core/Src/main.c **** 
+ 220:Core/Src/main.c **** /**
+ 221:Core/Src/main.c ****   * @brief GPIO Initialization Function
+ 222:Core/Src/main.c ****   * @param None
+ 223:Core/Src/main.c ****   * @retval None
+ 224:Core/Src/main.c ****   */
+ 225:Core/Src/main.c **** static void MX_GPIO_Init(void)
+ 226:Core/Src/main.c **** {
+  26              		.loc 1 226 1 view -0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 32
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 10B5     		push	{r4, lr}
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 4, -8
+  34              		.cfi_offset 14, -4
+  35 0002 88B0     		sub	sp, sp, #32
+  36              	.LCFI1:
+  37              		.cfi_def_cfa_offset 40
+ 227:Core/Src/main.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+  38              		.loc 1 227 3 view .LVU1
+  39              		.loc 1 227 20 is_stmt 0 view .LVU2
+  40 0004 0024     		movs	r4, #0
+  41 0006 0394     		str	r4, [sp, #12]
+  42 0008 0494     		str	r4, [sp, #16]
+  43 000a 0594     		str	r4, [sp, #20]
+  44 000c 0694     		str	r4, [sp, #24]
+  45 000e 0794     		str	r4, [sp, #28]
+ 228:Core/Src/main.c **** /* USER CODE BEGIN MX_GPIO_Init_1 */
+ 229:Core/Src/main.c **** /* USER CODE END MX_GPIO_Init_1 */
+ 230:Core/Src/main.c **** 
+ 231:Core/Src/main.c ****   /* GPIO Ports Clock Enable */
+ 232:Core/Src/main.c ****   __HAL_RCC_GPIOC_CLK_ENABLE();
+  46              		.loc 1 232 3 is_stmt 1 view .LVU3
+  47              	.LVL0:
+  48              	.LBB8:
+  49              	.LBI8:
+  50              		.file 2 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h"
+   1:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+   2:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   ******************************************************************************
+   3:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @file    stm32wlxx_ll_bus.h
+   4:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @author  MCD Application Team
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 6
+
+
+   5:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief   Header file of BUS LL module.
+   6:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   ******************************************************************************
+   7:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @attention
+   8:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *
+   9:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * Copyright (c) 2020 STMicroelectronics.
+  10:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * All rights reserved.
+  11:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *
+  12:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * in the root directory of this software component.
+  14:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *
+  16:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   ******************************************************************************
+  17:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   @verbatim
+  18:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****                       ##### RCC Limitations #####
+  19:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   ==============================================================================
+  20:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****     [..]
+  21:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****       A delay between an RCC peripheral clock enable and the effective peripheral
+  22:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****       enabling should be taken into account in order to manage the peripheral read/write
+  23:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****       from/to registers.w<
+  24:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****       (+) This delay depends on the peripheral mapping.
+  25:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****         (++) AHB & APB peripherals, 1 dummy read is necessary
+  26:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  27:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****     [..]
+  28:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****       Workarounds:
+  29:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****       (#) For AHB & APB peripherals, a dummy read to the peripheral register has been
+  30:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****           inserted in each LL_{BUS}_GRP{x}_EnableClock() function.
+  31:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  32:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   @endverbatim
+  33:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   ******************************************************************************
+  34:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+  35:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  36:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Define to prevent recursive inclusion -------------------------------------*/
+  37:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #ifndef __STM32WLxx_LL_BUS_H
+  38:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define __STM32WLxx_LL_BUS_H
+  39:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  40:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #ifdef __cplusplus
+  41:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** extern "C" {
+  42:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #endif
+  43:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  44:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Includes ------------------------------------------------------------------*/
+  45:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #include "stm32wlxx.h"
+  46:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  47:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @addtogroup STM32WLxx_LL_Driver
+  48:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+  49:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+  50:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  51:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #if defined(RCC)
+  52:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  53:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL BUS
+  54:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+  55:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+  56:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  57:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Private types -------------------------------------------------------------*/
+  58:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Private variables ---------------------------------------------------------*/
+  59:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  60:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Private constants ---------------------------------------------------------*/
+  61:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 7
+
+
+  62:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Private macros ------------------------------------------------------------*/
+  63:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  64:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Exported types ------------------------------------------------------------*/
+  65:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  66:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Exported constants --------------------------------------------------------*/
+  67:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_Exported_Constants BUS Exported Constants
+  68:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+  69:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+  70:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  71:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_AHB1_GRP1_PERIPH  AHB1 GRP1 PERIPH
+  72:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+  73:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+  74:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB1_GRP1_PERIPH_ALL            (0xFFFFFFFFU)
+  75:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB1_GRP1_PERIPH_DMA1           RCC_AHB1ENR_DMA1EN
+  76:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB1_GRP1_PERIPH_DMA2           RCC_AHB1ENR_DMA2EN
+  77:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB1_GRP1_PERIPH_DMAMUX1        RCC_AHB1ENR_DMAMUX1EN
+  78:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB1_GRP1_PERIPH_CRC            RCC_AHB1ENR_CRCEN
+  79:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+  80:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+  81:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+  82:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  83:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_AHB2_GRP1_PERIPH  AHB2 GRP1 PERIPH
+  84:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+  85:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+  86:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB2_GRP1_PERIPH_ALL            (0xFFFFFFFFU)
+  87:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB2_GRP1_PERIPH_GPIOA          RCC_AHB2ENR_GPIOAEN
+  88:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB2_GRP1_PERIPH_GPIOB          RCC_AHB2ENR_GPIOBEN
+  89:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB2_GRP1_PERIPH_GPIOC          RCC_AHB2ENR_GPIOCEN
+  90:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB2_GRP1_PERIPH_GPIOH          RCC_AHB2ENR_GPIOHEN
+  91:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+  92:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+  93:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+  94:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+  95:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_AHB3_GRP1_PERIPH  AHB3 GRP1 PERIPH
+  96:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+  97:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+  98:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB3_GRP1_PERIPH_ALL            (0xFFFFFFFFU)
+  99:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB3_GRP1_PERIPH_PKA            RCC_AHB3ENR_PKAEN
+ 100:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB3_GRP1_PERIPH_AES            RCC_AHB3ENR_AESEN
+ 101:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB3_GRP1_PERIPH_RNG            RCC_AHB3ENR_RNGEN
+ 102:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB3_GRP1_PERIPH_HSEM           RCC_AHB3ENR_HSEMEN
+ 103:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #if defined(DUAL_CORE)
+ 104:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB3_GRP1_PERIPH_IPCC           RCC_AHB3ENR_IPCCEN
+ 105:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #endif /* DUAL_CORE */
+ 106:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB3_GRP1_PERIPH_SRAM1          RCC_AHB3SMENR_SRAM1SMEN
+ 107:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB3_GRP1_PERIPH_SRAM2          RCC_AHB3SMENR_SRAM2SMEN
+ 108:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_AHB3_GRP1_PERIPH_FLASH          RCC_AHB3ENR_FLASHEN
+ 109:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 110:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 111:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 112:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 113:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_APB1_GRP1_PERIPH  APB1 GRP1 PERIPH
+ 114:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 115:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 116:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_ALL            (0xFFFFFFFFU)
+ 117:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_TIM2           RCC_APB1ENR1_TIM2EN
+ 118:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_RTCAPB         RCC_APB1ENR1_RTCAPBEN
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 8
+
+
+ 119:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_WWDG           RCC_APB1ENR1_WWDGEN
+ 120:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_SPI2           RCC_APB1ENR1_SPI2EN
+ 121:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_USART2         RCC_APB1ENR1_USART2EN
+ 122:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_I2C1           RCC_APB1ENR1_I2C1EN
+ 123:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_I2C2           RCC_APB1ENR1_I2C2EN
+ 124:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_I2C3           RCC_APB1ENR1_I2C3EN
+ 125:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_DAC            RCC_APB1ENR1_DACEN
+ 126:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_LPTIM1         RCC_APB1ENR1_LPTIM1EN
+ 127:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 128:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 129:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 130:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 131:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 132:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_APB1_GRP2_PERIPH  APB1 GRP2 PERIPH
+ 133:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 134:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 135:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP2_PERIPH_ALL            (0xFFFFFFFFU)
+ 136:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP2_PERIPH_LPUART1        RCC_APB1ENR2_LPUART1EN
+ 137:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP2_PERIPH_LPTIM2         RCC_APB1ENR2_LPTIM2EN
+ 138:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB1_GRP2_PERIPH_LPTIM3         RCC_APB1ENR2_LPTIM3EN
+ 139:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 140:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 141:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 142:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 143:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_APB2_GRP1_PERIPH  APB2 GRP1 PERIPH
+ 144:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 145:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 146:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_ALL            (0xFFFFFFFFU)
+ 147:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_ADC            RCC_APB2ENR_ADCEN
+ 148:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_TIM1           RCC_APB2ENR_TIM1EN
+ 149:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_SPI1           RCC_APB2ENR_SPI1EN
+ 150:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_USART1         RCC_APB2ENR_USART1EN
+ 151:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_TIM16          RCC_APB2ENR_TIM16EN
+ 152:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB2_GRP1_PERIPH_TIM17          RCC_APB2ENR_TIM17EN
+ 153:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 154:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 155:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 156:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 157:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_APB3_GRP1_PERIPH  APB3 GRP1 PERIPH
+ 158:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 159:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 160:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB3_GRP1_PERIPH_ALL            (0xFFFFFFFFU)
+ 161:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_APB3_GRP1_PERIPH_SUBGHZSPI      RCC_APB3ENR_SUBGHZSPIEN
+ 162:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 163:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 164:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 165:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 166:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #if defined(DUAL_CORE)
+ 167:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_C2_AHB1_GRP1_PERIPH  C2 AHB1 GRP1 PERIPH
+ 168:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 169:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 170:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB1_GRP1_PERIPH_DMA1         RCC_C2AHB1ENR_DMA1EN
+ 171:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB1_GRP1_PERIPH_DMA2         RCC_C2AHB1ENR_DMA2EN
+ 172:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB1_GRP1_PERIPH_DMAMUX1      RCC_C2AHB1ENR_DMAMUX1EN
+ 173:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB1_GRP1_PERIPH_CRC          RCC_C2AHB1ENR_CRCEN
+ 174:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 175:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 9
+
+
+ 176:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 177:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 178:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 179:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_C2_AHB2_GRP1_PERIPH  C2 AHB2 GRP1 PERIPH
+ 180:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 181:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 182:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB2_GRP1_PERIPH_GPIOA        RCC_C2AHB2ENR_GPIOAEN
+ 183:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB2_GRP1_PERIPH_GPIOB        RCC_C2AHB2ENR_GPIOBEN
+ 184:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB2_GRP1_PERIPH_GPIOC        RCC_C2AHB2ENR_GPIOCEN
+ 185:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB2_GRP1_PERIPH_GPIOH        RCC_C2AHB2ENR_GPIOHEN
+ 186:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 187:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 188:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 189:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 190:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 191:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_C2_AHB3_GRP1_PERIPH  C2 AHB3 GRP1 PERIPH
+ 192:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 193:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 194:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB3_GRP1_PERIPH_PKA          RCC_C2AHB3ENR_PKAEN
+ 195:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB3_GRP1_PERIPH_AES          RCC_C2AHB3ENR_AESEN
+ 196:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB3_GRP1_PERIPH_RNG          RCC_C2AHB3ENR_RNGEN
+ 197:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB3_GRP1_PERIPH_HSEM         RCC_C2AHB3ENR_HSEMEN
+ 198:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB3_GRP1_PERIPH_IPCC         RCC_C2AHB3ENR_IPCCEN
+ 199:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB3_GRP1_PERIPH_FLASH        RCC_C2AHB3ENR_FLASHEN
+ 200:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB3_GRP1_PERIPH_SRAM1        RCC_C2AHB3SMENR_SRAM1SMEN
+ 201:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_AHB3_GRP1_PERIPH_SRAM2        RCC_C2AHB3SMENR_SRAM2SMEN
+ 202:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 203:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 204:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 205:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 206:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 207:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_C2_APB1_GRP1_PERIPH  C2 APB1 GRP1 PERIPH
+ 208:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 209:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 210:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP1_PERIPH_TIM2         RCC_C2APB1ENR1_TIM2EN
+ 211:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP1_PERIPH_RTCAPB       RCC_C2APB1ENR1_RTCAPBEN
+ 212:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP1_PERIPH_SPI2         RCC_C2APB1ENR1_SPI2EN
+ 213:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP1_PERIPH_USART2       RCC_C2APB1ENR1_USART2EN
+ 214:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP1_PERIPH_I2C1         RCC_C2APB1ENR1_I2C1EN
+ 215:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP1_PERIPH_I2C2         RCC_C2APB1ENR1_I2C2EN
+ 216:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP1_PERIPH_I2C3         RCC_C2APB1ENR1_I2C3EN
+ 217:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP1_PERIPH_DAC          RCC_C2APB1ENR1_DACEN
+ 218:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP1_PERIPH_LPTIM1       RCC_C2APB1ENR1_LPTIM1EN
+ 219:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 220:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 221:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 222:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 223:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 224:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_C2_APB1_GRP2_PERIPH  C2 APB1 GRP2 PERIPH
+ 225:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 226:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 227:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP2_PERIPH_LPUART1      RCC_C2APB1ENR2_LPUART1EN
+ 228:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP2_PERIPH_LPTIM2       RCC_C2APB1ENR2_LPTIM2EN
+ 229:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB1_GRP2_PERIPH_LPTIM3       RCC_C2APB1ENR2_LPTIM3EN
+ 230:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 231:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 232:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 10
+
+
+ 233:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 234:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 235:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_C2_APB2_GRP1_PERIPH  C2 APB2 GRP1 PERIPH
+ 236:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 237:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 238:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_ADC          RCC_C2APB2ENR_ADCEN
+ 239:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_TIM1         RCC_C2APB2ENR_TIM1EN
+ 240:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_SPI1         RCC_C2APB2ENR_SPI1EN
+ 241:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_USART1       RCC_C2APB2ENR_USART1EN
+ 242:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_TIM16        RCC_C2APB2ENR_TIM16EN
+ 243:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB2_GRP1_PERIPH_TIM17        RCC_C2APB2ENR_TIM17EN
+ 244:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 245:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 246:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 247:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 248:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 249:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EC_C2_APB3_GRP1_PERIPH  C2 APB3 GRP1 PERIPH
+ 250:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 251:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 252:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #define LL_C2_APB3_GRP1_PERIPH_SUBGHZSPI    RCC_C2APB3ENR_SUBGHZSPIEN
+ 253:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 254:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 255:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 256:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** #endif /* DUAL_CORE */
+ 257:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 258:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 259:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 260:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 261:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 262:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Exported macro ------------------------------------------------------------*/
+ 263:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 264:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /* Exported functions --------------------------------------------------------*/
+ 265:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 266:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_Exported_Functions BUS Exported Functions
+ 267:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 268:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 269:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 270:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EF_AHB1 AHB1
+ 271:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 272:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 273:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 274:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 275:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Enable AHB1 peripherals clock.
+ 276:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1ENR      DMA1EN        LL_AHB1_GRP1_EnableClock\n
+ 277:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      DMA2EN        LL_AHB1_GRP1_EnableClock\n
+ 278:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      DMAMUX1EN     LL_AHB1_GRP1_EnableClock\n
+ 279:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      CRCEN         LL_AHB1_GRP1_EnableClock\n
+ 280:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
+ 281:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
+ 282:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
+ 283:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
+ 284:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
+ 285:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval None
+ 286:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 287:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_EnableClock(uint32_t Periphs)
+ 288:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+ 289:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   __IO uint32_t tmpreg;
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 11
+
+
+ 290:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   SET_BIT(RCC->AHB1ENR, Periphs);
+ 291:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   /* Delay after an RCC peripheral clock enabling */
+ 292:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   tmpreg = READ_BIT(RCC->AHB1ENR, Periphs);
+ 293:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
+ 294:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
+ 295:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 296:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 297:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Check if AHB1 peripheral clock is enabled or not
+ 298:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1ENR      DMA1EN        LL_AHB1_GRP1_IsEnabledClock\n
+ 299:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      DMA2EN        LL_AHB1_GRP1_IsEnabledClock\n
+ 300:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      DMAMUX1EN     LL_AHB1_GRP1_IsEnabledClock\n
+ 301:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      CRCEN         LL_AHB1_GRP1_IsEnabledClock\n
+ 302:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
+ 303:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
+ 304:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
+ 305:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
+ 306:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
+ 307:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval uint32_t
+ 308:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 309:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE uint32_t LL_AHB1_GRP1_IsEnabledClock(uint32_t Periphs)
+ 310:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+ 311:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   return ((READ_BIT(RCC->AHB1ENR, Periphs) == (Periphs)) ? 1UL : 0UL);
+ 312:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
+ 313:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 314:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 315:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Disable AHB1 peripherals clock.
+ 316:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1ENR      DMA1EN        LL_AHB1_GRP1_DisableClock\n
+ 317:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      DMA2EN        LL_AHB1_GRP1_DisableClock\n
+ 318:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      DMAMUX1EN     LL_AHB1_GRP1_DisableClock\n
+ 319:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1ENR      CRCEN         LL_AHB1_GRP1_DisableClock\n
+ 320:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
+ 321:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
+ 322:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
+ 323:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
+ 324:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
+ 325:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval None
+ 326:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 327:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_DisableClock(uint32_t Periphs)
+ 328:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+ 329:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   CLEAR_BIT(RCC->AHB1ENR, Periphs);
+ 330:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
+ 331:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 332:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 333:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Force AHB1 peripherals reset.
+ 334:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1RSTR     DMA1RST       LL_AHB1_GRP1_ForceReset\n
+ 335:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1RSTR     DMA2RST       LL_AHB1_GRP1_ForceReset\n
+ 336:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1RSTR     DMAMUX1RST    LL_AHB1_GRP1_ForceReset\n
+ 337:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1RSTR     CRCRST        LL_AHB1_GRP1_ForceReset\n
+ 338:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
+ 339:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_ALL
+ 340:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
+ 341:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
+ 342:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
+ 343:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
+ 344:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval None
+ 345:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 346:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_ForceReset(uint32_t Periphs)
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 12
+
+
+ 347:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+ 348:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   SET_BIT(RCC->AHB1RSTR, Periphs);
+ 349:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
+ 350:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 351:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 352:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Release AHB1 peripherals reset.
+ 353:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1RSTR     DMA1RST       LL_AHB1_GRP1_ReleaseReset\n
+ 354:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1RSTR     DMA2RST       LL_AHB1_GRP1_ReleaseReset\n
+ 355:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1RSTR     DMAMUX1RST     LL_AHB1_GRP1_ReleaseReset\n
+ 356:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1RSTR     CRCRST        LL_AHB1_GRP1_ReleaseReset\n
+ 357:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
+ 358:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_ALL
+ 359:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
+ 360:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
+ 361:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
+ 362:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
+ 363:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval None
+ 364:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 365:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_ReleaseReset(uint32_t Periphs)
+ 366:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+ 367:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   CLEAR_BIT(RCC->AHB1RSTR, Periphs);
+ 368:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
+ 369:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 370:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 371:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Enable AHB1 peripherals clock during Low Power (Sleep) mode.
+ 372:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1SMENR    DMA1SMEN      LL_AHB1_GRP1_EnableClockSleep\n
+ 373:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    DMA2SMEN      LL_AHB1_GRP1_EnableClockSleep\n
+ 374:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    DMAMUX1SMEN   LL_AHB1_GRP1_EnableClockSleep\n
+ 375:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    CRCSMEN       LL_AHB1_GRP1_EnableClockSleep\n
+ 376:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
+ 377:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
+ 378:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
+ 379:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
+ 380:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
+ 381:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval None
+ 382:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 383:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_EnableClockSleep(uint32_t Periphs)
+ 384:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+ 385:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   __IO uint32_t tmpreg;
+ 386:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   SET_BIT(RCC->AHB1SMENR, Periphs);
+ 387:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   /* Delay after an RCC peripheral clock enabling */
+ 388:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   tmpreg = READ_BIT(RCC->AHB1SMENR, Periphs);
+ 389:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
+ 390:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
+ 391:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 392:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 393:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Check if AHB1 peripheral clock is enabled by the clock gating during CPU1 CSleep mode
+ 394:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1SMENR    DMA1SMEN      LL_AHB1_GRP1_IsEnabledClockSleep\n
+ 395:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    DMA2SMEN      LL_AHB1_GRP1_IsEnabledClockSleep\n
+ 396:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    DMAMUX1SMEN   LL_AHB1_GRP1_IsEnabledClockSleep\n
+ 397:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    CRCSMEN       LL_AHB1_GRP1_IsEnabledClockSleep
+ 398:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
+ 399:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
+ 400:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
+ 401:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
+ 402:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
+ 403:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval uint32_t
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 13
+
+
+ 404:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 405:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE uint32_t LL_AHB1_GRP1_IsEnabledClockSleep(uint32_t Periphs)
+ 406:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+ 407:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   return ((READ_BIT(RCC->AHB1SMENR, Periphs) == (Periphs)) ? 1UL : 0UL);
+ 408:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
+ 409:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 410:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 411:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Disable AHB1 peripherals clock during Low Power (Sleep) mode.
+ 412:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB1SMENR    DMA1SMEN      LL_AHB1_GRP1_DisableClockSleep\n
+ 413:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    DMA2SMEN      LL_AHB1_GRP1_DisableClockSleep\n
+ 414:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    DMAMUX1SMEN   LL_AHB1_GRP1_DisableClockSleep\n
+ 415:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB1SMENR    CRCSMEN       LL_AHB1_GRP1_DisableClockSleep\n
+ 416:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
+ 417:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
+ 418:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
+ 419:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
+ 420:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CRC
+ 421:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval None
+ 422:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 423:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_DisableClockSleep(uint32_t Periphs)
+ 424:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+ 425:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   CLEAR_BIT(RCC->AHB1SMENR, Periphs);
+ 426:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** }
+ 427:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 428:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 429:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @}
+ 430:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 431:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 432:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /** @defgroup BUS_LL_EF_AHB2 AHB2
+ 433:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @{
+ 434:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 435:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** 
+ 436:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** /**
+ 437:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @brief  Enable AHB2 peripherals clock.
+ 438:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @rmtoll AHB2ENR      GPIOAEN       LL_AHB2_GRP1_EnableClock\n
+ 439:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB2ENR      GPIOBEN       LL_AHB2_GRP1_EnableClock\n
+ 440:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB2ENR      GPIOCEN       LL_AHB2_GRP1_EnableClock\n
+ 441:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         AHB2ENR      GPIOHEN       LL_AHB2_GRP1_EnableClock\n
+ 442:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @param  Periphs This parameter can be a combination of the following values:
+ 443:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB2_GRP1_PERIPH_GPIOA
+ 444:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB2_GRP1_PERIPH_GPIOB
+ 445:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB2_GRP1_PERIPH_GPIOC
+ 446:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   *         @arg @ref LL_AHB2_GRP1_PERIPH_GPIOH
+ 447:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   * @retval None
+ 448:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   */
+ 449:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** __STATIC_INLINE void LL_AHB2_GRP1_EnableClock(uint32_t Periphs)
+  51              		.loc 2 449 22 view .LVU4
+  52              	.LBB9:
+ 450:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+ 451:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   __IO uint32_t tmpreg;
+  53              		.loc 2 451 3 view .LVU5
+ 452:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   SET_BIT(RCC->AHB2ENR, Periphs);
+  54              		.loc 2 452 3 view .LVU6
+  55 0010 4FF0B043 		mov	r3, #1476395008
+  56 0014 DA6C     		ldr	r2, [r3, #76]
+  57 0016 42F00402 		orr	r2, r2, #4
+  58 001a DA64     		str	r2, [r3, #76]
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 14
+
+
+ 453:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   /* Delay after an RCC peripheral clock enabling */
+ 454:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   tmpreg = READ_BIT(RCC->AHB2ENR, Periphs);
+  59              		.loc 2 454 3 view .LVU7
+  60              		.loc 2 454 12 is_stmt 0 view .LVU8
+  61 001c DA6C     		ldr	r2, [r3, #76]
+  62 001e 02F00402 		and	r2, r2, #4
+  63              		.loc 2 454 10 view .LVU9
+  64 0022 0292     		str	r2, [sp, #8]
+ 455:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
+  65              		.loc 2 455 3 is_stmt 1 view .LVU10
+  66 0024 029A     		ldr	r2, [sp, #8]
+  67              	.LVL1:
+  68              		.loc 2 455 3 is_stmt 0 view .LVU11
+  69              	.LBE9:
+  70              	.LBE8:
+ 233:Core/Src/main.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
+  71              		.loc 1 233 3 is_stmt 1 view .LVU12
+  72              	.LBB10:
+  73              	.LBI10:
+ 449:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+  74              		.loc 2 449 22 view .LVU13
+  75              	.LBB11:
+ 451:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   SET_BIT(RCC->AHB2ENR, Periphs);
+  76              		.loc 2 451 3 view .LVU14
+ 452:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   /* Delay after an RCC peripheral clock enabling */
+  77              		.loc 2 452 3 view .LVU15
+  78 0026 DA6C     		ldr	r2, [r3, #76]
+  79 0028 42F00102 		orr	r2, r2, #1
+  80 002c DA64     		str	r2, [r3, #76]
+ 454:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
+  81              		.loc 2 454 3 view .LVU16
+ 454:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
+  82              		.loc 2 454 12 is_stmt 0 view .LVU17
+  83 002e DA6C     		ldr	r2, [r3, #76]
+  84 0030 02F00102 		and	r2, r2, #1
+ 454:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
+  85              		.loc 2 454 10 view .LVU18
+  86 0034 0192     		str	r2, [sp, #4]
+  87              		.loc 2 455 3 is_stmt 1 view .LVU19
+  88 0036 019A     		ldr	r2, [sp, #4]
+  89              	.LVL2:
+  90              		.loc 2 455 3 is_stmt 0 view .LVU20
+  91              	.LBE11:
+  92              	.LBE10:
+ 234:Core/Src/main.c ****   __HAL_RCC_GPIOB_CLK_ENABLE();
+  93              		.loc 1 234 3 is_stmt 1 view .LVU21
+  94              	.LBB12:
+  95              	.LBI12:
+ 449:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h **** {
+  96              		.loc 2 449 22 view .LVU22
+  97              	.LBB13:
+ 451:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   SET_BIT(RCC->AHB2ENR, Periphs);
+  98              		.loc 2 451 3 view .LVU23
+ 452:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   /* Delay after an RCC peripheral clock enabling */
+  99              		.loc 2 452 3 view .LVU24
+ 100 0038 DA6C     		ldr	r2, [r3, #76]
+ 101 003a 42F00202 		orr	r2, r2, #2
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 15
+
+
+ 102 003e DA64     		str	r2, [r3, #76]
+ 454:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
+ 103              		.loc 2 454 3 view .LVU25
+ 454:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
+ 104              		.loc 2 454 12 is_stmt 0 view .LVU26
+ 105 0040 DB6C     		ldr	r3, [r3, #76]
+ 106 0042 03F00203 		and	r3, r3, #2
+ 454:Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_bus.h ****   (void)tmpreg;
+ 107              		.loc 2 454 10 view .LVU27
+ 108 0046 0093     		str	r3, [sp]
+ 109              		.loc 2 455 3 is_stmt 1 view .LVU28
+ 110 0048 009B     		ldr	r3, [sp]
+ 111              	.LVL3:
+ 112              		.loc 2 455 3 is_stmt 0 view .LVU29
+ 113              	.LBE13:
+ 114              	.LBE12:
+ 235:Core/Src/main.c **** 
+ 236:Core/Src/main.c ****   /*Configure GPIO pins : T_VCP_RX_Pin T_VCP_RXA2_Pin */
+ 237:Core/Src/main.c ****   GPIO_InitStruct.Pin = T_VCP_RX_Pin|T_VCP_RXA2_Pin;
+ 115              		.loc 1 237 3 is_stmt 1 view .LVU30
+ 116              		.loc 1 237 23 is_stmt 0 view .LVU31
+ 117 004a 0C23     		movs	r3, #12
+ 118 004c 0393     		str	r3, [sp, #12]
+ 238:Core/Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 119              		.loc 1 238 3 is_stmt 1 view .LVU32
+ 120              		.loc 1 238 24 is_stmt 0 view .LVU33
+ 121 004e 0223     		movs	r3, #2
+ 122 0050 0493     		str	r3, [sp, #16]
+ 239:Core/Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 123              		.loc 1 239 3 is_stmt 1 view .LVU34
+ 240:Core/Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 124              		.loc 1 240 3 view .LVU35
+ 241:Core/Src/main.c ****   GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+ 125              		.loc 1 241 3 view .LVU36
+ 126              		.loc 1 241 29 is_stmt 0 view .LVU37
+ 127 0052 0723     		movs	r3, #7
+ 128 0054 0793     		str	r3, [sp, #28]
+ 242:Core/Src/main.c ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 129              		.loc 1 242 3 is_stmt 1 view .LVU38
+ 130 0056 03A9     		add	r1, sp, #12
+ 131 0058 4FF09040 		mov	r0, #1207959552
+ 132 005c FFF7FEFF 		bl	HAL_GPIO_Init
+ 133              	.LVL4:
+ 243:Core/Src/main.c **** 
+ 244:Core/Src/main.c ****   /*Configure GPIO pins :GPIO PB9 and 15, those are connected with LED1 and LED2 of the nucleo boar
+ 245:Core/Src/main.c ****   GPIO_InitStruct.Pin = GPIO_PIN_9 | GPIO_PIN_15;
+ 134              		.loc 1 245 3 view .LVU39
+ 135              		.loc 1 245 23 is_stmt 0 view .LVU40
+ 136 0060 4FF40243 		mov	r3, #33280
+ 137 0064 0393     		str	r3, [sp, #12]
+ 246:Core/Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 138              		.loc 1 246 3 is_stmt 1 view .LVU41
+ 139              		.loc 1 246 24 is_stmt 0 view .LVU42
+ 140 0066 0123     		movs	r3, #1
+ 141 0068 0493     		str	r3, [sp, #16]
+ 247:Core/Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 142              		.loc 1 247 3 is_stmt 1 view .LVU43
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 16
+
+
+ 143              		.loc 1 247 24 is_stmt 0 view .LVU44
+ 144 006a 0594     		str	r4, [sp, #20]
+ 248:Core/Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 145              		.loc 1 248 3 is_stmt 1 view .LVU45
+ 146              		.loc 1 248 25 is_stmt 0 view .LVU46
+ 147 006c 0694     		str	r4, [sp, #24]
+ 249:Core/Src/main.c ****   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ 148              		.loc 1 249 3 is_stmt 1 view .LVU47
+ 149 006e 03A9     		add	r1, sp, #12
+ 150 0070 0248     		ldr	r0, .L3
+ 151 0072 FFF7FEFF 		bl	HAL_GPIO_Init
+ 152              	.LVL5:
+ 250:Core/Src/main.c **** 
+ 251:Core/Src/main.c **** /* USER CODE BEGIN MX_GPIO_Init_2 */
+ 252:Core/Src/main.c **** /* USER CODE END MX_GPIO_Init_2 */
+ 253:Core/Src/main.c **** }
+ 153              		.loc 1 253 1 is_stmt 0 view .LVU48
+ 154 0076 08B0     		add	sp, sp, #32
+ 155              	.LCFI2:
+ 156              		.cfi_def_cfa_offset 8
+ 157              		@ sp needed
+ 158 0078 10BD     		pop	{r4, pc}
+ 159              	.L4:
+ 160 007a 00BF     		.align	2
+ 161              	.L3:
+ 162 007c 00040048 		.word	1207960576
+ 163              		.cfi_endproc
+ 164              	.LFE853:
+ 166              		.section	.text.SystemClock_Config,"ax",%progbits
+ 167              		.align	1
+ 168              		.global	SystemClock_Config
+ 169              		.syntax unified
+ 170              		.thumb
+ 171              		.thumb_func
+ 173              	SystemClock_Config:
+ 174              	.LFB852:
+ 183:Core/Src/main.c ****   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+ 175              		.loc 1 183 1 is_stmt 1 view -0
+ 176              		.cfi_startproc
+ 177              		@ args = 0, pretend = 0, frame = 104
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179 0000 00B5     		push	{lr}
+ 180              	.LCFI3:
+ 181              		.cfi_def_cfa_offset 4
+ 182              		.cfi_offset 14, -4
+ 183 0002 9BB0     		sub	sp, sp, #108
+ 184              	.LCFI4:
+ 185              		.cfi_def_cfa_offset 112
+ 184:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 186              		.loc 1 184 3 view .LVU50
+ 184:Core/Src/main.c ****   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+ 187              		.loc 1 184 22 is_stmt 0 view .LVU51
+ 188 0004 4822     		movs	r2, #72
+ 189 0006 0021     		movs	r1, #0
+ 190 0008 08A8     		add	r0, sp, #32
+ 191 000a FFF7FEFF 		bl	memset
+ 192              	.LVL6:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 17
+
+
+ 185:Core/Src/main.c **** 
+ 193              		.loc 1 185 3 is_stmt 1 view .LVU52
+ 185:Core/Src/main.c **** 
+ 194              		.loc 1 185 22 is_stmt 0 view .LVU53
+ 195 000e 0023     		movs	r3, #0
+ 196 0010 0193     		str	r3, [sp, #4]
+ 197 0012 0293     		str	r3, [sp, #8]
+ 198 0014 0393     		str	r3, [sp, #12]
+ 199 0016 0493     		str	r3, [sp, #16]
+ 200 0018 0593     		str	r3, [sp, #20]
+ 201 001a 0693     		str	r3, [sp, #24]
+ 202 001c 0793     		str	r3, [sp, #28]
+ 189:Core/Src/main.c **** 
+ 203              		.loc 1 189 3 is_stmt 1 view .LVU54
+ 204              	.LBB14:
+ 189:Core/Src/main.c **** 
+ 205              		.loc 1 189 3 view .LVU55
+ 189:Core/Src/main.c **** 
+ 206              		.loc 1 189 3 view .LVU56
+ 207 001e 1649     		ldr	r1, .L11
+ 208 0020 0A68     		ldr	r2, [r1]
+ 209 0022 22F4C062 		bic	r2, r2, #1536
+ 210 0026 42F48062 		orr	r2, r2, #1024
+ 211 002a 0A60     		str	r2, [r1]
+ 189:Core/Src/main.c **** 
+ 212              		.loc 1 189 3 view .LVU57
+ 213 002c 0A68     		ldr	r2, [r1]
+ 214 002e 02F4C062 		and	r2, r2, #1536
+ 215 0032 0092     		str	r2, [sp]
+ 189:Core/Src/main.c **** 
+ 216              		.loc 1 189 3 view .LVU58
+ 217 0034 009A     		ldr	r2, [sp]
+ 218              	.LBE14:
+ 189:Core/Src/main.c **** 
+ 219              		.loc 1 189 3 view .LVU59
+ 193:Core/Src/main.c ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+ 220              		.loc 1 193 3 view .LVU60
+ 193:Core/Src/main.c ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+ 221              		.loc 1 193 36 is_stmt 0 view .LVU61
+ 222 0036 2022     		movs	r2, #32
+ 223 0038 0892     		str	r2, [sp, #32]
+ 194:Core/Src/main.c ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
+ 224              		.loc 1 194 3 is_stmt 1 view .LVU62
+ 194:Core/Src/main.c ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
+ 225              		.loc 1 194 30 is_stmt 0 view .LVU63
+ 226 003a 0122     		movs	r2, #1
+ 227 003c 1092     		str	r2, [sp, #64]
+ 195:Core/Src/main.c ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+ 228              		.loc 1 195 3 is_stmt 1 view .LVU64
+ 195:Core/Src/main.c ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+ 229              		.loc 1 195 41 is_stmt 0 view .LVU65
+ 230 003e 1193     		str	r3, [sp, #68]
+ 196:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+ 231              		.loc 1 196 3 is_stmt 1 view .LVU66
+ 196:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+ 232              		.loc 1 196 35 is_stmt 0 view .LVU67
+ 233 0040 6022     		movs	r2, #96
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 18
+
+
+ 234 0042 1292     		str	r2, [sp, #72]
+ 197:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 235              		.loc 1 197 3 is_stmt 1 view .LVU68
+ 197:Core/Src/main.c ****   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 236              		.loc 1 197 34 is_stmt 0 view .LVU69
+ 237 0044 1393     		str	r3, [sp, #76]
+ 198:Core/Src/main.c ****   {
+ 238              		.loc 1 198 3 is_stmt 1 view .LVU70
+ 198:Core/Src/main.c ****   {
+ 239              		.loc 1 198 7 is_stmt 0 view .LVU71
+ 240 0046 08A8     		add	r0, sp, #32
+ 241 0048 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 242              	.LVL7:
+ 198:Core/Src/main.c ****   {
+ 243              		.loc 1 198 6 view .LVU72
+ 244 004c 70B9     		cbnz	r0, .L9
+ 245              	.L6:
+ 205:Core/Src/main.c ****                               |RCC_CLOCKTYPE_SYSCLK|RCC_CLOCKTYPE_PCLK1
+ 246              		.loc 1 205 3 is_stmt 1 view .LVU73
+ 205:Core/Src/main.c ****                               |RCC_CLOCKTYPE_SYSCLK|RCC_CLOCKTYPE_PCLK1
+ 247              		.loc 1 205 31 is_stmt 0 view .LVU74
+ 248 004e 4F23     		movs	r3, #79
+ 249 0050 0193     		str	r3, [sp, #4]
+ 208:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 250              		.loc 1 208 3 is_stmt 1 view .LVU75
+ 208:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 251              		.loc 1 208 34 is_stmt 0 view .LVU76
+ 252 0052 0021     		movs	r1, #0
+ 253 0054 0291     		str	r1, [sp, #8]
+ 209:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 254              		.loc 1 209 3 is_stmt 1 view .LVU77
+ 209:Core/Src/main.c ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+ 255              		.loc 1 209 35 is_stmt 0 view .LVU78
+ 256 0056 0391     		str	r1, [sp, #12]
+ 210:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 257              		.loc 1 210 3 is_stmt 1 view .LVU79
+ 210:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+ 258              		.loc 1 210 36 is_stmt 0 view .LVU80
+ 259 0058 0491     		str	r1, [sp, #16]
+ 211:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLK3Divider = RCC_SYSCLK_DIV1;
+ 260              		.loc 1 211 3 is_stmt 1 view .LVU81
+ 211:Core/Src/main.c ****   RCC_ClkInitStruct.AHBCLK3Divider = RCC_SYSCLK_DIV1;
+ 261              		.loc 1 211 36 is_stmt 0 view .LVU82
+ 262 005a 0591     		str	r1, [sp, #20]
+ 212:Core/Src/main.c **** 
+ 263              		.loc 1 212 3 is_stmt 1 view .LVU83
+ 212:Core/Src/main.c **** 
+ 264              		.loc 1 212 36 is_stmt 0 view .LVU84
+ 265 005c 0791     		str	r1, [sp, #28]
+ 214:Core/Src/main.c ****   {
+ 266              		.loc 1 214 3 is_stmt 1 view .LVU85
+ 214:Core/Src/main.c ****   {
+ 267              		.loc 1 214 7 is_stmt 0 view .LVU86
+ 268 005e 01A8     		add	r0, sp, #4
+ 269 0060 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 270              	.LVL8:
+ 214:Core/Src/main.c ****   {
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 19
+
+
+ 271              		.loc 1 214 6 view .LVU87
+ 272 0064 28B9     		cbnz	r0, .L10
+ 273              	.L5:
+ 218:Core/Src/main.c **** 
+ 274              		.loc 1 218 1 view .LVU88
+ 275 0066 1BB0     		add	sp, sp, #108
+ 276              	.LCFI5:
+ 277              		.cfi_remember_state
+ 278              		.cfi_def_cfa_offset 4
+ 279              		@ sp needed
+ 280 0068 5DF804FB 		ldr	pc, [sp], #4
+ 281              	.L9:
+ 282              	.LCFI6:
+ 283              		.cfi_restore_state
+ 200:Core/Src/main.c ****   }
+ 284              		.loc 1 200 5 is_stmt 1 view .LVU89
+ 285 006c FFF7FEFF 		bl	Error_Handler
+ 286              	.LVL9:
+ 287 0070 EDE7     		b	.L6
+ 288              	.L10:
+ 216:Core/Src/main.c ****   }
+ 289              		.loc 1 216 5 view .LVU90
+ 290 0072 FFF7FEFF 		bl	Error_Handler
+ 291              	.LVL10:
+ 218:Core/Src/main.c **** 
+ 292              		.loc 1 218 1 is_stmt 0 view .LVU91
+ 293 0076 F6E7     		b	.L5
+ 294              	.L12:
+ 295              		.align	2
+ 296              	.L11:
+ 297 0078 00040058 		.word	1476396032
+ 298              		.cfi_endproc
+ 299              	.LFE852:
+ 301              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 302              		.align	2
+ 303              	.LC0:
+ 304 0000 6B65726E 		.ascii	"kernel info: %s\015\012\000"
+ 304      656C2069 
+ 304      6E666F3A 
+ 304      2025730D 
+ 304      0A00
+ 305 0012 0000     		.align	2
+ 306              	.LC1:
+ 307 0014 636D7369 		.ascii	"cmsis os2 api version: %ld\015\012\000"
+ 307      73206F73 
+ 307      32206170 
+ 307      69207665 
+ 307      7273696F 
+ 308 0031 000000   		.align	2
+ 309              	.LC2:
+ 310 0034 636D7369 		.ascii	"cmsis os2 kernel version: %ld\015\012\000"
+ 310      73206F73 
+ 310      32206B65 
+ 310      726E656C 
+ 310      20766572 
+ 311              		.align	2
+ 312              	.LC3:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 20
+
+
+ 313 0054 4B65726E 		.ascii	"Kernel's default state is not inactive, going to er"
+ 313      656C2773 
+ 313      20646566 
+ 313      61756C74 
+ 313      20737461 
+ 314 0087 726F7220 		.ascii	"ror loop\015\000"
+ 314      6C6F6F70 
+ 314      0D00
+ 315 0091 000000   		.align	2
+ 316              	.LC4:
+ 317 0094 74687265 		.ascii	"thread creation failed\015\000"
+ 317      61642063 
+ 317      72656174 
+ 317      696F6E20 
+ 317      6661696C 
+ 318              		.align	2
+ 319              	.LC5:
+ 320 00ac 4B65726E 		.ascii	"Kernel is not ready to be started, check api: osKer"
+ 320      656C2069 
+ 320      73206E6F 
+ 320      74207265 
+ 320      61647920 
+ 321 00df 6E656C49 		.ascii	"nelInialize, going to error loop\015\000"
+ 321      6E69616C 
+ 321      697A652C 
+ 321      20676F69 
+ 321      6E672074 
+ 322              		.section	.text.main,"ax",%progbits
+ 323              		.align	1
+ 324              		.global	main
+ 325              		.syntax unified
+ 326              		.thumb
+ 327              		.thumb_func
+ 329              	main:
+ 330              	.LFB851:
+  74:Core/Src/main.c **** 
+ 331              		.loc 1 74 1 is_stmt 1 view -0
+ 332              		.cfi_startproc
+ 333              		@ Volatile: function does not return.
+ 334              		@ args = 0, pretend = 0, frame = 0
+ 335              		@ frame_needed = 0, uses_anonymous_args = 0
+ 336 0000 08B5     		push	{r3, lr}
+ 337              	.LCFI7:
+ 338              		.cfi_def_cfa_offset 8
+ 339              		.cfi_offset 3, -8
+ 340              		.cfi_offset 14, -4
+  83:Core/Src/main.c **** 
+ 341              		.loc 1 83 3 view .LVU93
+ 342 0002 FFF7FEFF 		bl	HAL_Init
+ 343              	.LVL11:
+  90:Core/Src/main.c **** 
+ 344              		.loc 1 90 3 view .LVU94
+ 345 0006 FFF7FEFF 		bl	SystemClock_Config
+ 346              	.LVL12:
+  97:Core/Src/main.c ****   /* USER CODE BEGIN 2 */
+ 347              		.loc 1 97 3 view .LVU95
+ 348 000a FFF7FEFF 		bl	MX_GPIO_Init
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 21
+
+
+ 349              	.LVL13:
+ 103:Core/Src/main.c ****   printf("kernel info: %s\r\n", chArrInfoBuf);
+ 350              		.loc 1 103 3 view .LVU96
+ 351 000e 1D4D     		ldr	r5, .L22
+ 352 0010 1D4C     		ldr	r4, .L22+4
+ 353 0012 6422     		movs	r2, #100
+ 354 0014 2946     		mov	r1, r5
+ 355 0016 2046     		mov	r0, r4
+ 356 0018 FFF7FEFF 		bl	osKernelGetInfo
+ 357              	.LVL14:
+ 358 001c FFF7FEFF 		bl	OS2ConfigAssert
+ 359              	.LVL15:
+ 104:Core/Src/main.c ****   printf("cmsis os2 api version: %ld\r\n", osv.api);
+ 360              		.loc 1 104 3 view .LVU97
+ 361 0020 2946     		mov	r1, r5
+ 362 0022 1A48     		ldr	r0, .L22+8
+ 363 0024 FFF7FEFF 		bl	printf
+ 364              	.LVL16:
+ 105:Core/Src/main.c ****   printf("cmsis os2 kernel version: %ld\r\n", osv.kernel);
+ 365              		.loc 1 105 3 view .LVU98
+ 366 0028 2168     		ldr	r1, [r4]
+ 367 002a 1948     		ldr	r0, .L22+12
+ 368 002c FFF7FEFF 		bl	printf
+ 369              	.LVL17:
+ 106:Core/Src/main.c **** 
+ 370              		.loc 1 106 3 view .LVU99
+ 371 0030 6168     		ldr	r1, [r4, #4]
+ 372 0032 1848     		ldr	r0, .L22+16
+ 373 0034 FFF7FEFF 		bl	printf
+ 374              	.LVL18:
+ 109:Core/Src/main.c ****   if(KernelState == osKernelInactive)
+ 375              		.loc 1 109 3 view .LVU100
+ 109:Core/Src/main.c ****   if(KernelState == osKernelInactive)
+ 376              		.loc 1 109 17 is_stmt 0 view .LVU101
+ 377 0038 FFF7FEFF 		bl	osKernelGetState
+ 378              	.LVL19:
+ 109:Core/Src/main.c ****   if(KernelState == osKernelInactive)
+ 379              		.loc 1 109 15 view .LVU102
+ 380 003c 164B     		ldr	r3, .L22+20
+ 381 003e 1860     		str	r0, [r3]
+ 110:Core/Src/main.c ****   {
+ 382              		.loc 1 110 3 is_stmt 1 view .LVU103
+ 110:Core/Src/main.c ****   {
+ 383              		.loc 1 110 5 is_stmt 0 view .LVU104
+ 384 0040 80B9     		cbnz	r0, .L14
+ 113:Core/Src/main.c ****   }
+ 385              		.loc 1 113 5 is_stmt 1 view .LVU105
+ 386 0042 FFF7FEFF 		bl	osKernelInitialize
+ 387              	.LVL20:
+ 388              	.L15:
+ 138:Core/Src/main.c ****   {
+ 389              		.loc 1 138 3 view .LVU106
+ 138:Core/Src/main.c ****   {
+ 390              		.loc 1 138 7 is_stmt 0 view .LVU107
+ 391 0046 FFF7FEFF 		bl	fnConfigAndCreateThreads
+ 392              	.LVL21:
+ 138:Core/Src/main.c ****   {
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 22
+
+
+ 393              		.loc 1 138 5 view .LVU108
+ 394 004a 88B1     		cbz	r0, .L20
+ 395              	.L16:
+ 142:Core/Src/main.c ****   
+ 396              		.loc 1 142 4 is_stmt 1 view .LVU109
+ 153:Core/Src/main.c ****   if(KernelState == osKernelReady)
+ 397              		.loc 1 153 3 view .LVU110
+ 153:Core/Src/main.c ****   if(KernelState == osKernelReady)
+ 398              		.loc 1 153 17 is_stmt 0 view .LVU111
+ 399 004c FFF7FEFF 		bl	osKernelGetState
+ 400              	.LVL22:
+ 153:Core/Src/main.c ****   if(KernelState == osKernelReady)
+ 401              		.loc 1 153 15 view .LVU112
+ 402 0050 114B     		ldr	r3, .L22+20
+ 403 0052 1860     		str	r0, [r3]
+ 154:Core/Src/main.c ****   {
+ 404              		.loc 1 154 3 is_stmt 1 view .LVU113
+ 154:Core/Src/main.c ****   {
+ 405              		.loc 1 154 5 is_stmt 0 view .LVU114
+ 406 0054 0128     		cmp	r0, #1
+ 407 0056 11D0     		beq	.L21
+ 161:Core/Src/main.c ****     Error_Handler();
+ 408              		.loc 1 161 5 is_stmt 1 view .LVU115
+ 409 0058 1048     		ldr	r0, .L22+24
+ 410 005a FFF7FEFF 		bl	puts
+ 411              	.LVL23:
+ 162:Core/Src/main.c ****   }
+ 412              		.loc 1 162 5 view .LVU116
+ 413 005e FFF7FEFF 		bl	Error_Handler
+ 414              	.LVL24:
+ 415              	.L18:
+ 169:Core/Src/main.c ****   {
+ 416              		.loc 1 169 3 discriminator 1 view .LVU117
+ 174:Core/Src/main.c ****   /* USER CODE END 3 */
+ 417              		.loc 1 174 3 discriminator 1 view .LVU118
+ 169:Core/Src/main.c ****   {
+ 418              		.loc 1 169 9 discriminator 1 view .LVU119
+ 419 0062 FEE7     		b	.L18
+ 420              	.L14:
+ 117:Core/Src/main.c ****     Error_Handler();
+ 421              		.loc 1 117 5 view .LVU120
+ 422 0064 0E48     		ldr	r0, .L22+28
+ 423 0066 FFF7FEFF 		bl	puts
+ 424              	.LVL25:
+ 118:Core/Src/main.c ****   }
+ 425              		.loc 1 118 5 view .LVU121
+ 426 006a FFF7FEFF 		bl	Error_Handler
+ 427              	.LVL26:
+ 428 006e EAE7     		b	.L15
+ 429              	.L20:
+ 140:Core/Src/main.c ****     Error_Handler();
+ 430              		.loc 1 140 5 view .LVU122
+ 431 0070 0C48     		ldr	r0, .L22+32
+ 432 0072 FFF7FEFF 		bl	puts
+ 433              	.LVL27:
+ 141:Core/Src/main.c ****   };
+ 434              		.loc 1 141 5 view .LVU123
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 23
+
+
+ 435 0076 FFF7FEFF 		bl	Error_Handler
+ 436              	.LVL28:
+ 437 007a E7E7     		b	.L16
+ 438              	.L21:
+ 157:Core/Src/main.c ****   }
+ 439              		.loc 1 157 5 view .LVU124
+ 440 007c FFF7FEFF 		bl	osKernelStart
+ 441              	.LVL29:
+ 442 0080 EFE7     		b	.L18
+ 443              	.L23:
+ 444 0082 00BF     		.align	2
+ 445              	.L22:
+ 446 0084 00000000 		.word	chArrInfoBuf
+ 447 0088 00000000 		.word	osv
+ 448 008c 00000000 		.word	.LC0
+ 449 0090 14000000 		.word	.LC1
+ 450 0094 34000000 		.word	.LC2
+ 451 0098 00000000 		.word	.LANCHOR0
+ 452 009c AC000000 		.word	.LC5
+ 453 00a0 54000000 		.word	.LC3
+ 454 00a4 94000000 		.word	.LC4
+ 455              		.cfi_endproc
+ 456              	.LFE851:
+ 458              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
+ 459              		.align	1
+ 460              		.global	HAL_TIM_PeriodElapsedCallback
+ 461              		.syntax unified
+ 462              		.thumb
+ 463              		.thumb_func
+ 465              	HAL_TIM_PeriodElapsedCallback:
+ 466              	.LVL30:
+ 467              	.LFB854:
+ 254:Core/Src/main.c **** 
+ 255:Core/Src/main.c **** /* USER CODE BEGIN 4 */
+ 256:Core/Src/main.c **** 
+ 257:Core/Src/main.c **** /* USER CODE END 4 */
+ 258:Core/Src/main.c **** 
+ 259:Core/Src/main.c **** /**
+ 260:Core/Src/main.c ****   * @brief  Period elapsed callback in non blocking mode
+ 261:Core/Src/main.c ****   * @note   This function is called  when TIM17 interrupt took place, inside
+ 262:Core/Src/main.c ****   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+ 263:Core/Src/main.c ****   * a global variable "uwTick" used as application time base.
+ 264:Core/Src/main.c ****   * @param  htim : TIM handle
+ 265:Core/Src/main.c ****   * @retval None
+ 266:Core/Src/main.c ****   */
+ 267:Core/Src/main.c **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ 268:Core/Src/main.c **** {
+ 468              		.loc 1 268 1 view -0
+ 469              		.cfi_startproc
+ 470              		@ args = 0, pretend = 0, frame = 0
+ 471              		@ frame_needed = 0, uses_anonymous_args = 0
+ 472              		.loc 1 268 1 is_stmt 0 view .LVU126
+ 473 0000 08B5     		push	{r3, lr}
+ 474              	.LCFI8:
+ 475              		.cfi_def_cfa_offset 8
+ 476              		.cfi_offset 3, -8
+ 477              		.cfi_offset 14, -4
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 24
+
+
+ 269:Core/Src/main.c ****   /* USER CODE BEGIN Callback 0 */
+ 270:Core/Src/main.c **** 
+ 271:Core/Src/main.c ****   /* USER CODE END Callback 0 */
+ 272:Core/Src/main.c ****   if (htim->Instance == TIM17) {
+ 478              		.loc 1 272 3 is_stmt 1 view .LVU127
+ 479              		.loc 1 272 11 is_stmt 0 view .LVU128
+ 480 0002 0268     		ldr	r2, [r0]
+ 481              		.loc 1 272 6 view .LVU129
+ 482 0004 034B     		ldr	r3, .L28
+ 483 0006 9A42     		cmp	r2, r3
+ 484 0008 00D0     		beq	.L27
+ 485              	.LVL31:
+ 486              	.L24:
+ 273:Core/Src/main.c ****     HAL_IncTick();
+ 274:Core/Src/main.c ****   }
+ 275:Core/Src/main.c ****   /* USER CODE BEGIN Callback 1 */
+ 276:Core/Src/main.c **** 
+ 277:Core/Src/main.c ****   /* USER CODE END Callback 1 */
+ 278:Core/Src/main.c **** }
+ 487              		.loc 1 278 1 view .LVU130
+ 488 000a 08BD     		pop	{r3, pc}
+ 489              	.LVL32:
+ 490              	.L27:
+ 273:Core/Src/main.c ****     HAL_IncTick();
+ 491              		.loc 1 273 5 is_stmt 1 view .LVU131
+ 492 000c FFF7FEFF 		bl	HAL_IncTick
+ 493              	.LVL33:
+ 494              		.loc 1 278 1 is_stmt 0 view .LVU132
+ 495 0010 FBE7     		b	.L24
+ 496              	.L29:
+ 497 0012 00BF     		.align	2
+ 498              	.L28:
+ 499 0014 00480140 		.word	1073825792
+ 500              		.cfi_endproc
+ 501              	.LFE854:
+ 503              		.section	.text.fnKernelGetTickCount,"ax",%progbits
+ 504              		.align	1
+ 505              		.global	fnKernelGetTickCount
+ 506              		.syntax unified
+ 507              		.thumb
+ 508              		.thumb_func
+ 510              	fnKernelGetTickCount:
+ 511              	.LFB855:
+ 279:Core/Src/main.c **** 
+ 280:Core/Src/main.c **** /**
+ 281:Core/Src/main.c ****  * @name : fnKernelGetTickCount
+ 282:Core/Src/main.c ****  * @param : NULL
+ 283:Core/Src/main.c ****  * @retval : void
+ 284:Core/Src/main.c ****  * @details : this function handles the tick count overflow of the api: osKerbelGettickCount, 
+ 285:Core/Src/main.c ****  *           typically the tick count value is 32 bit and will overflow after 2^32 ticks which is r
+ 286:Core/Src/main.c ****  * 
+ 287:Core/Src/main.c ****  */
+ 288:Core/Src/main.c **** uint64_t fnKernelGetTickCount(void) 
+ 289:Core/Src/main.c **** {
+ 512              		.loc 1 289 1 is_stmt 1 view -0
+ 513              		.cfi_startproc
+ 514              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 25
+
+
+ 515              		@ frame_needed = 0, uses_anonymous_args = 0
+ 516 0000 08B5     		push	{r3, lr}
+ 517              	.LCFI9:
+ 518              		.cfi_def_cfa_offset 8
+ 519              		.cfi_offset 3, -8
+ 520              		.cfi_offset 14, -4
+ 290:Core/Src/main.c ****   static uint32_t tick_h = 0U;
+ 521              		.loc 1 290 3 view .LVU134
+ 291:Core/Src/main.c ****   static uint32_t tick_l = 0U;
+ 522              		.loc 1 291 3 view .LVU135
+ 292:Core/Src/main.c ****   uint32_t tick;
+ 523              		.loc 1 292 3 view .LVU136
+ 293:Core/Src/main.c ****   tick = osKernelGetTickCount();
+ 524              		.loc 1 293 3 view .LVU137
+ 525              		.loc 1 293 10 is_stmt 0 view .LVU138
+ 526 0002 FFF7FEFF 		bl	osKernelGetTickCount
+ 527              	.LVL34:
+ 294:Core/Src/main.c ****   if (tick < tick_l) {
+ 528              		.loc 1 294 3 is_stmt 1 view .LVU139
+ 529              		.loc 1 294 12 is_stmt 0 view .LVU140
+ 530 0006 064B     		ldr	r3, .L33
+ 531 0008 1B68     		ldr	r3, [r3]
+ 532              		.loc 1 294 6 view .LVU141
+ 533 000a 8342     		cmp	r3, r0
+ 534 000c 03D9     		bls	.L31
+ 295:Core/Src/main.c ****     tick_h++;
+ 535              		.loc 1 295 5 is_stmt 1 view .LVU142
+ 536              		.loc 1 295 11 is_stmt 0 view .LVU143
+ 537 000e 054A     		ldr	r2, .L33+4
+ 538 0010 1368     		ldr	r3, [r2]
+ 539 0012 0133     		adds	r3, r3, #1
+ 540 0014 1360     		str	r3, [r2]
+ 541              	.L31:
+ 296:Core/Src/main.c ****   }
+ 297:Core/Src/main.c ****   tick_l = tick;
+ 542              		.loc 1 297 3 is_stmt 1 view .LVU144
+ 543              		.loc 1 297 10 is_stmt 0 view .LVU145
+ 544 0016 024B     		ldr	r3, .L33
+ 545 0018 1860     		str	r0, [r3]
+ 298:Core/Src/main.c ****   return (((uint64_t)tick_h << 32) | tick_l);
+ 546              		.loc 1 298 3 is_stmt 1 view .LVU146
+ 299:Core/Src/main.c **** }
+ 547              		.loc 1 299 1 is_stmt 0 view .LVU147
+ 548 001a 024B     		ldr	r3, .L33+4
+ 549 001c 1968     		ldr	r1, [r3]
+ 550 001e 08BD     		pop	{r3, pc}
+ 551              	.L34:
+ 552              		.align	2
+ 553              	.L33:
+ 554 0020 00000000 		.word	.LANCHOR1
+ 555 0024 00000000 		.word	.LANCHOR2
+ 556              		.cfi_endproc
+ 557              	.LFE855:
+ 559              		.global	u32KernelSystemTimer
+ 560              		.global	u32KernelTickFrequency
+ 561              		.global	KernelState
+ 562              		.section	.bss.KernelState,"aw",%nobits
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 26
+
+
+ 563              		.align	2
+ 564              		.set	.LANCHOR0,. + 0
+ 567              	KernelState:
+ 568 0000 00000000 		.space	4
+ 569              		.section	.bss.tick_h.0,"aw",%nobits
+ 570              		.align	2
+ 571              		.set	.LANCHOR2,. + 0
+ 574              	tick_h.0:
+ 575 0000 00000000 		.space	4
+ 576              		.section	.bss.tick_l.1,"aw",%nobits
+ 577              		.align	2
+ 578              		.set	.LANCHOR1,. + 0
+ 581              	tick_l.1:
+ 582 0000 00000000 		.space	4
+ 583              		.section	.bss.u32KernelSystemTimer,"aw",%nobits
+ 584              		.align	2
+ 587              	u32KernelSystemTimer:
+ 588 0000 00000000 		.space	4
+ 589              		.section	.bss.u32KernelTickFrequency,"aw",%nobits
+ 590              		.align	2
+ 593              	u32KernelTickFrequency:
+ 594 0000 00000000 		.space	4
+ 595              		.text
+ 596              	.Letext0:
+ 597              		.file 3 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 598              		.file 4 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 599              		.file 5 "Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wl55xx.h"
+ 600              		.file 6 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_def.h"
+ 601              		.file 7 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_dma.h"
+ 602              		.file 8 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_gpio.h"
+ 603              		.file 9 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_rcc.h"
+ 604              		.file 10 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_tim.h"
+ 605              		.file 11 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ 606              		.file 12 "Core/Inc/cmsis_os2_attr.h"
+ 607              		.file 13 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
+ 608              		.file 14 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal.h"
+ 609              		.file 15 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-1
+ 610              		.file 16 "<built-in>"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s 			page 27
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:18     .text.MX_GPIO_Init:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:23     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:162    .text.MX_GPIO_Init:0000007c $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:167    .text.SystemClock_Config:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:173    .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:297    .text.SystemClock_Config:00000078 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:302    .rodata.main.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:323    .text.main:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:329    .text.main:00000000 main
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:446    .text.main:00000084 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:459    .text.HAL_TIM_PeriodElapsedCallback:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:465    .text.HAL_TIM_PeriodElapsedCallback:00000000 HAL_TIM_PeriodElapsedCallback
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:499    .text.HAL_TIM_PeriodElapsedCallback:00000014 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:504    .text.fnKernelGetTickCount:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:510    .text.fnKernelGetTickCount:00000000 fnKernelGetTickCount
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:554    .text.fnKernelGetTickCount:00000020 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:587    .bss.u32KernelSystemTimer:00000000 u32KernelSystemTimer
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:593    .bss.u32KernelTickFrequency:00000000 u32KernelTickFrequency
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:567    .bss.KernelState:00000000 KernelState
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:563    .bss.KernelState:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:570    .bss.tick_h.0:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:574    .bss.tick_h.0:00000000 tick_h.0
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:577    .bss.tick_l.1:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:581    .bss.tick_l.1:00000000 tick_l.1
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:584    .bss.u32KernelSystemTimer:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cckoB0Mz.s:590    .bss.u32KernelTickFrequency:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+memset
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+Error_Handler
+HAL_Init
+osKernelGetInfo
+OS2ConfigAssert
+printf
+osKernelGetState
+osKernelInitialize
+fnConfigAndCreateThreads
+puts
+osKernelStart
+chArrInfoBuf
+osv
+HAL_IncTick
+osKernelGetTickCount

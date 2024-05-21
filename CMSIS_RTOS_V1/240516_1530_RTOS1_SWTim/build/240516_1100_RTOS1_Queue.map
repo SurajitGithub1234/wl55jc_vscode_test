@@ -2862,7 +2862,7 @@ LOAD d:/zodhya projects/technical doccuments/stm32_vscode_make/tools/gcc-arm-non
  .debug_line    0x000148f7      0x1e3 build/error_handler.o
  .debug_line    0x00014ada       0x7b build/startup_stm32wl55xx_cm4.o
 
-.debug_str      0x00000000     0x7410
+.debug_str      0x00000000     0x7479
  .debug_str     0x00000000     0x1351 build/main.o
                                0x150e (size before relaxing)
  .debug_str     0x00001351      0x158 build/app_freertos.o
@@ -2911,8 +2911,7 @@ LOAD d:/zodhya projects/technical doccuments/stm32_vscode_make/tools/gcc-arm-non
                                 0x414 (size before relaxing)
  .debug_str     0x000073c1       0x27 build/error_handler.o
                                 0x1da (size before relaxing)
- .debug_str     0x000073e8       0x28 build/startup_stm32wl55xx_cm4.o
-                                 0x83 (size before relaxing)
+ .debug_str     0x000073e8       0x91 build/startup_stm32wl55xx_cm4.o
 
 .comment        0x00000000       0x49
  .comment       0x00000000       0x49 build/main.o
