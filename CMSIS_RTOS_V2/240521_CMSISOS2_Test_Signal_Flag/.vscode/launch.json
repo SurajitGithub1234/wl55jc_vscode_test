@@ -1,0 +1,53 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Cortex Debug",
+      "cwd": "${workspaceRoot}",
+      "executable": "./build/240521_CMSISOS2_Test_Signal_Flag.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "device": "STM32WL55JC1",
+      "configFiles": [
+        "interface/stlink-dap.cfg",
+        "target/stm32wlx.cfg"
+      ],
+      "svdFile": "./stm32wl5x_cm4.svd",
+      "swoConfig": {
+        "enabled": true,
+        "cpuFrequency": 4000000,
+        "swoFrequency": 4000000,
+        "source": "probe",
+        "decoders": [
+          {
+            "label": "ITM port 0 output",
+            "type": "console",
+            "port": 0,
+            "showOnStartup": true,
+            "encoding": "ascii"
+          }
+        ]
+      }
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": ".",
+      "program": "build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}

@@ -150,7 +150,7 @@ int main(void)
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
-  KernelState = osKernelGetState(); 
+   KernelState = osKernelGetState(); 
   if(KernelState == osKernelReady)
   {
     //start the kernel
