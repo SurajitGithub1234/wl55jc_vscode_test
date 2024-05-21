@@ -1,0 +1,890 @@
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"cmsis_os2_threads.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.rodata.fnOS2ThreadSynchSender1.str1.4,"aMS",%progbits,1
+  18              		.align	2
+  19              	.LC0:
+  20 0000 4B65726E 		.ascii	"Kernel tick freq: %ldHz\015\012\000"
+  20      656C2074 
+  20      69636B20 
+  20      66726571 
+  20      3A20256C 
+  21 001a 0000     		.align	2
+  22              	.LC1:
+  23 001c 4B65726E 		.ascii	"Kernel system timer freq: %ldHz | ARM's systick fre"
+  23      656C2073 
+  23      79737465 
+  23      6D207469 
+  23      6D657220 
+  24 004f 713A2025 		.ascii	"q: %ldHz\015\012\000"
+  24      6C64487A 
+  24      0D0A00
+  25 005a 0000     		.align	2
+  26              	.LC2:
+  27 005c 53656E64 		.ascii	"Sender thread 1 toggle period: %ld\015\012\000"
+  27      65722074 
+  27      68726561 
+  27      64203120 
+  27      746F6767 
+  28 0081 000000   		.align	2
+  29              	.LC3:
+  30 0084 53657474 		.ascii	"Setting flag from Sender 1\015\000"
+  30      696E6720 
+  30      666C6167 
+  30      2066726F 
+  30      6D205365 
+  31              		.align	2
+  32              	.LC4:
+  33 00a0 72657475 		.ascii	"return value of 32 bit flag after receiver thread g"
+  33      726E2076 
+  33      616C7565 
+  33      206F6620 
+  33      33322062 
+  34 00d3 65742075 		.ascii	"et unblocked: %lx\015\012\000"
+  34      6E626C6F 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 2
+
+
+  34      636B6564 
+  34      3A20256C 
+  34      780D0A00 
+  35              		.section	.text.fnOS2ThreadSynchSender1,"ax",%progbits
+  36              		.align	1
+  37              		.global	fnOS2ThreadSynchSender1
+  38              		.syntax unified
+  39              		.thumb
+  40              		.thumb_func
+  42              	fnOS2ThreadSynchSender1:
+  43              	.LVL0:
+  44              	.LFB851:
+  45              		.file 1 "Core/Src/cmsis_os2_threads.c"
+   1:Core/Src/cmsis_os2_threads.c **** #include <stdio.h>
+   2:Core/Src/cmsis_os2_threads.c **** #include <string.h>
+   3:Core/Src/cmsis_os2_threads.c **** #include <stdarg.h>
+   4:Core/Src/cmsis_os2_threads.c **** #include <stdint.h>
+   5:Core/Src/cmsis_os2_threads.c **** #include <stdbool.h>
+   6:Core/Src/cmsis_os2_threads.c **** 
+   7:Core/Src/cmsis_os2_threads.c **** #include "main.h"
+   8:Core/Src/cmsis_os2_threads.c **** #include "cmsis_os.h"
+   9:Core/Src/cmsis_os2_threads.c **** #include "cmsis_os2.h"
+  10:Core/Src/cmsis_os2_threads.c **** #include "cmsis_os2_attr.h"
+  11:Core/Src/cmsis_os2_threads.c **** 
+  12:Core/Src/cmsis_os2_threads.c **** /* Private variables ---------------------------------------------------------*/
+  13:Core/Src/cmsis_os2_threads.c **** osVersion_t osv; 
+  14:Core/Src/cmsis_os2_threads.c **** char chArrInfoBuf[100];
+  15:Core/Src/cmsis_os2_threads.c **** 
+  16:Core/Src/cmsis_os2_threads.c **** //Global variables for Signal Flags//
+  17:Core/Src/cmsis_os2_threads.c **** uint32_t u32SetFlagFromthread, u32SignalApiReturnFlag, u32SignalFlagBeforeClear, u32SignalFlagForWa
+  18:Core/Src/cmsis_os2_threads.c **** /**
+  19:Core/Src/cmsis_os2_threads.c ****  * @brief : Definition and configuration of threads
+  20:Core/Src/cmsis_os2_threads.c ****  * @details : Thread ID creation which acts as a handler for thread creation and attribute structur
+  21:Core/Src/cmsis_os2_threads.c ****  *            like name, priority, stack size, array ptr for static thread alllocation etc.  
+  22:Core/Src/cmsis_os2_threads.c ****  * 
+  23:Core/Src/cmsis_os2_threads.c ****  */
+  24:Core/Src/cmsis_os2_threads.c **** osThreadId_t OS2SynchSender1ID, OS2SynchSender2ID, OS2SynchReceiverID; // Thread ids: structure tha
+  25:Core/Src/cmsis_os2_threads.c **** const osThreadAttr_t OS2SynchSender1Attr = {
+  26:Core/Src/cmsis_os2_threads.c ****   .name = "SynchSender1Thread",
+  27:Core/Src/cmsis_os2_threads.c ****   .priority = (osPriority_t) osPriorityNormal,
+  28:Core/Src/cmsis_os2_threads.c ****   .stack_size = 128 * 4
+  29:Core/Src/cmsis_os2_threads.c **** };
+  30:Core/Src/cmsis_os2_threads.c **** const osThreadAttr_t OS2SynchSender2Attr = {
+  31:Core/Src/cmsis_os2_threads.c ****   .name = "SynchSender2Thread",
+  32:Core/Src/cmsis_os2_threads.c ****   .priority = (osPriority_t) osPriorityNormal,
+  33:Core/Src/cmsis_os2_threads.c ****   .stack_size = 128 * 4
+  34:Core/Src/cmsis_os2_threads.c **** };
+  35:Core/Src/cmsis_os2_threads.c **** const osThreadAttr_t OS2SynchReceiverAttr = {
+  36:Core/Src/cmsis_os2_threads.c ****   .name = "SynchReceiverThread",
+  37:Core/Src/cmsis_os2_threads.c ****   .priority = (osPriority_t) osPriorityAboveNormal1,
+  38:Core/Src/cmsis_os2_threads.c ****   .stack_size = 128 * 4
+  39:Core/Src/cmsis_os2_threads.c **** };
+  40:Core/Src/cmsis_os2_threads.c **** 
+  41:Core/Src/cmsis_os2_threads.c **** /* USER CODE BEGIN Header_StartDefaultTask */
+  42:Core/Src/cmsis_os2_threads.c **** /**
+  43:Core/Src/cmsis_os2_threads.c ****   * @brief  Function implementing the fnOS2SynchSender1 thread.
+  44:Core/Src/cmsis_os2_threads.c ****   * @param  argument: Frequency of the LED 1 toggling
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 3
+
+
+  45:Core/Src/cmsis_os2_threads.c ****   * @details : This function toggles LED 1 (Nucleo Board) with fixed periocity got from the functio
+  46:Core/Src/cmsis_os2_threads.c ****   * @retval None
+  47:Core/Src/cmsis_os2_threads.c ****   */
+  48:Core/Src/cmsis_os2_threads.c **** void fnOS2ThreadSynchSender1(void *arg)
+  49:Core/Src/cmsis_os2_threads.c **** {
+  46              		.loc 1 49 1 view -0
+  47              		.cfi_startproc
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50              		.loc 1 49 1 is_stmt 0 view .LVU1
+  51 0000 70B5     		push	{r4, r5, r6, lr}
+  52              	.LCFI0:
+  53              		.cfi_def_cfa_offset 16
+  54              		.cfi_offset 4, -16
+  55              		.cfi_offset 5, -12
+  56              		.cfi_offset 6, -8
+  57              		.cfi_offset 14, -4
+  58 0002 0646     		mov	r6, r0
+  50:Core/Src/cmsis_os2_threads.c ****   /*1st get the kernel tick freq details*/
+  51:Core/Src/cmsis_os2_threads.c ****   u32KernelTickFrequency = osKernelGetTickFreq();
+  59              		.loc 1 51 3 is_stmt 1 view .LVU2
+  60              		.loc 1 51 28 is_stmt 0 view .LVU3
+  61 0004 FFF7FEFF 		bl	osKernelGetTickFreq
+  62              	.LVL1:
+  63              		.loc 1 51 26 view .LVU4
+  64 0008 194D     		ldr	r5, .L4
+  65 000a 2860     		str	r0, [r5]
+  52:Core/Src/cmsis_os2_threads.c ****   u32KernelSystemTimer = osKernelGetSysTimerFreq(); 
+  66              		.loc 1 52 3 is_stmt 1 view .LVU5
+  67              		.loc 1 52 26 is_stmt 0 view .LVU6
+  68 000c FFF7FEFF 		bl	osKernelGetSysTimerFreq
+  69              	.LVL2:
+  70              		.loc 1 52 24 view .LVU7
+  71 0010 184C     		ldr	r4, .L4+4
+  72 0012 2060     		str	r0, [r4]
+  53:Core/Src/cmsis_os2_threads.c ****   printf("Kernel tick freq: %ldHz\r\n", u32KernelTickFrequency);
+  73              		.loc 1 53 3 is_stmt 1 view .LVU8
+  74 0014 2968     		ldr	r1, [r5]
+  75 0016 1848     		ldr	r0, .L4+8
+  76 0018 FFF7FEFF 		bl	printf
+  77              	.LVL3:
+  54:Core/Src/cmsis_os2_threads.c ****   printf("Kernel system timer freq: %ldHz | ARM's systick freq: %ldHz\r\n", u32KernelSystemTimer, H
+  78              		.loc 1 54 3 view .LVU9
+  79 001c 2468     		ldr	r4, [r4]
+  80 001e FFF7FEFF 		bl	HAL_RCC_GetSysClockFreq
+  81              	.LVL4:
+  82 0022 0246     		mov	r2, r0
+  83 0024 2146     		mov	r1, r4
+  84 0026 1548     		ldr	r0, .L4+12
+  85 0028 FFF7FEFF 		bl	printf
+  86              	.LVL5:
+  55:Core/Src/cmsis_os2_threads.c ****   uint32_t u32LocTick;
+  87              		.loc 1 55 3 view .LVU10
+  56:Core/Src/cmsis_os2_threads.c ****   u32LocTick = osKernelGetTickCount();
+  88              		.loc 1 56 3 view .LVU11
+  89              		.loc 1 56 16 is_stmt 0 view .LVU12
+  90 002c FFF7FEFF 		bl	osKernelGetTickCount
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 4
+
+
+  91              	.LVL6:
+  92 0030 0446     		mov	r4, r0
+  93              	.LVL7:
+  57:Core/Src/cmsis_os2_threads.c ****   uint32_t u32LEDTogglePeriod = (uint32_t)arg; 
+  94              		.loc 1 57 3 is_stmt 1 view .LVU13
+  58:Core/Src/cmsis_os2_threads.c ****   printf("Sender thread 1 toggle period: %ld\r\n", u32LEDTogglePeriod);
+  95              		.loc 1 58 3 view .LVU14
+  96 0032 3146     		mov	r1, r6
+  97 0034 1248     		ldr	r0, .L4+16
+  98              	.LVL8:
+  99              		.loc 1 58 3 is_stmt 0 view .LVU15
+ 100 0036 FFF7FEFF 		bl	printf
+ 101              	.LVL9:
+ 102              	.L2:
+  59:Core/Src/cmsis_os2_threads.c ****   while(1)
+ 103              		.loc 1 59 3 is_stmt 1 discriminator 1 view .LVU16
+  60:Core/Src/cmsis_os2_threads.c ****   {
+  61:Core/Src/cmsis_os2_threads.c ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_15);
+ 104              		.loc 1 61 5 discriminator 1 view .LVU17
+ 105 003a 4FF40041 		mov	r1, #32768
+ 106 003e 1148     		ldr	r0, .L4+20
+ 107 0040 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 108              	.LVL10:
+  62:Core/Src/cmsis_os2_threads.c ****     //Set specific bits of the 32bit signal flag which is attached to the synch recieve thread
+  63:Core/Src/cmsis_os2_threads.c ****     u32SetFlagFromthread = 0x0000000F;
+ 109              		.loc 1 63 5 discriminator 1 view .LVU18
+ 110              		.loc 1 63 26 is_stmt 0 discriminator 1 view .LVU19
+ 111 0044 104D     		ldr	r5, .L4+24
+ 112 0046 0F23     		movs	r3, #15
+ 113 0048 2B60     		str	r3, [r5]
+  64:Core/Src/cmsis_os2_threads.c ****     printf("Setting flag from Sender 1\r\n");
+ 114              		.loc 1 64 5 is_stmt 1 discriminator 1 view .LVU20
+ 115 004a 1048     		ldr	r0, .L4+28
+ 116 004c FFF7FEFF 		bl	puts
+ 117              	.LVL11:
+  65:Core/Src/cmsis_os2_threads.c ****     u32SignalApiReturnFlag = osThreadFlagsSet(OS2SynchReceiverID, u32SetFlagFromthread);
+ 118              		.loc 1 65 5 discriminator 1 view .LVU21
+ 119              		.loc 1 65 30 is_stmt 0 discriminator 1 view .LVU22
+ 120 0050 2968     		ldr	r1, [r5]
+ 121 0052 0F4B     		ldr	r3, .L4+32
+ 122 0054 1868     		ldr	r0, [r3]
+ 123 0056 FFF7FEFF 		bl	osThreadFlagsSet
+ 124              	.LVL12:
+ 125 005a 0146     		mov	r1, r0
+ 126              		.loc 1 65 28 discriminator 1 view .LVU23
+ 127 005c 0D4B     		ldr	r3, .L4+36
+ 128 005e 1860     		str	r0, [r3]
+  66:Core/Src/cmsis_os2_threads.c ****     printf("return value of 32 bit flag after receiver thread get unblocked: %lx\r\n", u32SignalApi
+ 129              		.loc 1 66 5 is_stmt 1 discriminator 1 view .LVU24
+ 130 0060 0D48     		ldr	r0, .L4+40
+ 131 0062 FFF7FEFF 		bl	printf
+ 132              	.LVL13:
+  67:Core/Src/cmsis_os2_threads.c ****     u32LocTick += u32LEDTogglePeriod; // delay 2000 ticks (2 seconds) periodically 
+ 133              		.loc 1 67 5 discriminator 1 view .LVU25
+ 134              		.loc 1 67 16 is_stmt 0 discriminator 1 view .LVU26
+ 135 0066 3444     		add	r4, r4, r6
+ 136              	.LVL14:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 5
+
+
+  68:Core/Src/cmsis_os2_threads.c ****     osDelayUntil(u32LocTick);
+ 137              		.loc 1 68 5 is_stmt 1 discriminator 1 view .LVU27
+ 138 0068 2046     		mov	r0, r4
+ 139 006a FFF7FEFF 		bl	osDelayUntil
+ 140              	.LVL15:
+  59:Core/Src/cmsis_os2_threads.c ****   {
+ 141              		.loc 1 59 8 discriminator 1 view .LVU28
+ 142 006e E4E7     		b	.L2
+ 143              	.L5:
+ 144              		.align	2
+ 145              	.L4:
+ 146 0070 00000000 		.word	u32KernelTickFrequency
+ 147 0074 00000000 		.word	u32KernelSystemTimer
+ 148 0078 00000000 		.word	.LC0
+ 149 007c 1C000000 		.word	.LC1
+ 150 0080 5C000000 		.word	.LC2
+ 151 0084 00040048 		.word	1207960576
+ 152 0088 00000000 		.word	.LANCHOR0
+ 153 008c 84000000 		.word	.LC3
+ 154 0090 00000000 		.word	.LANCHOR1
+ 155 0094 00000000 		.word	.LANCHOR2
+ 156 0098 A0000000 		.word	.LC4
+ 157              		.cfi_endproc
+ 158              	.LFE851:
+ 160              		.section	.rodata.fnOS2ThreadSynchSender2.str1.4,"aMS",%progbits,1
+ 161              		.align	2
+ 162              	.LC5:
+ 163 0000 53656E64 		.ascii	"Sender thread 2 toggle period: %ld\015\012\000"
+ 163      65722074 
+ 163      68726561 
+ 163      64203220 
+ 163      746F6767 
+ 164 0025 000000   		.align	2
+ 165              	.LC6:
+ 166 0028 53657474 		.ascii	"Setting flag from Sender 2\015\000"
+ 166      696E6720 
+ 166      666C6167 
+ 166      2066726F 
+ 166      6D205365 
+ 167              		.section	.text.fnOS2ThreadSynchSender2,"ax",%progbits
+ 168              		.align	1
+ 169              		.global	fnOS2ThreadSynchSender2
+ 170              		.syntax unified
+ 171              		.thumb
+ 172              		.thumb_func
+ 174              	fnOS2ThreadSynchSender2:
+ 175              	.LVL16:
+ 176              	.LFB852:
+  69:Core/Src/cmsis_os2_threads.c ****   }
+  70:Core/Src/cmsis_os2_threads.c **** }
+  71:Core/Src/cmsis_os2_threads.c **** 
+  72:Core/Src/cmsis_os2_threads.c **** /* USER CODE BEGIN Header_StartDefaultTask */
+  73:Core/Src/cmsis_os2_threads.c **** /**
+  74:Core/Src/cmsis_os2_threads.c ****   * @brief  Function implementing the fnOS2SynchSender2 thread.
+  75:Core/Src/cmsis_os2_threads.c ****   * @param  argument: Frequency of the LED 2 toggling
+  76:Core/Src/cmsis_os2_threads.c ****   * @details : This function toggles LED 2 (Nucleo Board) with fixed periocity got from the functio
+  77:Core/Src/cmsis_os2_threads.c ****   * @retval None
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 6
+
+
+  78:Core/Src/cmsis_os2_threads.c ****   */
+  79:Core/Src/cmsis_os2_threads.c **** void fnOS2ThreadSynchSender2(void *arg)
+  80:Core/Src/cmsis_os2_threads.c **** {
+ 177              		.loc 1 80 1 view -0
+ 178              		.cfi_startproc
+ 179              		@ args = 0, pretend = 0, frame = 0
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181              		.loc 1 80 1 is_stmt 0 view .LVU30
+ 182 0000 70B5     		push	{r4, r5, r6, lr}
+ 183              	.LCFI1:
+ 184              		.cfi_def_cfa_offset 16
+ 185              		.cfi_offset 4, -16
+ 186              		.cfi_offset 5, -12
+ 187              		.cfi_offset 6, -8
+ 188              		.cfi_offset 14, -4
+ 189 0002 0646     		mov	r6, r0
+  81:Core/Src/cmsis_os2_threads.c ****   uint32_t u32LocTick;
+ 190              		.loc 1 81 3 is_stmt 1 view .LVU31
+  82:Core/Src/cmsis_os2_threads.c ****   u32LocTick = osKernelGetTickCount();
+ 191              		.loc 1 82 3 view .LVU32
+ 192              		.loc 1 82 16 is_stmt 0 view .LVU33
+ 193 0004 FFF7FEFF 		bl	osKernelGetTickCount
+ 194              	.LVL17:
+ 195              		.loc 1 82 16 view .LVU34
+ 196 0008 0446     		mov	r4, r0
+ 197              	.LVL18:
+  83:Core/Src/cmsis_os2_threads.c ****   uint32_t u32LEDTogglePeriod = (uint32_t)arg; 
+ 198              		.loc 1 83 3 is_stmt 1 view .LVU35
+  84:Core/Src/cmsis_os2_threads.c ****   printf("Sender thread 2 toggle period: %ld\r\n", u32LEDTogglePeriod);
+ 199              		.loc 1 84 3 view .LVU36
+ 200 000a 3146     		mov	r1, r6
+ 201 000c 0E48     		ldr	r0, .L9
+ 202              	.LVL19:
+ 203              		.loc 1 84 3 is_stmt 0 view .LVU37
+ 204 000e FFF7FEFF 		bl	printf
+ 205              	.LVL20:
+ 206              	.L7:
+  85:Core/Src/cmsis_os2_threads.c ****   while(1)
+ 207              		.loc 1 85 3 is_stmt 1 discriminator 1 view .LVU38
+  86:Core/Src/cmsis_os2_threads.c ****   {
+  87:Core/Src/cmsis_os2_threads.c ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_9);
+ 208              		.loc 1 87 5 discriminator 1 view .LVU39
+ 209 0012 4FF40071 		mov	r1, #512
+ 210 0016 0D48     		ldr	r0, .L9+4
+ 211 0018 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 212              	.LVL21:
+  88:Core/Src/cmsis_os2_threads.c ****     //Set specific bits of the 32bit signal flag which is attached to the synch recieve thread
+  89:Core/Src/cmsis_os2_threads.c ****     u32SetFlagFromthread = 0x00000010;
+ 213              		.loc 1 89 5 discriminator 1 view .LVU40
+ 214              		.loc 1 89 26 is_stmt 0 discriminator 1 view .LVU41
+ 215 001c 0C4D     		ldr	r5, .L9+8
+ 216 001e 1023     		movs	r3, #16
+ 217 0020 2B60     		str	r3, [r5]
+  90:Core/Src/cmsis_os2_threads.c ****     printf("Setting flag from Sender 2\r\n");
+ 218              		.loc 1 90 5 is_stmt 1 discriminator 1 view .LVU42
+ 219 0022 0C48     		ldr	r0, .L9+12
+ 220 0024 FFF7FEFF 		bl	puts
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 7
+
+
+ 221              	.LVL22:
+  91:Core/Src/cmsis_os2_threads.c ****     u32SignalApiReturnFlag = osThreadFlagsSet(OS2SynchReceiverID, u32SetFlagFromthread);
+ 222              		.loc 1 91 5 discriminator 1 view .LVU43
+ 223              		.loc 1 91 30 is_stmt 0 discriminator 1 view .LVU44
+ 224 0028 2968     		ldr	r1, [r5]
+ 225 002a 0B4B     		ldr	r3, .L9+16
+ 226 002c 1868     		ldr	r0, [r3]
+ 227 002e FFF7FEFF 		bl	osThreadFlagsSet
+ 228              	.LVL23:
+ 229 0032 0146     		mov	r1, r0
+ 230              		.loc 1 91 28 discriminator 1 view .LVU45
+ 231 0034 094B     		ldr	r3, .L9+20
+ 232 0036 1860     		str	r0, [r3]
+  92:Core/Src/cmsis_os2_threads.c ****     printf("return value of 32 bit flag after receiver thread get unblocked: %lx\r\n", u32SignalApi
+ 233              		.loc 1 92 5 is_stmt 1 discriminator 1 view .LVU46
+ 234 0038 0948     		ldr	r0, .L9+24
+ 235 003a FFF7FEFF 		bl	printf
+ 236              	.LVL24:
+  93:Core/Src/cmsis_os2_threads.c ****     u32LocTick += u32LEDTogglePeriod; // delay 2000 ticks (2 seconds) periodically 
+ 237              		.loc 1 93 5 discriminator 1 view .LVU47
+ 238              		.loc 1 93 16 is_stmt 0 discriminator 1 view .LVU48
+ 239 003e 3444     		add	r4, r4, r6
+ 240              	.LVL25:
+  94:Core/Src/cmsis_os2_threads.c ****     osDelayUntil(u32LocTick);
+ 241              		.loc 1 94 5 is_stmt 1 discriminator 1 view .LVU49
+ 242 0040 2046     		mov	r0, r4
+ 243 0042 FFF7FEFF 		bl	osDelayUntil
+ 244              	.LVL26:
+  85:Core/Src/cmsis_os2_threads.c ****   {
+ 245              		.loc 1 85 8 discriminator 1 view .LVU50
+ 246 0046 E4E7     		b	.L7
+ 247              	.L10:
+ 248              		.align	2
+ 249              	.L9:
+ 250 0048 00000000 		.word	.LC5
+ 251 004c 00040048 		.word	1207960576
+ 252 0050 00000000 		.word	.LANCHOR0
+ 253 0054 28000000 		.word	.LC6
+ 254 0058 00000000 		.word	.LANCHOR1
+ 255 005c 00000000 		.word	.LANCHOR2
+ 256 0060 A0000000 		.word	.LC4
+ 257              		.cfi_endproc
+ 258              	.LFE852:
+ 260              		.section	.rodata.fnOS2ThreadSynchReceiver.str1.4,"aMS",%progbits,1
+ 261              		.align	2
+ 262              	.LC7:
+ 263 0000 72656365 		.ascii	"receiver thread toggle period: %ld\015\012\000"
+ 263      69766572 
+ 263      20746872 
+ 263      65616420 
+ 263      746F6767 
+ 264 0025 000000   		.align	2
+ 265              	.LC8:
+ 266 0028 2A2A2A2A 		.ascii	"***********Thread gets unblocked**********\015\000"
+ 266      2A2A2A2A 
+ 266      2A2A2A54 
+ 266      68726561 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 8
+
+
+ 266      64206765 
+ 267              		.align	2
+ 268              	.LC9:
+ 269 0054 52656365 		.ascii	"Receiver Signal Flag before clear: %lx\015\012\000"
+ 269      69766572 
+ 269      20536967 
+ 269      6E616C20 
+ 269      466C6167 
+ 270              		.section	.text.fnOS2ThreadSynchReceiver,"ax",%progbits
+ 271              		.align	1
+ 272              		.global	fnOS2ThreadSynchReceiver
+ 273              		.syntax unified
+ 274              		.thumb
+ 275              		.thumb_func
+ 277              	fnOS2ThreadSynchReceiver:
+ 278              	.LVL27:
+ 279              	.LFB853:
+  95:Core/Src/cmsis_os2_threads.c ****   }
+  96:Core/Src/cmsis_os2_threads.c **** }
+  97:Core/Src/cmsis_os2_threads.c **** 
+  98:Core/Src/cmsis_os2_threads.c **** /* USER CODE BEGIN Header_StartDefaultTask */
+  99:Core/Src/cmsis_os2_threads.c **** /**
+ 100:Core/Src/cmsis_os2_threads.c ****   * @brief  Function implementing the fnOS2SynchReceiver thread.
+ 101:Core/Src/cmsis_os2_threads.c ****   * @param  argument: Frequency of the LED 3 toggling
+ 102:Core/Src/cmsis_os2_threads.c ****   * @details : This function toggles LED 3 (Nucleo Board) with fixed periocity got from the functio
+ 103:Core/Src/cmsis_os2_threads.c ****   * @retval None
+ 104:Core/Src/cmsis_os2_threads.c ****   */
+ 105:Core/Src/cmsis_os2_threads.c **** void fnOS2ThreadSynchReceiver(void *arg)
+ 106:Core/Src/cmsis_os2_threads.c **** {
+ 280              		.loc 1 106 1 view -0
+ 281              		.cfi_startproc
+ 282              		@ args = 0, pretend = 0, frame = 0
+ 283              		@ frame_needed = 0, uses_anonymous_args = 0
+ 284              		.loc 1 106 1 is_stmt 0 view .LVU52
+ 285 0000 70B5     		push	{r4, r5, r6, lr}
+ 286              	.LCFI2:
+ 287              		.cfi_def_cfa_offset 16
+ 288              		.cfi_offset 4, -16
+ 289              		.cfi_offset 5, -12
+ 290              		.cfi_offset 6, -8
+ 291              		.cfi_offset 14, -4
+ 292 0002 0646     		mov	r6, r0
+ 107:Core/Src/cmsis_os2_threads.c ****   //As this thread is having highest priority, all the timers should be enabled here only
+ 108:Core/Src/cmsis_os2_threads.c ****   fnTimerStart();
+ 293              		.loc 1 108 3 is_stmt 1 view .LVU53
+ 294 0004 FFF7FEFF 		bl	fnTimerStart
+ 295              	.LVL28:
+ 109:Core/Src/cmsis_os2_threads.c ****   uint32_t u32LocTick;
+ 296              		.loc 1 109 3 view .LVU54
+ 110:Core/Src/cmsis_os2_threads.c ****   u32LocTick = osKernelGetTickCount();
+ 297              		.loc 1 110 3 view .LVU55
+ 298              		.loc 1 110 16 is_stmt 0 view .LVU56
+ 299 0008 FFF7FEFF 		bl	osKernelGetTickCount
+ 300              	.LVL29:
+ 301 000c 0446     		mov	r4, r0
+ 302              	.LVL30:
+ 111:Core/Src/cmsis_os2_threads.c ****   uint32_t u32LEDTogglePeriod = (uint32_t)arg; 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 9
+
+
+ 303              		.loc 1 111 3 is_stmt 1 view .LVU57
+ 112:Core/Src/cmsis_os2_threads.c ****   printf("receiver thread toggle period: %ld\r\n", u32LEDTogglePeriod);
+ 304              		.loc 1 112 3 view .LVU58
+ 305 000e 3146     		mov	r1, r6
+ 306 0010 0F48     		ldr	r0, .L14
+ 307              	.LVL31:
+ 308              		.loc 1 112 3 is_stmt 0 view .LVU59
+ 309 0012 FFF7FEFF 		bl	printf
+ 310              	.LVL32:
+ 311              	.L12:
+ 113:Core/Src/cmsis_os2_threads.c ****   while(1)
+ 312              		.loc 1 113 3 is_stmt 1 discriminator 1 view .LVU60
+ 114:Core/Src/cmsis_os2_threads.c ****   {
+ 115:Core/Src/cmsis_os2_threads.c ****     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_11);
+ 313              		.loc 1 115 5 discriminator 1 view .LVU61
+ 314 0016 4FF40061 		mov	r1, #2048
+ 315 001a 0E48     		ldr	r0, .L14+4
+ 316 001c FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 317              	.LVL33:
+ 116:Core/Src/cmsis_os2_threads.c ****     //Got blocked state while waiting for specific bits of 32 but signal flag
+ 117:Core/Src/cmsis_os2_threads.c ****     u32SignalFlagForWaiting = RECEIVER_THREAD_SIGNAL_FLAG_PATTERN;
+ 318              		.loc 1 117 5 discriminator 1 view .LVU62
+ 319              		.loc 1 117 29 is_stmt 0 discriminator 1 view .LVU63
+ 320 0020 40F21F30 		movw	r0, #799
+ 321 0024 0C4B     		ldr	r3, .L14+8
+ 322 0026 1860     		str	r0, [r3]
+ 118:Core/Src/cmsis_os2_threads.c ****     u32SignalFlagBeforeClear = osThreadFlagsWait(u32SignalFlagForWaiting, osFlagsWaitAll, osWaitFor
+ 323              		.loc 1 118 5 is_stmt 1 discriminator 1 view .LVU64
+ 324              		.loc 1 118 32 is_stmt 0 discriminator 1 view .LVU65
+ 325 0028 4FF0FF32 		mov	r2, #-1
+ 326 002c 0121     		movs	r1, #1
+ 327 002e FFF7FEFF 		bl	osThreadFlagsWait
+ 328              	.LVL34:
+ 329              		.loc 1 118 30 discriminator 1 view .LVU66
+ 330 0032 0A4D     		ldr	r5, .L14+12
+ 331 0034 2860     		str	r0, [r5]
+ 119:Core/Src/cmsis_os2_threads.c ****     printf("***********Thread gets unblocked**********\r\n");
+ 332              		.loc 1 119 5 is_stmt 1 discriminator 1 view .LVU67
+ 333 0036 0A48     		ldr	r0, .L14+16
+ 334 0038 FFF7FEFF 		bl	puts
+ 335              	.LVL35:
+ 120:Core/Src/cmsis_os2_threads.c ****     printf("Receiver Signal Flag before clear: %lx\r\n", u32SignalFlagBeforeClear);
+ 336              		.loc 1 120 5 discriminator 1 view .LVU68
+ 337 003c 2968     		ldr	r1, [r5]
+ 338 003e 0948     		ldr	r0, .L14+20
+ 339 0040 FFF7FEFF 		bl	printf
+ 340              	.LVL36:
+ 121:Core/Src/cmsis_os2_threads.c ****     u32LocTick += u32LEDTogglePeriod; // delay 2000 ticks (2 seconds) periodically 
+ 341              		.loc 1 121 5 discriminator 1 view .LVU69
+ 342              		.loc 1 121 16 is_stmt 0 discriminator 1 view .LVU70
+ 343 0044 3444     		add	r4, r4, r6
+ 344              	.LVL37:
+ 122:Core/Src/cmsis_os2_threads.c ****     osDelayUntil(u32LocTick);
+ 345              		.loc 1 122 5 is_stmt 1 discriminator 1 view .LVU71
+ 346 0046 2046     		mov	r0, r4
+ 347 0048 FFF7FEFF 		bl	osDelayUntil
+ 348              	.LVL38:
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 10
+
+
+ 113:Core/Src/cmsis_os2_threads.c ****   {
+ 349              		.loc 1 113 8 discriminator 1 view .LVU72
+ 350 004c E3E7     		b	.L12
+ 351              	.L15:
+ 352 004e 00BF     		.align	2
+ 353              	.L14:
+ 354 0050 00000000 		.word	.LC7
+ 355 0054 00040048 		.word	1207960576
+ 356 0058 00000000 		.word	.LANCHOR3
+ 357 005c 00000000 		.word	.LANCHOR4
+ 358 0060 28000000 		.word	.LC8
+ 359 0064 54000000 		.word	.LC9
+ 360              		.cfi_endproc
+ 361              	.LFE853:
+ 363              		.section	.text.fnConfigAndCreateThreads,"ax",%progbits
+ 364              		.align	1
+ 365              		.global	fnConfigAndCreateThreads
+ 366              		.syntax unified
+ 367              		.thumb
+ 368              		.thumb_func
+ 370              	fnConfigAndCreateThreads:
+ 371              	.LFB854:
+ 123:Core/Src/cmsis_os2_threads.c ****   }
+ 124:Core/Src/cmsis_os2_threads.c **** }
+ 125:Core/Src/cmsis_os2_threads.c **** /* USER CODE END Header_StartDefaultTask */
+ 126:Core/Src/cmsis_os2_threads.c **** 
+ 127:Core/Src/cmsis_os2_threads.c **** bool fnConfigAndCreateThreads(void)
+ 128:Core/Src/cmsis_os2_threads.c **** {
+ 372              		.loc 1 128 1 view -0
+ 373              		.cfi_startproc
+ 374              		@ args = 0, pretend = 0, frame = 0
+ 375              		@ frame_needed = 0, uses_anonymous_args = 0
+ 376 0000 10B5     		push	{r4, lr}
+ 377              	.LCFI3:
+ 378              		.cfi_def_cfa_offset 8
+ 379              		.cfi_offset 4, -8
+ 380              		.cfi_offset 14, -4
+ 129:Core/Src/cmsis_os2_threads.c ****     osThreadFunc_t fnThreadPtr = fnOS2ThreadSynchSender1;
+ 381              		.loc 1 129 5 view .LVU74
+ 130:Core/Src/cmsis_os2_threads.c ****     uint32_t u32ThreadArgument = (uint32_t)SYNCH_SENDER_1_THREAD_TOGGLE_FREQUENCY;
+ 382              		.loc 1 130 5 view .LVU75
+ 383              	.LVL39:
+ 131:Core/Src/cmsis_os2_threads.c ****     OS2SynchSender1ID = osThreadNew(fnThreadPtr, (void *)u32ThreadArgument, &OS2SynchSender1Attr);
+ 384              		.loc 1 131 5 view .LVU76
+ 385              		.loc 1 131 25 is_stmt 0 view .LVU77
+ 386 0002 124A     		ldr	r2, .L22
+ 387 0004 4FF4FA61 		mov	r1, #2000
+ 388 0008 1148     		ldr	r0, .L22+4
+ 389 000a FFF7FEFF 		bl	osThreadNew
+ 390              	.LVL40:
+ 391              		.loc 1 131 23 view .LVU78
+ 392 000e 114C     		ldr	r4, .L22+8
+ 393 0010 2060     		str	r0, [r4]
+ 132:Core/Src/cmsis_os2_threads.c **** 
+ 133:Core/Src/cmsis_os2_threads.c ****     fnThreadPtr = fnOS2ThreadSynchSender2;
+ 394              		.loc 1 133 5 is_stmt 1 view .LVU79
+ 134:Core/Src/cmsis_os2_threads.c ****     u32ThreadArgument = (uint32_t)SYNCH_SENDER_2_THREAD_TOGGLE_FREQUENCY;
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 11
+
+
+ 395              		.loc 1 134 5 view .LVU80
+ 396              	.LVL41:
+ 135:Core/Src/cmsis_os2_threads.c ****     OS2SynchSender2ID = osThreadNew(fnThreadPtr, (void *)u32ThreadArgument, &OS2SynchSender2Attr);
+ 397              		.loc 1 135 5 view .LVU81
+ 398              		.loc 1 135 25 is_stmt 0 view .LVU82
+ 399 0012 114A     		ldr	r2, .L22+12
+ 400 0014 40F6B831 		movw	r1, #3000
+ 401 0018 1048     		ldr	r0, .L22+16
+ 402 001a FFF7FEFF 		bl	osThreadNew
+ 403              	.LVL42:
+ 404              		.loc 1 135 23 view .LVU83
+ 405 001e 104B     		ldr	r3, .L22+20
+ 406 0020 1860     		str	r0, [r3]
+ 136:Core/Src/cmsis_os2_threads.c **** 
+ 137:Core/Src/cmsis_os2_threads.c ****     fnThreadPtr = fnOS2ThreadSynchReceiver;
+ 407              		.loc 1 137 5 is_stmt 1 view .LVU84
+ 138:Core/Src/cmsis_os2_threads.c ****     u32ThreadArgument = (uint32_t)SYNCH_RECEIVER_THREAD_TOGGLE_FREQUENCY;
+ 408              		.loc 1 138 5 view .LVU85
+ 409              	.LVL43:
+ 139:Core/Src/cmsis_os2_threads.c ****     OS2SynchReceiverID = osThreadNew(fnThreadPtr, (void *)u32ThreadArgument, &OS2SynchReceiverAttr)
+ 410              		.loc 1 139 5 view .LVU86
+ 411              		.loc 1 139 26 is_stmt 0 view .LVU87
+ 412 0022 104A     		ldr	r2, .L22+24
+ 413 0024 4FF47A71 		mov	r1, #1000
+ 414 0028 0F48     		ldr	r0, .L22+28
+ 415 002a FFF7FEFF 		bl	osThreadNew
+ 416              	.LVL44:
+ 417              		.loc 1 139 24 view .LVU88
+ 418 002e 0F4B     		ldr	r3, .L22+32
+ 419 0030 1860     		str	r0, [r3]
+ 140:Core/Src/cmsis_os2_threads.c **** 
+ 141:Core/Src/cmsis_os2_threads.c ****     
+ 142:Core/Src/cmsis_os2_threads.c ****     if(OS2SynchSender1ID == NULL || OS2SynchSender2ID == NULL || OS2SynchReceiverID == NULL)
+ 420              		.loc 1 142 5 is_stmt 1 view .LVU89
+ 421              		.loc 1 142 26 is_stmt 0 view .LVU90
+ 422 0032 2368     		ldr	r3, [r4]
+ 423              		.loc 1 142 7 view .LVU91
+ 424 0034 2BB1     		cbz	r3, .L18
+ 425              		.loc 1 142 55 discriminator 1 view .LVU92
+ 426 0036 0A4B     		ldr	r3, .L22+20
+ 427 0038 1B68     		ldr	r3, [r3]
+ 428              		.loc 1 142 34 discriminator 1 view .LVU93
+ 429 003a 23B1     		cbz	r3, .L19
+ 430              		.loc 1 142 63 discriminator 2 view .LVU94
+ 431 003c 00B1     		cbz	r0, .L17
+ 143:Core/Src/cmsis_os2_threads.c ****     {
+ 144:Core/Src/cmsis_os2_threads.c ****         return false;
+ 145:Core/Src/cmsis_os2_threads.c ****     }
+ 146:Core/Src/cmsis_os2_threads.c ****     else
+ 147:Core/Src/cmsis_os2_threads.c ****     {
+ 148:Core/Src/cmsis_os2_threads.c ****         return true;
+ 432              		.loc 1 148 16 view .LVU95
+ 433 003e 0120     		movs	r0, #1
+ 434              	.L17:
+ 149:Core/Src/cmsis_os2_threads.c ****     }
+ 150:Core/Src/cmsis_os2_threads.c **** }...
+ 435              		.loc 1 150 1 view .LVU96
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 12
+
+
+ 436 0040 10BD     		pop	{r4, pc}
+ 437              	.L18:
+ 144:Core/Src/cmsis_os2_threads.c ****         return false;
+ 438              		.loc 1 144 16 view .LVU97
+ 439 0042 0020     		movs	r0, #0
+ 440 0044 FCE7     		b	.L17
+ 441              	.L19:
+ 442 0046 0020     		movs	r0, #0
+ 443 0048 FAE7     		b	.L17
+ 444              	.L23:
+ 445 004a 00BF     		.align	2
+ 446              	.L22:
+ 447 004c 00000000 		.word	.LANCHOR5
+ 448 0050 00000000 		.word	fnOS2ThreadSynchSender1
+ 449 0054 00000000 		.word	.LANCHOR6
+ 450 0058 00000000 		.word	.LANCHOR7
+ 451 005c 00000000 		.word	fnOS2ThreadSynchSender2
+ 452 0060 00000000 		.word	.LANCHOR8
+ 453 0064 00000000 		.word	.LANCHOR9
+ 454 0068 00000000 		.word	fnOS2ThreadSynchReceiver
+ 455 006c 00000000 		.word	.LANCHOR1
+ 456              		.cfi_endproc
+ 457              	.LFE854:
+ 459              		.global	OS2SynchReceiverAttr
+ 460              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 461              		.align	2
+ 462              	.LC10:
+ 463 0000 53796E63 		.ascii	"SynchReceiverThread\000"
+ 463      68526563 
+ 463      65697665 
+ 463      72546872 
+ 463      65616400 
+ 464              		.global	OS2SynchSender2Attr
+ 465              		.align	2
+ 466              	.LC11:
+ 467 0014 53796E63 		.ascii	"SynchSender2Thread\000"
+ 467      6853656E 
+ 467      64657232 
+ 467      54687265 
+ 467      616400
+ 468              		.global	OS2SynchSender1Attr
+ 469 0027 00       		.align	2
+ 470              	.LC12:
+ 471 0028 53796E63 		.ascii	"SynchSender1Thread\000"
+ 471      6853656E 
+ 471      64657231 
+ 471      54687265 
+ 471      616400
+ 472              		.global	OS2SynchReceiverID
+ 473              		.global	OS2SynchSender2ID
+ 474              		.global	OS2SynchSender1ID
+ 475              		.global	u32SignalFlagForWaiting
+ 476              		.global	u32SignalFlagBeforeClear
+ 477              		.global	u32SignalApiReturnFlag
+ 478              		.global	u32SetFlagFromthread
+ 479              		.global	chArrInfoBuf
+ 480              		.global	osv
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 13
+
+
+ 481              		.section	.bss.OS2SynchReceiverID,"aw",%nobits
+ 482              		.align	2
+ 483              		.set	.LANCHOR1,. + 0
+ 486              	OS2SynchReceiverID:
+ 487 0000 00000000 		.space	4
+ 488              		.section	.bss.OS2SynchSender1ID,"aw",%nobits
+ 489              		.align	2
+ 490              		.set	.LANCHOR6,. + 0
+ 493              	OS2SynchSender1ID:
+ 494 0000 00000000 		.space	4
+ 495              		.section	.bss.OS2SynchSender2ID,"aw",%nobits
+ 496              		.align	2
+ 497              		.set	.LANCHOR8,. + 0
+ 500              	OS2SynchSender2ID:
+ 501 0000 00000000 		.space	4
+ 502              		.section	.bss.chArrInfoBuf,"aw",%nobits
+ 503              		.align	2
+ 506              	chArrInfoBuf:
+ 507 0000 00000000 		.space	100
+ 507      00000000 
+ 507      00000000 
+ 507      00000000 
+ 507      00000000 
+ 508              		.section	.bss.osv,"aw",%nobits
+ 509              		.align	2
+ 512              	osv:
+ 513 0000 00000000 		.space	8
+ 513      00000000 
+ 514              		.section	.bss.u32SetFlagFromthread,"aw",%nobits
+ 515              		.align	2
+ 516              		.set	.LANCHOR0,. + 0
+ 519              	u32SetFlagFromthread:
+ 520 0000 00000000 		.space	4
+ 521              		.section	.bss.u32SignalApiReturnFlag,"aw",%nobits
+ 522              		.align	2
+ 523              		.set	.LANCHOR2,. + 0
+ 526              	u32SignalApiReturnFlag:
+ 527 0000 00000000 		.space	4
+ 528              		.section	.bss.u32SignalFlagBeforeClear,"aw",%nobits
+ 529              		.align	2
+ 530              		.set	.LANCHOR4,. + 0
+ 533              	u32SignalFlagBeforeClear:
+ 534 0000 00000000 		.space	4
+ 535              		.section	.bss.u32SignalFlagForWaiting,"aw",%nobits
+ 536              		.align	2
+ 537              		.set	.LANCHOR3,. + 0
+ 540              	u32SignalFlagForWaiting:
+ 541 0000 00000000 		.space	4
+ 542              		.section	.rodata.OS2SynchReceiverAttr,"a"
+ 543              		.align	2
+ 544              		.set	.LANCHOR9,. + 0
+ 547              	OS2SynchReceiverAttr:
+ 548 0000 00000000 		.word	.LC10
+ 549 0004 00000000 		.space	16
+ 549      00000000 
+ 549      00000000 
+ 549      00000000 
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 14
+
+
+ 550 0014 00020000 		.word	512
+ 551 0018 21000000 		.word	33
+ 552 001c 00000000 		.space	8
+ 552      00000000 
+ 553              		.section	.rodata.OS2SynchSender1Attr,"a"
+ 554              		.align	2
+ 555              		.set	.LANCHOR5,. + 0
+ 558              	OS2SynchSender1Attr:
+ 559 0000 28000000 		.word	.LC12
+ 560 0004 00000000 		.space	16
+ 560      00000000 
+ 560      00000000 
+ 560      00000000 
+ 561 0014 00020000 		.word	512
+ 562 0018 18000000 		.word	24
+ 563 001c 00000000 		.space	8
+ 563      00000000 
+ 564              		.section	.rodata.OS2SynchSender2Attr,"a"
+ 565              		.align	2
+ 566              		.set	.LANCHOR7,. + 0
+ 569              	OS2SynchSender2Attr:
+ 570 0000 14000000 		.word	.LC11
+ 571 0004 00000000 		.space	16
+ 571      00000000 
+ 571      00000000 
+ 571      00000000 
+ 572 0014 00020000 		.word	512
+ 573 0018 18000000 		.word	24
+ 574 001c 00000000 		.space	8
+ 574      00000000 
+ 575              		.text
+ 576              	.Letext0:
+ 577              		.file 2 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 578              		.file 3 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 579              		.file 4 "Drivers/CMSIS/Device/ST/STM32WLxx/Include/stm32wl55xx.h"
+ 580              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/portmacro.h"
+ 581              		.file 6 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ 582              		.file 7 "Core/Inc/cmsis_os2_attr.h"
+ 583              		.file 8 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 584              		.file 9 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_gpio.h"
+ 585              		.file 10 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_rcc.h"
+ 586              		.file 11 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
+ 587              		.file 12 "<built-in>"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 cmsis_os2_threads.c
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:18     .rodata.fnOS2ThreadSynchSender1.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:36     .text.fnOS2ThreadSynchSender1:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:42     .text.fnOS2ThreadSynchSender1:00000000 fnOS2ThreadSynchSender1
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:146    .text.fnOS2ThreadSynchSender1:00000070 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:161    .rodata.fnOS2ThreadSynchSender2.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:168    .text.fnOS2ThreadSynchSender2:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:174    .text.fnOS2ThreadSynchSender2:00000000 fnOS2ThreadSynchSender2
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:250    .text.fnOS2ThreadSynchSender2:00000048 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:261    .rodata.fnOS2ThreadSynchReceiver.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:271    .text.fnOS2ThreadSynchReceiver:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:277    .text.fnOS2ThreadSynchReceiver:00000000 fnOS2ThreadSynchReceiver
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:354    .text.fnOS2ThreadSynchReceiver:00000050 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:364    .text.fnConfigAndCreateThreads:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:370    .text.fnConfigAndCreateThreads:00000000 fnConfigAndCreateThreads
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:447    .text.fnConfigAndCreateThreads:0000004c $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:547    .rodata.OS2SynchReceiverAttr:00000000 OS2SynchReceiverAttr
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:461    .rodata.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:569    .rodata.OS2SynchSender2Attr:00000000 OS2SynchSender2Attr
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:558    .rodata.OS2SynchSender1Attr:00000000 OS2SynchSender1Attr
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:486    .bss.OS2SynchReceiverID:00000000 OS2SynchReceiverID
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:500    .bss.OS2SynchSender2ID:00000000 OS2SynchSender2ID
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:493    .bss.OS2SynchSender1ID:00000000 OS2SynchSender1ID
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:540    .bss.u32SignalFlagForWaiting:00000000 u32SignalFlagForWaiting
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:533    .bss.u32SignalFlagBeforeClear:00000000 u32SignalFlagBeforeClear
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:526    .bss.u32SignalApiReturnFlag:00000000 u32SignalApiReturnFlag
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:519    .bss.u32SetFlagFromthread:00000000 u32SetFlagFromthread
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:506    .bss.chArrInfoBuf:00000000 chArrInfoBuf
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:512    .bss.osv:00000000 osv
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:482    .bss.OS2SynchReceiverID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:489    .bss.OS2SynchSender1ID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:496    .bss.OS2SynchSender2ID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:503    .bss.chArrInfoBuf:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:509    .bss.osv:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:515    .bss.u32SetFlagFromthread:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:522    .bss.u32SignalApiReturnFlag:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:529    .bss.u32SignalFlagBeforeClear:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:536    .bss.u32SignalFlagForWaiting:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:543    .rodata.OS2SynchReceiverAttr:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:554    .rodata.OS2SynchSender1Attr:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:565    .rodata.OS2SynchSender2Attr:00000000 $d
+
+UNDEFINED SYMBOLS
+osKernelGetTickFreq
+osKernelGetSysTimerFreq
+printf
+HAL_RCC_GetSysClockFreq
+osKernelGetTickCount
+HAL_GPIO_TogglePin
+puts
+osThreadFlagsSet
+osDelayUntil
+u32KernelTickFrequency
+u32KernelSystemTimer
+fnTimerStart
+osThreadFlagsWait
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 16
+
+
+osThreadNew
