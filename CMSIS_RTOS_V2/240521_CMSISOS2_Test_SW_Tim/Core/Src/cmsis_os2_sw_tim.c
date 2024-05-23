@@ -13,6 +13,7 @@
 osTimerId_t osOneshotTimId, osPeriodicTimId;
 uint8_t u8TimerCBArg;
 
+
 uint32_t u32SignalFlagSetFromOneshotCB = 0x00000100;
 uint32_t u32SignalFlagSetFromPeriodicCB = 0x00000200;
 
@@ -62,21 +63,23 @@ void fnTimerStart(void)
 void SwTimCommonCallback(void const *argument)
 {
     uint32_t u32SignalApiReturnFlag = 0;
-    u8TimerCBArg = (uint8_t *)argument;
+    u8TimerCBArg = (uint8_t)argument;
     printf("Timer Callback arg: %u\r\n",u8TimerCBArg);
     if(u8TimerCBArg == ONESHOT_TIM_NAME_FLAG)
     {
         printf("Oneshot timer invoked\r\n");
-        u32SignalApiReturnFlag = osThreadFlagsSet(OS2SynchReceiverID, u32SignalFlagSetFromOneshotCB);
         printf("Signal flag set from Oneshot timer callback\r\n");
-        printf("Stoping and deleting Oneshot timer\r\b");
-        OS2ConfigAssert(osTimerStop(osOneshotTimId));
+        u32SignalApiReturnFlag = osThreadFlagsSet(OS2SynchReceiverID, u32SignalFlagSetFromOneshotCB);
+        //If we try to stop Oneshot timer, it will give "Resource not found" error
+        // printf("Stoping Oneshot timer\r\n");
+        // OS2ConfigAssert(osTimerStop(osOneshotTimId));
+        printf("Deleting Oneshot timer\r\n");
         OS2ConfigAssert(osTimerDelete(osOneshotTimId));
     }
-    else if(u8TimerCBArg == ONESHOT_TIM_NAME_FLAG)
+    else if(u8TimerCBArg == PERIODIC_TIM_NAME_FLAG)
     {
         printf("Periodic timer invoked\r\n");
-        u32SignalApiReturnFlag = osThreadFlagsSet(OS2SynchReceiverID, u32SignalFlagSetFromPeriodicCB);
         printf("Signal flag set from Periodic timer callback\r\n");
+        u32SignalApiReturnFlag = osThreadFlagsSet(OS2SynchReceiverID, u32SignalFlagSetFromPeriodicCB);
     }
 }

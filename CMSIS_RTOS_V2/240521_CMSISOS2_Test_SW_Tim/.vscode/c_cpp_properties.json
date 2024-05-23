@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "name": "240521_CMSISOS2_Test_SW_Tim",
+      "name": "STM32WL_MakeTest",
       "includePath": [
         "${workspaceFolder}/**"
       ],

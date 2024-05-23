@@ -1,0 +1,791 @@
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"cmsis_os2_error_handler.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Error_Handler,"ax",%progbits
+  18              		.align	1
+  19              		.global	Error_Handler
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	Error_Handler:
+  25              	.LFB851:
+  26              		.file 1 "Core/Src/cmsis_os2_error_handler.c"
+   1:Core/Src/cmsis_os2_error_handler.c **** #include <stdio.h>
+   2:Core/Src/cmsis_os2_error_handler.c **** #include <string.h>
+   3:Core/Src/cmsis_os2_error_handler.c **** #include <stdarg.h>
+   4:Core/Src/cmsis_os2_error_handler.c **** #include <stdint.h>
+   5:Core/Src/cmsis_os2_error_handler.c **** 
+   6:Core/Src/cmsis_os2_error_handler.c **** #include "main.h"
+   7:Core/Src/cmsis_os2_error_handler.c **** #include "cmsis_os.h"
+   8:Core/Src/cmsis_os2_error_handler.c **** #include "cmsis_os2.h"
+   9:Core/Src/cmsis_os2_error_handler.c **** #include "cmsis_os2_attr.h"
+  10:Core/Src/cmsis_os2_error_handler.c **** 
+  11:Core/Src/cmsis_os2_error_handler.c **** /*User extern variable*/
+  12:Core/Src/cmsis_os2_error_handler.c **** extern osMutexId OS2MutexITMConsoleID;
+  13:Core/Src/cmsis_os2_error_handler.c **** //char buffer to print string to ITM Console
+  14:Core/Src/cmsis_os2_error_handler.c **** extern char chArrBufITMConsole[MAX_CHARACTER_SIZE_ITM_CONSOLE];
+  15:Core/Src/cmsis_os2_error_handler.c **** 
+  16:Core/Src/cmsis_os2_error_handler.c **** //Timer fot mutex acquire while printing to ITM Console
+  17:Core/Src/cmsis_os2_error_handler.c **** extern uint32_t u32ITMMutexTimeout; //For now ITM Console Mutex timeout is set at 500 ms
+  18:Core/Src/cmsis_os2_error_handler.c **** 
+  19:Core/Src/cmsis_os2_error_handler.c **** /* User function*/
+  20:Core/Src/cmsis_os2_error_handler.c **** /**
+  21:Core/Src/cmsis_os2_error_handler.c ****  * @brief Handles errors by disabling interrupts and entering an infinite loop.
+  22:Core/Src/cmsis_os2_error_handler.c ****  *
+  23:Core/Src/cmsis_os2_error_handler.c ****  * This function is called to handle errors that occur during the execution of the program.
+  24:Core/Src/cmsis_os2_error_handler.c ****  * It disables all interrupts to prevent further processing and enters an infinite loop,
+  25:Core/Src/cmsis_os2_error_handler.c ****  * effectively halting the program. Users can add their own implementation to report the
+  26:Core/Src/cmsis_os2_error_handler.c ****  * HAL (Hardware Abstraction Layer) error return state.
+  27:Core/Src/cmsis_os2_error_handler.c ****  *
+  28:Core/Src/cmsis_os2_error_handler.c ****  * @note This function does not return.
+  29:Core/Src/cmsis_os2_error_handler.c ****  */
+  30:Core/Src/cmsis_os2_error_handler.c **** void Error_Handler(void)
+  31:Core/Src/cmsis_os2_error_handler.c **** {
+  27              		.loc 1 31 1 view -0
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 2
+
+
+  28              		.cfi_startproc
+  29              		@ Volatile: function does not return.
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  32:Core/Src/cmsis_os2_error_handler.c ****   /* USER CODE BEGIN Error_Handler_Debug */
+  33:Core/Src/cmsis_os2_error_handler.c ****   /* User can add his own implementation to report the HAL error return state */
+  34:Core/Src/cmsis_os2_error_handler.c ****   __disable_irq();
+  33              		.loc 1 34 3 view .LVU1
+  34              	.LBB4:
+  35              	.LBI4:
+  36              		.file 2 "Drivers/CMSIS/Include/cmsis_gcc.h"
+   1:Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
+   2:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
+   3:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
+   4:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @version  V5.2.0
+   5:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @date     08. May 2019
+   6:Drivers/CMSIS/Include/cmsis_gcc.h ****  ******************************************************************************/
+   7:Drivers/CMSIS/Include/cmsis_gcc.h **** /*
+   8:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
+   9:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  10:Drivers/CMSIS/Include/cmsis_gcc.h ****  * SPDX-License-Identifier: Apache-2.0
+  11:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  12:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  13:Drivers/CMSIS/Include/cmsis_gcc.h ****  * not use this file except in compliance with the License.
+  14:Drivers/CMSIS/Include/cmsis_gcc.h ****  * You may obtain a copy of the License at
+  15:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  16:Drivers/CMSIS/Include/cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
+  17:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  18:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Unless required by applicable law or agreed to in writing, software
+  19:Drivers/CMSIS/Include/cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  20:Drivers/CMSIS/Include/cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  21:Drivers/CMSIS/Include/cmsis_gcc.h ****  * See the License for the specific language governing permissions and
+  22:Drivers/CMSIS/Include/cmsis_gcc.h ****  * limitations under the License.
+  23:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+  24:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  25:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
+  26:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_H
+  27:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  28:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ignore some GCC warnings */
+  29:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic push
+  30:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
+  31:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
+  32:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
+  33:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  34:Drivers/CMSIS/Include/cmsis_gcc.h **** /* Fallback for __has_builtin */
+  35:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __has_builtin
+  36:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __has_builtin(x) (0)
+  37:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  38:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  39:Drivers/CMSIS/Include/cmsis_gcc.h **** /* CMSIS compiler specific defines */
+  40:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ASM
+  41:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ASM                                  __asm
+  42:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  43:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __INLINE
+  44:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __INLINE                               inline
+  45:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 3
+
+
+  46:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
+  47:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
+  48:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  49:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
+  50:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
+  51:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif                                           
+  52:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
+  53:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
+  54:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  55:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __USED
+  56:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
+  57:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  58:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __WEAK
+  59:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __WEAK                                 __attribute__((weak))
+  60:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  61:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED
+  62:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
+  63:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  64:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
+  65:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
+  66:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  67:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_UNION
+  68:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
+  69:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  70:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
+  71:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  72:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  73:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  74:Drivers/CMSIS/Include/cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
+  75:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  76:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
+  77:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  78:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
+  79:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  80:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  81:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  82:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
+  83:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  84:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))-
+  85:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  86:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
+  87:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  88:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  89:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  90:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+  91:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  92:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
+  93:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  94:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
+  95:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  96:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  97:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  98:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+  99:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 100:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
+ 101:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 102:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 4
+
+
+ 103:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+ 104:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ 105:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+ 106:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+ 107:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 108:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
+ 109:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 110:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ALIGNED
+ 111:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
+ 112:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 113:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __RESTRICT
+ 114:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __RESTRICT                             __restrict
+ 115:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 116:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __COMPILER_BARRIER
+ 117:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __COMPILER_BARRIER()                   __ASM volatile("":::"memory")
+ 118:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 119:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 120:Drivers/CMSIS/Include/cmsis_gcc.h **** /* #########################  Startup and Lowlevel Init  ######################## */
+ 121:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 122:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __PROGRAM_START
+ 123:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 124:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 125:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Initializes data and bss sections
+ 126:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details This default implementations initialized all data and additional bss
+ 127:Drivers/CMSIS/Include/cmsis_gcc.h ****            sections relying on .copy.table and .zero.table specified properly
+ 128:Drivers/CMSIS/Include/cmsis_gcc.h ****            in the used linker script.
+ 129:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 130:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 131:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE __NO_RETURN void __cmsis_start(void)
+ 132:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 133:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern void _start(void) __NO_RETURN;
+ 134:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 135:Drivers/CMSIS/Include/cmsis_gcc.h ****   typedef struct {
+ 136:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t const* src;
+ 137:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t* dest;
+ 138:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t  wlen;
+ 139:Drivers/CMSIS/Include/cmsis_gcc.h ****   } __copy_table_t;
+ 140:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 141:Drivers/CMSIS/Include/cmsis_gcc.h ****   typedef struct {
+ 142:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t* dest;
+ 143:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t  wlen;
+ 144:Drivers/CMSIS/Include/cmsis_gcc.h ****   } __zero_table_t;
+ 145:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 146:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __copy_table_t __copy_table_start__;
+ 147:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __copy_table_t __copy_table_end__;
+ 148:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __zero_table_t __zero_table_start__;
+ 149:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __zero_table_t __zero_table_end__;
+ 150:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 151:Drivers/CMSIS/Include/cmsis_gcc.h ****   for (__copy_table_t const* pTable = &__copy_table_start__; pTable < &__copy_table_end__; ++pTable
+ 152:Drivers/CMSIS/Include/cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 153:Drivers/CMSIS/Include/cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 154:Drivers/CMSIS/Include/cmsis_gcc.h ****     }
+ 155:Drivers/CMSIS/Include/cmsis_gcc.h ****   }
+ 156:Drivers/CMSIS/Include/cmsis_gcc.h ****  
+ 157:Drivers/CMSIS/Include/cmsis_gcc.h ****   for (__zero_table_t const* pTable = &__zero_table_start__; pTable < &__zero_table_end__; ++pTable
+ 158:Drivers/CMSIS/Include/cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 159:Drivers/CMSIS/Include/cmsis_gcc.h ****       pTable->dest[i] = 0u;
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 5
+
+
+ 160:Drivers/CMSIS/Include/cmsis_gcc.h ****     }
+ 161:Drivers/CMSIS/Include/cmsis_gcc.h ****   }
+ 162:Drivers/CMSIS/Include/cmsis_gcc.h ****  
+ 163:Drivers/CMSIS/Include/cmsis_gcc.h ****   _start();
+ 164:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 165:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 166:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __PROGRAM_START           __cmsis_start
+ 167:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 168:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 169:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __INITIAL_SP
+ 170:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __INITIAL_SP              __StackTop
+ 171:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 172:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 173:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __STACK_LIMIT
+ 174:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __STACK_LIMIT             __StackLimit
+ 175:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 176:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 177:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __VECTOR_TABLE
+ 178:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __VECTOR_TABLE            __Vectors
+ 179:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 180:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 181:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __VECTOR_TABLE_ATTRIBUTE
+ 182:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __VECTOR_TABLE_ATTRIBUTE  __attribute((used, section(".vectors")))
+ 183:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 184:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 185:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
+ 186:Drivers/CMSIS/Include/cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+ 187:Drivers/CMSIS/Include/cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+ 188:Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
+ 189:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 190:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 191:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 192:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
+ 193:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
+ 194:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 195:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 196:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
+ 197:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 198:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+ 199:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 200:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 201:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 202:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 203:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
+ 204:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
+ 205:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 206:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 207:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_irq(void)
+  37              		.loc 2 207 27 view .LVU2
+  38              	.LBB5:
+ 208:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 209:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid i" : : : "memory");
+  39              		.loc 2 209 3 view .LVU3
+  40              		.syntax unified
+  41              	@ 209 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+  42 0000 72B6     		cpsid i
+  43              	@ 0 "" 2
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 6
+
+
+  44              		.thumb
+  45              		.syntax unified
+  46              	.L2:
+  47              	.LBE5:
+  48              	.LBE4:
+  35:Core/Src/cmsis_os2_error_handler.c ****   while (1)
+  49              		.loc 1 35 3 discriminator 1 view .LVU4
+  36:Core/Src/cmsis_os2_error_handler.c ****   {
+  37:Core/Src/cmsis_os2_error_handler.c ****   }
+  50              		.loc 1 37 3 discriminator 1 view .LVU5
+  35:Core/Src/cmsis_os2_error_handler.c ****   while (1)
+  51              		.loc 1 35 9 discriminator 1 view .LVU6
+  52 0002 FEE7     		b	.L2
+  53              		.cfi_endproc
+  54              	.LFE851:
+  56              		.section	.rodata.OS2ConfigAssert.str1.4,"aMS",%progbits,1
+  57              		.align	2
+  58              	.LC0:
+  59 0000 4F706572 		.ascii	"Operation completed successfully\015\012\000"
+  59      6174696F 
+  59      6E20636F 
+  59      6D706C65 
+  59      74656420 
+  60 0023 00       		.align	2
+  61              	.LC1:
+  62 0024 556E7370 		.ascii	"Unspecified RTOS error: run-time error but no other"
+  62      65636966 
+  62      69656420 
+  62      52544F53 
+  62      20657272 
+  63 0057 20657272 		.ascii	" error message fits.\000"
+  63      6F72206D 
+  63      65737361 
+  63      67652066 
+  63      6974732E 
+  64              		.align	2
+  65              	.LC2:
+  66 006c 4F706572 		.ascii	"Operation not completed successfully within timeout"
+  66      6174696F 
+  66      6E206E6F 
+  66      7420636F 
+  66      6D706C65 
+  67 009f 0D0A00   		.ascii	"\015\012\000"
+  68 00a2 0000     		.align	2
+  69              	.LC3:
+  70 00a4 5265736F 		.ascii	"Resource not available\015\012\000"
+  70      75726365 
+  70      206E6F74 
+  70      20617661 
+  70      696C6162 
+  71 00bd 000000   		.align	2
+  72              	.LC4:
+  73 00c0 50617261 		.ascii	"Parameter error\015\012\000"
+  73      6D657465 
+  73      72206572 
+  73      726F720D 
+  73      0A00
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 7
+
+
+  74 00d2 0000     		.align	2
+  75              	.LC5:
+  76 00d4 53797374 		.ascii	"System is out of memory: it was impossible to alloc"
+  76      656D2069 
+  76      73206F75 
+  76      74206F66 
+  76      206D656D 
+  77 0107 61746520 		.ascii	"ate or reserve memory for the operation\015\012\000"
+  77      6F722072 
+  77      65736572 
+  77      7665206D 
+  77      656D6F72 
+  78 0131 000000   		.align	2
+  79              	.LC6:
+  80 0134 4E6F7420 		.ascii	"Not allowed in ISR context: the function cannot be "
+  80      616C6C6F 
+  80      77656420 
+  80      696E2049 
+  80      53522063 
+  81 0167 63616C6C 		.ascii	"called from interrupt service routines\015\012\000"
+  81      65642066 
+  81      726F6D20 
+  81      696E7465 
+  81      72727570 
+  82              		.align	2
+  83              	.LC7:
+  84 0190 70726576 		.ascii	"prevents enum down size compiler optimizations\015\012"
+  84      656E7473 
+  84      20656E75 
+  84      6D20646F 
+  84      776E2073 
+  85 01c0 00       		.ascii	"\000"
+  86              		.section	.text.OS2ConfigAssert,"ax",%progbits
+  87              		.align	1
+  88              		.global	OS2ConfigAssert
+  89              		.syntax unified
+  90              		.thumb
+  91              		.thumb_func
+  93              	OS2ConfigAssert:
+  94              	.LVL0:
+  95              	.LFB852:
+  38:Core/Src/cmsis_os2_error_handler.c ****   /* USER CODE END Error_Handler_Debug */
+  39:Core/Src/cmsis_os2_error_handler.c **** }
+  40:Core/Src/cmsis_os2_error_handler.c **** 
+  41:Core/Src/cmsis_os2_error_handler.c **** 
+  42:Core/Src/cmsis_os2_error_handler.c **** /**
+  43:Core/Src/cmsis_os2_error_handler.c ****  * @brief Asserts the status of an RTOS operation and prints a corresponding message.
+  44:Core/Src/cmsis_os2_error_handler.c ****  *
+  45:Core/Src/cmsis_os2_error_handler.c ****  * This function takes an osStatus_t status code from an RTOS operation and prints
+  46:Core/Src/cmsis_os2_error_handler.c ****  * a message to the standard output describing the result of the operation.
+  47:Core/Src/cmsis_os2_error_handler.c ****  *
+  48:Core/Src/cmsis_os2_error_handler.c ****  * @param osStatus The status code of the RTOS operation. This can be one of the following:
+  49:Core/Src/cmsis_os2_error_handler.c ****  *                 - osOK: Operation completed successfully.
+  50:Core/Src/cmsis_os2_error_handler.c ****  *                 - osError: Unspecified RTOS error.
+  51:Core/Src/cmsis_os2_error_handler.c ****  *                 - osErrorTimeout: Operation not completed successfully within timeout.
+  52:Core/Src/cmsis_os2_error_handler.c ****  *                 - osErrorResource: Resource not available.
+  53:Core/Src/cmsis_os2_error_handler.c ****  *                 - osErrorParameter: Parameter error.
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 8
+
+
+  54:Core/Src/cmsis_os2_error_handler.c ****  *                 - osErrorNoMemory: System is out of memory.
+  55:Core/Src/cmsis_os2_error_handler.c ****  *                 - osErrorISR: Not allowed in ISR context.
+  56:Core/Src/cmsis_os2_error_handler.c ****  *                 - osStatusReserved: Prevents enum down size compiler optimizations.
+  57:Core/Src/cmsis_os2_error_handler.c ****  */
+  58:Core/Src/cmsis_os2_error_handler.c **** 
+  59:Core/Src/cmsis_os2_error_handler.c **** void OS2ConfigAssert(osStatus_t osStatus)
+  60:Core/Src/cmsis_os2_error_handler.c **** {
+  96              		.loc 1 60 1 view -0
+  97              		.cfi_startproc
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		.loc 1 60 1 is_stmt 0 view .LVU8
+ 101 0000 70B5     		push	{r4, r5, r6, lr}
+ 102              	.LCFI0:
+ 103              		.cfi_def_cfa_offset 16
+ 104              		.cfi_offset 4, -16
+ 105              		.cfi_offset 5, -12
+ 106              		.cfi_offset 6, -8
+ 107              		.cfi_offset 14, -4
+  61:Core/Src/cmsis_os2_error_handler.c ****   switch(osStatus)
+ 108              		.loc 1 61 3 is_stmt 1 view .LVU9
+ 109 0002 0028     		cmp	r0, #0
+ 110              		.loc 1 61 3 is_stmt 0 view .LVU10
+ 111 0004 0BDC     		bgt	.L4
+ 112 0006 10F1060F 		cmn	r0, #6
+ 113 000a 40DB     		blt	.L3
+ 114 000c 0630     		adds	r0, r0, #6
+ 115              	.LVL1:
+ 116              		.loc 1 61 3 view .LVU11
+ 117 000e 0628     		cmp	r0, #6
+ 118 0010 3DD8     		bhi	.L3
+ 119 0012 DFE800F0 		tbb	[pc, r0]
+ 120              	.L7:
+ 121 0016 9B       		.byte	(.L13-.L7)/2
+ 122 0017 8D       		.byte	(.L12-.L7)/2
+ 123 0018 7C       		.byte	(.L11-.L7)/2
+ 124 0019 68       		.byte	(.L10-.L7)/2
+ 125 001a 4B       		.byte	(.L9-.L7)/2
+ 126 001b 3D       		.byte	(.L8-.L7)/2
+ 127 001c 20       		.byte	(.L6-.L7)/2
+ 128              	.LVL2:
+ 129 001d 00       		.p2align 1
+ 130              	.L4:
+ 131              		.loc 1 61 3 view .LVU12
+ 132 001e 6FF00043 		mvn	r3, #-2147483648
+ 133 0022 9842     		cmp	r0, r3
+ 134 0024 33D1     		bne	.L3
+  62:Core/Src/cmsis_os2_error_handler.c ****   {
+  63:Core/Src/cmsis_os2_error_handler.c ****     case osOK: 
+  64:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Operation completed successfully\r\n");
+  65:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+  66:Core/Src/cmsis_os2_error_handler.c ****       //printf("Operation completed successfully\r\n");
+  67:Core/Src/cmsis_os2_error_handler.c ****       break;
+  68:Core/Src/cmsis_os2_error_handler.c ****     case osError:
+  69:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Unspecified RTOS error: run-time error but no other error messag
+  70:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+  71:Core/Src/cmsis_os2_error_handler.c ****       //printf("Unspecified RTOS error: run-time error but no other error message fits.");
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 9
+
+
+  72:Core/Src/cmsis_os2_error_handler.c ****       break;
+  73:Core/Src/cmsis_os2_error_handler.c ****     case osErrorTimeout:
+  74:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Operation not completed successfully within timeout\r\n");
+  75:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+  76:Core/Src/cmsis_os2_error_handler.c ****       //printf("Operation not completed successfully wthin timeout\r\n");
+  77:Core/Src/cmsis_os2_error_handler.c ****       break; 
+  78:Core/Src/cmsis_os2_error_handler.c ****     case osErrorResource: 
+  79:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Resource not available\r\n");
+  80:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+  81:Core/Src/cmsis_os2_error_handler.c ****       //printf("Resource not available\r\n");
+  82:Core/Src/cmsis_os2_error_handler.c ****       break; 
+  83:Core/Src/cmsis_os2_error_handler.c ****     case osErrorParameter:
+  84:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Parameter error\r\n");
+  85:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+  86:Core/Src/cmsis_os2_error_handler.c ****       //printf("Parameter error\r\n");
+  87:Core/Src/cmsis_os2_error_handler.c ****       break;
+  88:Core/Src/cmsis_os2_error_handler.c ****     case osErrorNoMemory:
+  89:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "System is out of memory: it was impossible to allocate or reserv
+  90:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+  91:Core/Src/cmsis_os2_error_handler.c ****       //printf("System is out of memory: it was impossible to allocate or reserve memory for the op
+  92:Core/Src/cmsis_os2_error_handler.c ****       break;
+  93:Core/Src/cmsis_os2_error_handler.c ****     case osErrorISR:
+  94:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Not allowed in ISR context: the function cannot be called from i
+  95:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+  96:Core/Src/cmsis_os2_error_handler.c ****       //printf("Not allowed in ISR context: the function cannot be called from interrupt service ro
+  97:Core/Src/cmsis_os2_error_handler.c ****       break; 
+  98:Core/Src/cmsis_os2_error_handler.c ****     case osStatusReserved: 
+  99:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "prevents enum down size compiler optimizations\r\n");
+ 135              		.loc 1 99 7 is_stmt 1 view .LVU13
+ 136 0026 504E     		ldr	r6, .L19
+ 137 0028 504D     		ldr	r5, .L19+4
+ 138 002a 06F1300C 		add	ip, r6, #48
+ 139              	.LVL3:
+ 140              	.L17:
+ 141              		.loc 1 99 7 is_stmt 0 view .LVU14
+ 142 002e 3446     		mov	r4, r6
+ 143 0030 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 144 0032 2860     		str	r0, [r5]	@ unaligned
+ 145 0034 6960     		str	r1, [r5, #4]	@ unaligned
+ 146 0036 AA60     		str	r2, [r5, #8]	@ unaligned
+ 147 0038 EB60     		str	r3, [r5, #12]	@ unaligned
+ 148 003a 2646     		mov	r6, r4
+ 149 003c 1035     		adds	r5, r5, #16
+ 150 003e 6445     		cmp	r4, ip
+ 151 0040 F5D1     		bne	.L17
+ 152 0042 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 153 0044 2B70     		strb	r3, [r5]
+ 100:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+ 154              		.loc 1 100 7 is_stmt 1 view .LVU15
+ 155 0046 494A     		ldr	r2, .L19+4
+ 156 0048 494B     		ldr	r3, .L19+8
+ 157 004a 1968     		ldr	r1, [r3]
+ 158 004c 494B     		ldr	r3, .L19+12
+ 159 004e 1868     		ldr	r0, [r3]
+ 160 0050 FFF7FEFF 		bl	fnPrintToITMConsole
+ 161              	.LVL4:
+ 101:Core/Src/cmsis_os2_error_handler.c ****       //printf("prevents enum down size compiler optimizations\r\n");
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 10
+
+
+ 102:Core/Src/cmsis_os2_error_handler.c ****       break; 
+ 162              		.loc 1 102 7 view .LVU16
+ 103:Core/Src/cmsis_os2_error_handler.c ****     default: 
+ 104:Core/Src/cmsis_os2_error_handler.c ****       break;
+ 105:Core/Src/cmsis_os2_error_handler.c ****   }
+ 106:Core/Src/cmsis_os2_error_handler.c **** }...
+ 163              		.loc 1 106 1 is_stmt 0 view .LVU17
+ 164 0054 1BE0     		b	.L3
+ 165              	.LVL5:
+ 166              	.L6:
+  64:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Operation completed successfully\r\n");
+ 167              		.loc 1 64 7 is_stmt 1 view .LVU18
+ 168 0056 484D     		ldr	r5, .L19+16
+ 169 0058 444C     		ldr	r4, .L19+4
+ 170 005a 05F12006 		add	r6, r5, #32
+ 171              	.LVL6:
+ 172              	.L15:
+  64:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Operation completed successfully\r\n");
+ 173              		.loc 1 64 7 is_stmt 0 view .LVU19
+ 174 005e AC46     		mov	ip, r5
+ 175 0060 BCE80F00 		ldmia	ip!, {r0, r1, r2, r3}
+ 176 0064 2060     		str	r0, [r4]	@ unaligned
+ 177 0066 6160     		str	r1, [r4, #4]	@ unaligned
+ 178 0068 A260     		str	r2, [r4, #8]	@ unaligned
+ 179 006a E360     		str	r3, [r4, #12]	@ unaligned
+ 180 006c 6546     		mov	r5, ip
+ 181 006e 1034     		adds	r4, r4, #16
+ 182 0070 B445     		cmp	ip, r6
+ 183 0072 F4D1     		bne	.L15
+ 184 0074 BCF80020 		ldrh	r2, [ip]	@ unaligned
+ 185 0078 9CF80230 		ldrb	r3, [ip, #2]	@ zero_extendqisi2
+ 186 007c 2280     		strh	r2, [r4]	@ unaligned
+ 187 007e A370     		strb	r3, [r4, #2]
+  65:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+ 188              		.loc 1 65 7 is_stmt 1 view .LVU20
+ 189 0080 3A4A     		ldr	r2, .L19+4
+ 190 0082 3B4B     		ldr	r3, .L19+8
+ 191 0084 1968     		ldr	r1, [r3]
+ 192 0086 3B4B     		ldr	r3, .L19+12
+ 193 0088 1868     		ldr	r0, [r3]
+ 194 008a FFF7FEFF 		bl	fnPrintToITMConsole
+ 195              	.LVL7:
+  67:Core/Src/cmsis_os2_error_handler.c ****       break;
+ 196              		.loc 1 67 7 view .LVU21
+ 197              	.L3:
+ 198              		.loc 1 106 1 is_stmt 0 view .LVU22
+ 199 008e 70BD     		pop	{r4, r5, r6, pc}
+ 200              	.L8:
+  69:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Unspecified RTOS error: run-time error but no other error messag
+ 201              		.loc 1 69 7 is_stmt 1 view .LVU23
+ 202 0090 364C     		ldr	r4, .L19+4
+ 203 0092 4822     		movs	r2, #72
+ 204 0094 3949     		ldr	r1, .L19+20
+ 205 0096 2046     		mov	r0, r4
+ 206 0098 FFF7FEFF 		bl	memcpy
+ 207              	.LVL8:
+  70:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 11
+
+
+ 208              		.loc 1 70 7 view .LVU24
+ 209 009c 2246     		mov	r2, r4
+ 210 009e 344B     		ldr	r3, .L19+8
+ 211 00a0 1968     		ldr	r1, [r3]
+ 212 00a2 344B     		ldr	r3, .L19+12
+ 213 00a4 1868     		ldr	r0, [r3]
+ 214 00a6 FFF7FEFF 		bl	fnPrintToITMConsole
+ 215              	.LVL9:
+  72:Core/Src/cmsis_os2_error_handler.c ****       break;
+ 216              		.loc 1 72 7 view .LVU25
+ 217 00aa F0E7     		b	.L3
+ 218              	.L9:
+  74:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Operation not completed successfully within timeout\r\n");
+ 219              		.loc 1 74 7 view .LVU26
+ 220 00ac 344D     		ldr	r5, .L19+24
+ 221 00ae 2F4C     		ldr	r4, .L19+4
+ 222 00b0 05F13006 		add	r6, r5, #48
+ 223              	.L16:
+ 224 00b4 AC46     		mov	ip, r5
+ 225 00b6 BCE80F00 		ldmia	ip!, {r0, r1, r2, r3}
+ 226 00ba 2060     		str	r0, [r4]	@ unaligned
+ 227 00bc 6160     		str	r1, [r4, #4]	@ unaligned
+ 228 00be A260     		str	r2, [r4, #8]	@ unaligned
+ 229 00c0 E360     		str	r3, [r4, #12]	@ unaligned
+ 230 00c2 6546     		mov	r5, ip
+ 231 00c4 1034     		adds	r4, r4, #16
+ 232 00c6 B445     		cmp	ip, r6
+ 233 00c8 F4D1     		bne	.L16
+ 234 00ca DCF80000 		ldr	r0, [ip]
+ 235 00ce 2060     		str	r0, [r4]	@ unaligned
+ 236 00d0 BCF80430 		ldrh	r3, [ip, #4]	@ unaligned
+ 237 00d4 A380     		strh	r3, [r4, #4]	@ unaligned
+  75:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+ 238              		.loc 1 75 7 view .LVU27
+ 239 00d6 254A     		ldr	r2, .L19+4
+ 240 00d8 254B     		ldr	r3, .L19+8
+ 241 00da 1968     		ldr	r1, [r3]
+ 242 00dc 254B     		ldr	r3, .L19+12
+ 243 00de 1868     		ldr	r0, [r3]
+ 244 00e0 FFF7FEFF 		bl	fnPrintToITMConsole
+ 245              	.LVL10:
+  77:Core/Src/cmsis_os2_error_handler.c ****       break; 
+ 246              		.loc 1 77 7 view .LVU28
+ 247 00e4 D3E7     		b	.L3
+ 248              	.L10:
+  79:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Resource not available\r\n");
+ 249              		.loc 1 79 7 view .LVU29
+ 250 00e6 214D     		ldr	r5, .L19+4
+ 251 00e8 264C     		ldr	r4, .L19+28
+ 252 00ea 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 253 00ec 2860     		str	r0, [r5]	@ unaligned
+ 254 00ee 6960     		str	r1, [r5, #4]	@ unaligned
+ 255 00f0 AA60     		str	r2, [r5, #8]	@ unaligned
+ 256 00f2 EB60     		str	r3, [r5, #12]	@ unaligned
+ 257 00f4 03CC     		ldmia	r4!, {r0, r1}
+ 258 00f6 2861     		str	r0, [r5, #16]	@ unaligned
+ 259 00f8 6961     		str	r1, [r5, #20]	@ unaligned
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 12
+
+
+ 260 00fa 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 261 00fc 2B76     		strb	r3, [r5, #24]
+  80:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+ 262              		.loc 1 80 7 view .LVU30
+ 263 00fe 2A46     		mov	r2, r5
+ 264 0100 1B4B     		ldr	r3, .L19+8
+ 265 0102 1968     		ldr	r1, [r3]
+ 266 0104 1B4B     		ldr	r3, .L19+12
+ 267 0106 1868     		ldr	r0, [r3]
+ 268 0108 FFF7FEFF 		bl	fnPrintToITMConsole
+ 269              	.LVL11:
+  82:Core/Src/cmsis_os2_error_handler.c ****       break; 
+ 270              		.loc 1 82 7 view .LVU31
+ 271 010c BFE7     		b	.L3
+ 272              	.L11:
+  84:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Parameter error\r\n");
+ 273              		.loc 1 84 7 view .LVU32
+ 274 010e 174D     		ldr	r5, .L19+4
+ 275 0110 1D4C     		ldr	r4, .L19+32
+ 276 0112 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+ 277 0114 2860     		str	r0, [r5]	@ unaligned
+ 278 0116 6960     		str	r1, [r5, #4]	@ unaligned
+ 279 0118 AA60     		str	r2, [r5, #8]	@ unaligned
+ 280 011a EB60     		str	r3, [r5, #12]	@ unaligned
+ 281 011c 2388     		ldrh	r3, [r4]	@ unaligned
+ 282 011e 2B82     		strh	r3, [r5, #16]	@ unaligned
+  85:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+ 283              		.loc 1 85 7 view .LVU33
+ 284 0120 2A46     		mov	r2, r5
+ 285 0122 134B     		ldr	r3, .L19+8
+ 286 0124 1968     		ldr	r1, [r3]
+ 287 0126 134B     		ldr	r3, .L19+12
+ 288 0128 1868     		ldr	r0, [r3]
+ 289 012a FFF7FEFF 		bl	fnPrintToITMConsole
+ 290              	.LVL12:
+  87:Core/Src/cmsis_os2_error_handler.c ****       break;
+ 291              		.loc 1 87 7 view .LVU34
+ 292 012e AEE7     		b	.L3
+ 293              	.L12:
+  89:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "System is out of memory: it was impossible to allocate or reserv
+ 294              		.loc 1 89 7 view .LVU35
+ 295 0130 0E4C     		ldr	r4, .L19+4
+ 296 0132 5D22     		movs	r2, #93
+ 297 0134 1549     		ldr	r1, .L19+36
+ 298 0136 2046     		mov	r0, r4
+ 299 0138 FFF7FEFF 		bl	memcpy
+ 300              	.LVL13:
+  90:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+ 301              		.loc 1 90 7 view .LVU36
+ 302 013c 2246     		mov	r2, r4
+ 303 013e 0C4B     		ldr	r3, .L19+8
+ 304 0140 1968     		ldr	r1, [r3]
+ 305 0142 0C4B     		ldr	r3, .L19+12
+ 306 0144 1868     		ldr	r0, [r3]
+ 307 0146 FFF7FEFF 		bl	fnPrintToITMConsole
+ 308              	.LVL14:
+  92:Core/Src/cmsis_os2_error_handler.c ****       break;
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 13
+
+
+ 309              		.loc 1 92 7 view .LVU37
+ 310 014a A0E7     		b	.L3
+ 311              	.L13:
+  94:Core/Src/cmsis_os2_error_handler.c ****       sprintf(chArrBufITMConsole, "Not allowed in ISR context: the function cannot be called from i
+ 312              		.loc 1 94 7 view .LVU38
+ 313 014c 074C     		ldr	r4, .L19+4
+ 314 014e 5C22     		movs	r2, #92
+ 315 0150 0F49     		ldr	r1, .L19+40
+ 316 0152 2046     		mov	r0, r4
+ 317 0154 FFF7FEFF 		bl	memcpy
+ 318              	.LVL15:
+  95:Core/Src/cmsis_os2_error_handler.c ****       fnPrintToITMConsole(OS2MutexITMConsoleID, u32ITMMutexTimeout, chArrBufITMConsole);
+ 319              		.loc 1 95 7 view .LVU39
+ 320 0158 2246     		mov	r2, r4
+ 321 015a 054B     		ldr	r3, .L19+8
+ 322 015c 1968     		ldr	r1, [r3]
+ 323 015e 054B     		ldr	r3, .L19+12
+ 324 0160 1868     		ldr	r0, [r3]
+ 325 0162 FFF7FEFF 		bl	fnPrintToITMConsole
+ 326              	.LVL16:
+  97:Core/Src/cmsis_os2_error_handler.c ****       break; 
+ 327              		.loc 1 97 7 view .LVU40
+ 328 0166 92E7     		b	.L3
+ 329              	.L20:
+ 330              		.align	2
+ 331              	.L19:
+ 332 0168 90010000 		.word	.LC7
+ 333 016c 00000000 		.word	chArrBufITMConsole
+ 334 0170 00000000 		.word	u32ITMMutexTimeout
+ 335 0174 00000000 		.word	OS2MutexITMConsoleID
+ 336 0178 00000000 		.word	.LC0
+ 337 017c 24000000 		.word	.LC1
+ 338 0180 6C000000 		.word	.LC2
+ 339 0184 A4000000 		.word	.LC3
+ 340 0188 C0000000 		.word	.LC4
+ 341 018c D4000000 		.word	.LC5
+ 342 0190 34010000 		.word	.LC6
+ 343              		.cfi_endproc
+ 344              	.LFE852:
+ 346              		.text
+ 347              	.Letext0:
+ 348              		.file 3 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 349              		.file 4 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 350              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ 351              		.file 6 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
+ 352              		.file 7 "Core/Inc/cmsis_os2_attr.h"
+ 353              		.file 8 "<built-in>"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 cmsis_os2_error_handler.c
+C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s:18     .text.Error_Handler:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s:24     .text.Error_Handler:00000000 Error_Handler
+C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s:57     .rodata.OS2ConfigAssert.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s:87     .text.OS2ConfigAssert:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s:93     .text.OS2ConfigAssert:00000000 OS2ConfigAssert
+C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s:121    .text.OS2ConfigAssert:00000016 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s:332    .text.OS2ConfigAssert:00000168 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s:129    .text.OS2ConfigAssert:0000001d $d
+C:\Users\Lenovo\AppData\Local\Temp\ccCj7qlY.s:129    .text.OS2ConfigAssert:0000001e $t
+
+UNDEFINED SYMBOLS
+fnPrintToITMConsole
+memcpy
+chArrBufITMConsole
+u32ITMMutexTimeout
+OS2MutexITMConsoleID

@@ -145,7 +145,7 @@ int main(void)
     printf("timer creation failed\r\n");
     Error_Handler();
   }
-  
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -155,7 +155,7 @@ int main(void)
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
-   KernelState = osKernelGetState(); 
+  KernelState = osKernelGetState(); 
   if(KernelState == osKernelReady)
   {
     //start the kernel

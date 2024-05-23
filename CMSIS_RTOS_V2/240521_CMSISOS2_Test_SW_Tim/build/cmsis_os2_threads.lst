@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
   33      33322062 
   34 00d3 65742075 		.ascii	"et unblocked: %lx\015\012\000"
   34      6E626C6F 
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 2
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 2
 
 
   34      636B6564 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
   42:Core/Src/cmsis_os2_threads.c **** /**
   43:Core/Src/cmsis_os2_threads.c ****   * @brief  Function implementing the fnOS2SynchSender1 thread.
   44:Core/Src/cmsis_os2_threads.c ****   * @param  argument: Frequency of the LED 1 toggling
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 3
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 3
 
 
   45:Core/Src/cmsis_os2_threads.c ****   * @details : This function toggles LED 1 (Nucleo Board) with fixed periocity got from the functio
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
   88              		.loc 1 56 3 view .LVU11
   89              		.loc 1 56 16 is_stmt 0 view .LVU12
   90 002c FFF7FEFF 		bl	osKernelGetTickCount
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 4
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 4
 
 
   91              	.LVL6:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  134              		.loc 1 67 16 is_stmt 0 discriminator 1 view .LVU26
  135 0066 3444     		add	r4, r4, r6
  136              	.LVL14:
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 5
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 5
 
 
   68:Core/Src/cmsis_os2_threads.c ****     osDelayUntil(u32LocTick);
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
   75:Core/Src/cmsis_os2_threads.c ****   * @param  argument: Frequency of the LED 2 toggling
   76:Core/Src/cmsis_os2_threads.c ****   * @details : This function toggles LED 2 (Nucleo Board) with fixed periocity got from the functio
   77:Core/Src/cmsis_os2_threads.c ****   * @retval None
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 6
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 6
 
 
   78:Core/Src/cmsis_os2_threads.c ****   */
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  218              		.loc 1 90 5 is_stmt 1 discriminator 1 view .LVU42
  219 0022 0C48     		ldr	r0, .L9+12
  220 0024 FFF7FEFF 		bl	puts
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 7
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 7
 
 
  221              	.LVL22:
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  266      2A2A2A2A 
  266      2A2A2A54 
  266      68726561 
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 8
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 8
 
 
  266      64206765 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  301 000c 0446     		mov	r4, r0
  302              	.LVL30:
  111:Core/Src/cmsis_os2_threads.c ****   uint32_t u32LEDTogglePeriod = (uint32_t)arg; 
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 9
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 9
 
 
  303              		.loc 1 111 3 is_stmt 1 view .LVU57
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  346 0046 2046     		mov	r0, r4
  347 0048 FFF7FEFF 		bl	osDelayUntil
  348              	.LVL38:
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 10
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 10
 
 
  113:Core/Src/cmsis_os2_threads.c ****   {
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  133:Core/Src/cmsis_os2_threads.c ****     fnThreadPtr = fnOS2ThreadSynchSender2;
  394              		.loc 1 133 5 is_stmt 1 view .LVU79
  134:Core/Src/cmsis_os2_threads.c ****     u32ThreadArgument = (uint32_t)SYNCH_SENDER_2_THREAD_TOGGLE_FREQUENCY;
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 11
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 11
 
 
  395              		.loc 1 134 5 view .LVU80
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  149:Core/Src/cmsis_os2_threads.c ****     }
  150:Core/Src/cmsis_os2_threads.c **** }...
  435              		.loc 1 150 1 view .LVU96
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 12
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 12
 
 
  436 0040 10BD     		pop	{r4, pc}
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  478              		.global	u32SetFlagFromthread
  479              		.global	chArrInfoBuf
  480              		.global	osv
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 13
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 13
 
 
  481              		.section	.bss.OS2SynchReceiverID,"aw",%nobits
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  549      00000000 
  549      00000000 
  549      00000000 
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 14
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 14
 
 
  550 0014 00020000 		.word	512
@@ -824,51 +824,51 @@ ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 1
  585              		.file 10 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_hal_rcc.h"
  586              		.file 11 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
  587              		.file 12 "<built-in>"
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 15
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 cmsis_os2_threads.c
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:18     .rodata.fnOS2ThreadSynchSender1.str1.4:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:36     .text.fnOS2ThreadSynchSender1:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:42     .text.fnOS2ThreadSynchSender1:00000000 fnOS2ThreadSynchSender1
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:146    .text.fnOS2ThreadSynchSender1:00000070 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:161    .rodata.fnOS2ThreadSynchSender2.str1.4:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:168    .text.fnOS2ThreadSynchSender2:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:174    .text.fnOS2ThreadSynchSender2:00000000 fnOS2ThreadSynchSender2
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:250    .text.fnOS2ThreadSynchSender2:00000048 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:261    .rodata.fnOS2ThreadSynchReceiver.str1.4:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:271    .text.fnOS2ThreadSynchReceiver:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:277    .text.fnOS2ThreadSynchReceiver:00000000 fnOS2ThreadSynchReceiver
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:354    .text.fnOS2ThreadSynchReceiver:00000050 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:364    .text.fnConfigAndCreateThreads:00000000 $t
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:370    .text.fnConfigAndCreateThreads:00000000 fnConfigAndCreateThreads
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:447    .text.fnConfigAndCreateThreads:0000004c $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:547    .rodata.OS2SynchReceiverAttr:00000000 OS2SynchReceiverAttr
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:461    .rodata.str1.4:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:569    .rodata.OS2SynchSender2Attr:00000000 OS2SynchSender2Attr
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:558    .rodata.OS2SynchSender1Attr:00000000 OS2SynchSender1Attr
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:486    .bss.OS2SynchReceiverID:00000000 OS2SynchReceiverID
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:500    .bss.OS2SynchSender2ID:00000000 OS2SynchSender2ID
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:493    .bss.OS2SynchSender1ID:00000000 OS2SynchSender1ID
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:540    .bss.u32SignalFlagForWaiting:00000000 u32SignalFlagForWaiting
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:533    .bss.u32SignalFlagBeforeClear:00000000 u32SignalFlagBeforeClear
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:526    .bss.u32SignalApiReturnFlag:00000000 u32SignalApiReturnFlag
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:519    .bss.u32SetFlagFromthread:00000000 u32SetFlagFromthread
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:506    .bss.chArrInfoBuf:00000000 chArrInfoBuf
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:512    .bss.osv:00000000 osv
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:482    .bss.OS2SynchReceiverID:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:489    .bss.OS2SynchSender1ID:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:496    .bss.OS2SynchSender2ID:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:503    .bss.chArrInfoBuf:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:509    .bss.osv:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:515    .bss.u32SetFlagFromthread:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:522    .bss.u32SignalApiReturnFlag:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:529    .bss.u32SignalFlagBeforeClear:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:536    .bss.u32SignalFlagForWaiting:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:543    .rodata.OS2SynchReceiverAttr:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:554    .rodata.OS2SynchSender1Attr:00000000 $d
-C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s:565    .rodata.OS2SynchSender2Attr:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:18     .rodata.fnOS2ThreadSynchSender1.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:36     .text.fnOS2ThreadSynchSender1:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:42     .text.fnOS2ThreadSynchSender1:00000000 fnOS2ThreadSynchSender1
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:146    .text.fnOS2ThreadSynchSender1:00000070 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:161    .rodata.fnOS2ThreadSynchSender2.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:168    .text.fnOS2ThreadSynchSender2:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:174    .text.fnOS2ThreadSynchSender2:00000000 fnOS2ThreadSynchSender2
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:250    .text.fnOS2ThreadSynchSender2:00000048 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:261    .rodata.fnOS2ThreadSynchReceiver.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:271    .text.fnOS2ThreadSynchReceiver:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:277    .text.fnOS2ThreadSynchReceiver:00000000 fnOS2ThreadSynchReceiver
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:354    .text.fnOS2ThreadSynchReceiver:00000050 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:364    .text.fnConfigAndCreateThreads:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:370    .text.fnConfigAndCreateThreads:00000000 fnConfigAndCreateThreads
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:447    .text.fnConfigAndCreateThreads:0000004c $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:547    .rodata.OS2SynchReceiverAttr:00000000 OS2SynchReceiverAttr
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:461    .rodata.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:569    .rodata.OS2SynchSender2Attr:00000000 OS2SynchSender2Attr
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:558    .rodata.OS2SynchSender1Attr:00000000 OS2SynchSender1Attr
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:486    .bss.OS2SynchReceiverID:00000000 OS2SynchReceiverID
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:500    .bss.OS2SynchSender2ID:00000000 OS2SynchSender2ID
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:493    .bss.OS2SynchSender1ID:00000000 OS2SynchSender1ID
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:540    .bss.u32SignalFlagForWaiting:00000000 u32SignalFlagForWaiting
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:533    .bss.u32SignalFlagBeforeClear:00000000 u32SignalFlagBeforeClear
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:526    .bss.u32SignalApiReturnFlag:00000000 u32SignalApiReturnFlag
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:519    .bss.u32SetFlagFromthread:00000000 u32SetFlagFromthread
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:506    .bss.chArrInfoBuf:00000000 chArrInfoBuf
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:512    .bss.osv:00000000 osv
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:482    .bss.OS2SynchReceiverID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:489    .bss.OS2SynchSender1ID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:496    .bss.OS2SynchSender2ID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:503    .bss.chArrInfoBuf:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:509    .bss.osv:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:515    .bss.u32SetFlagFromthread:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:522    .bss.u32SignalApiReturnFlag:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:529    .bss.u32SignalFlagBeforeClear:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:536    .bss.u32SignalFlagForWaiting:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:543    .rodata.OS2SynchReceiverAttr:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:554    .rodata.OS2SynchSender1Attr:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s:565    .rodata.OS2SynchSender2Attr:00000000 $d
 
 UNDEFINED SYMBOLS
 osKernelGetTickFreq
@@ -884,7 +884,7 @@ u32KernelTickFrequency
 u32KernelSystemTimer
 fnTimerStart
 osThreadFlagsWait
-ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\cc5z2kVf.s 			page 16
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccTiz081.s 			page 16
 
 
 osThreadNew

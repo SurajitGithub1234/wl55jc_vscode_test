@@ -1,0 +1,251 @@
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"cmsis_os2_mutex_semaphore.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.fnOs2MutexCreate,"ax",%progbits
+  18              		.align	1
+  19              		.global	fnOs2MutexCreate
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	fnOs2MutexCreate:
+  25              	.LFB851:
+  26              		.file 1 "Core/Src/cmsis_os2_mutex_semaphore.c"
+   1:Core/Src/cmsis_os2_mutex_semaphore.c **** #include <stdio.h>
+   2:Core/Src/cmsis_os2_mutex_semaphore.c **** #include <string.h>
+   3:Core/Src/cmsis_os2_mutex_semaphore.c **** #include <stdarg.h>
+   4:Core/Src/cmsis_os2_mutex_semaphore.c **** #include <stdint.h>
+   5:Core/Src/cmsis_os2_mutex_semaphore.c **** #include <stdbool.h>
+   6:Core/Src/cmsis_os2_mutex_semaphore.c **** 
+   7:Core/Src/cmsis_os2_mutex_semaphore.c **** #include "main.h"
+   8:Core/Src/cmsis_os2_mutex_semaphore.c **** #include "cmsis_os.h"
+   9:Core/Src/cmsis_os2_mutex_semaphore.c **** #include "cmsis_os2.h"
+  10:Core/Src/cmsis_os2_mutex_semaphore.c **** #include "cmsis_os2_attr.h"
+  11:Core/Src/cmsis_os2_mutex_semaphore.c **** 
+  12:Core/Src/cmsis_os2_mutex_semaphore.c **** /* Mutex ID */
+  13:Core/Src/cmsis_os2_mutex_semaphore.c **** osMutexId OS2MutexITMConsoleID;
+  14:Core/Src/cmsis_os2_mutex_semaphore.c **** 
+  15:Core/Src/cmsis_os2_mutex_semaphore.c **** /* Mutex attributes */
+  16:Core/Src/cmsis_os2_mutex_semaphore.c **** const osMutexAttr_t OS2ITMMutexAttr = {
+  17:Core/Src/cmsis_os2_mutex_semaphore.c ****     "MutexITMConsole",
+  18:Core/Src/cmsis_os2_mutex_semaphore.c ****     (osMutexPrioInherit | osMutexRobust)
+  19:Core/Src/cmsis_os2_mutex_semaphore.c **** };
+  20:Core/Src/cmsis_os2_mutex_semaphore.c **** 
+  21:Core/Src/cmsis_os2_mutex_semaphore.c **** bool fnOs2MutexCreate(void)
+  22:Core/Src/cmsis_os2_mutex_semaphore.c **** {
+  27              		.loc 1 22 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  23:Core/Src/cmsis_os2_mutex_semaphore.c ****     OS2MutexITMConsoleID = osMutexNew(NULL);
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s 			page 2
+
+
+  36              		.loc 1 23 5 view .LVU1
+  37              		.loc 1 23 28 is_stmt 0 view .LVU2
+  38 0002 0020     		movs	r0, #0
+  39 0004 FFF7FEFF 		bl	osMutexNew
+  40              	.LVL0:
+  41              		.loc 1 23 26 view .LVU3
+  42 0008 024B     		ldr	r3, .L5
+  43 000a 1860     		str	r0, [r3]
+  24:Core/Src/cmsis_os2_mutex_semaphore.c ****     if(OS2MutexITMConsoleID != NULL)
+  44              		.loc 1 24 5 is_stmt 1 view .LVU4
+  45              		.loc 1 24 7 is_stmt 0 view .LVU5
+  46 000c 00B1     		cbz	r0, .L2
+  25:Core/Src/cmsis_os2_mutex_semaphore.c ****     {
+  26:Core/Src/cmsis_os2_mutex_semaphore.c ****         return true;
+  47              		.loc 1 26 16 view .LVU6
+  48 000e 0120     		movs	r0, #1
+  49              	.L2:
+  27:Core/Src/cmsis_os2_mutex_semaphore.c ****     }
+  28:Core/Src/cmsis_os2_mutex_semaphore.c ****     return false;
+  29:Core/Src/cmsis_os2_mutex_semaphore.c **** }
+  50              		.loc 1 29 1 view .LVU7
+  51 0010 08BD     		pop	{r3, pc}
+  52              	.L6:
+  53 0012 00BF     		.align	2
+  54              	.L5:
+  55 0014 00000000 		.word	.LANCHOR0
+  56              		.cfi_endproc
+  57              	.LFE851:
+  59              		.section	.text.fnPrintToITMConsole,"ax",%progbits
+  60              		.align	1
+  61              		.global	fnPrintToITMConsole
+  62              		.syntax unified
+  63              		.thumb
+  64              		.thumb_func
+  66              	fnPrintToITMConsole:
+  67              	.LVL1:
+  68              	.LFB852:
+  30:Core/Src/cmsis_os2_mutex_semaphore.c **** 
+  31:Core/Src/cmsis_os2_mutex_semaphore.c **** void fnPrintToITMConsole(osMutexId osMutexID, uint32_t timeout, char *buffer)
+  32:Core/Src/cmsis_os2_mutex_semaphore.c **** {
+  69              		.loc 1 32 1 is_stmt 1 view -0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		.loc 1 32 1 is_stmt 0 view .LVU9
+  74 0000 38B5     		push	{r3, r4, r5, lr}
+  75              	.LCFI1:
+  76              		.cfi_def_cfa_offset 16
+  77              		.cfi_offset 3, -16
+  78              		.cfi_offset 4, -12
+  79              		.cfi_offset 5, -8
+  80              		.cfi_offset 14, -4
+  81 0002 0546     		mov	r5, r0
+  82 0004 1446     		mov	r4, r2
+  33:Core/Src/cmsis_os2_mutex_semaphore.c ****     osStatus Os2MutexStatus = osMutexAcquire(osMutexID, timeout);
+  83              		.loc 1 33 5 is_stmt 1 view .LVU10
+  84              		.loc 1 33 31 is_stmt 0 view .LVU11
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s 			page 3
+
+
+  85 0006 FFF7FEFF 		bl	osMutexAcquire
+  86              	.LVL2:
+  34:Core/Src/cmsis_os2_mutex_semaphore.c ****     if(Os2MutexStatus == osOK)
+  87              		.loc 1 34 5 is_stmt 1 view .LVU12
+  88              		.loc 1 34 7 is_stmt 0 view .LVU13
+  89 000a 18B1     		cbz	r0, .L11
+  35:Core/Src/cmsis_os2_mutex_semaphore.c ****     {
+  36:Core/Src/cmsis_os2_mutex_semaphore.c ****         printf(buffer);
+  37:Core/Src/cmsis_os2_mutex_semaphore.c ****         Os2MutexStatus = osMutexRelease(osMutexID);
+  38:Core/Src/cmsis_os2_mutex_semaphore.c ****         if(Os2MutexStatus == osOK)
+  39:Core/Src/cmsis_os2_mutex_semaphore.c ****         {
+  40:Core/Src/cmsis_os2_mutex_semaphore.c ****             ;
+  41:Core/Src/cmsis_os2_mutex_semaphore.c ****         }
+  42:Core/Src/cmsis_os2_mutex_semaphore.c ****         else
+  43:Core/Src/cmsis_os2_mutex_semaphore.c ****         {
+  44:Core/Src/cmsis_os2_mutex_semaphore.c ****             ;
+  45:Core/Src/cmsis_os2_mutex_semaphore.c ****         }
+  46:Core/Src/cmsis_os2_mutex_semaphore.c ****     }
+  47:Core/Src/cmsis_os2_mutex_semaphore.c ****     else if(Os2MutexStatus == osErrorParameter) //osMutexID = NULL, which means mutex has not be cr
+  90              		.loc 1 47 10 is_stmt 1 view .LVU14
+  91              		.loc 1 47 12 is_stmt 0 view .LVU15
+  92 000c 10F1040F 		cmn	r0, #4
+  93 0010 07D0     		beq	.L12
+  94              	.LVL3:
+  95              	.L7:
+  48:Core/Src/cmsis_os2_mutex_semaphore.c ****     {
+  49:Core/Src/cmsis_os2_mutex_semaphore.c ****         printf(buffer);
+  50:Core/Src/cmsis_os2_mutex_semaphore.c ****     }
+  51:Core/Src/cmsis_os2_mutex_semaphore.c ****     else if(Os2MutexStatus == osErrorTimeout || Os2MutexStatus == osErrorResource || Os2MutexStatus
+  52:Core/Src/cmsis_os2_mutex_semaphore.c ****     {
+  53:Core/Src/cmsis_os2_mutex_semaphore.c ****         ;
+  54:Core/Src/cmsis_os2_mutex_semaphore.c ****     }
+  55:Core/Src/cmsis_os2_mutex_semaphore.c ****     else
+  56:Core/Src/cmsis_os2_mutex_semaphore.c ****     {
+  57:Core/Src/cmsis_os2_mutex_semaphore.c ****         ;
+  58:Core/Src/cmsis_os2_mutex_semaphore.c ****     }
+  59:Core/Src/cmsis_os2_mutex_semaphore.c **** }...
+  96              		.loc 1 59 1 view .LVU16
+  97 0012 38BD     		pop	{r3, r4, r5, pc}
+  98              	.LVL4:
+  99              	.L11:
+  36:Core/Src/cmsis_os2_mutex_semaphore.c ****         printf(buffer);
+ 100              		.loc 1 36 9 is_stmt 1 view .LVU17
+ 101 0014 2046     		mov	r0, r4
+ 102              	.LVL5:
+  36:Core/Src/cmsis_os2_mutex_semaphore.c ****         printf(buffer);
+ 103              		.loc 1 36 9 is_stmt 0 view .LVU18
+ 104 0016 FFF7FEFF 		bl	printf
+ 105              	.LVL6:
+  37:Core/Src/cmsis_os2_mutex_semaphore.c ****         Os2MutexStatus = osMutexRelease(osMutexID);
+ 106              		.loc 1 37 9 is_stmt 1 view .LVU19
+  37:Core/Src/cmsis_os2_mutex_semaphore.c ****         Os2MutexStatus = osMutexRelease(osMutexID);
+ 107              		.loc 1 37 26 is_stmt 0 view .LVU20
+ 108 001a 2846     		mov	r0, r5
+ 109 001c FFF7FEFF 		bl	osMutexRelease
+ 110              	.LVL7:
+  38:Core/Src/cmsis_os2_mutex_semaphore.c ****         if(Os2MutexStatus == osOK)
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s 			page 4
+
+
+ 111              		.loc 1 38 9 is_stmt 1 view .LVU21
+ 112 0020 F7E7     		b	.L7
+ 113              	.LVL8:
+ 114              	.L12:
+  49:Core/Src/cmsis_os2_mutex_semaphore.c ****         printf(buffer);
+ 115              		.loc 1 49 9 view .LVU22
+ 116 0022 2046     		mov	r0, r4
+ 117              	.LVL9:
+  49:Core/Src/cmsis_os2_mutex_semaphore.c ****         printf(buffer);
+ 118              		.loc 1 49 9 is_stmt 0 view .LVU23
+ 119 0024 FFF7FEFF 		bl	printf
+ 120              	.LVL10:
+  57:Core/Src/cmsis_os2_mutex_semaphore.c ****         ;
+ 121              		.loc 1 57 9 is_stmt 1 view .LVU24
+ 122              		.loc 1 59 1 is_stmt 0 view .LVU25
+ 123 0028 F3E7     		b	.L7
+ 124              		.cfi_endproc
+ 125              	.LFE852:
+ 127              		.global	OS2ITMMutexAttr
+ 128              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 129              		.align	2
+ 130              	.LC0:
+ 131 0000 4D757465 		.ascii	"MutexITMConsole\000"
+ 131      7849544D 
+ 131      436F6E73 
+ 131      6F6C6500 
+ 132              		.global	OS2MutexITMConsoleID
+ 133              		.section	.bss.OS2MutexITMConsoleID,"aw",%nobits
+ 134              		.align	2
+ 135              		.set	.LANCHOR0,. + 0
+ 138              	OS2MutexITMConsoleID:
+ 139 0000 00000000 		.space	4
+ 140              		.section	.rodata.OS2ITMMutexAttr,"a"
+ 141              		.align	2
+ 144              	OS2ITMMutexAttr:
+ 145 0000 00000000 		.word	.LC0
+ 146 0004 0A000000 		.word	10
+ 147 0008 00000000 		.space	8
+ 147      00000000 
+ 148              		.text
+ 149              	.Letext0:
+ 150              		.file 2 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 151              		.file 3 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 152              		.file 4 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h"
+ 153              		.file 5 "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h"
+ 154              		.file 6 "d:\\zodhya projects\\technical doccuments\\stm32_vscode_make\\tools\\gcc-arm-none-eabi-10
+ 155              		.file 7 "Drivers/STM32WLxx_HAL_Driver/Inc/stm32wlxx_ll_dma.h"
+ARM GAS  C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 cmsis_os2_mutex_semaphore.c
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:18     .text.fnOs2MutexCreate:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:24     .text.fnOs2MutexCreate:00000000 fnOs2MutexCreate
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:55     .text.fnOs2MutexCreate:00000014 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:60     .text.fnPrintToITMConsole:00000000 $t
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:66     .text.fnPrintToITMConsole:00000000 fnPrintToITMConsole
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:144    .rodata.OS2ITMMutexAttr:00000000 OS2ITMMutexAttr
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:129    .rodata.str1.4:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:138    .bss.OS2MutexITMConsoleID:00000000 OS2MutexITMConsoleID
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:134    .bss.OS2MutexITMConsoleID:00000000 $d
+C:\Users\Lenovo\AppData\Local\Temp\ccQYNIIk.s:141    .rodata.OS2ITMMutexAttr:00000000 $d
+
+UNDEFINED SYMBOLS
+osMutexNew
+osMutexAcquire
+printf
+osMutexRelease
